@@ -52,6 +52,8 @@ public:
 	void	AddViewKick( void );
 	void	DryFire( void );
 	void	Operator_HandleAnimEvent( animevent_t *pEvent, CBaseCombatCharacter *pOperator );
+	void	WeaponIdle( void );
+	void	SecondaryAttack( void );
 
 	void	UpdatePenaltyTime( void );
 
@@ -105,8 +107,6 @@ public:
 	}
 
 	DECLARE_ACTTABLE();
-	void WeaponIdle( void );
-	void SecondaryAttack( void );
 
 private:
 	float	m_flSoonestPrimaryAttack;
