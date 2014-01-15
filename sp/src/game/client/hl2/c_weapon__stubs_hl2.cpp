@@ -44,4 +44,7 @@ STUB_WEAPON_CLASS( weapon_oldmanharpoon, WeaponOldManHarpoon, C_WeaponCitizenPac
 #endif
 #endif
 
+STUB_WEAPON_CLASS( weapon_pdw_p90, WeaponP90, C_HLMachineGun );
+
+
 
