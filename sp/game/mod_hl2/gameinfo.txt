@@ -1,6 +1,6 @@
 "GameInfo"
 {
-	game 		"My First HL2 Mod"
+	game 		"Comrade Erika"
 	title 		"HALF-LIFE'"
 	title2		""
 
