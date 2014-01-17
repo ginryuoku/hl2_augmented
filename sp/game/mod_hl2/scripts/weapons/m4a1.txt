@@ -1,0 +1,90 @@
+"Weapon_M4A1.Clipin"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons\m4a1\clipin.wav"
+	
+}
+
+"Weapon_M4A1.Clipout"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons\m4a1\clipout.wav"
+	
+}
+
+"Weapon_M4A1.Cliptap"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons\m4a1\cliptap.wav"
+	
+}
+
+"Weapon_M4A1.Boltpull"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons\m4a1\boltpull.wav"
+	
+}
+
+"Weapon_M4A1.Boltrelease"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons\m4a1\boltrelease.wav"
+	
+}
+
+"Weapon_M4A1.Deploy"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"0.8"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons\m4a1\deploy.wav"
+	
+}
+
+
+"Weapon_M4A1.Silencer_off"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons\m4a1\siloff.wav"
+	
+}
+
+
+"Weapon_M4A1.Silencer_on"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons\m4a1\silon.wav"
+	
+}
+
