@@ -211,7 +211,7 @@ void CNPC_Zombine::Spawn( void )
 
 	m_iHealth			= sk_zombie_soldier_health.GetFloat();
 	SetMaxHealth( m_iHealth );
-
+	m_iCash = 100;
 	m_flFieldOfView		= 0.2;
 
 	CapabilitiesClear();

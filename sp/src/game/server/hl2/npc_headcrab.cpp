@@ -2434,7 +2434,7 @@ void CHeadcrab::Spawn( void )
 	m_flBurrowTime = 0.0f;
 	m_bCrawlFromCanister = false;
 	m_bMidJump = false;
-
+	m_iCash = 10;
 	NPCInit();
 	HeadcrabInit();
 }
@@ -2561,7 +2561,7 @@ void CFastHeadcrab::Spawn( void )
 {
 	Precache();
 	SetModel( "models/headcrab.mdl" );
-
+	m_iCash = 20;
 	BaseClass::Spawn();
 
 	m_iHealth = sk_headcrab_health.GetFloat();
@@ -3066,7 +3066,7 @@ void CBlackHeadcrab::Spawn( void )
 
 	m_bPanicState = false;
 	m_iHealth = sk_headcrab_poison_health.GetFloat();
-
+	m_iCash = 30;
 	NPCInit();
 	HeadcrabInit();
 }

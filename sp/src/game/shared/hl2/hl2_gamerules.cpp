@@ -22,6 +22,7 @@
 	#include "globalstate.h"
 	#include "ai_basenpc.h"
 	#include "weapon_physcannon.h"
+	#include "filesystem.h"
 #endif
 
 // memdbgon must be the last include file in a .cpp file!!!
@@ -1774,6 +1775,67 @@ bool CHalfLife2::ShouldBurningPropsEmitLight()
 // ------------------------------------------------------------------------------------ //
 // Global functions.
 // ------------------------------------------------------------------------------------ //
+#ifndef CLIENT_DLL
+void CHalfLife2::LoadItemPrices()
+{
+	g_ItemPrices.PurgeAndDeleteElements();
+
+	KeyValues *pKV = new KeyValues("shop");
+	
+	if ( !pKV->LoadFromFile( filesystem, "scripts/shop.txt", "GAME" ) )
+	{
+		Warning("unable to load item prices\n");
+		return;
+	}
+
+	Msg("Loading Item Prices\n");
+	for ( KeyValues *pItem = pKV->GetFirstSubKey(); pItem; pItem = pItem->GetNextKey() )
+	{
+		itemPrice_s *item = new itemPrice_s;
+		Q_strncpy( item->szItemName, pItem->GetName(), 128 );
+		item->price = pItem->GetInt();
+		Q_strlower( item->szItemName ); //doesn't really matter, but for consistency.
+		Msg("adding item: %s to list with price: %i\n", item->szItemName, item->price );
+		g_ItemPrices.AddToTail( item );
+	}
+	Msg("Finished Loading Prices\n");
+}
+
+
+
+CON_COMMAND( buy, "Sell item to player.\n\tArguments: <item_name>" )
+{
+	if ( HL2GameRules()->g_ItemPrices.Count() == 0 )
+		HL2GameRules()->LoadItemPrices();
+
+	CBasePlayer *pPlayer = UTIL_GetLocalPlayer();
+	if ( !pPlayer || args.ArgC() < 2 )
+		return;
+
+	if ( pPlayer && args.ArgC() >= 2 )
+	{
+		char item_to_give[ 256 ];
+		Q_strncpy( item_to_give, args[1], sizeof( item_to_give ) );
+		Q_strlower( item_to_give );
+
+		CHalfLife2::itemPrice_s *item = HL2GameRules()->FindItemPrice( item_to_give );
+
+		if ( !item )
+		{
+			Msg("item %s not found\n", item_to_give );
+			return;
+		}
+
+		if ( pPlayer->GetPlayerCash() < item->price )
+		{
+			UTIL_CenterPrintAll( "You can't afford that!\n" );
+			return;
+		}
+		pPlayer->AddPlayerCash( -item->price );
+		pPlayer->GiveNamedItem( item_to_give );
+	}
+}
+#endif // !CLIENT_DLL
 
 #ifndef HL2MP
 #ifndef PORTAL
@@ -1784,7 +1846,7 @@ bool CHalfLife2::ShouldBurningPropsEmitLight()
 #define BULLET_MASS_GRAINS_TO_KG(grains)	lbs2kg(BULLET_MASS_GRAINS_TO_LB(grains))
 
 // exaggerate all of the forces, but use real numbers to keep them consistent
-#define BULLET_IMPULSE_EXAGGERATION			3.5
+#define BULLET_IMPULSE_EXAGGERATION			1
 // convert a velocity in ft/sec and a mass in grains to an impulse in kg in/s
 #define BULLET_IMPULSE(grains, ftpersec)	((ftpersec)*12*BULLET_MASS_GRAINS_TO_KG(grains)*BULLET_IMPULSE_EXAGGERATION)
 

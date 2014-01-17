@@ -892,6 +892,7 @@ CNPC_AttackHelicopter::CNPC_AttackHelicopter() :
 	m_flGracePeriod( 2.0f ),
 	m_bBombsExplodeOnContact( false )
 {
+	m_iCash = 1000;
 	m_flMaxSpeed = 0;
 }
 

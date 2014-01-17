@@ -286,7 +286,7 @@ void CNPC_PoisonZombie::Spawn( void )
 	Precache();
 
 	m_fIsTorso = m_fIsHeadless = false;
-
+	m_iCash = 60;
 #ifdef HL2_EPISODIC
 	SetBloodColor( BLOOD_COLOR_ZOMBIE );
 #else

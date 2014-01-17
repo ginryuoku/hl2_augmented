@@ -226,6 +226,7 @@ CNPC_Manhack::CNPC_Manhack()
 	m_flEnginePitch1Time = 0;
 	m_bDoSwarmBehavior = true;
 	m_flBumpSuppressTime = 0;
+	m_iCash = 20;
 }
 
 //------------------------------------------------------------------------------

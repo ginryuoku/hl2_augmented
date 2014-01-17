@@ -673,6 +673,12 @@ public:
 	float	MuzzleFlashTime() const { return m_flFlashTime; }
 	float	PlayerDrownTime() const	{ return m_AirFinished; }
 
+	int						GetPlayerCash() 
+		{ return m_Local.m_iPlayerCash; }
+	void					AddPlayerCash(int cash)	
+		{ m_Local.m_iPlayerCash = m_Local.m_iPlayerCash + cash; return; }
+
+
 	int		GetObserverMode() const	{ return m_iObserverMode; }
 	CBaseEntity *GetObserverTarget() const	{ return m_hObserverTarget; }
 

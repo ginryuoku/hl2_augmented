@@ -87,7 +87,7 @@ void CNPC_GroundTurret::Precache( void )
 void CNPC_GroundTurret::Spawn( void )
 {
 	Precache();
-
+	m_iCash = 30;
 	UTIL_SetModel( this, "models/combine_turrets/ground_turret.mdl" );
 
 	SetNavType( NAV_FLY );

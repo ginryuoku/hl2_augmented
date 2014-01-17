@@ -234,7 +234,7 @@ CNPC_CeilingTurret::CNPC_CeilingTurret( void )
 	m_flLastSight		= 0;
 	m_bBlinkState		= false;
 	m_bEnabled			= false;
-
+	m_iCash = 30;
 	m_vecGoalAngles.Init();
 }
 

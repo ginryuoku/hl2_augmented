@@ -117,6 +117,7 @@ CNPC_Barnacle::CNPC_Barnacle(void)
 	m_nBloodColor = BLOOD_COLOR_YELLOW;
 #endif
 	m_bPlayerWasStanding = false;
+	m_iCash = 50;
 }
 
 //-----------------------------------------------------------------------------

@@ -99,10 +99,12 @@ void CNPC_CombineS::Precache()
 	if( !Q_stricmp( pModelName, "models/combine_super_soldier.mdl" ) )
 	{
 		m_fIsElite = true;
+		m_iCash = 150;
 	}
 	else
 	{
 		m_fIsElite = false;
+		m_iCash = 80;
 	}
 
 	if( !GetModelName() )

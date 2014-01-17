@@ -751,7 +751,8 @@ public:
 	// Think function handling
 	void (CBaseEntity::*m_pfnThink)(void);
 	virtual void Think( void ) { if (m_pfnThink) (this->*m_pfnThink)();};
-
+	int		m_iCash;
+	int		GetCash( void ) { return m_iCash; }
 	// Think functions with contexts
 	int		RegisterThinkContext( const char *szContext );
 	BASEPTR	ThinkSet( BASEPTR func, float flNextThinkTime = 0, const char *szContext = NULL );
