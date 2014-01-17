@@ -399,6 +399,9 @@ CHL2_Player::CHL2_Player()
 
 	m_flArmorReductionTime = 0.0f;
 	m_iArmorReductionFrom = 0;
+
+	m_fHealthRegenRemainder = 0;
+	m_fArmorRegenRemainder = 0;
 }
 
 //
@@ -905,6 +908,33 @@ void CHL2_Player::PostThink( void )
 	if ( !g_fGameOver && !IsPlayerLockedInPlace() && IsAlive() )
 	{
 		 HandleAdmireGlovesAnimation();
+	}
+
+	if ( IsAlive() && ( GetHealth() < GetMaxHealth() || ArmorValue() < 100 ) && IsSuitEquipped() )
+	{
+
+		if ( gpGlobals->curtime > m_flLastDamageTime + 1 && GetHealth() % 25 != 0 )
+		{
+			//Regenerate based on rate, and scale it by the frametime
+			m_fHealthRegenRemainder += 0.5 * gpGlobals->frametime;
+
+			if(m_fHealthRegenRemainder >= 1)
+			{
+				TakeHealth( m_fHealthRegenRemainder, DMG_GENERIC );
+				--m_fHealthRegenRemainder;
+			}
+		}
+		if ( gpGlobals->curtime > m_flLastDamageTime + 1 )
+		{
+			//Regenerate based on rate, and scale it by the frametime
+			m_fArmorRegenRemainder += 0.5 * gpGlobals->frametime;
+
+			if(m_fArmorRegenRemainder >= 1)
+			{
+				IncrementArmorValue( m_fArmorRegenRemainder, 100 );
+				--m_fArmorRegenRemainder;
+			}
+		}
 	}
 }
 
