@@ -10,6 +10,7 @@ game_sounds_manifest
 	"precache_file"		"scripts/game_sounds_weapons_cstrike.txt"
 	"preload_file"      "scripts/weapons/p90.txt" 
 	"preload_file"      "scripts/weapons/usp.txt" 
+	"preload_file"      "scripts/weapons/m4a1.txt" 
 
 	// HL2 World, Ambient Generic, Items, Physics, Vehicles
 	"precache_file"		"scripts/game_sounds_world.txt"
