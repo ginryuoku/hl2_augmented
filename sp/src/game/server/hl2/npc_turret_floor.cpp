@@ -171,7 +171,7 @@ CNPC_FloorTurret::CNPC_FloorTurret( void ) :
 	m_bSelfDestructing( false )
 {
 	m_vecGoalAngles.Init();
-
+	m_iCash = 30;
 	m_vecEnemyLKP = vec3_invalid;
 }
 

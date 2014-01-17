@@ -73,6 +73,7 @@ private:
 
 	// Ammo
 	virtual void			PlayerThink( CBasePlayer *pPlayer );
+	virtual void			LoadItemPrices();
 	virtual float			GetAmmoDamage( CBaseEntity *pAttacker, CBaseEntity *pVictim, int nAmmoType );
 
 	virtual bool			ShouldBurningPropsEmitLight();
@@ -87,6 +88,23 @@ public:
 	bool	MegaPhyscannonActive( void ) { return m_bMegaPhysgun;	}
 	
 	virtual bool IsAlyxInDarknessMode();
+	struct itemPrice_s
+	{
+		char szItemName[128];
+		int price;
+	};
+
+	CUtlVector<itemPrice_s*> g_ItemPrices;
+	//oh how indices would be much nicer.
+	itemPrice_s *FindItemPrice(const char *szName)
+	{
+		FOR_EACH_VEC( g_ItemPrices, i )
+		{
+			if ( !Q_strncmp( g_ItemPrices[i]->szItemName, szName, strlen(g_ItemPrices[i]->szItemName ) ) )
+				return g_ItemPrices[i];
+		}
+		return NULL;
+	}
 
 private:
 

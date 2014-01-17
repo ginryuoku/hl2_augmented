@@ -367,7 +367,7 @@ void CAntlionGrub::Spawn( void )
 {
 	Precache();
 	BaseClass::Spawn();
-
+	m_iCash = 3;
 	SetModel( ANTLIONGRUB_MODEL );
 	
 	// FIXME: This is a big perf hit with the number of grubs we're using! - jdw

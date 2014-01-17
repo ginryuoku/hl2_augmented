@@ -212,10 +212,12 @@ CNPC_CScanner::CNPC_CScanner()
 	{
 		// Streetwar scanners are claw scanners
 		m_bIsClawScanner = true;
+			m_iCash = 20;
 	}
 	else
 	{
 		m_bIsClawScanner = false;
+			m_iCash = 15;
 	}
 }
 

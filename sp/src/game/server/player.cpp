@@ -579,6 +579,7 @@ CBasePlayer::CBasePlayer( )
 	m_szNetname[0] = '\0';
 
 	m_iHealth = 0;
+	m_Local.m_iPlayerCash = 0;
 	Weapon_SetLast( NULL );
 	m_bitsDamageType = 0;
 

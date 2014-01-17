@@ -635,7 +635,7 @@ CNPC_AntlionGuard::CNPC_AntlionGuard( void )
 {
 	m_bCavernBreed = false;
 	m_bInCavern = false;
-
+	m_iCash = 1500;
 	m_iszPhysicsPropClass = AllocPooledString( "prop_physics" );
 }
 

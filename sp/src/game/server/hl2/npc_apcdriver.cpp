@@ -74,7 +74,7 @@ LINK_ENTITY_TO_CLASS( npc_apcdriver, CNPC_APCDriver );
 void CNPC_APCDriver::Spawn( void )
 {
 	BaseClass::Spawn();
-
+		m_iCash = 250;
 	m_flTimeLastSeenEnemy = -NPC_APCDRIVER_REMEMBER_TIME;
 	CapabilitiesClear();
 	CapabilitiesAdd( bits_CAP_INNATE_RANGE_ATTACK1 | bits_CAP_INNATE_RANGE_ATTACK2 );

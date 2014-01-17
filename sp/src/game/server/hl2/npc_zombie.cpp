@@ -272,7 +272,7 @@ void CZombie::Spawn( void )
 		// This was placed as an npc_zombie_torso
 		m_fIsTorso = true;
 	}
-
+	m_iCash = 30;
 	m_fIsHeadless = false;
 
 #ifdef HL2_EPISODIC

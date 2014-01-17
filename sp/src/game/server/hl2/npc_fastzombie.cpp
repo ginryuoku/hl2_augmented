@@ -672,7 +672,7 @@ void CFastZombie::Spawn( void )
 
 	m_iHealth			= 50;
 	m_flFieldOfView		= 0.2;
-
+	m_iCash = 50;
 	CapabilitiesClear();
 	CapabilitiesAdd( bits_CAP_MOVE_CLIMB | bits_CAP_MOVE_JUMP | bits_CAP_MOVE_GROUND | bits_CAP_INNATE_RANGE_ATTACK1 /* | bits_CAP_INNATE_MELEE_ATTACK1 */);
 

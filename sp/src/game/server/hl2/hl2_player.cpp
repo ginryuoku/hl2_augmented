@@ -2476,6 +2476,14 @@ void CHL2_Player::Event_KilledOther( CBaseEntity *pVictim, const CTakeDamageInfo
 {
 	BaseClass::Event_KilledOther( pVictim, info );
 
+	CBasePlayer *pPlayer = UTIL_GetLocalPlayer();
+	if (pPlayer) {	
+		CHL2_Player *pHL2Player = dynamic_cast<CHL2_Player*>(pPlayer);
+		if (pHL2Player && info.GetAttacker() == pHL2Player) 
+		{
+			AddPlayerCash( pVictim->GetCash() );
+		}
+	}
 #ifdef HL2_EPISODIC
 
 	CAI_BaseNPC **ppAIs = g_AI_Manager.AccessAIs();
