@@ -684,6 +684,24 @@
 		"tall"					"100"
 	}
 
+	HudScore
+	{
+		"fieldName"		"HudScore"
+		"xpos"	"r175"
+		"ypos"	"388"
+		"wide"	"150"
+		"tall"  "36"
+		"visible" "1"
+		"enabled" "1"
+
+		"PaintBackgroundType"	"2"
+
+		"text_xpos" "8"
+		"text_ypos" "20"
+		"digit_xpos" "8"
+		"digit_ypos" "2"
+	}
+
 	CHudVote
 	{
 		"fieldName"		"CHudVote"
