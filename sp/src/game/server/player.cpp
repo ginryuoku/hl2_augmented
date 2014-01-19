@@ -6558,6 +6558,8 @@ extern bool UTIL_ItemCanBeTouchedByPlayer( CBaseEntity *pItem, CBasePlayer *pPla
 //-----------------------------------------------------------------------------
 bool CBasePlayer::BumpWeapon( CBaseCombatWeapon *pWeapon )
 {
+	bool IsProscribedWeapon = false;
+
 	CBaseCombatCharacter *pOwner = pWeapon->GetOwner();
 
 	// Can I have this weapon type?
@@ -6587,6 +6589,15 @@ bool CBasePlayer::BumpWeapon( CBaseCombatWeapon *pWeapon )
 			return false;
 	}
 	
+	if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_pistol") )
+		IsProscribedWeapon = true;
+	if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_smg1") )
+		IsProscribedWeapon = true;
+//  TODO HL2: Build SMG1 launcher-only weapon.
+//	TODO HL2: Build AR2 launcher-only weapon.
+//	if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_ar2") )
+//		IsProscribedWeapon = true;	
+
 	// ----------------------------------------
 	// If I already have it just take the ammo
 	// ----------------------------------------
@@ -6613,6 +6624,37 @@ bool CBasePlayer::BumpWeapon( CBaseCombatWeapon *pWeapon )
 			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_rpg") )
 				AddPlayerCash( 6500 * 0.1 );
 							
+			UTIL_Remove( pWeapon );
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	else if (IsProscribedWeapon)
+	{
+		if( Weapon_EquipAmmoOnly( pWeapon ) )
+		{
+			// Only remove me if I have no ammo left
+			if ( pWeapon->HasPrimaryAmmo() )
+				return false;
+
+			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_pistol") )
+				AddPlayerCash( 800 * 0.1 );
+			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_357") )
+				AddPlayerCash( 1200 * 0.1 );
+			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_smg1") )
+				AddPlayerCash( 3000 * 0.1 );
+			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_ar2") )
+				AddPlayerCash( 5000 * 0.1 );
+			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_shotgun") )
+				AddPlayerCash( 2500 * 0.1 );
+			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_crossbow") )
+				AddPlayerCash( 4000 * 0.1 );
+			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_rpg") )
+				AddPlayerCash( 6500 * 0.1 );
+
 			UTIL_Remove( pWeapon );
 			return true;
 		}
