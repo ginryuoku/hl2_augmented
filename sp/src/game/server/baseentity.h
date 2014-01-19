@@ -751,8 +751,18 @@ public:
 	// Think function handling
 	void (CBaseEntity::*m_pfnThink)(void);
 	virtual void Think( void ) { if (m_pfnThink) (this->*m_pfnThink)();};
+	
 	int		m_iCash;
-	int		GetCash( void ) { return m_iCash; }
+	int		GetCash				( void ) { return m_iCash; }
+
+	int		m_iItemID;
+	int		m_iItemCapacity;
+	int		m_iItemMaxCapacity;
+
+	int		GetItemID			( void ) { return m_iItemID; }
+	int		GetItemCapacity		( void ) { return m_iItemCapacity; }
+	int		GetItemMaxCapacity	( void ) { return m_iItemMaxCapacity; }
+
 	// Think functions with contexts
 	int		RegisterThinkContext( const char *szContext );
 	BASEPTR	ThinkSet( BASEPTR func, float flNextThinkTime = 0, const char *szContext = NULL );

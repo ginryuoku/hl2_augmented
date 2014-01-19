@@ -18,6 +18,7 @@
 #include "hintsystem.h"
 #include "SoundEmitterSystem/isoundemittersystembase.h"
 #include "util_shared.h"
+#include "comrade_erika/baseinventory.h"
 
 #if defined USES_ECON_ITEMS
 #include "game_item_schema.h"
@@ -836,6 +837,8 @@ public:
 	// This player's data that should only be replicated to 
 	//  the player and not to other players.
 	CNetworkVarEmbedded( CPlayerLocalData, m_Local );
+
+	CBaseInventory		m_Inventory;
 
 #if defined USES_ECON_ITEMS
 	CNetworkVarEmbedded( CAttributeList,	m_AttributeList );
