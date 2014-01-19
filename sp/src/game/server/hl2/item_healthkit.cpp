@@ -108,6 +108,10 @@ public:
 		SetModel( "models/healthvial.mdl" );
 
 		BaseClass::Spawn();
+
+		m_iItemID = 101;
+		m_iItemCapacity = 15;
+		m_iItemMaxCapacity = 15;
 	}
 
 	void Precache( void )
@@ -119,7 +123,7 @@ public:
 
 	bool MyTouch( CBasePlayer *pPlayer )
 	{
-		if ( pPlayer->TakeHealth( sk_healthvial.GetFloat(), DMG_GENERIC ) )
+		if ( pPlayer->TakeHealth( m_iItemCapacity, DMG_GENERIC ) )
 		{
 			CSingleUserRecipientFilter user( pPlayer );
 			user.MakeReliable();
