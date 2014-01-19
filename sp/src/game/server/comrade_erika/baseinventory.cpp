@@ -1,3 +1,4 @@
+//////////////////////////////////////////////////////////////////////////
 
 #include "cbase.h"
 #include "comrade_erika/baseinventory.h"
@@ -6,7 +7,22 @@
 
 CBaseInventory::CBaseInventory()
 {
-	return;
+	PurgeAllObjects();
+}
+
+void CBaseInventory::PurgeObject( int element )
+{
+	ItemID[element] = -1;
+	ItemCap[element] = 0;
+	ItemMaxCap[element] = 0;
+}
+
+void CBaseInventory::PurgeAllObjects()
+{
+	for ( int i = 0; i < 100; ++i)
+	{
+		PurgeObject(i);
+	}
 }
 
 int CBaseInventory::GetItemID( int element )
@@ -24,16 +40,7 @@ int CBaseInventory::GetItemMaxCapacity( int element )
 	return ItemMaxCap[element];
 }
 
-int CBaseInventory::GetItemBaseWeight( int element )
-{
-	return ItemBaseWeight[element];
-}
-
-int CBaseInventory::GetItemUnitWeight( int element )
-{
-	return ItemUnitWeight[element];
-}
-
+#if 0
 int CBaseInventory::GetItemTotalWeight( int element )
 {
 	if (ItemUnitWeight[element] && ItemBaseWeight[element])
@@ -51,28 +58,4 @@ int CBaseInventory::GetItemTotalWeight( int element )
 		return -1;
 	}
 }
-
-void CBaseInventory::MakeNewItem( int itemtype, int itemid, int cap, int maxcap, int baseweight, int unitweight )
-{
-	return;
-}
-
-void CBaseInventory::MakeEntityIntoObject( CBaseEntity *pEntity )
-{
-	if (!pEntity)
-	{
-		Warning("CInventory::MakeEntityIntoObject passed a NULL entity pointer!\n");
-		return;
-	}
-
-	//int type = pEntity->GetItemType();
-	//int id = pEntity->GetItemID();
-	//int cap = pEntity->GetItemCapacity();
-	//int maxcap = pEntity->GetItemMaxCapacity();
-	//int baseweight = pEntity->GetItemBaseWeight();
-	//int unitweight = pEntity->GetItemUnitWeight();
-
-	//MakeNewItem(type,id,cap,maxcap,baseweight,unitweight);
-
-	UTIL_Remove(pEntity);
-}
+#endif
