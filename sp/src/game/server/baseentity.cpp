@@ -365,7 +365,11 @@ CBaseEntity::CBaseEntity( bool bServerOnly )
 
 	// NOTE: THIS MUST APPEAR BEFORE ANY SetMoveType() or SetNextThink() calls
 	AddEFlags( EFL_NO_THINK_FUNCTION | EFL_NO_GAME_PHYSICS_SIMULATION | EFL_USE_PARTITION_WHEN_NOT_SOLID );
+	// Inventory code
 	m_iCash = 0;
+	m_iItemID = -1;
+	m_iItemCapacity = 0;
+	m_iItemMaxCapacity = 0;
 	// clear debug overlays
 	m_debugOverlays  = 0;
 	m_pTimedOverlay  = NULL;
