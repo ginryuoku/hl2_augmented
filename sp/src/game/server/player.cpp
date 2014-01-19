@@ -6634,7 +6634,31 @@ bool CBasePlayer::BumpWeapon( CBaseCombatWeapon *pWeapon )
 	}
 	else if (IsProscribedWeapon)
 	{
-		if( Weapon_EquipAmmoOnly( pWeapon ) )
+		int	primaryGiven	= (pWeapon->UsesClipsForAmmo1()) ? pWeapon->m_iClip1 : pWeapon->GetPrimaryAmmoCount();
+		int secondaryGiven	= (pWeapon->UsesClipsForAmmo2()) ? pWeapon->m_iClip2 : pWeapon->GetSecondaryAmmoCount();
+
+		int takenPrimary   = GiveAmmo( primaryGiven, pWeapon->m_iPrimaryAmmoType); 
+		int takenSecondary = GiveAmmo( secondaryGiven, pWeapon->m_iSecondaryAmmoType); 
+
+		if( pWeapon->UsesClipsForAmmo1() )
+		{
+			pWeapon->m_iClip1 -= takenPrimary;
+		}
+		else
+		{
+			pWeapon->SetPrimaryAmmoCount( pWeapon->GetPrimaryAmmoCount() - takenPrimary );
+		}
+
+		if( pWeapon->UsesClipsForAmmo2() )
+		{
+			pWeapon->m_iClip2 -= takenSecondary;
+		}
+		else
+		{
+			pWeapon->SetSecondaryAmmoCount( pWeapon->GetSecondaryAmmoCount() - takenSecondary );
+		}
+
+		if( takenPrimary > 0 || takenSecondary > 0 )
 		{
 			// Only remove me if I have no ammo left
 			if ( pWeapon->HasPrimaryAmmo() )
