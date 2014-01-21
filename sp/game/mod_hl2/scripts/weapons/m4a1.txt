@@ -88,3 +88,23 @@
 	
 }
 
+"Weapon_M4A1.Single"
+{
+	"channel"		"CHAN_WEAPON"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"0.52"
+	"pitch"		"PITCH_NORM"
+
+	"wave"			")weapons/m4a1/m4a1_unsil-1.wav"
+	
+}
+
+"Weapon_M4A1.Silenced"
+{
+	"channel"		"CHAN_WEAPON"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.4"
+	"pitch"		"PITCH_NORM"
+
+	"wave"			")weapons/m4a1/m4a1-1.wav"
+}
