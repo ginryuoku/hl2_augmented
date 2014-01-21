@@ -6,11 +6,15 @@ game_sounds_manifest
 
 	// Weapon sounds
 	"precache_file"		"scripts/game_sounds_weapons.txt"
-	"precache_file"		"scripts/game_sounds_weapons_cstrike.txt"
-	"preload_file"		"scripts/weapons/p90.txt"
-	"preload_file"		"scripts/weapons/usp.txt"
-	"preload_file"		"scripts/weapons/m4a1.txt"	
 
+	"precache_file"		"scripts/weapons/p90.txt"
+	"precache_file"		"scripts/weapons/usp.txt"
+	"precache_file"		"scripts/weapons/m4a1.txt"	
+	"precache_file"		"scripts/weapons/mp5.txt"
+
+//	"precache_file"		"scripts/game_sounds_weapons_cstrike.txt"
+	"precache_file"		"scripts/game_sounds_weapons_erika.txt"
+	
 	// HL2 World, Ambient Generic, Items, Physics, Vehicles
 	"precache_file"		"scripts/game_sounds_world.txt"
 	"precache_file"		"scripts/game_sounds_ambient_generic.txt"

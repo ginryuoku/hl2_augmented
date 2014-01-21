@@ -57,3 +57,13 @@
 
 	"wave"			"weapons\p90\p90_draw.wav"
 }
+
+"Weapon_P90.Single"
+{
+	"channel"		"CHAN_WEAPON"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"0.64"
+	"pitch"		"PITCH_NORM"
+
+	"wave"			")weapons/p90/p90-1.wav"
+}

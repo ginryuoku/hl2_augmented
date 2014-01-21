@@ -1,0 +1,217 @@
+"Default.PullPin_Grenade"
+{
+	"channel"		"CHAN_WEAPON"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"PITCH_NORM"
+
+	"wave"			"weapons/pinpull.wav"
+}
+
+"Flashbang.Explode"
+{
+	"channel"		"CHAN_VOICE"
+	"volume"		"1.0"
+	"soundlevel"		"SNDLVL_85dB"
+	"pitch"			"70,130"
+
+	
+
+	"rndwave"
+	{
+		"wave"	"^weapons/flashbang/flashbang_explode1.wav"	
+		"wave"	"^weapons/flashbang/flashbang_explode2.wav"	
+	}
+}
+
+
+"Flashbang.Bounce"
+{
+	"channel"		"CHAN_VOICE"
+	"volume"		"1.0"
+	"soundlevel"		"SNDLVL_75dB"
+	"pitch"			"PITCH_NORM"
+
+	"wave"			"weapons/flashbang/grenade_hit1.wav"
+}
+
+"SmokeGrenade.Bounce"
+{
+	"channel"		"CHAN_VOICE"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"PITCH_NORM"
+
+	"wave"			"weapons/smokegrenade/grenade_hit1.wav"
+}
+
+"HEGrenade.Bounce"
+{
+	"channel"		"CHAN_VOICE"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"PITCH_NORM"
+
+	"wave"			"weapons/hegrenade/he_bounce-1.wav"
+}
+
+"Default.ClipEmpty_Rifle"
+{
+	"channel"		"CHAN_WEAPON"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"		"PITCH_NORM"
+
+	"wave"			"weapons/ClipEmpty_Rifle.wav"
+}
+
+
+"Default.ClipEmpty_Pistol"
+{
+	"channel"		"CHAN_WEAPON"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"		"PITCH_NORM"
+
+	"wave"			"weapons/ClipEmpty_Pistol.wav"
+}
+
+"Default.Zoom"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"2.39"
+	"pitch"		"PITCH_NORM"
+
+	"wave"			"weapons/zoom.wav"
+}
+
+"BaseGrenade.Explode"
+{
+	"channel"		"CHAN_WEAPON"
+	"volume"		"1"
+	"soundlevel"  	"SNDLVL_100dB"
+	"pitch"		"80,120"
+
+	"rndwave"
+	{
+		"wave"	"^weapons/hegrenade/explode3.wav"
+		"wave"	"^weapons/hegrenade/explode4.wav"
+		"wave"	"^weapons/hegrenade/explode5.wav"
+	}
+}
+
+"BaseExplosionEffect.Sound"
+{
+	"channel"	"CHAN_STATIC"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_85dB"
+	"pitch"		"80,110"
+
+	"rndwave"
+	{
+		"wave"	"weapons/debris1.wav"
+		"wave"	"weapons/debris2.wav"
+	}
+}
+
+"BaseSmokeEffect.Sound"
+{
+	"channel"		"CHAN_STATIC"
+	"volume"		"1.0"
+	"soundlevel"	"SNDLVL_85dB"
+	
+
+	"wave"		"^weapons/smokegrenade/sg_explode.wav"
+		
+}
+
+"c4.disarmstart"
+{
+	"channel"		"CHAN_VOICE"
+	"volume"		"1"
+	"CompatibilityAttenuation"	"1.0"
+
+	"wave"			"weapons/c4/c4_disarm.wav"
+}
+
+"c4.disarmfinish"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1"
+	"CompatibilityAttenuation"	"1.0"
+
+	"wave"			"weapons/c4/c4_disarm.wav"
+}
+
+"c4.explode"
+{
+	"channel"		"CHAN_VOICE"
+	"volume"		"1"
+	"soundlevel"	"SNDLVL_GUNFIRE"
+
+	"wave"			")weapons/c4/c4_explode1.wav"
+}
+
+
+"c4.click"
+{
+	"channel"		"CHAN_WEAPON"
+	"volume"		"1"
+	"CompatibilityAttenuation"	"1.0"
+	
+
+	"wave"			"weapons/c4/c4_click.wav"
+}
+
+
+"c4.plant"
+{
+	"channel"		"CHAN_VOICE"
+	"volume"		"1"
+	"CompatibilityAttenuation"	"1.0"
+
+	"wave"			"weapons/c4/c4_plant.wav"
+}
+
+"C4.PlantSound"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"VOL_NORM"
+	"CompatibilityAttenuation"	"1.0"
+
+	"wave"	"weapons/c4/c4_beep1.wav"
+}
+
+"defuser.equip"
+{
+	"channel"		"CHAN_WEAPON"
+	"volume"		"1"
+	"CompatibilityAttenuation"	"1.0"
+
+	"wave"			"items/defuser_equip.wav"
+}
+
+"BaseCombatWeapon.WeaponDrop"
+{
+	"channel"		"CHAN_VOICE"
+	"volume"		"0.8"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"	  "95,110"
+	"rndwave"
+	{
+		"wave"	"physics/metal/weapon_impact_hard1.wav"
+		"wave"	"physics/metal/weapon_impact_hard2.wav"
+		"wave"	"physics/metal/weapon_impact_hard3.wav"
+	}
+}
+
+"BaseCombatWeapon.WeaponMaterialize"
+{
+	"channel"	"CHAN_WEAPON"
+	"volume"	"1"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"	"150"
+
+	"wave"	"items/suitchargeok1.wav"
+}
