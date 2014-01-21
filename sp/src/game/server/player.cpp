@@ -6593,10 +6593,8 @@ bool CBasePlayer::BumpWeapon( CBaseCombatWeapon *pWeapon )
 		IsProscribedWeapon = true;
 	if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_smg1") )
 		IsProscribedWeapon = true;
-//  TODO HL2: Build SMG1 launcher-only weapon.
-//	TODO HL2: Build AR2 launcher-only weapon.
-//	if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_ar2") )
-//		IsProscribedWeapon = true;	
+	if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_ar2") )
+		IsProscribedWeapon = true;	
 
 	// ----------------------------------------
 	// If I already have it just take the ammo
