@@ -6610,17 +6610,17 @@ bool CBasePlayer::BumpWeapon( CBaseCombatWeapon *pWeapon )
 				return false;
 
 			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_pistol") )
-				AddPlayerCash( 800 * 0.1 );
+				AddPlayerCash( 500 * 0.1 );
 			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_357") )
-				AddPlayerCash( 1200 * 0.1 );
+				AddPlayerCash( 1000 * 0.1 );
 			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_smg1") )
-				AddPlayerCash( 3000 * 0.1 );
+				AddPlayerCash( 2000 * 0.1 );
 			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_ar2") )
-				AddPlayerCash( 5000 * 0.1 );
+				AddPlayerCash( 4000 * 0.1 );
 			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_shotgun") )
 				AddPlayerCash( 2500 * 0.1 );
 			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_crossbow") )
-				AddPlayerCash( 4000 * 0.1 );
+				AddPlayerCash( 5000 * 0.1 );
 			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_rpg") )
 				AddPlayerCash( 6500 * 0.1 );
 							
@@ -6665,17 +6665,17 @@ bool CBasePlayer::BumpWeapon( CBaseCombatWeapon *pWeapon )
 				return false;
 
 			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_pistol") )
-				AddPlayerCash( 800 * 0.1 );
+				AddPlayerCash( 500 * 0.1 );
 			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_357") )
-				AddPlayerCash( 1200 * 0.1 );
+				AddPlayerCash( 1000 * 0.1 );
 			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_smg1") )
-				AddPlayerCash( 3000 * 0.1 );
+				AddPlayerCash( 2000 * 0.1 );
 			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_ar2") )
-				AddPlayerCash( 5000 * 0.1 );
+				AddPlayerCash( 4000 * 0.1 );
 			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_shotgun") )
 				AddPlayerCash( 2500 * 0.1 );
 			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_crossbow") )
-				AddPlayerCash( 4000 * 0.1 );
+				AddPlayerCash( 5000 * 0.1 );
 			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_rpg") )
 				AddPlayerCash( 6500 * 0.1 );
 
