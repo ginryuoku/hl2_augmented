@@ -1,37 +1,31 @@
-// Pistol
+// 357
 
 WeaponData
 {
 	// Weapon data is loaded by both the Game and Client DLLs.
-	"printname"	"#M9"
-	"viewmodel"			"models/weapons/v_pist_usp.mdl"
-	"playermodel"		"models/weapons/w_pist_usp.mdl"
-	"anim_prefix"		"pistol"
+	"printname"			"#HL2_357Handgun"
+	"viewmodel"			"models/weapons/v_357.mdl"
+	"playermodel"		"models/weapons/w_357.mdl"
+	"anim_prefix"		"python"
 	"bucket"			"1"
-	"bucket_position"	"0"
+	"bucket_position"	"1"
 	"bucket_360"			"0"
-	"bucket_position_360"	"0"
+	"bucket_position_360"	"1"
 
-	"clip_size"			"15"
-	"primary_ammo"		"Pistol"
+	"clip_size"			"6"
+	"default_clip"		"6"
+	"primary_ammo"		"357"
 	"secondary_ammo"	"None"
 
-	"weight"		"2"
-	"rumble"		"1"
+	"weight"		"7"
+	"rumble"		"2"
 	"item_flags"		"0"
-
-	"BuiltRightHanded" "0" 
-	"AllowFlipping" "1"  
 
 	// Sounds for the weapon. There is a max of 16 sounds per category (i.e. max 16 "single_shot" sounds)
 	SoundData
 	{
-
-		"reload_npc"	"Weapon_Pistol.NPC_Reload"
-		"empty"			"Default.ClipEmpty_Pistol"
-		"single_shot"	"Weapon_USP.Single"
-		"single_shot_npc"	"Weapon_Pistol.NPC_Single"
-		"special1"		"Weapon_USP.SilencedShot"
+		"empty"		"Weapon_Pistol.Empty"
+		"single_shot"	"Weapon_357.Single"
 	}
 
 	// Weapon Sprite data is loaded by the Client DLL.
@@ -40,22 +34,22 @@ WeaponData
 		"weapon"
 		{
 				"font"		"WeaponIcons"
-				"character"	"d"
+				"character"	"e"
 		}
 		"weapon_s"
 		{	
 				"font"		"WeaponIconsSelected"
-				"character"	"d"
+				"character"	"e"
 		}
 		"weapon_small"
 		{
 				"font"		"WeaponIconsSmall"
-				"character"	"d"
+				"character"	"e"
 		}
 		"ammo"
 		{
 				"font"		"WeaponIconsSmall"
-				"character"	"p"
+				"character"	"q"
 		}
 		"crosshair"
 		{
