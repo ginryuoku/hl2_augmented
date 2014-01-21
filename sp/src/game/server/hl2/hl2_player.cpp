@@ -924,14 +924,43 @@ void CHL2_Player::PostThink( void )
 				--m_fHealthRegenRemainder;
 			}
 		}
-		if ( gpGlobals->curtime > m_flLastDamageTime + 1 )
+		if ( gpGlobals->curtime > m_flLastDamageTime + 5 && ArmorValue() % 25 != 0)
 		{
-			//Regenerate based on rate, and scale it by the frametime
-			m_fArmorRegenRemainder += 0.5 * gpGlobals->frametime;
+			// Regenerate based on rate, and scale it by the frametime
+			// If we're regenerating while health is regenerating, we take a penalty.
+			if (GetHealth() % 25 > 0)
+			{
+				m_fArmorRegenRemainder += 0.25 * gpGlobals->frametime;
+			} 
+			else
+			{
+				m_fArmorRegenRemainder += 0.5 * gpGlobals->frametime;
+			}
+			
 
 			if(m_fArmorRegenRemainder >= 1)
 			{
-				IncrementArmorValue( m_fArmorRegenRemainder, 100 );
+				IncrementArmorValue( 1, 100 );
+				--m_fArmorRegenRemainder;
+			}
+		}
+		if (gpGlobals->curtime > m_flLastDamageTime + 20 && ArmorValue() % 25 == 0)
+		{
+			// Regenerate based on rate, and scale it by the frametime
+			// If we're regenerating while health is regenerating, we take a penalty.
+			if (GetHealth() % 25 > 0)
+			{
+				m_fArmorRegenRemainder += 0.25 * gpGlobals->frametime;
+			} 
+			else
+			{
+				m_fArmorRegenRemainder += 0.5 * gpGlobals->frametime;
+			}
+
+
+			if(m_fArmorRegenRemainder >= 1)
+			{
+				IncrementArmorValue( 1, 100 );
 				--m_fArmorRegenRemainder;
 			}
 		}
