@@ -5,6 +5,12 @@
 
 #include "tier0/memdbgon.h"
 
+BEGIN_SIMPLE_DATADESC( CBaseInventory )
+	DEFINE_ARRAY(ItemID, FIELD_INTEGER, MAX_INVENTORY),
+	DEFINE_ARRAY(ItemCap, FIELD_INTEGER, MAX_INVENTORY),
+	DEFINE_ARRAY(ItemMaxCap, FIELD_INTEGER, MAX_INVENTORY),
+END_DATADESC()
+
 CBaseInventory::CBaseInventory()
 {
 	PurgeAllObjects();

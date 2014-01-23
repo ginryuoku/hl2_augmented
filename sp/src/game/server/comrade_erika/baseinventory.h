@@ -10,6 +10,10 @@ class CBaseInventory
 public:
 	CBaseInventory();
 
+	DECLARE_SIMPLE_DATADESC();
+	DECLARE_CLASS_NOBASE( CBaseInventory );
+	DECLARE_SERVERCLASS();
+
 	int GetItemID( int element );
 	int GetItemCapacity( int element );
 	int GetItemMaxCapacity( int element );
@@ -25,7 +29,6 @@ private:
 	int ItemID[MAX_INVENTORY];
 	int ItemCap[MAX_INVENTORY];
 	int ItemMaxCap[MAX_INVENTORY];
-
 };
 
 #endif
