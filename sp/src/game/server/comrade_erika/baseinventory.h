@@ -3,6 +3,8 @@
 
 #include "cbase.h"
 
+#define MAX_INVENTORY 100
+
 class CBaseInventory
 {
 public:
@@ -14,11 +16,12 @@ public:
 	
 	void PurgeObject( int element );
 	void PurgeAllObjects();
-
+	void ConvertEntityToObject( CBaseEntity *pEntity );
+	void NewObject( int ObjectIndex, int NewItemID, int NewItemCap, int NewItemMaxCap );
 private:
-	int ItemID[100];
-	int ItemCap[100];
-	int ItemMaxCap[100];
+	int ItemID[MAX_INVENTORY];
+	int ItemCap[MAX_INVENTORY];
+	int ItemMaxCap[MAX_INVENTORY];
 
 };
 

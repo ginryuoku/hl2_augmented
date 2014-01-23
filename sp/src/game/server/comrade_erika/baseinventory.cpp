@@ -59,3 +59,38 @@ int CBaseInventory::GetItemTotalWeight( int element )
 	}
 }
 #endif
+
+void CBaseInventory::ConvertEntityToObject( CBaseEntity *pEntity )
+{
+	int i = 0;
+	int NewObjectIndex = 0;
+	do 
+	{
+		if (ItemID < 0)
+		{
+			++i;
+		}
+		else
+		{
+			NewObjectIndex = i;
+		}
+	} while (i < MAX_INVENTORY && !NewObjectIndex );
+
+	if ( pEntity )
+	{
+		int itemid = pEntity->GetItemID();
+		int itemcap = pEntity->GetItemCapacity();
+		int itemmaxcap = pEntity->GetItemMaxCapacity();
+		NewObject( NewObjectIndex, itemid, itemcap, itemmaxcap );
+	}
+
+	UTIL_Remove(pEntity);
+	return;
+}
+
+void CBaseInventory::NewObject( int ObjectIndex, int NewItemID, int NewItemCap, int NewItemMaxCap )
+{
+	ItemID[ObjectIndex] = NewItemID;
+	ItemCap[ObjectIndex] = NewItemCap;
+	ItemMaxCap[ObjectIndex] = NewItemMaxCap;
+}
