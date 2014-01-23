@@ -219,7 +219,15 @@ void CItem::Use( CBaseEntity *pActivator, CBaseEntity *pCaller, USE_TYPE useType
 
 	if ( pPlayer )
 	{
-		pPlayer->PickupObject( this );
+		if ( GetItemID() > 0 )
+		{
+			pPlayer->ImportEntityIntoInventory(this);
+		} 
+		else
+		{
+			pPlayer->PickupObject( this );
+		}
+
 	}
 }
 
@@ -427,6 +435,12 @@ void CItem::ItemTouch( CBaseEntity *pOther )
 	if ( !g_pGameRules->CanHaveItem( pPlayer, this ) )
 	{
 		// no? Ignore the touch.
+		return;
+	}
+
+	if ( GetItemID() > 0 )
+	{
+		//DevMsg("Item ID of touched item: %d\n", GetItemID());
 		return;
 	}
 
