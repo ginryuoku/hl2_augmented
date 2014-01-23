@@ -837,8 +837,10 @@ public:
 	// This player's data that should only be replicated to 
 	//  the player and not to other players.
 	CNetworkVarEmbedded( CPlayerLocalData, m_Local );
+	// Inventory code
+	CBaseInventory		m_pInventory;
 
-	CBaseInventory		m_Inventory;
+	bool ImportEntityIntoInventory( CBaseEntity *pEntity );
 
 #if defined USES_ECON_ITEMS
 	CNetworkVarEmbedded( CAttributeList,	m_AttributeList );

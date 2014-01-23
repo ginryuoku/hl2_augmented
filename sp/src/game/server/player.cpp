@@ -8836,6 +8836,20 @@ bool CBasePlayer::HasAnyAmmoOfType( int nAmmoIndex )
 	return false;
 }
 
+bool CBasePlayer::ImportEntityIntoInventory( CBaseEntity *pEntity )
+{
+	if (pEntity)
+	{
+		m_pInventory.ConvertEntityToObject(pEntity);
+		return true;
+	}
+	else
+	{
+		PickupObject(pEntity);
+		return false;
+	}
+}
+
 bool CBasePlayer::HandleVoteCommands( const CCommand &args )
 {
 	if( g_voteController == NULL )
