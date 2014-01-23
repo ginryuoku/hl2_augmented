@@ -62,20 +62,10 @@ int CBaseInventory::GetItemTotalWeight( int element )
 
 void CBaseInventory::ConvertEntityToObject( CBaseEntity *pEntity )
 {
-	int i = 0;
-	int NewObjectIndex = 0;
-	do 
-	{
-		if (ItemID < 0)
-		{
-			++i;
-		}
-		else
-		{
-			NewObjectIndex = i;
-		}
-	} while (i < MAX_INVENTORY && !NewObjectIndex );
-
+	int NewObjectIndex = FindFirstFreeObject();
+	if (NewObjectIndex == -1)
+		return;
+	
 	if ( pEntity )
 	{
 		int itemid = pEntity->GetItemID();
@@ -93,4 +83,17 @@ void CBaseInventory::NewObject( int ObjectIndex, int NewItemID, int NewItemCap, 
 	ItemID[ObjectIndex] = NewItemID;
 	ItemCap[ObjectIndex] = NewItemCap;
 	ItemMaxCap[ObjectIndex] = NewItemMaxCap;
+	DevMsg("Created new object at position %d of type %d with capacity %d and max capacity %d\n", ObjectIndex, NewItemID, NewItemCap, NewItemMaxCap);
+}
+
+int CBaseInventory::FindFirstFreeObject()
+{
+	for (int i = 0; i < MAX_INVENTORY; ++i)
+	{
+		if (ItemID[i] == -1)
+		{
+			return i;
+		}
+	}
+	return -1;
 }
