@@ -12,7 +12,7 @@ public:
 
 	DECLARE_SIMPLE_DATADESC();
 	DECLARE_CLASS_NOBASE( CBaseInventory );
-	DECLARE_SERVERCLASS();
+	//DECLARE_SERVERCLASS();
 
 	int GetItemID( int element );
 	int GetItemCapacity( int element );
