@@ -452,7 +452,8 @@ BEGIN_DATADESC( CBasePlayer )
 
 	DEFINE_FIELD( m_nNumCrateHudHints, FIELD_INTEGER ),
 
-
+	// Inventory.
+	DEFINE_EMBEDDED(m_pInventory),
 
 	// DEFINE_FIELD( m_nBodyPitchPoseParam, FIELD_INTEGER ),
 	// DEFINE_ARRAY( m_StepSoundCache, StepSoundCache_t,  2  ),
