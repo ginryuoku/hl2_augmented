@@ -16,7 +16,7 @@ CInvPanel::CInvPanel(IViewPort *pViewPort) : BaseClass(NULL, PANEL_INVENTORY)
 	SetTitle("", true);
 
 	// load the new scheme early!!
-	SetScheme("ClientScheme");
+	SetScheme(vgui::scheme()->LoadSchemeFromFile("resource/SourceScheme.res", "SourceScheme"));
 	SetMoveable(false);
 	SetSizeable(false);
 
