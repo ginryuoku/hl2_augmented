@@ -41,6 +41,7 @@
 #include "hud.h"
 #include "NavProgress.h"
 #include "commentary_modelviewer.h"
+#include "comrade_erika/invpanel.h"
 
 // our definition
 #include "baseviewport.h"
@@ -89,6 +90,18 @@ CON_COMMAND( hidepanel, "Hides a viewport panel <name>" )
 		return;
 		
 	 gViewPortInterface->ShowPanel( args[ 1 ], false );
+}
+
+CON_COMMAND( inventory, "Shows or hides the inventory" )
+{
+	if (!gViewPortInterface)
+		return;
+
+	IViewPortPanel *m_pInventoryPanel = gViewPortInterface->FindPanelByName(PANEL_INVENTORY);
+
+	bool bState = m_pInventoryPanel->IsVisible();
+
+	gViewPortInterface->ShowPanel(PANEL_INVENTORY, !bState);
 }
 
 /* global helper functions
@@ -234,6 +247,7 @@ void CBaseViewport::CreateDefaultPanels( void )
 	// AddNewPanel( CreatePanelByName( PANEL_TEAM ), "PANEL_TEAM" );
 	// AddNewPanel( CreatePanelByName( PANEL_CLASS ), "PANEL_CLASS" );
 	// AddNewPanel( CreatePanelByName( PANEL_BUY ), "PANEL_BUY" );
+	AddNewPanel( CreatePanelByName( PANEL_INVENTORY ), "PANEL_INVENTORY");
 #endif
 }
 
@@ -294,6 +308,12 @@ IViewPortPanel* CBaseViewport::CreatePanelByName(const char *szPanelName)
 	{
 		newpanel = new CCommentaryModelViewer( this );
 	}
+
+	if ( Q_strcmp(PANEL_INVENTORY, szPanelName) == 0)
+	{
+		newpanel = new CInvPanel( this );
+	}
+
 	
 	return newpanel; 
 }
