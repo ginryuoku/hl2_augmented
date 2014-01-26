@@ -52,8 +52,8 @@ protected:
 
 		SetPaintBackgroundEnabled( false );
 	}
-
-	virtual void CreateDefaultPanels( void ) { /* don't create any panels yet*/ };
+	// According to AkFuttySeben, this is what steps on baseviewport panels.
+	//virtual void CreateDefaultPanels( void ) { /* don't create any panels yet*/ };
 };
 
 
