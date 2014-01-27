@@ -26,12 +26,12 @@ CInvPanel::CInvPanel(IViewPort *pViewPort) : BaseClass(NULL, PANEL_INVENTORY)
 
 	LoadControlSettings("resource/UI/invpanel.res");
 	InvalidateLayout();
+	SetSize(ScreenWidth(),ScreenHeight());
 
 	m_pInvPanel = new HTML(this, "InvPanelHTML");
 	m_pInvPanel->SetPos(0,0);
-	m_pInvPanel->SetSize(640, 480);
-	m_pInvPanel->OpenURL("https://www.google.com", NULL);
-
+	m_pInvPanel->SetSize(ScreenWidth(),ScreenHeight());
+	
 	DevMsg("InvPanel has been constructed\n");
 }
 
