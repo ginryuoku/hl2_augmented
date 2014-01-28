@@ -53,6 +53,8 @@ void CInvPanel::ShowPanel(bool bShow)
 			m_iInvKey = gameuifuncs->GetButtonCodeForBind( "inventory" );
 		}
 
+		m_pInvPanel->OpenURL("file:///html/invpanel/invpanel.html", NULL, true);
+
 	}
 	else
 	{
