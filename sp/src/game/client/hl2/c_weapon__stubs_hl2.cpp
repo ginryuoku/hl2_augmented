@@ -44,11 +44,19 @@ STUB_WEAPON_CLASS( weapon_oldmanharpoon, WeaponOldManHarpoon, C_WeaponCitizenPac
 #endif
 #endif
 
-STUB_WEAPON_CLASS( weapon_pdw_p90, WeaponP90, C_HLMachineGun );
-STUB_WEAPON_CLASS( weapon_smg_mp5a2, WeaponMP5A2, C_HLMachineGun );
-STUB_WEAPON_CLASS( weapon_arifle_m4a1, WeaponM4A1, C_HLMachineGun );
 STUB_WEAPON_CLASS( weapon_hgun_m9, WeaponM9, C_BaseHLCombatWeapon );
+
+STUB_WEAPON_CLASS( weapon_mag_mr96, WeaponMR96, C_BaseHLCombatWeapon );
+
+STUB_WEAPON_CLASS( weapon_shot_870ae, Weapon870AE, C_BaseHLCombatWeapon );
+STUB_WEAPON_CLASS( weapon_shot_spas12, WeaponSPAS12, C_BaseHLCombatWeapon );
+
+STUB_WEAPON_CLASS( weapon_smg_mp5a2, WeaponMP5A2, C_HLMachineGun );
+
+STUB_WEAPON_CLASS( weapon_pdw_p90, WeaponP90, C_HLMachineGun );
+
+STUB_WEAPON_CLASS( weapon_arifle_m4a1, WeaponM4A1, C_HLMachineGun );
+
 STUB_WEAPON_CLASS( weapon_launcher_40mm, WeaponLauncher40mm, C_BaseHLCombatWeapon );
 STUB_WEAPON_CLASS( weapon_dissolver, WeaponDissolver, C_BaseHLCombatWeapon );
-
 

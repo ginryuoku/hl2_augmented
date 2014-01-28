@@ -4,14 +4,16 @@
 	"weapon_stunstick"			"250"
 
 	"weapon_hgun_m9"			"500"
-	"weapon_smg_mp5a2"			"1500"
-	"weapon_pdw_p90"			"3000"
-	"weapon_arifle_m4a1"		"5000"
-	"weapon_dissolver"			"15000"
-	"weapon_launcher_40mm"		"4000"
+	"weapon_mag_mr96"			"800"		
+	"weapon_shot_870ae"			"1200"
+	"weapon_shot_spas12"		"3500"
+	"weapon_smg_mp5a2"			"2500"
+	"weapon_pdw_p90"			"5000"
+	"weapon_arifle_m4a1"		"7500"
+	"weapon_dissolver"			"16000"
+	"weapon_launcher_40mm"		"8000"
 
-	"weapon_357"				"750"	
-	"weapon_shotgun"			"2500"
+
 	"weapon_crossbow"			"4000"
 	"weapon_rpg"				"6500"
 

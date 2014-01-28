@@ -6596,6 +6596,10 @@ bool CBasePlayer::BumpWeapon( CBaseCombatWeapon *pWeapon )
 		IsProscribedWeapon = true;
 	if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_ar2") )
 		IsProscribedWeapon = true;	
+	if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_shotgun") )
+		IsProscribedWeapon = true;	
+	if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_357") )
+		IsProscribedWeapon = true;	
 
 	// ----------------------------------------
 	// If I already have it just take the ammo

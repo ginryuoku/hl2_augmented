@@ -8,7 +8,7 @@ WeaponData
 	"playermodel"			"models/weapons/w_rocket_launcher.mdl"
 	"anim_prefix"			"missile launcher"
 	"bucket"				"4"
-	"bucket_position"		"2"
+	"bucket_position"		"3"
 	"autoswitchfrom"		"0"
 	"bucket_360"			"3"
 	"bucket_position_360"	"1"
