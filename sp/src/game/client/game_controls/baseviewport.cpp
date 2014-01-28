@@ -43,6 +43,10 @@
 #include "commentary_modelviewer.h"
 #include "comrade_erika/invpanel.h"
 
+#ifdef PostMessage
+#undef PostMessage
+#endif
+
 // our definition
 #include "baseviewport.h"
 #include <filesystem.h>
