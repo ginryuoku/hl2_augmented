@@ -53,7 +53,11 @@ void CInvPanel::ShowPanel(bool bShow)
 			m_iInvKey = gameuifuncs->GetButtonCodeForBind( "inventory" );
 		}
 
-		m_pInvPanel->OpenURL("file:///html/invpanel/invpanel.html");
+		// FIXME: THIS IS GROSS AS FUCK
+		// DO NOT SHIP BINARIES IN THIS STATE!
+		// ASSUMES STEAM IS ON WINDOWS x64, INSTALLED TO DEFAULT LOCATION
+		// AND THE STARS ARE RIGHT - FOR TESTING *ONLY*
+		m_pInvPanel->OpenURL("file:///C:/Program Files (x86)/Steam/SteamApps/sourcemods/comrade_erika/html/invpanel/invpanel.html");
 
 	}
 	else
