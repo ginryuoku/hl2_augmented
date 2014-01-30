@@ -1,0 +1,14 @@
+@import url("jquery.gridster.min.css");
+
+.container {
+	width: 80%;
+	margin: 10%;
+}
+
+.gridster ul li {
+	list-style-type: none;
+	background-color: #7F7F7F;
+	border: 3px solid #404040;
+	border-radius: 3px;
+	opacity: 50%;
+}
