@@ -1,6 +1,6 @@
 "GameInfo"
 {
-	game 		"My First Episodic Mod"
+	game 		"Comrade Erika"
 	title 		"HALF-LIFE'"
 	title2		""
 
