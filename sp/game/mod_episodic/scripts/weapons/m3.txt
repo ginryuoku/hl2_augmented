@@ -1,0 +1,42 @@
+"Weapon_M3.FoldStock"
+{
+	"channel"		"CHAN_WEAPON"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"0.40"
+	"pitch"		"PITCH_NORM"
+
+	"wave"			"weapons/stock-fold.wav"
+}
+
+//M3SUPER90
+"Weapon_M3.Single"
+{
+	"channel"		"CHAN_WEAPON"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"0.48"
+	"pitch"		"PITCH_NORM"
+
+	"wave"			")weapons/m3/m3-1.wav"
+}
+
+
+
+"Weapon_M3.Insertshell"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"		"PITCH_NORM"
+
+	"wave"			"weapons/m3/m3_insertshell.wav"
+}
+
+"Weapon_M3.Pump"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"		"PITCH_NORM"
+
+	"wave"			"weapons/m3/m3_pump.wav"
+}

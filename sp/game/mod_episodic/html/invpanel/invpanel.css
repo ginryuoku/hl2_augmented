@@ -1,0 +1,54 @@
+@import url("jquery.gridster.min.css");
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #808080;
+	opacity: 0.9;
+}
+
+#wrapper {
+    height: auto !important; /* ie6 ignores !important, so this will be overridden below */
+    min-height: 100%; /* ie6 ignores min-height completely */
+    height: 100%;
+    background-color: #808080;
+    opacity: 0.9;
+}
+
+#header
+{
+	height: 120px;
+	position: absolute;
+	opacity: 0.6;
+	top: 0;
+	left: 0;
+	width: 100%
+}
+
+#footer {
+    height: 60px; /* Define height of the footer */
+    position: absolute;
+    bottom: 0; /* Sit it on the bottom */
+    left: 0;
+    width: 100%; /* As wide as it's allowed */
+}
+
+#content {
+	padding-top: 120px;
+    padding-bottom: 60px; /* This should match the height of the footer */
+}
+
+
+.gridster {
+	margin: 0 auto;
+	width: 80%;
+	background-color: #606060;
+}
+
+.gridster ul li {
+	list-style-type: none;
+	background-color: #404040;
+	border: 3px solid #202020;
+	border-radius: 3px;
+}
