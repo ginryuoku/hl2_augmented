@@ -580,7 +580,16 @@ CBasePlayer::CBasePlayer( )
 	m_szNetname[0] = '\0';
 
 	m_iHealth = 0;
-	m_Local.m_iPlayerCash = 800;
+	m_Local.m_iPlayerCash = 400; // Just enough to buy a handgun if you collect two in EP2.
+	m_Local.m_iArmorUpgrades = 0;
+	m_Local.m_iHealthUpgrades = 0;
+
+	m_Local.m_iGrabbed357 = 0;
+	m_Local.m_iGrabbedAR2 = 0;
+	m_Local.m_iGrabbedPistol = 0;
+	m_Local.m_iGrabbedShotgun = 0;
+	m_Local.m_iGrabbedSMG1 = 0;
+
 	Weapon_SetLast( NULL );
 	m_bitsDamageType = 0;
 
@@ -4898,8 +4907,11 @@ void CBasePlayer::Spawn( void )
 
 	m_ArmorValue		= SpawnArmorValue();
 	SetBlocksLOS( false );
-	m_iMaxHealth		= m_iHealth;
-
+	m_iMaxHealth		= 40 + (20 * m_Local.m_iHealthUpgrades);
+	if (m_iMaxHealth < m_iHealth)
+	{
+		m_iHealth = m_iMaxHealth;
+	}
 	// Clear all flags except for FL_FULLEDICT
 	if ( GetFlags() & FL_FAKECLIENT )
 	{
@@ -6613,15 +6625,30 @@ bool CBasePlayer::BumpWeapon( CBaseCombatWeapon *pWeapon )
 				return false;
 
 			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_pistol") )
-				AddPlayerCash( 500 * 0.1 );
+			{
+				++m_Local.m_iGrabbedPistol;
+				AddPlayerCash( 500 * (1.0 / m_Local.m_iGrabbedPistol) );
+			}
 			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_357") )
-				AddPlayerCash( 1200 * 0.1 );
+			{
+				++m_Local.m_iGrabbed357;
+				AddPlayerCash( 800 * (1.0 / m_Local.m_iGrabbed357) );
+			}
 			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_smg1") )
-				AddPlayerCash( 2500 * 0.1 );
+			{
+				++m_Local.m_iGrabbedSMG1;
+				AddPlayerCash( 2500 * (1.0 / m_Local.m_iGrabbedSMG1) );
+			}
 			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_ar2") )
-				AddPlayerCash( 5000 * 0.1 );
+			{
+				++m_Local.m_iGrabbedAR2;
+				AddPlayerCash( 5000 * (1.0 / m_Local.m_iGrabbedAR2) );
+			}
 			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_shotgun") )
-				AddPlayerCash( 3500 * 0.1 );
+			{
+				++m_Local.m_iGrabbedShotgun;
+				AddPlayerCash( 3500 * (1.0 / m_Local.m_iGrabbedShotgun) );
+			}
 			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_crossbow") )
 				AddPlayerCash( 5000 * 0.1 );
 			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_rpg") )
@@ -6668,15 +6695,30 @@ bool CBasePlayer::BumpWeapon( CBaseCombatWeapon *pWeapon )
 				return false;
 
 			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_pistol") )
-				AddPlayerCash( 500 * 0.1 );
+			{
+				++m_Local.m_iGrabbedPistol;
+				AddPlayerCash( 500 * (1.0 / m_Local.m_iGrabbedPistol) );
+			}
 			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_357") )
-				AddPlayerCash( 1200 * 0.1 );
+			{
+				++m_Local.m_iGrabbed357;
+				AddPlayerCash( 800 * (1.0 / m_Local.m_iGrabbed357) );
+			}
 			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_smg1") )
-				AddPlayerCash( 2500 * 0.1 );
+			{
+				++m_Local.m_iGrabbedSMG1;
+				AddPlayerCash( 2500 * (1.0 / m_Local.m_iGrabbedSMG1) );
+			}
 			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_ar2") )
-				AddPlayerCash( 5000 * 0.1 );
+			{
+				++m_Local.m_iGrabbedAR2;
+				AddPlayerCash( 5000 * (1.0 / m_Local.m_iGrabbedAR2) );
+			}
 			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_shotgun") )
-				AddPlayerCash( 3500 * 0.1 );
+			{
+				++m_Local.m_iGrabbedShotgun;
+				AddPlayerCash( 3500 * (1.0 / m_Local.m_iGrabbedShotgun) );
+			}
 			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_crossbow") )
 				AddPlayerCash( 5000 * 0.1 );
 			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_rpg") )
@@ -8689,6 +8731,11 @@ void CBasePlayer::EquipSuit( bool bPlayEffects )
 void CBasePlayer::RemoveSuit( void )
 {
 	m_Local.m_bWearingSuit = false;
+}
+
+void CBasePlayer::ResetMaxHealth( void )
+{
+	SetMaxHealth( 40 + ( 20 * m_Local.m_iHealthUpgrades));
 }
 
 //-----------------------------------------------------------------------------

@@ -64,6 +64,9 @@ public:
 	bool					m_bWearingSuit;
 
 	int						m_iPlayerCash;
+	int						m_iMaxArmor;
+	int						m_iHealthUpgrades;
+	int						m_iArmorUpgrades;
 
 	bool					m_bPoisoned;
 	float					m_flStepSize;

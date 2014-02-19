@@ -910,10 +910,9 @@ void CHL2_Player::PostThink( void )
 		 HandleAdmireGlovesAnimation();
 	}
 
-	if ( IsAlive() && ( GetHealth() < GetMaxHealth() || ArmorValue() < 100 ) && IsSuitEquipped() )
+	if ( IsAlive() && ( GetHealth() < GetMaxHealth() || ArmorValue() < MaxArmorValue() ) && IsSuitEquipped() )
 	{
-
-		if ( gpGlobals->curtime > m_flLastDamageTime + 1 && GetHealth() % 25 != 0 )
+		if ( gpGlobals->curtime > m_flLastDamageTime + 1 && GetHealth() % 20 != 0 && GetHealth() < GetMaxHealth())
 		{
 			//Regenerate based on rate, and scale it by the frametime
 			m_fHealthRegenRemainder += 0.5 * gpGlobals->frametime;
@@ -924,39 +923,18 @@ void CHL2_Player::PostThink( void )
 				--m_fHealthRegenRemainder;
 			}
 		}
-		if ( gpGlobals->curtime > m_flLastDamageTime + 5 && ArmorValue() % 25 != 0)
+		if ( gpGlobals->curtime > m_flLastDamageTime + 5 && (ArmorValue() % 20 != 0 || ArmorValue() == 0 ))
 		{
 			// Regenerate based on rate, and scale it by the frametime
 			// If we're regenerating while health is regenerating, we take a penalty.
 			if (GetHealth() % 25 > 0)
 			{
-				m_fArmorRegenRemainder += 0.25 * gpGlobals->frametime;
+				m_fArmorRegenRemainder += 0.05 * gpGlobals->frametime;
 			} 
 			else
 			{
-				m_fArmorRegenRemainder += 0.5 * gpGlobals->frametime;
+				m_fArmorRegenRemainder += 0.4 * gpGlobals->frametime;
 			}
-			
-
-			if(m_fArmorRegenRemainder >= 1)
-			{
-				IncrementArmorValue( 1, 100 );
-				--m_fArmorRegenRemainder;
-			}
-		}
-		if (gpGlobals->curtime > m_flLastDamageTime + 20 && ArmorValue() % 25 == 0)
-		{
-			// Regenerate based on rate, and scale it by the frametime
-			// If we're regenerating while health is regenerating, we take a penalty.
-			if (GetHealth() % 25 > 0)
-			{
-				m_fArmorRegenRemainder += 0.25 * gpGlobals->frametime;
-			} 
-			else
-			{
-				m_fArmorRegenRemainder += 0.5 * gpGlobals->frametime;
-			}
-
 
 			if(m_fArmorRegenRemainder >= 1)
 			{
@@ -2041,13 +2019,13 @@ ConVar	sk_battery( "sk_battery","0" );
 
 bool CHL2_Player::ApplyBattery( float powerMultiplier )
 {
-	const float MAX_NORMAL_BATTERY = 100;
-	if ((ArmorValue() < MAX_NORMAL_BATTERY) && IsSuitEquipped())
+//	const float MAX_NORMAL_BATTERY = 100;
+	if ((ArmorValue() < MaxArmorValue()) && IsSuitEquipped())
 	{
 		int pct;
 		char szcharge[64];
 
-		IncrementArmorValue( sk_battery.GetFloat() * powerMultiplier, MAX_NORMAL_BATTERY );
+		IncrementArmorValue( sk_battery.GetFloat() * powerMultiplier, MaxArmorValue() );
 
 		CPASAttenuationFilter filter( this, "ItemBattery.Touch" );
 		EmitSound( filter, entindex(), "ItemBattery.Touch" );
@@ -2062,7 +2040,7 @@ bool CHL2_Player::ApplyBattery( float powerMultiplier )
 		
 		// Suit reports new power level
 		// For some reason this wasn't working in release build -- round it.
-		pct = (int)( (float)(ArmorValue() * 100.0) * (1.0/MAX_NORMAL_BATTERY) + 0.5);
+		pct = (int)( (float)(ArmorValue() * 100.0) * (1.0/MaxArmorValue()) + 0.5);
 		pct = (pct / 5);
 		if (pct > 0)
 			pct--;
