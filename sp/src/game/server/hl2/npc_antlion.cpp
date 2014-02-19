@@ -185,7 +185,7 @@ CNPC_Antlion::CNPC_Antlion( void )
 	m_bForcedStuckJump = false;
 	m_nBodyBone = -1;
 	m_bSuppressUnburrowEffects = false;
-	m_iCash = 10;
+	m_iCash = 40;
 }
 
 LINK_ENTITY_TO_CLASS( npc_antlion, CNPC_Antlion );
@@ -324,6 +324,7 @@ void CNPC_Antlion::Spawn( void )
 	{
 		CapabilitiesAdd( bits_CAP_INNATE_RANGE_ATTACK1 );
 		// CapabilitiesRemove( bits_CAP_INNATE_MELEE_ATTACK2 );
+		m_iCash = 60;
 	}
 
 	// JAY: Optimize these out for now

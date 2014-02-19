@@ -75,6 +75,16 @@ public:
 	CNetworkVar( float, m_flStepSize );
 	CNetworkVar( bool, m_bAllowAutoMovement );
 	CNetworkVar( int, m_iPlayerCash );
+	CNetworkVar( int, m_iMaxArmor );
+	CNetworkVar( int, m_iHealthUpgrades );
+	CNetworkVar( int, m_iArmorUpgrades );
+
+	int	m_iGrabbedPistol;
+	int m_iGrabbed357;
+	int m_iGrabbedSMG1;
+	int m_iGrabbedShotgun;
+	int m_iGrabbedAR2;
+
 	// 3d skybox
 	CNetworkVarEmbedded( sky3dparams_t, m_skybox3d );
 	// world fog

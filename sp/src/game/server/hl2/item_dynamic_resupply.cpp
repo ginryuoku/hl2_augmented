@@ -437,6 +437,7 @@ void CItem_DynamicResupply::ComputeHealthRatios( CItem_DynamicResupply* pMaster,
 		if ( i == DS_HEALTH_INDEX )
 		{
 			// Health
+			pPlayer->ResetMaxHealth();
 			flMax = pPlayer->GetMaxHealth();
 
 			float flCurrentHealth = pPlayer->GetHealth() + (pSpawnInfo[i].m_iPotentialItems * sk_healthkit.GetFloat());
@@ -452,7 +453,7 @@ void CItem_DynamicResupply::ComputeHealthRatios( CItem_DynamicResupply* pMaster,
 			}
 			else
 			{
-				flMax = MAX_NORMAL_BATTERY;
+				flMax = pPlayer->MaxArmorValue();
 				float flCurrentArmor = pPlayer->ArmorValue() + (pSpawnInfo[i].m_iPotentialItems * sk_battery.GetFloat());
 				pSpawnInfo[i].m_flCurrentRatio = (flCurrentArmor / flMax);
 			}

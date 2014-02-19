@@ -664,6 +664,9 @@ public:
 	bool	IsDisconnecting() const	{ return m_iConnected == PlayerDisconnecting; }
 	bool	IsSuitEquipped() const	{ return m_Local.m_bWearingSuit; }
 	int		ArmorValue() const		{ return m_ArmorValue; }
+	int		MaxArmorValue()	const	{ return 20 + (m_Local.m_iArmorUpgrades * 20); }
+	void	ResetMaxHealth();
+
 	bool	HUDNeedsRestart() const { return m_fInitHUD; }
 	float	MaxSpeed() const		{ return m_flMaxspeed; }
 	Activity GetActivity( ) const	{ return m_Activity; }
@@ -674,10 +677,16 @@ public:
 	float	MuzzleFlashTime() const { return m_flFlashTime; }
 	float	PlayerDrownTime() const	{ return m_AirFinished; }
 
-	int						GetPlayerCash() 
-		{ return m_Local.m_iPlayerCash; }
-	void					AddPlayerCash(int cash)	
-		{ m_Local.m_iPlayerCash = m_Local.m_iPlayerCash + cash; return; }
+	int		GetPlayerCash() 
+	{ 
+		return m_Local.m_iPlayerCash; 
+	}
+	void	AddPlayerCash(int cash)	
+	{ 
+		Msg("Received %d credits\n",cash);
+		m_Local.m_iPlayerCash = m_Local.m_iPlayerCash + cash;
+		return; 
+	}
 
 
 	int		GetObserverMode() const	{ return m_iObserverMode; }
