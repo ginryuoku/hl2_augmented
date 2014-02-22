@@ -28,7 +28,7 @@ CInvPanel::CInvPanel(IViewPort *pViewPort) : BaseClass(NULL, PANEL_INVENTORY)
 	InvalidateLayout();
 	SetSize(ScreenWidth(),ScreenHeight());
 
-	m_pInvPanel = new VInvPanel(this, "InvPanelHTML");
+	m_pInvPanel = new HTML(this, "InvPanelHTML");
 	m_pInvPanel->SetPos(0,0);
 	m_pInvPanel->SetSize(ScreenWidth(),ScreenHeight());
 	
@@ -53,7 +53,7 @@ void CInvPanel::ShowPanel(bool bShow)
 			m_iInvKey = gameuifuncs->GetButtonCodeForBind( "inventory" );
 		}
 
-		m_pInvPanel->OpenURL("file:///html/invpanel/invpanel.html");
+		m_pInvPanel->OpenURL("file:///html/invpanel/invpanel.html", NULL, true);
 
 	}
 	else

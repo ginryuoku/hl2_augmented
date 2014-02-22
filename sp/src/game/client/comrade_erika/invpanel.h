@@ -6,7 +6,7 @@ using namespace vgui;
 #include <vgui/IVGui.h>
 #include <vgui_controls/Frame.h>
 #include <game/client/iviewport.h>
-#include "comrade_erika/gui_inventory.h"
+#include <vgui_controls/HTML.h>
 
 class CInvPanel : public vgui::Frame, public IViewPortPanel
 {
@@ -33,7 +33,7 @@ public:
 protected:
 	//VGUI overrides:
 	IViewPort *m_pViewPort;
-	VInvPanel *m_pInvPanel;
+	vgui::HTML *m_pInvPanel;
 	ButtonCode_t m_iInvKey;
 
 private:

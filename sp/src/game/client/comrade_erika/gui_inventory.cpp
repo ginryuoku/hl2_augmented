@@ -29,6 +29,7 @@ void VInvPanel::OnMethodCall(Awesomium::WebView* caller, unsigned int remote_obj
 
 VInvPanel::VInvPanel( vgui::Panel *parent, const char *panelName ) : VAwesomium(parent, panelName)
 {
+	OpenURL("https://encrypted.google.com");
 }
 
 
