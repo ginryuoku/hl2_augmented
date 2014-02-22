@@ -79,6 +79,21 @@ $Project
 	
 	$Folder	"Source Files"
 	{
+		$Folder "Comrade Erika"
+		{
+			$File "comrade_erika\baseinventory.cpp"
+			$File "comrade_erika\baseinventory.h"
+			$File "comrade_erika\item_upgrades.cpp"
+			$File "comrade_erika\weapon_arifle_m4a1.cpp"
+			$File "comrade_erika\weapon_launcher_40mm.cpp"
+			$File "comrade_erika\weapon_shot_870ae.cpp"
+			$File "comrade_erika\weapon_dissolver.cpp"
+			$File "comrade_erika\weapon_mag_mr96.cpp"
+			$File "comrade_erika\weapon_shot_spas12.cpp"
+			$File "comrade_erika\weapon_smg_mp5a2.cpp"
+			$File "comrade_erika\weapon_pdw_p90.cpp"
+			$File "comrade_erika\weapon_hgun_m9.cpp"
+		}
 		$File	"$SRCDIR\game\shared\achievement_saverestore.cpp"
 		$File	"$SRCDIR\game\shared\achievement_saverestore.h"
 		$File	"$SRCDIR\game\shared\achievementmgr.cpp"

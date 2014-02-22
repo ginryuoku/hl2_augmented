@@ -173,6 +173,12 @@ $Project
 		
 	$Folder	"Source Files"
 	{
+		$Folder "Comrade Erika"
+		{
+			$File "hud_score.cpp"
+			$File "comrade_erika\invpanel.cpp"
+			$File "comrade_erika\invpanel.h"
+		}
 		$File	"hl2\C_Func_Monitor.cpp"
 		$File	"geiger.cpp"
 		$File	"history_resource.cpp"
