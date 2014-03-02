@@ -53,7 +53,8 @@ void CInvPanel::ShowPanel(bool bShow)
 			m_iInvKey = gameuifuncs->GetButtonCodeForBind( "inventory" );
 		}
 
-		m_pInvPanel->OpenURL("file:///html/invpanel/invpanel.html", NULL, true);
+		// This is evil and cannot go into production as-is. We need a better way to push HTML to CEF.
+		m_pInvPanel->OpenURL("file:///Users/michelle/Library/Application Support/Steam/SteamApps/sourcemods/comrade_erika/html/invpanel/invpanel.html", NULL, true);
 
 	}
 	else
