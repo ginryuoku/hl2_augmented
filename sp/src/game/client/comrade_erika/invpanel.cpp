@@ -68,6 +68,10 @@ void CInvPanel::ShowPanel(bool bShow)
 void CInvPanel::Update()
 {
 	// This is a stub.
+	//CUtlString *m_buildJavaScriptString;
+	//m_buildJavaScriptString->Append("UpdateObject(InvArray, ");
+	//m_buildJavaScriptString->Append(const char *pchAddition);
+	m_pInvPanel->RunJavascript("UpdateObject(InvArray, 8, 101, 5, 15)");
 	return;
 }
 

@@ -25,6 +25,7 @@
 #include "c_env_fog_controller.h"
 #include "igameevents.h"
 #include "GameEventListener.h"
+#include "comrade_erika/c_baseinventory.h"
 
 #if defined USES_ECON_ITEMS
 #include "econ_item.h"
@@ -412,6 +413,9 @@ public:
 	// Data for only the local player
 	CNetworkVarEmbedded( CPlayerLocalData, m_Local );
 
+	// Inventory code
+	CBaseInventory		m_pInventory;
+	
 #if defined USES_ECON_ITEMS
 	CNetworkVarEmbedded( CAttributeList, m_AttributeList );
 #endif
