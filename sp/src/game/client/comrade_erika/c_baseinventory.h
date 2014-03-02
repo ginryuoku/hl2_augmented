@@ -18,7 +18,6 @@ class CBaseInventory
 public:
 	CBaseInventory();
 	
-	DECLARE_CLASS_NOBASE( CBaseInventory );
 	//DECLARE_SERVERCLASS();
 	
 	void PurgeObject( int element );
