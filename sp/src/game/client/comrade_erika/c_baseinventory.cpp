@@ -6,6 +6,7 @@
 //
 //
 
+#include "cbase.h"
 #include "c_baseinventory.h"
 
 CBaseInventory::CBaseInventory()
