@@ -8,26 +8,32 @@
 
 #include "cbase.h"
 #include "c_baseinventory.h"
+#include "usermessages.h"
+#include "c_user_message_register.h"
 
 CBaseInventory::CBaseInventory()
 {
-	PurgeAllObjects();
 }
 
-void CBaseInventory::PurgeObject( int element )
+// declare the user message handler
+void __MsgFunc_InventoryUpdate( bf_read &msg )
 {
-	ItemID[element] = -1;
-	ItemCap[element] = 0;
-	ItemMaxCap[element] = 0;
-}
-
-void CBaseInventory::PurgeAllObjects()
-{
-	for ( int i = 0; i < 100; ++i)
+	int element = msg.ReadByte();
+	int id = msg.ReadByte();
+	int cap = msg.ReadByte();
+	int maxcap = msg.ReadByte();
+	
+	CBasePlayer *pPlayer = ToBasePlayer( UTIL_PlayerByIndex( 1 ) );
+	
+	if ( pPlayer )
 	{
-		PurgeObject(i);
+		pPlayer->UpdateInventoryObject(element, id, cap, maxcap );
 	}
+	
 }
+
+// register message handler once
+USER_MESSAGE_REGISTER(InventoryUpdate)
 
 int CBaseInventory::GetItemID( int element )
 {
@@ -44,12 +50,9 @@ int CBaseInventory::GetItemMaxCapacity( int element )
 	return ItemMaxCap[element];
 }
 
-void CBaseInventory::NewObject( int ObjectIndex, int NewItemID, int NewItemCap, int NewItemMaxCap )
+bool CBaseInventory::GetItemDirtiness( int element )
 {
-	ItemID[ObjectIndex] = NewItemID;
-	ItemCap[ObjectIndex] = NewItemCap;
-	ItemMaxCap[ObjectIndex] = NewItemMaxCap;
-	DevMsg("Client: Created new object at position %d of type %d with capacity %d and max capacity %d\n", ObjectIndex, NewItemID, NewItemCap, NewItemMaxCap);
+	return ItemDirty[element];
 }
 
 int CBaseInventory::FindFirstFreeObject()
@@ -62,4 +65,17 @@ int CBaseInventory::FindFirstFreeObject()
 		}
 	}
 	return -1;
+}
+
+void CBaseInventory::UpdateObject( int ObjectIndex, int NewItemID, int NewItemCap, int NewItemMaxCap )
+{
+	ItemID[ObjectIndex] = NewItemID;
+	ItemCap[ObjectIndex] = NewItemCap;
+	ItemMaxCap[ObjectIndex] = NewItemMaxCap;
+	ItemDirty[ObjectIndex] = true;
+}
+
+void CBaseInventory::ItemIsClean( int element )
+{
+	ItemDirty[element] = false;
 }

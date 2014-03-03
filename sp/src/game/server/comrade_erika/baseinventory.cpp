@@ -16,11 +16,37 @@ CBaseInventory::CBaseInventory()
 	PurgeAllObjects();
 }
 
+void CBaseInventory::ClientUpdateMessage( CBasePlayer *pBasePlayer, int element )
+{
+	CSingleUserRecipientFilter filter ( pBasePlayer ); // set recipient
+	filter.MakeReliable();  // reliable transmission
+
+	UserMessageBegin( filter, "InventoryUpdate" ); // create message
+	WRITE_BYTE( element );
+	WRITE_BYTE( ItemID[element] ); // fill message
+	WRITE_BYTE( ItemCap[element] ); // fill message
+	WRITE_BYTE( ItemMaxCap[element] );
+	MessageEnd(); //send message
+	ItemDirty[element] = false;
+}
+
+void CBaseInventory::FlushPendingObjects( CBasePlayer *pBasePlayer )
+{
+	for (int i = 0; i < MAX_INVENTORY; ++i)
+	{
+		if (ItemDirty[i] == true)
+		{
+			ClientUpdateMessage(pBasePlayer, i);
+		}
+	}
+}
+
 void CBaseInventory::PurgeObject( int element )
 {
 	ItemID[element] = -1;
 	ItemCap[element] = 0;
 	ItemMaxCap[element] = 0;
+	ItemDirty[element] = true;
 }
 
 void CBaseInventory::PurgeAllObjects()
@@ -89,6 +115,9 @@ void CBaseInventory::NewObject( int ObjectIndex, int NewItemID, int NewItemCap, 
 	ItemID[ObjectIndex] = NewItemID;
 	ItemCap[ObjectIndex] = NewItemCap;
 	ItemMaxCap[ObjectIndex] = NewItemMaxCap;
+	
+	ItemDirty[ObjectIndex] = true;
+	
 	DevMsg("Created new object at position %d of type %d with capacity %d and max capacity %d\n", ObjectIndex, NewItemID, NewItemCap, NewItemMaxCap);
 }
 

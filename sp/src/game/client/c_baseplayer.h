@@ -403,6 +403,8 @@ public:
 
 	virtual bool			CanUseFirstPersonCommand( void ){ return true; }
 	
+	void UpdateInventoryObject( int ObjectIndex, int NewItemID, int NewItemCap, int NewItemMaxCap );
+	
 protected:
 	fogparams_t				m_CurrentFog;
 	EHANDLE					m_hOldFogController;
