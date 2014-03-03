@@ -6,7 +6,7 @@ using namespace vgui;
 #include <vgui/IVGui.h>
 #include <vgui_controls/Frame.h>
 #include <game/client/iviewport.h>
-#include <vgui_controls/HTML.h>
+#include "ce_html.h"
 
 class CInvPanel : public vgui::Frame, public IViewPortPanel
 {
@@ -19,6 +19,7 @@ public:
 	virtual const char *GetName( void ) { return PANEL_INVENTORY; }
 	virtual void SetData(KeyValues *data) {};
 	virtual void Reset() {};
+	virtual void BeginUpdates();
 	virtual void Update();
 	virtual bool NeedsUpdate( void ) { return false; }
 	virtual bool HasInputElements( void ) { return true; }
@@ -33,7 +34,7 @@ public:
 protected:
 	//VGUI overrides:
 	IViewPort *m_pViewPort;
-	vgui::HTML *m_pInvPanel;
+	CE_HTML *m_pInvPanel;
 	ButtonCode_t m_iInvKey;
 
 private:

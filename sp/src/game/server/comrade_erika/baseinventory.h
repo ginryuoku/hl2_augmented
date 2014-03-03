@@ -14,6 +14,9 @@ public:
 	DECLARE_CLASS_NOBASE( CBaseInventory );
 	//DECLARE_SERVERCLASS();
 
+	void FlushPendingObjects( CBasePlayer *pBasePlayer );
+	void ClientUpdateMessage( CBasePlayer *pBasePlayer, int element );
+	
 	int GetItemID( int element );
 	int GetItemCapacity( int element );
 	int GetItemMaxCapacity( int element );
@@ -29,6 +32,7 @@ private:
 	int ItemID[MAX_INVENTORY];
 	int ItemCap[MAX_INVENTORY];
 	int ItemMaxCap[MAX_INVENTORY];
+	bool ItemDirty[MAX_INVENTORY]; // dirty flag for each
 };
 
 #endif

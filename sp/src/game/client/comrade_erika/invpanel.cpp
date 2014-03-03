@@ -28,7 +28,7 @@ CInvPanel::CInvPanel(IViewPort *pViewPort) : BaseClass(NULL, PANEL_INVENTORY)
 	InvalidateLayout();
 	SetSize(ScreenWidth(),ScreenHeight());
 
-	m_pInvPanel = new HTML(this, "InvPanelHTML");
+	m_pInvPanel = new CE_HTML(this, "InvPanelHTML");
 	m_pInvPanel->SetPos(0,0);
 	m_pInvPanel->SetSize(ScreenWidth(),ScreenHeight());
 	
@@ -54,7 +54,12 @@ void CInvPanel::ShowPanel(bool bShow)
 		}
 
 		// This is evil and cannot go into production as-is. We need a better way to push HTML to CEF.
-		m_pInvPanel->OpenURL("file:///Users/michelle/Library/Application Support/Steam/SteamApps/sourcemods/comrade_erika/html/invpanel/invpanel.html", NULL, true);
+		CUtlString *m_URL;
+		m_URL->Append(engine->GetGameDirectory());
+		m_URL->Append("/html/invpanel/index.html");
+		DevMsg("URL: %s\n", m_URL->Get());
+
+		m_pInvPanel->OpenURL(m_URL->Get(), NULL, true);
 
 	}
 	else
@@ -65,13 +70,30 @@ void CInvPanel::ShowPanel(bool bShow)
 
 }
 
+void CInvPanel::BeginUpdates()
+{
+	CBasePlayer *pPlayer = ToBasePlayer(UTIL_PlayerByIndex(1));
+	if (pPlayer)
+	{
+		for (int i = 0; i < MAX_INVENTORY; ++i)
+		{
+			if (pPlayer->m_pInventory.GetItemDirtiness(i))
+			{
+				int id = pPlayer->m_pInventory.GetItemID(i);
+				int cap = pPlayer->m_pInventory.GetItemCapacity(i);
+				int maxcap = pPlayer->m_pInventory.GetItemMaxCapacity(i);
+				CUtlString *m_buildJSString;
+				m_buildJSString->Format("UpdateObject(InvArray, %d, %d, %d, %d)", i, id, cap, maxcap);
+				m_pInvPanel->RunJavascript(m_buildJSString->Get());
+				pPlayer->m_pInventory.ItemIsClean(i);
+			}
+		}
+	}
+}
+
 void CInvPanel::Update()
 {
-	// This is a stub.
-	//CUtlString *m_buildJavaScriptString;
-	//m_buildJavaScriptString->Append("UpdateObject(InvArray, ");
-	//m_buildJavaScriptString->Append(const char *pchAddition);
-	m_pInvPanel->RunJavascript("UpdateObject(InvArray, 8, 101, 5, 15)");
+	BeginUpdates();
 	return;
 }
 
