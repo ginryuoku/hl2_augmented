@@ -912,6 +912,7 @@ void CHL2_Player::PostThink( void )
 
 	if ( IsAlive() && ( GetHealth() < GetMaxHealth() || ArmorValue() < MaxArmorValue() ) && IsSuitEquipped() )
 	{
+		m_pInventory.FlushPendingObjects( this );
 		if ( gpGlobals->curtime > m_flLastDamageTime + 1 && GetHealth() % 20 != 0 && GetHealth() < GetMaxHealth())
 		{
 			//Regenerate based on rate, and scale it by the frametime

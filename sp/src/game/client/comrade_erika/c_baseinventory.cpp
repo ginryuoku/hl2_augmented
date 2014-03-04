@@ -13,6 +13,10 @@
 
 CBaseInventory::CBaseInventory()
 {
+	for (int i = 0; i < MAX_INVENTORY; ++i)
+	{
+		UpdateObject( i, -1, 0, 0);
+	}
 }
 
 // declare the user message handler
@@ -73,6 +77,7 @@ void CBaseInventory::UpdateObject( int ObjectIndex, int NewItemID, int NewItemCa
 	ItemCap[ObjectIndex] = NewItemCap;
 	ItemMaxCap[ObjectIndex] = NewItemMaxCap;
 	ItemDirty[ObjectIndex] = true;
+	Msg("Client: Created new object at position %d of type %d with capacity %d and max capacity %d\n", ObjectIndex, NewItemID, NewItemCap, NewItemMaxCap);
 }
 
 void CBaseInventory::ItemIsClean( int element )

@@ -3878,7 +3878,6 @@ void CBasePlayer::PreThink(void)
 	// track where we are in the nav mesh
 	UpdateLastKnownArea();
 
-	m_pInventory.FlushPendingObjects( this );
 	// StudioFrameAdvance( );//!!!HACKHACK!!! Can't be hit by traceline when not animating?
 }
 

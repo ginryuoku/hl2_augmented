@@ -27,6 +27,7 @@ void CBaseInventory::ClientUpdateMessage( CBasePlayer *pBasePlayer, int element 
 	WRITE_BYTE( ItemCap[element] ); // fill message
 	WRITE_BYTE( ItemMaxCap[element] );
 	MessageEnd(); //send message
+	Msg("Server - pushing message: %d, %d, %d, %d\n", element, ItemID[element], ItemCap[element], ItemMaxCap[element]);
 	ItemDirty[element] = false;
 }
 
@@ -118,7 +119,7 @@ void CBaseInventory::NewObject( int ObjectIndex, int NewItemID, int NewItemCap, 
 	
 	ItemDirty[ObjectIndex] = true;
 	
-	DevMsg("Created new object at position %d of type %d with capacity %d and max capacity %d\n", ObjectIndex, NewItemID, NewItemCap, NewItemMaxCap);
+	Msg("Server: Created new object at position %d of type %d with capacity %d and max capacity %d\n", ObjectIndex, NewItemID, NewItemCap, NewItemMaxCap);
 }
 
 int CBaseInventory::FindFirstFreeObject()
