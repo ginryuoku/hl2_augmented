@@ -19,15 +19,14 @@ void CE_HTML::OnKeyCodeTyped(vgui::KeyCode code)
 	{
 		case KEY_ESCAPE:
 		{
-			engine->ClientCmd( "vguicancel" );
+			engine->ClientCmd( "inventory" );
 		}
-
 	}
 	
 	int m_iInvKey = gameuifuncs->GetButtonCodeForBind( "inventory" );
 	
 	if (code == m_iInvKey) {
-		engine->ClientCmd( "vguicancel" );
+		engine->ClientCmd( "inventory" );
 	}
 	
 	HTML::OnKeyCodeTyped(code);

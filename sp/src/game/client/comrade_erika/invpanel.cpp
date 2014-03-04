@@ -28,7 +28,7 @@ CInvPanel::CInvPanel(IViewPort *pViewPort) : BaseClass(NULL, PANEL_INVENTORY)
 	InvalidateLayout();
 	SetSize(ScreenWidth(),ScreenHeight());
 
-	m_pInvPanel = new CE_HTML(this, "InvPanelHTML");
+	m_pInvPanel = new CE_HTML(this, "InvPanelHTML", true);
 	m_pInvPanel->SetPos(0,0);
 	m_pInvPanel->SetSize(ScreenWidth(),ScreenHeight());
 	
@@ -54,12 +54,12 @@ void CInvPanel::ShowPanel(bool bShow)
 		}
 
 		// This is evil and cannot go into production as-is. We need a better way to push HTML to CEF.
-		CUtlString *m_URL;
-		m_URL->Append(engine->GetGameDirectory());
-		m_URL->Append("/html/invpanel/index.html");
-		DevMsg("URL: %s\n", m_URL->Get());
+		CUtlString m_URL;
+		m_URL.Append(engine->GetGameDirectory());
+		m_URL.Append("/html/invpanel/index.html");
+		DevMsg("URL: %s\n", m_URL.Get());
 
-		m_pInvPanel->OpenURL(m_URL->Get(), NULL, true);
+		m_pInvPanel->OpenURL(m_URL.Get(), NULL, true);
 
 	}
 	else
@@ -77,24 +77,27 @@ void CInvPanel::BeginUpdates()
 	{
 		for (int i = 0; i < MAX_INVENTORY; ++i)
 		{
-			if (pPlayer->m_pInventory.GetItemDirtiness(i))
-			{
-				int id = pPlayer->m_pInventory.GetItemID(i);
-				int cap = pPlayer->m_pInventory.GetItemCapacity(i);
-				int maxcap = pPlayer->m_pInventory.GetItemMaxCapacity(i);
-				CUtlString *m_buildJSString;
-				m_buildJSString->Format("UpdateObject(InvArray, %d, %d, %d, %d)", i, id, cap, maxcap);
-				m_pInvPanel->RunJavascript(m_buildJSString->Get());
-				pPlayer->m_pInventory.ItemIsClean(i);
-			}
+			int id = pPlayer->m_pInventory.GetItemID(i);
+			int cap = pPlayer->m_pInventory.GetItemCapacity(i);
+			int maxcap = pPlayer->m_pInventory.GetItemMaxCapacity(i);
+			CUtlString m_buildJSString;
+			m_buildJSString.Format("UpdateObject(InvArray, %d, %d, %d, %d);", i, id, cap, maxcap);
+			Msg("Sending command: %s\n", m_buildJSString.Get());
+			m_pInvPanel->RunJavascript(m_buildJSString.String());
+			pPlayer->m_pInventory.ItemIsClean(i);
 		}
 	}
 }
 
 void CInvPanel::Update()
 {
-	BeginUpdates();
 	return;
+}
+
+void CInvPanel::OnThink()
+{
+	BeginUpdates();
+	BaseClass::OnThink();
 }
 
 void CInvPanel::OnCommand(const char *command)
