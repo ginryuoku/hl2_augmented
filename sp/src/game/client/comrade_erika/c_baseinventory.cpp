@@ -84,3 +84,10 @@ void CBaseInventory::ItemIsClean( int element )
 {
 	ItemDirty[element] = false;
 }
+
+// HACK: The server is supposed to decide this, but our UI code at present is too eager to 'clean' values, 
+// so none get shown again. This is because we don't cache or otherwise mirror state.
+void CBaseInventory::ItemIsDirty(int element)
+{
+	ItemDirty[element] = true;
+}
