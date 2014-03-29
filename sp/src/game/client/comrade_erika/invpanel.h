@@ -40,6 +40,7 @@ protected:
 
 private:
 	//Other used VGUI control Elements:
+	int update_counter;
 };
 
 #endif

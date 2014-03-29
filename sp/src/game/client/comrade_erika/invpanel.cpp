@@ -6,6 +6,8 @@
 
 #include "tier0/memdbgon.h"
 
+#define MAX_HTML_UPDATES 5
+
 // Constructor: Initializes the Panel
 CInvPanel::CInvPanel(IViewPort *pViewPort) : BaseClass(NULL, PANEL_INVENTORY)
 {
@@ -32,6 +34,7 @@ CInvPanel::CInvPanel(IViewPort *pViewPort) : BaseClass(NULL, PANEL_INVENTORY)
 	m_pInvPanel->SetPos(0,0);
 	m_pInvPanel->SetSize(ScreenWidth(),ScreenHeight());
 	
+	update_counter = 0;
 	DevMsg("InvPanel has been constructed\n");
 }
 
@@ -60,7 +63,16 @@ void CInvPanel::ShowPanel(bool bShow)
 		DevMsg("URL: %s\n", m_URL.Get());
 
 		m_pInvPanel->OpenURL(m_URL.Get(), NULL, true);
+		for (int i = 0; i < MAX_INVENTORY; ++i)
+		{
+			CBasePlayer *pPlayer = ToBasePlayer(UTIL_PlayerByIndex(1));
+			if (pPlayer)
+			{
+				pPlayer->m_pInventory.ItemIsDirty(i);
+			}
 
+		}
+		update_counter = 0;
 	}
 	else
 	{
@@ -77,14 +89,27 @@ void CInvPanel::BeginUpdates()
 	{
 		for (int i = 0; i < MAX_INVENTORY; ++i)
 		{
-			int id = pPlayer->m_pInventory.GetItemID(i);
-			int cap = pPlayer->m_pInventory.GetItemCapacity(i);
-			int maxcap = pPlayer->m_pInventory.GetItemMaxCapacity(i);
-			CUtlString m_buildJSString;
-			m_buildJSString.Format("UpdateObject(InvArray, %d, %d, %d, %d);", i, id, cap, maxcap);
-			Msg("Sending command: %s\n", m_buildJSString.Get());
-			m_pInvPanel->RunJavascript(m_buildJSString.String());
-			pPlayer->m_pInventory.ItemIsClean(i);
+			if (pPlayer->m_pInventory.GetItemDirtiness(i))
+			{
+				int id = pPlayer->m_pInventory.GetItemID(i);
+				int cap = pPlayer->m_pInventory.GetItemCapacity(i);
+				int maxcap = pPlayer->m_pInventory.GetItemMaxCapacity(i);
+
+				CUtlString m_buildJSString;
+				m_buildJSString.Format("UpdateObject(InvArray, %d, %d, %d, %d);", i, id, cap, maxcap);
+				Msg("Sending command: %s\n", m_buildJSString.Get());
+				m_pInvPanel->RunJavascript(m_buildJSString.String());
+				pPlayer->m_pInventory.ItemIsClean(i);
+
+				++update_counter;
+			}
+
+			if (update_counter >= MAX_HTML_UPDATES)
+			{
+				update_counter = 0;
+				break;
+			}
+
 		}
 	}
 }
