@@ -1,12 +1,14 @@
 //The following include files are necessary to allow your MyPanel.cpp to compile.
 #include "cbase.h"
+#include "vgui_grid.h"
+#include <vgui_controls/ImagePanel.h>
+#include <vgui_controls/Label.h>
+
 #include "invpanel.h"
 
 #include "IGameUIFuncs.h" // for key bindings
 
 #include "tier0/memdbgon.h"
-
-#define MAX_HTML_UPDATES 5
 
 // Constructor: Initializes the Panel
 CInvPanel::CInvPanel(IViewPort *pViewPort) : BaseClass(NULL, PANEL_INVENTORY)
@@ -25,16 +27,38 @@ CInvPanel::CInvPanel(IViewPort *pViewPort) : BaseClass(NULL, PANEL_INVENTORY)
 	// hide the system buttons
 	SetTitleBarVisible( false );
 	SetProportional(true);
+	
+	InvSubPanel = new ControlGrid(this, "InvSubPanel");
+	InvSubPanel->SetNumColumns(8);
+	InvSubPanel->SetShouldDrawLabels(true);
+	InvSubPanel->SetProportional(true);
 
 	LoadControlSettings("resource/UI/invpanel.res");
 	InvalidateLayout();
-	SetSize(ScreenWidth(),ScreenHeight());
-
-	m_pInvPanel = new CE_HTML(this, "InvPanelHTML", true);
-	m_pInvPanel->SetPos(0,0);
-	m_pInvPanel->SetSize(ScreenWidth(),ScreenHeight());
+	SetSize(ScreenWidth(), ScreenHeight());
 	
-	update_counter = 0;
+	char buffer[40];
+
+	for (int i = 0; i < MAX_INVENTORY; i++)
+	{
+		//Create Image
+		Q_snprintf(buffer, sizeof(buffer), "image%i", i);
+		ImagePanel* imagePanel = new ImagePanel(this, buffer);
+		imagePanel->SetImage(scheme()->GetImage("inv/0", false));
+		imagePanel->SetMinimumSize(32, 32);
+		imagePanel->SetProportional(true);
+
+		//Create Label
+		Q_snprintf(buffer, sizeof(buffer), "label%i", i);
+		Label* label = new Label(this, buffer, buffer);
+		label->SetText(buffer);
+
+		//Add Label and Image to PanelListPanel
+		InvSubPanel->AddItem(imagePanel, label);
+	}
+
+	vgui::ivgui()->AddTickSignal(GetVPanel(), 100);
+		
 	DevMsg("InvPanel has been constructed\n");
 }
 
@@ -56,23 +80,6 @@ void CInvPanel::ShowPanel(bool bShow)
 			m_iInvKey = gameuifuncs->GetButtonCodeForBind( "inventory" );
 		}
 
-		// This is evil and cannot go into production as-is. We need a better way to push HTML to CEF.
-		CUtlString m_URL;
-		m_URL.Append(engine->GetGameDirectory());
-		m_URL.Append("/html/invpanel/index.html");
-		DevMsg("URL: %s\n", m_URL.Get());
-
-		m_pInvPanel->OpenURL(m_URL.Get(), NULL, true);
-		for (int i = 0; i < MAX_INVENTORY; ++i)
-		{
-			CBasePlayer *pPlayer = ToBasePlayer(UTIL_PlayerByIndex(1));
-			if (pPlayer)
-			{
-				pPlayer->m_pInventory.ItemIsDirty(i);
-			}
-
-		}
-		update_counter = 0;
 	}
 	else
 	{
@@ -85,33 +92,42 @@ void CInvPanel::ShowPanel(bool bShow)
 void CInvPanel::BeginUpdates()
 {
 	CBasePlayer *pPlayer = ToBasePlayer(UTIL_PlayerByIndex(1));
+	char buffer[40];
 	if (pPlayer)
 	{
 		for (int i = 0; i < MAX_INVENTORY; ++i)
 		{
 			if (pPlayer->m_pInventory.GetItemDirtiness(i))
 			{
-				int id = pPlayer->m_pInventory.GetItemID(i);
-				int cap = pPlayer->m_pInventory.GetItemCapacity(i);
-				int maxcap = pPlayer->m_pInventory.GetItemMaxCapacity(i);
-
-				CUtlString m_buildJSString;
-				m_buildJSString.Format("UpdateObject(InvArray, %d, %d, %d, %d);", i, id, cap, maxcap);
-				Msg("Sending command: %s\n", m_buildJSString.Get());
-				m_pInvPanel->RunJavascript(m_buildJSString.String());
+				// First, grab the image panel.
+				Panel* panel = InvSubPanel->GetItemPanel(i);
+				if (panel)
+				{
+					ImagePanel* imagepanel = dynamic_cast<ImagePanel*>(panel);
+					if (imagepanel)
+					{
+						Q_snprintf(buffer, sizeof(buffer), "inv/%i", pPlayer->m_pInventory.GetItemID(i));
+						imagepanel->SetImage(scheme()->GetImage(buffer, false));
+					}
+				}
+				// Next, grab the label panel.
+				Panel* panel2 = InvSubPanel->GetItemLabel(i);
+				if (panel2)
+				{
+					Label* label = dynamic_cast<Label*>(panel2);
+					if (label)
+					{
+						Q_snprintf(buffer, sizeof(buffer), "%i/%i", pPlayer->m_pInventory.GetItemCapacity(i), pPlayer->m_pInventory.GetItemMaxCapacity(i));
+						label->SetText(buffer);
+					}
+				}
+				// Great. Now to 'clean' the item so that we don't waste time updating it.
 				pPlayer->m_pInventory.ItemIsClean(i);
-
-				++update_counter;
 			}
-
-			if (update_counter >= MAX_HTML_UPDATES)
-			{
-				update_counter = 0;
-				break;
-			}
-
 		}
 	}
+
+	return;
 }
 
 void CInvPanel::Update()

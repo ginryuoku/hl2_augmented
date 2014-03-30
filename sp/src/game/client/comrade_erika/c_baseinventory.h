@@ -28,7 +28,6 @@ public:
 	int FindFirstFreeObject();
 	
 	void UpdateObject( int ObjectIndex, int NewItemID, int NewItemCap, int NewItemMaxCap );
-	void ItemIsDirty(int element);
 	void ItemIsClean(int element);
 private:
 	int ItemID[MAX_INVENTORY];
