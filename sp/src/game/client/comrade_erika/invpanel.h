@@ -6,7 +6,7 @@ using namespace vgui;
 #include <vgui/IVGui.h>
 #include <vgui_controls/Frame.h>
 #include <game/client/iviewport.h>
-#include "ce_html.h"
+#include "vgui_controlgrid.h"
 
 class CInvPanel : public vgui::Frame, public IViewPortPanel
 {
@@ -35,8 +35,9 @@ public:
 protected:
 	//VGUI overrides:
 	IViewPort *m_pViewPort;
-	CE_HTML *m_pInvPanel;
+	ControlGrid *InvSubPanel;
 	ButtonCode_t m_iInvKey;
+
 
 private:
 	//Other used VGUI control Elements:
