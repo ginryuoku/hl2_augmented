@@ -29,9 +29,10 @@ CInvPanel::CInvPanel(IViewPort *pViewPort) : BaseClass(NULL, PANEL_INVENTORY)
 	SetProportional(true);
 	
 	InvSubPanel = new ControlGrid(this, "InvSubPanel");
-	InvSubPanel->SetNumColumns(8);
+	InvSubPanel->SetNumColumns(15);
 	InvSubPanel->SetShouldDrawLabels(true);
 	InvSubPanel->SetProportional(true);
+	InvSubPanel->SetMinimumSize(600, 400);
 
 	LoadControlSettings("resource/UI/invpanel.res");
 	InvalidateLayout();
@@ -79,7 +80,6 @@ void CInvPanel::ShowPanel(bool bShow)
 		{
 			m_iInvKey = gameuifuncs->GetButtonCodeForBind( "inventory" );
 		}
-
 	}
 	else
 	{

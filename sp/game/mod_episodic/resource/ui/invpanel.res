@@ -18,7 +18,7 @@
 	}
 	"InvSubPanel"
 	{
-	 "ControlName"  "PanelListPanel"
+	 "ControlName"  "ControlGrid"
 	 "fieldName"  "InvSubPanel"
 	 "xpos"  "20"
 	 "ypos"  "20"
