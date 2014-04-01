@@ -23,7 +23,7 @@ CBaseInventory::CBaseInventory()
 void __MsgFunc_InventoryUpdate( bf_read &msg )
 {
 	int element = msg.ReadByte();
-	int id = msg.ReadByte();
+	int id = msg.ReadLong(); // No integer type. Huh.
 	int cap = msg.ReadByte();
 	int maxcap = msg.ReadByte();
 	

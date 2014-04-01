@@ -23,8 +23,8 @@ void CBaseInventory::ClientUpdateMessage( CBasePlayer *pBasePlayer, int element 
 
 	UserMessageBegin( filter, "InventoryUpdate" ); // create message
 	WRITE_BYTE( element );
-	WRITE_BYTE( ItemID[element] ); // fill message
-	WRITE_BYTE( ItemCap[element] ); // fill message
+	WRITE_LONG( ItemID[element] ); // Long required to express signed integer. Artifact of VS6?
+	WRITE_BYTE( ItemCap[element] );
 	WRITE_BYTE( ItemMaxCap[element] );
 	MessageEnd(); //send message
 	Msg("Server - pushing message: %d, %d, %d, %d\n", element, ItemID[element], ItemCap[element], ItemMaxCap[element]);
