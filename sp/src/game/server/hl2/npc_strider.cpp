@@ -1131,7 +1131,7 @@ void CNPC_Strider::GatherConditions()
 					   !WeaponLOSCondition( GetAdjustedOrigin(), GetEnemy()->BodyTarget( GetAdjustedOrigin() ), false ) ) )
 				{
 #if 0
-					if ( !HasCondition( COND_STRIDER_SHOULD_CROUCH ) && !HasCondition( COND_STRIDER_SHOULD_CROUCH ) )
+					if ( !HasCondition( COND_STRIDER_SHOULD_CROUCH ) )
 						SetIdealHeight( MIN( GetMaxHeight(), GetHeight() + 75.0 * 0.1 ) ); // default to rising up
 #endif
 					GatherHeightConditions( GetAdjustedOrigin(), GetEnemy() );
@@ -1162,7 +1162,7 @@ void CNPC_Strider::GatherConditions()
 //---------------------------------------------------------
 void CNPC_Strider::GatherHeightConditions( const Vector &vTestPos, CBaseEntity *pEntity )
 {
-	if ( HasCondition( COND_STRIDER_SHOULD_CROUCH ) && HasCondition( COND_STRIDER_SHOULD_CROUCH ) )
+	if ( HasCondition( COND_STRIDER_SHOULD_CROUCH ) )
 		return;
 
 	float maxZ = (GetAbsOrigin().z - (GetMaxHeightModel() - GetMaxHeight()));
