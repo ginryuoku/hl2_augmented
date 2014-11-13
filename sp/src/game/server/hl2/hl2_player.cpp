@@ -939,7 +939,7 @@ void CHL2_Player::PostThink( void )
 
 			if(m_fArmorRegenRemainder >= 1)
 			{
-				IncrementArmorValue( 1, 100 );
+				IncrementArmorValue( 1, MaxArmorValue() );
 				--m_fArmorRegenRemainder;
 			}
 		}
