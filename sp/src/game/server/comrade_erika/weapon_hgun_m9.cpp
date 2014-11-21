@@ -167,7 +167,7 @@ CWeaponM9::CWeaponM9( void )
 	m_fMinRange2		= 24;
 	m_fMaxRange2		= 200;
 
-	m_bFiresUnderwater	= true;
+	m_bFiresUnderwater	= false;
 	m_bIsSuppressed		= false;
 }
 
