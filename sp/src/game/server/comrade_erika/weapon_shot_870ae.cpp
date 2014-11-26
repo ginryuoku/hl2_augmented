@@ -581,12 +581,13 @@ CWeapon870AE::CWeapon870AE( void )
 	m_bReloadsSingly = true;
 
 	m_bDelayedFire1 = false;
-
-
+	
 	m_fMinRange1		= 0.0;
 	m_fMaxRange1		= 500;
 	m_fMinRange2		= 0.0;
 	m_fMaxRange2		= 200;
+
+	m_iItemID			= 450;
 }
 
 //-----------------------------------------------------------------------------
