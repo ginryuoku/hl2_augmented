@@ -180,6 +180,8 @@ $Project
 			$File "comrade_erika\invpanel.h"
 			$File "comrade_erika\c_baseinventory.h"
 			$File "comrade_erika\c_baseinventory.cpp"
+            $File "comrade_erika\vgui_controlgrid.h"
+            $File "comrade_erika\vgui_controlgrid.cpp"
 		}
 		$File	"hl2\C_Func_Monitor.cpp"
 		$File	"geiger.cpp"
