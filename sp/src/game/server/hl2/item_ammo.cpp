@@ -532,6 +532,9 @@ public:
 		Precache( );
 		SetModel( "models/items/boxbuckshot.mdl");
 		BaseClass::Spawn( );
+		m_iItemID = 184;
+		m_iItemCapacity = 20;
+		m_iItemMaxCapacity = 20;
 	}
 	void Precache( void )
 	{
