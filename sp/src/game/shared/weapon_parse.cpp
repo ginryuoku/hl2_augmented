@@ -385,7 +385,7 @@ void FileWeaponInfo_t::Parse( KeyValues *pKeyValuesData, const char *szWeaponNam
 	iDefaultClip1 = pKeyValuesData->GetInt( "default_clip", iMaxClip1 );		// amount of primary ammo placed in the primary clip when it's picked up
 	iDefaultClip2 = pKeyValuesData->GetInt( "default_clip2", iMaxClip2 );		// amount of secondary ammo placed in the secondary clip when it's picked up
 	iWeight = pKeyValuesData->GetInt( "weight", 0 );
-	iAmmoID = pKeyValuesData->GetInt( "ammo_id", 0);
+	iAmmoID = pKeyValuesData->GetInt( "ammo_id", 0 );
 
 	iRumbleEffect = pKeyValuesData->GetInt( "rumble", -1 );
 	
