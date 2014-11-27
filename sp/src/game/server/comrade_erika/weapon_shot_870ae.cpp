@@ -272,22 +272,39 @@ bool CWeapon870AE::StartReload( void )
 	if ( pOwner == NULL )
 		return false;
 
-	if (pOwner->GetAmmoCount(m_iPrimaryAmmoType) <= 0)
-		return false;
+	if (m_iItemID == 0) 
+	{
+		if (pOwner->GetAmmoCount(m_iPrimaryAmmoType) <= 0)
+			return false;
 
-	if (m_iClip1 >= GetMaxClip1())
-		return false;
+		if (m_iClip1 >= GetMaxClip1())
+			return false;
 
-	// If shotgun totally emptied then a pump animation is needed
-	
-	//NOTENOTE: This is kinda lame because the player doesn't get strong feedback on when the reload has finished,
-	//			without the pump.  Technically, it's incorrect, but it's good for feedback...
+		// If shotgun totally emptied then a pump animation is needed
+
+		//NOTENOTE: This is kinda lame because the player doesn't get strong feedback on when the reload has finished,
+		//			without the pump.  Technically, it's incorrect, but it's good for feedback...
 
 
-	int j = MIN(1, pOwner->GetAmmoCount(m_iPrimaryAmmoType));
+		int j = MIN(1, pOwner->GetAmmoCount(m_iPrimaryAmmoType));
 
-	if (j <= 0)
-		return false;
+		if (j <= 0)
+			return false;
+	}
+	else 
+	{
+		CBasePlayer *pPlayer = ToBasePlayer(GetOwner());
+		if (pPlayer)
+		{
+			if (pPlayer->m_pInventory.CountAllObjectsOfID(GetAmmoID()) <= 0)
+				return false;
+			if (m_iClip1 >= GetMaxClip1())
+				return false;
+			int j = MIN(1, pPlayer->m_pInventory.CountAllObjectsOfID(GetAmmoID()));
+			if (j <= 0)
+				return false;
+		}
+	}
 
 	SendWeaponAnim( ACT_SHOTGUN_RELOAD_START );
 
@@ -316,19 +333,33 @@ bool CWeapon870AE::Reload( void )
 
 	CBaseCombatCharacter *pOwner  = GetOwner();
 	
-	if ( pOwner == NULL )
-		return false;
+	if (m_iItemID == 0)
+	{
+		if (pOwner->GetAmmoCount(m_iPrimaryAmmoType) <= 0)
+			return false;
 
-	if (pOwner->GetAmmoCount(m_iPrimaryAmmoType) <= 0)
-		return false;
+		if (m_iClip1 >= GetMaxClip1())
+			return false;
 
-	if (m_iClip1 >= GetMaxClip1())
-		return false;
+		int j = MIN(1, pOwner->GetAmmoCount(m_iPrimaryAmmoType));
 
-	int j = MIN(1, pOwner->GetAmmoCount(m_iPrimaryAmmoType));
-
-	if (j <= 0)
-		return false;
+		if (j <= 0)
+			return false;
+	}
+	else
+	{
+		CBasePlayer *pPlayer = ToBasePlayer(GetOwner());
+		if (pPlayer)
+		{
+			if (pPlayer->m_pInventory.CountAllObjectsOfID(GetAmmoID()) <= 0)
+				return false;
+			if (m_iClip1 >= GetMaxClip1())
+				return false;
+			int j = MIN(1, pPlayer->m_pInventory.CountAllObjectsOfID(GetAmmoID()));
+			if (j <= 0)
+				return false;
+		}
+	}
 
 	FillClip();
 	// Play reload on different channel as otherwise steals channel away from fire sound
@@ -377,13 +408,18 @@ void CWeapon870AE::FillClip( void )
 	if ( pOwner == NULL )
 		return;
 
+	CBasePlayer *pPlayer = ToBasePlayer(pOwner);
+
+	if (!pPlayer)
+		return;
+
 	// Add them to the clip
-	if ( pOwner->GetAmmoCount( m_iPrimaryAmmoType ) > 0 )
+	if ( pPlayer->m_pInventory.CountAllObjectsOfID(GetAmmoID()) > 0)
 	{
 		if ( Clip1() < GetMaxClip1() )
 		{
 			m_iClip1++;
-			pOwner->RemoveAmmo( 1, m_iPrimaryAmmoType );
+			pPlayer->m_pInventory.UseItem(1,pPlayer->m_pInventory.FindFirstFullObject(GetAmmoID()));
 		}
 	}
 }
@@ -442,7 +478,7 @@ void CWeapon870AE::PrimaryAttack( void )
 
 	CSoundEnt::InsertSound( SOUND_COMBAT, GetAbsOrigin(), SOUNDENT_VOLUME_SHOTGUN, 0.2, GetOwner() );
 
-	if (!m_iClip1 && pPlayer->GetAmmoCount(m_iPrimaryAmmoType) <= 0)
+	if (!m_iClip1 && pPlayer->m_pInventory.CountAllObjectsOfID(GetAmmoID()) <= 0)
 	{
 		// HEV suit - indicate out of ammo condition
 		pPlayer->SetSuitUpdate("!HEV_AMO0", FALSE, 0); 
@@ -602,7 +638,7 @@ void CWeapon870AE::ItemHolsterFrame( void )
 	// We can't be active
 	if ( GetOwner()->GetActiveWeapon() == this )
 		return;
-
+#if 0 // Auto-reload is hereby forbidden!
 	// If it's been longer than three seconds, reload
 	if ( ( gpGlobals->curtime - m_flHolsterTime ) > sk_auto_reload_time.GetFloat() )
 	{
@@ -621,6 +657,7 @@ void CWeapon870AE::ItemHolsterFrame( void )
 		GetOwner()->RemoveAmmo( ammoFill, GetPrimaryAmmoType() );
 		m_iClip1 += ammoFill;
 	}
+#endif
 }
 
 //==================================================
