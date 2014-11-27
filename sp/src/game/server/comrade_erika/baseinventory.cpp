@@ -245,6 +245,21 @@ int CBaseInventory::UseItem(int used, int object)
 
 }
 
+int CBaseInventory::CountAllObjectsOfID(int itemid)
+{
+	int itemcount = 0;
+
+	for (int i = 0; i < MAX_INVENTORY; ++i)
+	{
+		if (GetItemID(i) == itemid)
+		{
+			itemcount = itemcount + GetItemCapacity(i);
+		}
+	}
+
+	return itemcount;
+}
+
 void UseHealthItem(const CCommand &args)
 {
 	CBasePlayer *pPlayer = UTIL_GetLocalPlayer();

@@ -356,6 +356,11 @@ int CBaseCombatWeapon::GetMaxClip1( void ) const
 	return GetWpnData().iMaxClip1;
 }
 
+int CBaseCombatWeapon::GetAmmoID(void) const
+{
+	return GetWpnData().iAmmoID;
+}
+
 //-----------------------------------------------------------------------------
 // Purpose: 
 //-----------------------------------------------------------------------------
