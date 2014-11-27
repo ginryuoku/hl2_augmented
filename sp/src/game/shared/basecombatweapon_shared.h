@@ -343,6 +343,7 @@ public:
 	virtual const char		*GetAnimPrefix( void ) const;
 	virtual int				GetMaxClip1( void ) const;
 	virtual int				GetMaxClip2( void ) const;
+	virtual int				GetAmmoID( void ) const;
 	virtual int				GetDefaultClip1( void ) const;
 	virtual int				GetDefaultClip2( void ) const;
 	virtual int				GetWeight( void ) const;
