@@ -538,9 +538,9 @@ void CWeapon870AE::ItemPostFrame( void )
 	if ( (m_bDelayedFire1 || pOwner->m_nButtons & IN_ATTACK) && m_flNextPrimaryAttack <= gpGlobals->curtime)
 	{
 		m_bDelayedFire1 = false;
-		if ( (m_iClip1 <= 0 && UsesClipsForAmmo1()) || ( !UsesClipsForAmmo1() && !pOwner->GetAmmoCount(m_iPrimaryAmmoType) ) )
+		if ((m_iClip1 <= 0 && UsesClipsForAmmo1()) || (!UsesClipsForAmmo1() && !pOwner->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()) ))
 		{
-			if (!pOwner->GetAmmoCount(m_iPrimaryAmmoType))
+			if (!pOwner->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()))
 			{
 				DryFire();
 			}
