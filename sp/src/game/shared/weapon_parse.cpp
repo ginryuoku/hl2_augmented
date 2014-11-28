@@ -348,6 +348,7 @@ FileWeaponInfo_t::FileWeaponInfo_t()
 	m_bAllowFlipping = true;
 	m_bBuiltRightHanded = true;
 	iPrimaryAmmoID = 0;
+	iSecondaryAmmoID = 0;
 }
 
 #ifdef CLIENT_DLL
