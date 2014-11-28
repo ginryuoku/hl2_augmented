@@ -490,7 +490,7 @@ void CWeapon870AE::PrimaryAttack( void )
 
 
 //-----------------------------------------------------------------------------
-// Purpose: Override so shotgun can do mulitple reloads in a row
+// Purpose: Override so shotgun can do multiple reloads in a row
 //-----------------------------------------------------------------------------
 void CWeapon870AE::ItemPostFrame( void )
 {
