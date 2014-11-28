@@ -578,28 +578,6 @@ void CWeapon870AE::ItemPostFrame( void )
 		// no fire buttons down
 		m_bFireOnEmpty = false;
 
-		if ( !HasAnyAmmo() && m_flNextPrimaryAttack < gpGlobals->curtime ) 
-		{
-			// weapon isn't useable, switch.
-			if ( !(GetWeaponFlags() & ITEM_FLAG_NOAUTOSWITCHEMPTY) && pOwner->SwitchToNextBestWeapon( this ) )
-			{
-				m_flNextPrimaryAttack = gpGlobals->curtime + 0.3;
-				return;
-			}
-		}
-		else
-		{
-			// weapon is useable. Reload if empty and weapon has waited as long as it has to after firing
-			if ( m_iClip1 <= 0 && !(GetWeaponFlags() & ITEM_FLAG_NOAUTORELOAD) && m_flNextPrimaryAttack < gpGlobals->curtime )
-			{
-				if (StartReload())
-				{
-					// if we've successfully started to reload, we're done
-					return;
-				}
-			}
-		}
-
 		WeaponIdle( );
 		return;
 	}
