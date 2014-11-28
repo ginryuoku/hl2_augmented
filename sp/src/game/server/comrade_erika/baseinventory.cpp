@@ -130,6 +130,18 @@ void CBaseInventory::NewObject( int ObjectIndex, int NewItemID, int NewItemCap, 
 	Msg("Server: Created new object at position %d of type %d with capacity %d and max capacity %d\n", ObjectIndex, NewItemID, NewItemCap, NewItemMaxCap);
 }
 
+int CBaseInventory::FindFirstObject(int itemid)
+{
+	for (int i = 0; i < MAX_INVENTORY; ++i)
+	{
+		if (ItemID[i] == itemid)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+
 int CBaseInventory::FindFirstFreeObject()
 {
 	for (int i = 0; i < MAX_INVENTORY; ++i)

@@ -419,7 +419,7 @@ void CWeapon870AE::FillClip( void )
 		if ( Clip1() < GetMaxClip1() )
 		{
 			m_iClip1++;
-			pPlayer->m_pInventory.UseItem(1,pPlayer->m_pInventory.FindFirstFullObject(GetPrimaryAmmoID()));
+			pPlayer->m_pInventory.UseItem(1,pPlayer->m_pInventory.FindFirstObject(GetPrimaryAmmoID()));
 		}
 	}
 }
