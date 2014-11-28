@@ -356,11 +356,14 @@ int CBaseCombatWeapon::GetMaxClip1( void ) const
 	return GetWpnData().iMaxClip1;
 }
 
-int CBaseCombatWeapon::GetAmmoID(void) const
+int CBaseCombatWeapon::GetPrimaryAmmoID(void) const
 {
-	return GetWpnData().iAmmoID;
+	return GetWpnData().iPrimaryAmmoID;
 }
-
+int CBaseCombatWeapon::GetSecondaryAmmoID(void) const
+{
+	return GetWpnData().iSecondaryAmmoID;
+}
 //-----------------------------------------------------------------------------
 // Purpose: 
 //-----------------------------------------------------------------------------
