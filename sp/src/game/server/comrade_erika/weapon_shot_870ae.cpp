@@ -296,11 +296,11 @@ bool CWeapon870AE::StartReload( void )
 		CBasePlayer *pPlayer = ToBasePlayer(GetOwner());
 		if (pPlayer)
 		{
-			if (pPlayer->m_pInventory.CountAllObjectsOfID(GetAmmoID()) <= 0)
+			if (pPlayer->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()) <= 0)
 				return false;
 			if (m_iClip1 >= GetMaxClip1())
 				return false;
-			int j = MIN(1, pPlayer->m_pInventory.CountAllObjectsOfID(GetAmmoID()));
+			int j = MIN(1, pPlayer->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()));
 			if (j <= 0)
 				return false;
 		}
@@ -351,11 +351,11 @@ bool CWeapon870AE::Reload( void )
 		CBasePlayer *pPlayer = ToBasePlayer(GetOwner());
 		if (pPlayer)
 		{
-			if (pPlayer->m_pInventory.CountAllObjectsOfID(GetAmmoID()) <= 0)
+			if (pPlayer->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()) <= 0)
 				return false;
 			if (m_iClip1 >= GetMaxClip1())
 				return false;
-			int j = MIN(1, pPlayer->m_pInventory.CountAllObjectsOfID(GetAmmoID()));
+			int j = MIN(1, pPlayer->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()));
 			if (j <= 0)
 				return false;
 		}
@@ -414,12 +414,12 @@ void CWeapon870AE::FillClip( void )
 		return;
 
 	// Add them to the clip
-	if ( pPlayer->m_pInventory.CountAllObjectsOfID(GetAmmoID()) > 0)
+	if ( pPlayer->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()) > 0)
 	{
 		if ( Clip1() < GetMaxClip1() )
 		{
 			m_iClip1++;
-			pPlayer->m_pInventory.UseItem(1,pPlayer->m_pInventory.FindFirstFullObject(GetAmmoID()));
+			pPlayer->m_pInventory.UseItem(1,pPlayer->m_pInventory.FindFirstFullObject(GetPrimaryAmmoID()));
 		}
 	}
 }
@@ -478,7 +478,7 @@ void CWeapon870AE::PrimaryAttack( void )
 
 	CSoundEnt::InsertSound( SOUND_COMBAT, GetAbsOrigin(), SOUNDENT_VOLUME_SHOTGUN, 0.2, GetOwner() );
 
-	if (!m_iClip1 && pPlayer->m_pInventory.CountAllObjectsOfID(GetAmmoID()) <= 0)
+	if (!m_iClip1 && pPlayer->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()) <= 0)
 	{
 		// HEV suit - indicate out of ammo condition
 		pPlayer->SetSuitUpdate("!HEV_AMO0", FALSE, 0); 
@@ -510,8 +510,7 @@ void CWeapon870AE::ItemPostFrame( void )
 		}
 		else if (m_flNextPrimaryAttack <= gpGlobals->curtime)
 		{
-			// If out of ammo end reload
-			if (pOwner->GetAmmoCount(m_iPrimaryAmmoType) <=0)
+			if (pOwner->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()) <= 0)
 			{
 				FinishReload();
 				return;
