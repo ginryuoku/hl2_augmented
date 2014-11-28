@@ -19,6 +19,8 @@ WeaponData
 	"weight"				"4"
 	"rumble"			"5"
 	"item_flags"			"0"
+    
+    "primary_ammo_id"       "184"
 
 	// Sounds for the weapon. There is a max of 16 sounds per category (i.e. max 16 "single_shot" sounds)
 	SoundData
