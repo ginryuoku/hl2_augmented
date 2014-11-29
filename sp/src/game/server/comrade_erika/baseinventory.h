@@ -43,7 +43,10 @@ public:
 	int FindFirstFreeObject();
 	int FindFirstFullObject(int itemid);
 	int FindFirstFullObjectByType(int itemtype);
+
 	int FindHealthItem();
+	int FindArmorItem();
+
 	int FindItemType(int itemid);
 
 	int UseItem(int used, int object);

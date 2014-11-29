@@ -198,7 +198,10 @@ int CBaseInventory::FindFirstFullObjectByType(int itemtype)
 			}
 		}
 	}
-	return element;
+	if (element <= 0)
+		return -1;
+	else
+		return element;
 }
 
 int CBaseInventory::FindItemType(int itemid)
@@ -233,6 +236,11 @@ int CBaseInventory::FindItemType(int itemid)
 int CBaseInventory::FindHealthItem()
 {
 	return FindFirstFullObjectByType(1);
+}
+
+int CBaseInventory::FindArmorItem()
+{
+	return FindFirstFullObjectByType(3);
 }
 
 // Returns amount actually used.
@@ -285,3 +293,28 @@ void UseHealthItem(const CCommand &args)
 }
 
 ConCommand use_heal("use_heal", UseHealthItem, "Use first healing item in inventory", 0);
+
+void UseArmorItem(const CCommand &args)
+{
+	CBasePlayer *pPlayer = UTIL_GetLocalPlayer();
+
+	if (pPlayer)
+	{
+		int used = pPlayer->MaxArmorValue() - pPlayer->ArmorValue();
+		if (used <= 0)
+			return;
+
+		int itemid = pPlayer->m_pInventory.FindArmorItem();
+
+		if (itemid <= -1)
+			return;
+
+		if (used > pPlayer->m_pInventory.GetItemCapacity(itemid))
+			used = pPlayer->m_pInventory.GetItemCapacity(itemid);
+
+		pPlayer->IncrementArmorValue(used, pPlayer->MaxArmorValue());
+		pPlayer->m_pInventory.UseItem(used, itemid);
+	}
+}
+
+ConCommand use_armor("use_armor", UseArmorItem, "Use first armor item in inventory", 0);
