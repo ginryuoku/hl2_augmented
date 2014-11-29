@@ -25,6 +25,10 @@ public:
 		Precache( );
 		SetModel( "models/items/battery.mdl" );
 		BaseClass::Spawn( );
+
+		m_iItemID = 30;
+		m_iItemCapacity = 15;
+		m_iItemMaxCapacity = 15;
 	}
 	void Precache( void )
 	{
@@ -36,8 +40,12 @@ public:
 	bool MyTouch( CBasePlayer *pPlayer )
 	{
 		pPlayer->ResetMaxHealth();
-		CHL2_Player *pHL2Player = dynamic_cast<CHL2_Player *>( pPlayer );
-		return ( pHL2Player && pHL2Player->ApplyBattery() );
+		if (!m_iItemID) {
+			CHL2_Player *pHL2Player = dynamic_cast<CHL2_Player *>(pPlayer);
+			return (pHL2Player && pHL2Player->ApplyBattery());
+		}
+		else 
+			return false;
 	}
 };
 
