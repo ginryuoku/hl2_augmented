@@ -267,32 +267,49 @@ float CWeaponSPAS12::GetFireRate()
 //-----------------------------------------------------------------------------
 bool CWeaponSPAS12::StartReload( void )
 {
-	CBaseCombatCharacter *pOwner  = GetOwner();
-	
-	if ( pOwner == NULL )
+	CBaseCombatCharacter *pOwner = GetOwner();
+
+	if (pOwner == NULL)
 		return false;
 
-	if (pOwner->GetAmmoCount(m_iPrimaryAmmoType) <= 0)
-		return false;
+	if (m_iItemID == 0)
+	{
+		if (pOwner->GetAmmoCount(m_iPrimaryAmmoType) <= 0)
+			return false;
 
-	if (m_iClip1 >= GetMaxClip1())
-		return false;
+		if (m_iClip1 >= GetMaxClip1())
+			return false;
 
-	// If shotgun totally emptied then a pump animation is needed
-	
-	//NOTENOTE: This is kinda lame because the player doesn't get strong feedback on when the reload has finished,
-	//			without the pump.  Technically, it's incorrect, but it's good for feedback...
+		// If shotgun totally emptied then a pump animation is needed
+
+		//NOTENOTE: This is kinda lame because the player doesn't get strong feedback on when the reload has finished,
+		//			without the pump.  Technically, it's incorrect, but it's good for feedback...
 
 
-	int j = MIN(1, pOwner->GetAmmoCount(m_iPrimaryAmmoType));
+		int j = MIN(1, pOwner->GetAmmoCount(m_iPrimaryAmmoType));
 
-	if (j <= 0)
-		return false;
+		if (j <= 0)
+			return false;
+	}
+	else
+	{
+		CBasePlayer *pPlayer = ToBasePlayer(GetOwner());
+		if (pPlayer)
+		{
+			if (pPlayer->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()) <= 0)
+				return false;
+			if (m_iClip1 >= GetMaxClip1())
+				return false;
+			int j = MIN(1, pPlayer->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()));
+			if (j <= 0)
+				return false;
+		}
+	}
 
-	SendWeaponAnim( ACT_SHOTGUN_RELOAD_START );
+	SendWeaponAnim(ACT_SHOTGUN_RELOAD_START);
 
 	// Make shotgun shell visible
-	SetBodygroup(1,0);
+	SetBodygroup(1, 0);
 
 	pOwner->m_flNextAttack = gpGlobals->curtime;
 	m_flNextPrimaryAttack = gpGlobals->curtime + SequenceDuration();
@@ -314,26 +331,40 @@ bool CWeaponSPAS12::Reload( void )
 		Warning("ERROR: Shotgun Reload called incorrectly!\n");
 	}
 
-	CBaseCombatCharacter *pOwner  = GetOwner();
-	
-	if ( pOwner == NULL )
-		return false;
+	CBaseCombatCharacter *pOwner = GetOwner();
 
-	if (pOwner->GetAmmoCount(m_iPrimaryAmmoType) <= 0)
-		return false;
+	if (m_iItemID == 0)
+	{
+		if (pOwner->GetAmmoCount(m_iPrimaryAmmoType) <= 0)
+			return false;
 
-	if (m_iClip1 >= GetMaxClip1())
-		return false;
+		if (m_iClip1 >= GetMaxClip1())
+			return false;
 
-	int j = MIN(1, pOwner->GetAmmoCount(m_iPrimaryAmmoType));
+		int j = MIN(1, pOwner->GetAmmoCount(m_iPrimaryAmmoType));
 
-	if (j <= 0)
-		return false;
+		if (j <= 0)
+			return false;
+	}
+	else
+	{
+		CBasePlayer *pPlayer = ToBasePlayer(GetOwner());
+		if (pPlayer)
+		{
+			if (pPlayer->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()) <= 0)
+				return false;
+			if (m_iClip1 >= GetMaxClip1())
+				return false;
+			int j = MIN(1, pPlayer->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()));
+			if (j <= 0)
+				return false;
+		}
+	}
 
 	FillClip();
 	// Play reload on different channel as otherwise steals channel away from fire sound
 	WeaponSound(RELOAD);
-	SendWeaponAnim( ACT_VM_RELOAD );
+	SendWeaponAnim(ACT_VM_RELOAD);
 
 	pOwner->m_flNextAttack = gpGlobals->curtime;
 	m_flNextPrimaryAttack = gpGlobals->curtime + SequenceDuration();
@@ -372,18 +403,23 @@ void CWeaponSPAS12::FinishReload( void )
 //-----------------------------------------------------------------------------
 void CWeaponSPAS12::FillClip( void )
 {
-	CBaseCombatCharacter *pOwner  = GetOwner();
-	
-	if ( pOwner == NULL )
+	CBaseCombatCharacter *pOwner = GetOwner();
+
+	if (pOwner == NULL)
+		return;
+
+	CBasePlayer *pPlayer = ToBasePlayer(pOwner);
+
+	if (!pPlayer)
 		return;
 
 	// Add them to the clip
-	if ( pOwner->GetAmmoCount( m_iPrimaryAmmoType ) > 0 )
+	if (pPlayer->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()) > 0)
 	{
-		if ( Clip1() < GetMaxClip1() )
+		if (Clip1() < GetMaxClip1())
 		{
 			m_iClip1++;
-			pOwner->RemoveAmmo( 1, m_iPrimaryAmmoType );
+			pPlayer->m_pInventory.UseItem(1, pPlayer->m_pInventory.FindFirstObject(GetPrimaryAmmoID()));
 		}
 	}
 }
@@ -409,7 +445,7 @@ void CWeaponSPAS12::DryFire( void )
 void CWeaponSPAS12::PrimaryAttack( void )
 {
 	// Only the player fires this way so we can cast
-	CBasePlayer *pPlayer = ToBasePlayer( GetOwner() );
+	CBasePlayer *pPlayer = ToBasePlayer(GetOwner());
 
 	if (!pPlayer)
 	{
@@ -421,35 +457,35 @@ void CWeaponSPAS12::PrimaryAttack( void )
 
 	pPlayer->DoMuzzleFlash();
 
-	SendWeaponAnim( ACT_VM_PRIMARYATTACK );
+	SendWeaponAnim(ACT_VM_PRIMARYATTACK);
 
 	// player "shoot" animation
-	pPlayer->SetAnimation( PLAYER_ATTACK1 );
+	pPlayer->SetAnimation(PLAYER_ATTACK1);
 
 	// Don't fire again until fire animation has completed
 	m_flNextPrimaryAttack = gpGlobals->curtime + SequenceDuration();
 	m_iClip1 -= 1;
 
-	Vector	vecSrc		= pPlayer->Weapon_ShootPosition( );
-	Vector	vecAiming	= pPlayer->GetAutoaimVector( AUTOAIM_SCALE_DEFAULT );	
+	Vector	vecSrc = pPlayer->Weapon_ShootPosition();
+	Vector	vecAiming = pPlayer->GetAutoaimVector(AUTOAIM_SCALE_DEFAULT);
 
-	pPlayer->SetMuzzleFlashTime( gpGlobals->curtime + 1.0 );
-	
+	pPlayer->SetMuzzleFlashTime(gpGlobals->curtime + 1.0);
+
 	// Fire the bullets, and force the first shot to be perfectly accuracy
-	pPlayer->FireBullets( sk_plr_num_shotgun_pellets.GetInt(), vecSrc, vecAiming, GetBulletSpread(), MAX_TRACE_LENGTH, m_iPrimaryAmmoType, 0, -1, -1, 0, NULL, true, true );
-	
-	pPlayer->ViewPunch( QAngle( random->RandomFloat( -2, -1 ), random->RandomFloat( -2, 2 ), 0 ) );
+	pPlayer->FireBullets(sk_plr_num_shotgun_pellets.GetInt(), vecSrc, vecAiming, GetBulletSpread(), MAX_TRACE_LENGTH, m_iPrimaryAmmoType, 0, -1, -1, 0, NULL, true, true);
 
-	CSoundEnt::InsertSound( SOUND_COMBAT, GetAbsOrigin(), SOUNDENT_VOLUME_SHOTGUN, 0.2, GetOwner() );
+	pPlayer->ViewPunch(QAngle(random->RandomFloat(-2, -1), random->RandomFloat(-2, 2), 0));
 
-	if (!m_iClip1 && pPlayer->GetAmmoCount(m_iPrimaryAmmoType) <= 0)
+	CSoundEnt::InsertSound(SOUND_COMBAT, GetAbsOrigin(), SOUNDENT_VOLUME_SHOTGUN, 0.2, GetOwner());
+
+	if (!m_iClip1 && pPlayer->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()) <= 0)
 	{
 		// HEV suit - indicate out of ammo condition
-		pPlayer->SetSuitUpdate("!HEV_AMO0", FALSE, 0); 
+		pPlayer->SetSuitUpdate("!HEV_AMO0", FALSE, 0);
 	}
 
 	m_iPrimaryAttacks++;
-	gamestats->Event_WeaponFired( pPlayer, true, GetClassname() );
+	gamestats->Event_WeaponFired(pPlayer, true, GetClassname());
 }
 
 
@@ -458,7 +494,7 @@ void CWeaponSPAS12::PrimaryAttack( void )
 //-----------------------------------------------------------------------------
 void CWeaponSPAS12::ItemPostFrame( void )
 {
-	CBasePlayer *pOwner = ToBasePlayer( GetOwner() );
+	CBasePlayer *pOwner = ToBasePlayer(GetOwner());
 	if (!pOwner)
 	{
 		return;
@@ -467,15 +503,14 @@ void CWeaponSPAS12::ItemPostFrame( void )
 	if (m_bInReload)
 	{
 		// If I'm primary firing and have one round stop reloading and fire
-		if ((pOwner->m_nButtons & IN_ATTACK ) && (m_iClip1 >=1))
+		if ((pOwner->m_nButtons & IN_ATTACK) && (m_iClip1 >= 1))
 		{
-			m_bInReload		= false;
+			m_bInReload = false;
 			m_bDelayedFire1 = true;
 		}
 		else if (m_flNextPrimaryAttack <= gpGlobals->curtime)
 		{
-			// If out of ammo end reload
-			if (pOwner->GetAmmoCount(m_iPrimaryAmmoType) <=0)
+			if (pOwner->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()) <= 0)
 			{
 				FinishReload();
 				return;
@@ -495,17 +530,17 @@ void CWeaponSPAS12::ItemPostFrame( void )
 		}
 	}
 	else
-	{			
+	{
 		// Make shotgun shell invisible
-		SetBodygroup(1,1);
+		SetBodygroup(1, 1);
 	}
 
-	if ( (m_bDelayedFire1 || pOwner->m_nButtons & IN_ATTACK) && m_flNextPrimaryAttack <= gpGlobals->curtime)
+	if ((m_bDelayedFire1 || pOwner->m_nButtons & IN_ATTACK) && m_flNextPrimaryAttack <= gpGlobals->curtime)
 	{
 		m_bDelayedFire1 = false;
-		if ( (m_iClip1 <= 0 && UsesClipsForAmmo1()) || ( !UsesClipsForAmmo1() && !pOwner->GetAmmoCount(m_iPrimaryAmmoType) ) )
+		if ((m_iClip1 <= 0 && UsesClipsForAmmo1()) || (!UsesClipsForAmmo1() && !pOwner->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID())))
 		{
-			if (!pOwner->GetAmmoCount(m_iPrimaryAmmoType))
+			if (!pOwner->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()))
 			{
 				DryFire();
 			}
@@ -524,48 +559,26 @@ void CWeaponSPAS12::ItemPostFrame( void )
 		else
 		{
 			// If the firing button was just pressed, reset the firing time
-			CBasePlayer *pPlayer = ToBasePlayer( GetOwner() );
-			if ( pPlayer && pPlayer->m_afButtonPressed & IN_ATTACK )
+			CBasePlayer *pPlayer = ToBasePlayer(GetOwner());
+			if (pPlayer && pPlayer->m_afButtonPressed & IN_ATTACK)
 			{
-				 m_flNextPrimaryAttack = gpGlobals->curtime;
+				m_flNextPrimaryAttack = gpGlobals->curtime;
 			}
 			PrimaryAttack();
 		}
 	}
 
-	if ( pOwner->m_nButtons & IN_RELOAD && UsesClipsForAmmo1() && !m_bInReload ) 
+	if (pOwner->m_nButtons & IN_RELOAD && UsesClipsForAmmo1() && !m_bInReload)
 	{
 		// reload when reload is pressed, or if no buttons are down and weapon is empty.
 		StartReload();
 	}
-	else 
+	else
 	{
 		// no fire buttons down
 		m_bFireOnEmpty = false;
 
-		if ( !HasAnyAmmo() && m_flNextPrimaryAttack < gpGlobals->curtime ) 
-		{
-			// weapon isn't useable, switch.
-			if ( !(GetWeaponFlags() & ITEM_FLAG_NOAUTOSWITCHEMPTY) && pOwner->SwitchToNextBestWeapon( this ) )
-			{
-				m_flNextPrimaryAttack = gpGlobals->curtime + 0.3;
-				return;
-			}
-		}
-		else
-		{
-			// weapon is useable. Reload if empty and weapon has waited as long as it has to after firing
-			if ( m_iClip1 <= 0 && !(GetWeaponFlags() & ITEM_FLAG_NOAUTORELOAD) && m_flNextPrimaryAttack < gpGlobals->curtime )
-			{
-				if (StartReload())
-				{
-					// if we've successfully started to reload, we're done
-					return;
-				}
-			}
-		}
-
-		WeaponIdle( );
+		WeaponIdle();
 		return;
 	}
 
@@ -587,6 +600,8 @@ CWeaponSPAS12::CWeaponSPAS12( void )
 	m_fMaxRange1		= 500;
 	m_fMinRange2		= 0.0;
 	m_fMaxRange2		= 200;
+
+	m_iItemID = 451;
 }
 
 //-----------------------------------------------------------------------------
@@ -595,31 +610,32 @@ CWeaponSPAS12::CWeaponSPAS12( void )
 void CWeaponSPAS12::ItemHolsterFrame( void )
 {
 	// Must be player held
-	if ( GetOwner() && GetOwner()->IsPlayer() == false )
+	if (GetOwner() && GetOwner()->IsPlayer() == false)
 		return;
 
 	// We can't be active
-	if ( GetOwner()->GetActiveWeapon() == this )
+	if (GetOwner()->GetActiveWeapon() == this)
 		return;
-
+#if 0 // Auto-reload is hereby forbidden!
 	// If it's been longer than three seconds, reload
-	if ( ( gpGlobals->curtime - m_flHolsterTime ) > sk_auto_reload_time.GetFloat() )
+	if ((gpGlobals->curtime - m_flHolsterTime) > sk_auto_reload_time.GetFloat())
 	{
 		// Reset the timer
 		m_flHolsterTime = gpGlobals->curtime;
-	
-		if ( GetOwner() == NULL )
+
+		if (GetOwner() == NULL)
 			return;
 
-		if ( m_iClip1 == GetMaxClip1() )
+		if (m_iClip1 == GetMaxClip1())
 			return;
 
 		// Just load the clip with no animations
-		int ammoFill = MIN( (GetMaxClip1() - m_iClip1), GetOwner()->GetAmmoCount( GetPrimaryAmmoType() ) );
-		
-		GetOwner()->RemoveAmmo( ammoFill, GetPrimaryAmmoType() );
+		int ammoFill = MIN((GetMaxClip1() - m_iClip1), GetOwner()->GetAmmoCount(GetPrimaryAmmoType()));
+
+		GetOwner()->RemoveAmmo(ammoFill, GetPrimaryAmmoType());
 		m_iClip1 += ammoFill;
 	}
+#endif
 }
 
 //==================================================

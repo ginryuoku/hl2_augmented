@@ -296,11 +296,11 @@ bool CWeapon870AE::StartReload( void )
 		CBasePlayer *pPlayer = ToBasePlayer(GetOwner());
 		if (pPlayer)
 		{
-			if (pPlayer->m_pInventory.CountAllObjectsOfID(GetAmmoID()) <= 0)
+			if (pPlayer->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()) <= 0)
 				return false;
 			if (m_iClip1 >= GetMaxClip1())
 				return false;
-			int j = MIN(1, pPlayer->m_pInventory.CountAllObjectsOfID(GetAmmoID()));
+			int j = MIN(1, pPlayer->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()));
 			if (j <= 0)
 				return false;
 		}
@@ -351,11 +351,11 @@ bool CWeapon870AE::Reload( void )
 		CBasePlayer *pPlayer = ToBasePlayer(GetOwner());
 		if (pPlayer)
 		{
-			if (pPlayer->m_pInventory.CountAllObjectsOfID(GetAmmoID()) <= 0)
+			if (pPlayer->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()) <= 0)
 				return false;
 			if (m_iClip1 >= GetMaxClip1())
 				return false;
-			int j = MIN(1, pPlayer->m_pInventory.CountAllObjectsOfID(GetAmmoID()));
+			int j = MIN(1, pPlayer->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()));
 			if (j <= 0)
 				return false;
 		}
@@ -414,12 +414,12 @@ void CWeapon870AE::FillClip( void )
 		return;
 
 	// Add them to the clip
-	if ( pPlayer->m_pInventory.CountAllObjectsOfID(GetAmmoID()) > 0)
+	if ( pPlayer->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()) > 0)
 	{
 		if ( Clip1() < GetMaxClip1() )
 		{
 			m_iClip1++;
-			pPlayer->m_pInventory.UseItem(1,pPlayer->m_pInventory.FindFirstFullObject(GetAmmoID()));
+			pPlayer->m_pInventory.UseItem(1,pPlayer->m_pInventory.FindFirstObject(GetPrimaryAmmoID()));
 		}
 	}
 }
@@ -478,7 +478,7 @@ void CWeapon870AE::PrimaryAttack( void )
 
 	CSoundEnt::InsertSound( SOUND_COMBAT, GetAbsOrigin(), SOUNDENT_VOLUME_SHOTGUN, 0.2, GetOwner() );
 
-	if (!m_iClip1 && pPlayer->m_pInventory.CountAllObjectsOfID(GetAmmoID()) <= 0)
+	if (!m_iClip1 && pPlayer->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()) <= 0)
 	{
 		// HEV suit - indicate out of ammo condition
 		pPlayer->SetSuitUpdate("!HEV_AMO0", FALSE, 0); 
@@ -490,7 +490,7 @@ void CWeapon870AE::PrimaryAttack( void )
 
 
 //-----------------------------------------------------------------------------
-// Purpose: Override so shotgun can do mulitple reloads in a row
+// Purpose: Override so shotgun can do multiple reloads in a row
 //-----------------------------------------------------------------------------
 void CWeapon870AE::ItemPostFrame( void )
 {
@@ -510,8 +510,7 @@ void CWeapon870AE::ItemPostFrame( void )
 		}
 		else if (m_flNextPrimaryAttack <= gpGlobals->curtime)
 		{
-			// If out of ammo end reload
-			if (pOwner->GetAmmoCount(m_iPrimaryAmmoType) <=0)
+			if (pOwner->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()) <= 0)
 			{
 				FinishReload();
 				return;
@@ -539,9 +538,9 @@ void CWeapon870AE::ItemPostFrame( void )
 	if ( (m_bDelayedFire1 || pOwner->m_nButtons & IN_ATTACK) && m_flNextPrimaryAttack <= gpGlobals->curtime)
 	{
 		m_bDelayedFire1 = false;
-		if ( (m_iClip1 <= 0 && UsesClipsForAmmo1()) || ( !UsesClipsForAmmo1() && !pOwner->GetAmmoCount(m_iPrimaryAmmoType) ) )
+		if ((m_iClip1 <= 0 && UsesClipsForAmmo1()) || (!UsesClipsForAmmo1() && !pOwner->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()) ))
 		{
-			if (!pOwner->GetAmmoCount(m_iPrimaryAmmoType))
+			if (!pOwner->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()))
 			{
 				DryFire();
 			}
@@ -578,28 +577,6 @@ void CWeapon870AE::ItemPostFrame( void )
 	{
 		// no fire buttons down
 		m_bFireOnEmpty = false;
-
-		if ( !HasAnyAmmo() && m_flNextPrimaryAttack < gpGlobals->curtime ) 
-		{
-			// weapon isn't useable, switch.
-			if ( !(GetWeaponFlags() & ITEM_FLAG_NOAUTOSWITCHEMPTY) && pOwner->SwitchToNextBestWeapon( this ) )
-			{
-				m_flNextPrimaryAttack = gpGlobals->curtime + 0.3;
-				return;
-			}
-		}
-		else
-		{
-			// weapon is useable. Reload if empty and weapon has waited as long as it has to after firing
-			if ( m_iClip1 <= 0 && !(GetWeaponFlags() & ITEM_FLAG_NOAUTORELOAD) && m_flNextPrimaryAttack < gpGlobals->curtime )
-			{
-				if (StartReload())
-				{
-					// if we've successfully started to reload, we're done
-					return;
-				}
-			}
-		}
 
 		WeaponIdle( );
 		return;
