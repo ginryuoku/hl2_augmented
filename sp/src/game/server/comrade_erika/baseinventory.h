@@ -39,10 +39,14 @@ public:
 	void PurgeAllObjects();
 	void ConvertEntityToObject( CBaseEntity *pEntity );
 
+	int FindFirstObject(int itemid);
 	int FindFirstFreeObject();
 	int FindFirstFullObject(int itemid);
 	int FindFirstFullObjectByType(int itemtype);
+
 	int FindHealthItem();
+	int FindArmorItem();
+
 	int FindItemType(int itemid);
 
 	int UseItem(int used, int object);
@@ -50,6 +54,7 @@ public:
 	int CountAllObjectsOfID(int itemid);
 
 	void NewObject( int ObjectIndex, int NewItemID, int NewItemCap, int NewItemMaxCap );
+
 private:
 	int  ItemID     [MAX_INVENTORY];
 	int  ItemCap    [MAX_INVENTORY];

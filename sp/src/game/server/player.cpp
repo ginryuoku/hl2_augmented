@@ -6663,72 +6663,139 @@ bool CBasePlayer::BumpWeapon( CBaseCombatWeapon *pWeapon )
 	}
 	else if (IsProscribedWeapon)
 	{
-		int	primaryGiven	= (pWeapon->UsesClipsForAmmo1()) ? pWeapon->m_iClip1 : pWeapon->GetPrimaryAmmoCount();
-		int secondaryGiven	= (pWeapon->UsesClipsForAmmo2()) ? pWeapon->m_iClip2 : pWeapon->GetSecondaryAmmoCount();
+		if (pWeapon->GetPrimaryAmmoID() == 0)
+		{
+			int	primaryGiven = (pWeapon->UsesClipsForAmmo1()) ? pWeapon->m_iClip1 : pWeapon->GetPrimaryAmmoCount();
+			int secondaryGiven = (pWeapon->UsesClipsForAmmo2()) ? pWeapon->m_iClip2 : pWeapon->GetSecondaryAmmoCount();
 
-		int takenPrimary   = GiveAmmo( primaryGiven, pWeapon->m_iPrimaryAmmoType); 
-		int takenSecondary = GiveAmmo( secondaryGiven, pWeapon->m_iSecondaryAmmoType); 
+			int takenPrimary = GiveAmmo(primaryGiven, pWeapon->m_iPrimaryAmmoType);
+			int takenSecondary = GiveAmmo(secondaryGiven, pWeapon->m_iSecondaryAmmoType);
 
-		if( pWeapon->UsesClipsForAmmo1() )
-		{
-			pWeapon->m_iClip1 -= takenPrimary;
-		}
-		else
-		{
-			pWeapon->SetPrimaryAmmoCount( pWeapon->GetPrimaryAmmoCount() - takenPrimary );
-		}
+			if (pWeapon->UsesClipsForAmmo1())
+			{
+				pWeapon->m_iClip1 -= takenPrimary;
+			}
+			else
+			{
+				pWeapon->SetPrimaryAmmoCount(pWeapon->GetPrimaryAmmoCount() - takenPrimary);
+			}
 
-		if( pWeapon->UsesClipsForAmmo2() )
-		{
-			pWeapon->m_iClip2 -= takenSecondary;
-		}
-		else
-		{
-			pWeapon->SetSecondaryAmmoCount( pWeapon->GetSecondaryAmmoCount() - takenSecondary );
-		}
+			if (pWeapon->UsesClipsForAmmo2())
+			{
+				pWeapon->m_iClip2 -= takenSecondary;
+			}
+			else
+			{
+				pWeapon->SetSecondaryAmmoCount(pWeapon->GetSecondaryAmmoCount() - takenSecondary);
+			}
 
-		if( takenPrimary > 0 || takenSecondary > 0 )
-		{
-			// Only remove me if I have no ammo left
-			if ( pWeapon->HasPrimaryAmmo() )
+			if (takenPrimary > 0 || takenSecondary > 0)
+			{
+				// Only remove me if I have no ammo left
+				if (pWeapon->HasPrimaryAmmo())
+					return false;
+
+				if (!Q_stricmp(pWeapon->GetClassname(), "weapon_pistol"))
+				{
+					++m_Local.m_iGrabbedPistol;
+					AddPlayerCash(500 * (1.0 / m_Local.m_iGrabbedPistol));
+				}
+				if (!Q_stricmp(pWeapon->GetClassname(), "weapon_357"))
+				{
+					++m_Local.m_iGrabbed357;
+					AddPlayerCash(800 * (1.0 / m_Local.m_iGrabbed357));
+				}
+				if (!Q_stricmp(pWeapon->GetClassname(), "weapon_smg1"))
+				{
+					++m_Local.m_iGrabbedSMG1;
+					AddPlayerCash(2500 * (1.0 / m_Local.m_iGrabbedSMG1));
+				}
+				if (!Q_stricmp(pWeapon->GetClassname(), "weapon_ar2"))
+				{
+					++m_Local.m_iGrabbedAR2;
+					AddPlayerCash(5000 * (1.0 / m_Local.m_iGrabbedAR2));
+				}
+				if (!Q_stricmp(pWeapon->GetClassname(), "weapon_shotgun"))
+				{
+					++m_Local.m_iGrabbedShotgun;
+					AddPlayerCash(3500 * (1.0 / m_Local.m_iGrabbedShotgun));
+				}
+				if (!Q_stricmp(pWeapon->GetClassname(), "weapon_crossbow"))
+					AddPlayerCash(5000 * 0.1);
+				if (!Q_stricmp(pWeapon->GetClassname(), "weapon_rpg"))
+					AddPlayerCash(6500 * 0.1);
+
+				UTIL_Remove(pWeapon);
+				return true;
+			}
+			else
+			{
 				return false;
+			}
+		}
+		else
+		{
+			if (m_pInventory.FindFirstFreeObject() == -1)
+				return false; // no room in inventory
 
-			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_pistol") )
+			int	primaryGiven = (pWeapon->UsesClipsForAmmo1()) ? pWeapon->m_iClip1 : pWeapon->GetPrimaryAmmoCount();
+			int secondaryGiven = (pWeapon->UsesClipsForAmmo2()) ? pWeapon->m_iClip2 : pWeapon->GetSecondaryAmmoCount();
+
+			if (pWeapon->UsesClipsForAmmo1())
+			{
+				pWeapon->m_iClip1 -= primaryGiven;
+			}
+			else
+			{
+				pWeapon->SetPrimaryAmmoCount(pWeapon->GetPrimaryAmmoCount() - primaryGiven);
+			}
+
+			if (pWeapon->UsesClipsForAmmo2())
+			{
+				pWeapon->m_iClip2 -= secondaryGiven;
+			}
+			else
+			{
+				pWeapon->SetSecondaryAmmoCount(pWeapon->GetSecondaryAmmoCount() - secondaryGiven);
+			}
+
+			if (!Q_stricmp(pWeapon->GetClassname(), "weapon_pistol"))
 			{
 				++m_Local.m_iGrabbedPistol;
-				AddPlayerCash( 500 * (1.0 / m_Local.m_iGrabbedPistol) );
+				AddPlayerCash(500 * (1.0 / m_Local.m_iGrabbedPistol));
 			}
-			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_357") )
+			if (!Q_stricmp(pWeapon->GetClassname(), "weapon_357"))
 			{
 				++m_Local.m_iGrabbed357;
-				AddPlayerCash( 800 * (1.0 / m_Local.m_iGrabbed357) );
+				AddPlayerCash(800 * (1.0 / m_Local.m_iGrabbed357));
 			}
-			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_smg1") )
+			if (!Q_stricmp(pWeapon->GetClassname(), "weapon_smg1"))
 			{
 				++m_Local.m_iGrabbedSMG1;
-				AddPlayerCash( 2500 * (1.0 / m_Local.m_iGrabbedSMG1) );
+				AddPlayerCash(2500 * (1.0 / m_Local.m_iGrabbedSMG1));
 			}
-			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_ar2") )
+			if (!Q_stricmp(pWeapon->GetClassname(), "weapon_ar2"))
 			{
 				++m_Local.m_iGrabbedAR2;
-				AddPlayerCash( 5000 * (1.0 / m_Local.m_iGrabbedAR2) );
+				AddPlayerCash(5000 * (1.0 / m_Local.m_iGrabbedAR2));
 			}
-			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_shotgun") )
+			if (!Q_stricmp(pWeapon->GetClassname(), "weapon_shotgun"))
 			{
 				++m_Local.m_iGrabbedShotgun;
-				AddPlayerCash( 3500 * (1.0 / m_Local.m_iGrabbedShotgun) );
+				AddPlayerCash(3500 * (1.0 / m_Local.m_iGrabbedShotgun));
+				m_pInventory.NewObject(m_pInventory.FindFirstFreeObject(), 184, primaryGiven, 20);
 			}
-			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_crossbow") )
-				AddPlayerCash( 5000 * 0.1 );
-			if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_rpg") )
-				AddPlayerCash( 6500 * 0.1 );
-
-			UTIL_Remove( pWeapon );
-			return true;
-		}
-		else
-		{
-			return false;
+			if (!Q_stricmp(pWeapon->GetClassname(), "weapon_crossbow"))
+				AddPlayerCash(5000 * 0.1);
+			if (!Q_stricmp(pWeapon->GetClassname(), "weapon_rpg"))
+				AddPlayerCash(6500 * 0.1);
+			
+			if (pWeapon->HasPrimaryAmmo())
+				return false;
+			else {
+				UTIL_Remove(pWeapon);
+				return true;
+			}
 		}
 	}
 	// -------------------------
