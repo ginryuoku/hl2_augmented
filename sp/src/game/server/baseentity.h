@@ -758,10 +758,12 @@ public:
 	int		m_iItemID;
 	int		m_iItemCapacity;
 	int		m_iItemMaxCapacity;
+	int		m_iItemContains;
 
 	int		GetItemID			( void ) { return m_iItemID; }
 	int		GetItemCapacity		( void ) { return m_iItemCapacity; }
 	int		GetItemMaxCapacity	( void ) { return m_iItemMaxCapacity; }
+	int		GetItemContains(void) {	return m_iItemContains;	}
 
 	// Think functions with contexts
 	int		RegisterThinkContext( const char *szContext );

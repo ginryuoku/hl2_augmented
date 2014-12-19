@@ -86,6 +86,7 @@ protected:
 	const FileInventoryInfo_t &GetItemInfo(void) const;
 	int GetStartingCapacity(void) const;
 	int GetStartingMaxCapacity(void) const;
+	int GetStartingContains(void) const;
 private:
 	bool		m_bActivateWhenAtRest;
 	COutputEvent m_OnPlayerTouch;
