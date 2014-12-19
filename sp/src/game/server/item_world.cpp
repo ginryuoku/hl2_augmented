@@ -159,6 +159,11 @@ int CItem::GetStartingMaxCapacity(void) const
 	return GetItemInfo().item_maxcapacity;
 }
 
+int CItem::GetStartingContains(void) const
+{
+	return GetItemInfo().item_contains;
+}
+
 //-----------------------------------------------------------------------------
 // Purpose: 
 //-----------------------------------------------------------------------------
@@ -223,6 +228,7 @@ void CItem::Spawn( void )
 		{
 			m_iItemCapacity = GetStartingCapacity();
 			m_iItemMaxCapacity = GetStartingMaxCapacity();
+			m_iItemContains = GetStartingContains();
 		}
 	}
 

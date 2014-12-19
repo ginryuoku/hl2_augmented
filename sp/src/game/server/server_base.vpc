@@ -84,6 +84,7 @@ $Project
 			$File "comrade_erika\baseinventory.cpp"
 			$File "comrade_erika\baseinventory.h"
 			$File "comrade_erika\item_upgrades.cpp"
+			$File "comrade_erika\item_magazines.cpp"
             $File "comrade_erika\inventory_parse.cpp"
             $File "comrade_erika\inventory_parse.h"
             $File "comrade_erika\inventory_parse_default.cpp"

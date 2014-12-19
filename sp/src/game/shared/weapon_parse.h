@@ -113,6 +113,10 @@ public:
 	bool					m_bAllowFlipping;	// False to disallow flipping the model, regardless of whether
 												// it is built left or right handed.
 
+	int						iPrimaryMagazineID;
+	int						iSecondaryMagazineID;
+	bool					m_bUsesMagazines;
+
 // CLIENT DLL
 	// Sprite data, read from the data file
 	int						iSpriteCount;
