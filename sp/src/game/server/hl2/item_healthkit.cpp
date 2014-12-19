@@ -45,8 +45,6 @@ void CHealthKit::Spawn( void )
 	SetModel( "models/items/healthkit.mdl" );
 
 	m_iItemID = 11;
-	m_iItemCapacity = 25;
-	m_iItemMaxCapacity = 25;
 
 	BaseClass::Spawn();
 }
