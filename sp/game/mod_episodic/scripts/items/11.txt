@@ -1,0 +1,15 @@
+ItemData
+{
+	"entity_name"				"item_healthkit" // entity name must match numeric ID
+	"item_friendlyname"			"#CE_HealthKit" // Friendly name. We use the localizer here.
+	"item_friendlydescription"	"#CE_HealthKit_Desc" // Friendly description, also localized.
+
+	"item_capacity"				"25"	// Capacity of the item.
+	"item_maxcapacity"			"25"	// Max capacity of the item.
+
+	"item_baseprice"			"5"		// Price for the item, empty.
+	"item_unitprice"			"5"		// Price for each element contained within the item.
+
+	"item_baseweight" 			"500"	// Weight in grams of the empty item.
+	"item_unitweight" 			"15"	// Weight in grams of each element.
+}

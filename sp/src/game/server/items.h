@@ -15,6 +15,7 @@
 #include "entityoutput.h"
 #include "player_pickup.h"
 #include "vphysics/constraints.h"
+#include "comrade_erika/inventory_parse.h"
 
 
 // Armor given by a battery
@@ -82,7 +83,9 @@ public:
 	DECLARE_DATADESC();
 protected:
 	virtual void ComeToRest( void );
-
+	const FileInventoryInfo_t &GetItemInfo(void) const;
+	int GetStartingCapacity(void) const;
+	int GetStartingMaxCapacity(void) const;
 private:
 	bool		m_bActivateWhenAtRest;
 	COutputEvent m_OnPlayerTouch;
@@ -92,6 +95,8 @@ private:
 	QAngle		m_vOriginalSpawnAngles;
 
 	IPhysicsConstraint		*m_pConstraint;
+
+	ITEM_FILE_INFO_HANDLE m_hItemFileInfo;
 };
 
 #endif // ITEMS_H

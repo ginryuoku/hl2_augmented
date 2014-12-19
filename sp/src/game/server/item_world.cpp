@@ -144,6 +144,21 @@ bool CItem::CreateItemVPhysicsObject( void )
 	return true;
 }
 
+const FileInventoryInfo_t &CItem::GetItemInfo(void) const
+{
+	return *GetFileItemInfoFromHandle(m_hItemFileInfo);
+}
+
+int CItem::GetStartingCapacity(void) const
+{
+	return GetItemInfo().item_capacity;
+}
+
+int CItem::GetStartingMaxCapacity(void) const
+{
+	return GetItemInfo().item_maxcapacity;
+}
+
 //-----------------------------------------------------------------------------
 // Purpose: 
 //-----------------------------------------------------------------------------
@@ -201,6 +216,15 @@ void CItem::Spawn( void )
 		}
 	}
 #endif //CLIENT_DLL
+
+	if (m_iItemID > 0)
+	{
+		if (ReadItemDataFromFileInSlot(filesystem, m_iItemID, &m_hItemFileInfo))
+		{
+			m_iItemCapacity = GetStartingCapacity();
+			m_iItemMaxCapacity = GetStartingMaxCapacity();
+		}
+	}
 
 #if defined( HL2MP ) || defined( TF_DLL )
 	SetThink( &CItem::FallThink );
