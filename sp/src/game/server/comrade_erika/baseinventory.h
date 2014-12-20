@@ -51,6 +51,7 @@ public:
 
 	int UseItem(int used, int object);
 	int UseHealthItem(int used, int itemid);
+	int CountAllObjectContentsOfID(int itemid);
 	int CountAllObjectsOfID(int itemid);
 
 	void NewObject( int ObjectIndex, int NewItemID, int NewItemCap, int NewItemMaxCap );

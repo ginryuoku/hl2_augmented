@@ -29,6 +29,9 @@ public:
 	
 	void UpdateObject( int ObjectIndex, int NewItemID, int NewItemCap, int NewItemMaxCap );
 	void ItemIsClean(int element);
+
+	int CountAllObjectContentsOfID(int itemid);
+	int CountAllObjectsOfID(int itemid);
 private:
 	int ItemID[MAX_INVENTORY];
 	int ItemCap[MAX_INVENTORY];

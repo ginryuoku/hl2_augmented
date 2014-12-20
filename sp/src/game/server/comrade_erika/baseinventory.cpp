@@ -265,7 +265,7 @@ int CBaseInventory::UseItem(int used, int object)
 
 }
 
-int CBaseInventory::CountAllObjectsOfID(int itemid)
+int CBaseInventory::CountAllObjectContentsOfID(int itemid)
 {
 	int itemcount = 0;
 
@@ -278,6 +278,17 @@ int CBaseInventory::CountAllObjectsOfID(int itemid)
 	}
 
 	return itemcount;
+}
+
+int CBaseInventory::CountAllObjectsOfID(int itemid)
+{
+	int items = 0;
+	for (int i = 0; i < MAX_INVENTORY; ++i)
+	{
+		if (GetItemID(i) == itemid)
+			++items;
+	}
+	return items;
 }
 
 void UseHealthItem(const CCommand &args)
