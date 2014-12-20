@@ -77,9 +77,34 @@ void CBaseInventory::UpdateObject( int ObjectIndex, int NewItemID, int NewItemCa
 	ItemCap[ObjectIndex] = NewItemCap;
 	ItemMaxCap[ObjectIndex] = NewItemMaxCap;
 	ItemDirty[ObjectIndex] = true;
-	Msg("Client: Created new object at position %d of type %d with capacity %d and max capacity %d\n", ObjectIndex, NewItemID, NewItemCap, NewItemMaxCap);
+	DevMsg("Client: Updated object at position %d of type %d with capacity %d and max capacity %d\n", ObjectIndex, NewItemID, NewItemCap, NewItemMaxCap);
 }
 
+int CBaseInventory::CountAllObjectContentsOfID(int itemid)
+{
+	int itemcount = 0;
+
+	for (int i = 0; i < MAX_INVENTORY; ++i)
+	{
+		if (GetItemID(i) == itemid)
+		{
+			itemcount = itemcount + GetItemCapacity(i);
+		}
+	}
+
+	return itemcount;
+}
+
+int CBaseInventory::CountAllObjectsOfID(int itemid)
+{
+	int items = 0;
+	for (int i = 0; i < MAX_INVENTORY; ++i)
+	{
+		if (GetItemID(i) == itemid)
+			++items;
+	}
+	return items;
+}
 void CBaseInventory::ItemIsClean( int element )
 {
 	ItemDirty[element] = false;

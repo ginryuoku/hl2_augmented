@@ -296,11 +296,11 @@ bool CWeaponSPAS12::StartReload( void )
 		CBasePlayer *pPlayer = ToBasePlayer(GetOwner());
 		if (pPlayer)
 		{
-			if (pPlayer->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()) <= 0)
+			if (pPlayer->m_pInventory.CountAllObjectContentsOfID(GetPrimaryAmmoID()) <= 0)
 				return false;
 			if (m_iClip1 >= GetMaxClip1())
 				return false;
-			int j = MIN(1, pPlayer->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()));
+			int j = MIN(1, pPlayer->m_pInventory.CountAllObjectContentsOfID(GetPrimaryAmmoID()));
 			if (j <= 0)
 				return false;
 		}
@@ -351,11 +351,11 @@ bool CWeaponSPAS12::Reload( void )
 		CBasePlayer *pPlayer = ToBasePlayer(GetOwner());
 		if (pPlayer)
 		{
-			if (pPlayer->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()) <= 0)
+			if (pPlayer->m_pInventory.CountAllObjectContentsOfID(GetPrimaryAmmoID()) <= 0)
 				return false;
 			if (m_iClip1 >= GetMaxClip1())
 				return false;
-			int j = MIN(1, pPlayer->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()));
+			int j = MIN(1, pPlayer->m_pInventory.CountAllObjectContentsOfID(GetPrimaryAmmoID()));
 			if (j <= 0)
 				return false;
 		}
@@ -414,7 +414,7 @@ void CWeaponSPAS12::FillClip( void )
 		return;
 
 	// Add them to the clip
-	if (pPlayer->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()) > 0)
+	if (pPlayer->m_pInventory.CountAllObjectContentsOfID(GetPrimaryAmmoID()) > 0)
 	{
 		if (Clip1() < GetMaxClip1())
 		{
@@ -478,7 +478,7 @@ void CWeaponSPAS12::PrimaryAttack( void )
 
 	CSoundEnt::InsertSound(SOUND_COMBAT, GetAbsOrigin(), SOUNDENT_VOLUME_SHOTGUN, 0.2, GetOwner());
 
-	if (!m_iClip1 && pPlayer->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()) <= 0)
+	if (!m_iClip1 && pPlayer->m_pInventory.CountAllObjectContentsOfID(GetPrimaryAmmoID()) <= 0)
 	{
 		// HEV suit - indicate out of ammo condition
 		pPlayer->SetSuitUpdate("!HEV_AMO0", FALSE, 0);
@@ -510,7 +510,7 @@ void CWeaponSPAS12::ItemPostFrame( void )
 		}
 		else if (m_flNextPrimaryAttack <= gpGlobals->curtime)
 		{
-			if (pOwner->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()) <= 0)
+			if (pOwner->m_pInventory.CountAllObjectContentsOfID(GetPrimaryAmmoID()) <= 0)
 			{
 				FinishReload();
 				return;
@@ -538,9 +538,9 @@ void CWeaponSPAS12::ItemPostFrame( void )
 	if ((m_bDelayedFire1 || pOwner->m_nButtons & IN_ATTACK) && m_flNextPrimaryAttack <= gpGlobals->curtime)
 	{
 		m_bDelayedFire1 = false;
-		if ((m_iClip1 <= 0 && UsesClipsForAmmo1()) || (!UsesClipsForAmmo1() && !pOwner->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID())))
+		if ((m_iClip1 <= 0 && UsesClipsForAmmo1()) || (!UsesClipsForAmmo1() && !pOwner->m_pInventory.CountAllObjectContentsOfID(GetPrimaryAmmoID())))
 		{
-			if (!pOwner->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()))
+			if (!pOwner->m_pInventory.CountAllObjectContentsOfID(GetPrimaryAmmoID()))
 			{
 				DryFire();
 			}
