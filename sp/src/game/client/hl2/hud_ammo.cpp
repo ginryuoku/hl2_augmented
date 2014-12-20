@@ -146,13 +146,25 @@ void CHudAmmo::UpdatePlayerAmmo( C_BasePlayer *player )
 	if (ammo1 < 0)
 	{
 		// we don't use clip ammo, just use the total ammo count
-		ammo1 = player->GetAmmoCount(wpn->GetPrimaryAmmoType());
+		if (wpn->GetPrimaryAmmoID() > 0)
+			ammo1 = player->m_pInventory.CountAllObjectContentsOfID(wpn->GetPrimaryAmmoID());
+		else
+			ammo1 = player->GetAmmoCount(wpn->GetPrimaryAmmoType());
 		ammo2 = 0;
 	}
 	else
 	{
-		// we use clip ammo, so the second ammo is the total ammo
-		ammo2 = player->GetAmmoCount(wpn->GetPrimaryAmmoType());
+		if (wpn->UsesMagazines())
+		{
+			ammo2 = player->m_pInventory.CountAllObjectsOfID(wpn->GetPrimaryMagazineID());
+		} 
+		else if (!wpn->UsesMagazines() && wpn->GetPrimaryAmmoID() > 0)
+		{
+			ammo2 = player->m_pInventory.CountAllObjectContentsOfID(wpn->GetPrimaryAmmoID());
+		}
+		else
+			// we use clip ammo, so the second ammo is the total ammo
+			ammo2 = player->GetAmmoCount(wpn->GetPrimaryAmmoType());
 	}
 
 	hudlcd->SetGlobalStat( "(ammo_primary)", VarArgs( "%d", ammo1 ) );
