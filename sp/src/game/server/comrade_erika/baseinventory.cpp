@@ -10,7 +10,10 @@ BEGIN_SIMPLE_DATADESC( CBaseInventory )
 	DEFINE_ARRAY(ItemCap, FIELD_INTEGER, MAX_INVENTORY),
 	DEFINE_ARRAY(ItemMaxCap, FIELD_INTEGER, MAX_INVENTORY),
 	DEFINE_ARRAY(ItemType, FIELD_INTEGER, MAX_INVENTORY),
+	DEFINE_ARRAY(ItemContains, FIELD_INTEGER, MAX_INVENTORY),
 END_DATADESC()
+
+ITEM_FILE_INFO_HANDLE m_hInventoryFileInfo;
 
 CBaseInventory::CBaseInventory()
 {
@@ -49,6 +52,7 @@ void CBaseInventory::PurgeObject( int element )
 	ItemCap[element] = 0;
 	ItemMaxCap[element] = 0;
 	ItemType[element] = 0;
+	ItemContains[element] = 0;
 	ItemDirty[element] = true;
 }
 
@@ -118,12 +122,18 @@ void CBaseInventory::ConvertEntityToObject( CBaseEntity *pEntity )
 	return;
 }
 
+const FileInventoryInfo_t &CBaseInventory::GetItemInfo(void) const
+{
+	return *GetFileItemInfoFromHandle(m_hInventoryFileInfo);
+}
+
 void CBaseInventory::NewObject( int ObjectIndex, int NewItemID, int NewItemCap, int NewItemMaxCap )
 {
 	ItemID[ObjectIndex] = NewItemID;
 	ItemCap[ObjectIndex] = NewItemCap;
 	ItemMaxCap[ObjectIndex] = NewItemMaxCap;
 	ItemType[ObjectIndex] = FindItemType(NewItemID);
+	ItemContains[ObjectIndex] = GetItemInfo().item_contains;
 	
 	ItemDirty[ObjectIndex] = true;
 	
@@ -251,7 +261,7 @@ int CBaseInventory::UseItem(int used, int object)
 		return 0; // you can't use more than the object has
 	ItemCap[object] = ItemCap[object] - used;
 	
-	if (ItemCap[object] == 0)
+	if (ItemCap[object] == 0 && FindItemType(object) != TYPE_MAGAZINE)
 	{
 		PurgeObject(object); // it's empty, throw it away.
 		return used;
@@ -289,6 +299,17 @@ int CBaseInventory::CountAllObjectsOfID(int itemid)
 			++items;
 	}
 	return items;
+}
+
+int CBaseInventory::SwapMagazines(int itemid, int remaining)
+{
+	int mag = FindFirstFullObject(itemid);
+	int used = GetItemCapacity(mag);
+
+	ItemCap[mag] = remaining;
+	ItemDirty[mag] = true;
+
+	return used;
 }
 
 void UseHealthItem(const CCommand &args)

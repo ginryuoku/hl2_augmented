@@ -2,6 +2,7 @@
 #define BASEINVENTORY_H
 
 #include "cbase.h"
+#include "comrade_erika/inventory_parse.h"
 
 #define MAX_INVENTORY 100
 
@@ -17,6 +18,10 @@
 //250	MAGAZINE	9
 //350	WEAPON		10
 //500	KEY_ITEM	11
+
+#define TYPE_MAGAZINE 9
+
+extern ITEM_FILE_INFO_HANDLE m_hInventoryFileInfo;
 
 class CBaseInventory
 {
@@ -54,13 +59,16 @@ public:
 	int CountAllObjectContentsOfID(int itemid);
 	int CountAllObjectsOfID(int itemid);
 
-	void NewObject( int ObjectIndex, int NewItemID, int NewItemCap, int NewItemMaxCap );
+	int SwapMagazines(int itemid, int remaining);
 
+	void NewObject( int ObjectIndex, int NewItemID, int NewItemCap, int NewItemMaxCap );
+	const FileInventoryInfo_t &GetItemInfo(void) const;
 private:
 	int  ItemID     [MAX_INVENTORY];
 	int  ItemCap    [MAX_INVENTORY];
 	int  ItemMaxCap [MAX_INVENTORY];
 	int  ItemType   [MAX_INVENTORY];
+	int  ItemContains[MAX_INVENTORY];
 	bool ItemDirty  [MAX_INVENTORY]; // dirty flag for each
 };
 

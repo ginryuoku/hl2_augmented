@@ -32,6 +32,11 @@ public:
 
 	int CountAllObjectContentsOfID(int itemid);
 	int CountAllObjectsOfID(int itemid);
+
+	int FindFirstFullObject(int itemid);
+	int UseItem(int used, int object);
+	int SwapMagazines(int itemid, int remaining);
+
 private:
 	int ItemID[MAX_INVENTORY];
 	int ItemCap[MAX_INVENTORY];

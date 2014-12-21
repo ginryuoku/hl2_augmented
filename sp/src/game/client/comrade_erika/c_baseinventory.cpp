@@ -109,3 +109,44 @@ void CBaseInventory::ItemIsClean( int element )
 {
 	ItemDirty[element] = false;
 }
+
+int CBaseInventory::FindFirstFullObject(int itemid)
+{
+	int element = 0;
+	for (int i = 0; i < MAX_INVENTORY; ++i)
+	{
+		if (GetItemID(i) == itemid)
+		{
+			if (GetItemCapacity(i) == GetItemMaxCapacity(i))
+				return i;
+
+			if (GetItemCapacity(i) > GetItemCapacity(element))
+			{
+				element = i;
+			}
+		}
+	}
+	return element;
+}
+
+// Returns amount actually used.
+// Takes 'used' (amount you need from such item), and object (index of item)
+int CBaseInventory::UseItem(int used, int object)
+{
+	if (used > ItemCap[object])
+		return 0; // you can't use more than the object has
+	ItemCap[object] = ItemCap[object] - used;
+
+	return used;
+}
+
+int CBaseInventory::SwapMagazines(int itemid, int remaining)
+{
+	int mag = FindFirstFullObject(itemid);
+	int used = GetItemCapacity(mag);
+
+	ItemCap[mag] = remaining;
+	ItemDirty[mag] = true;
+
+	return used;
+}
