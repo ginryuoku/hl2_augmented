@@ -349,6 +349,9 @@ FileWeaponInfo_t::FileWeaponInfo_t()
 	m_bBuiltRightHanded = true;
 	iPrimaryAmmoID = 0;
 	iSecondaryAmmoID = 0;
+	iPrimaryMagazineID = 0;
+	iSecondaryMagazineID = 0;
+	m_bUsesMagazines = false;
 }
 
 #ifdef CLIENT_DLL
@@ -388,6 +391,11 @@ void FileWeaponInfo_t::Parse( KeyValues *pKeyValuesData, const char *szWeaponNam
 	iWeight = pKeyValuesData->GetInt( "weight", 0 );
 	iPrimaryAmmoID = pKeyValuesData->GetInt( "primary_ammo_id", 0 );
 	iSecondaryAmmoID = pKeyValuesData->GetInt("secondary_ammo_id", 0);
+
+	iPrimaryMagazineID = pKeyValuesData->GetInt("primary_mag_id", 0);
+	iSecondaryMagazineID = pKeyValuesData->GetInt("secondary_mag_id", 0);
+
+	m_bUsesMagazines = pKeyValuesData->GetBool("uses_magazines", false);
 
 	iRumbleEffect = pKeyValuesData->GetInt( "rumble", -1 );
 	
