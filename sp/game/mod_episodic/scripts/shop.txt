@@ -31,4 +31,6 @@
 
 	"upgrade_health"		"1000"
 	"upgrade_armor"			"1000"
+    
+    "item_mag_9x19_15"      "35"
 }

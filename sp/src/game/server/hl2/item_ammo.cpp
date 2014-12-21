@@ -47,7 +47,9 @@ public:
 	{ 
 		Precache( );
 		SetModel( "models/items/boxsrounds.mdl" );
+		m_iItemID = 180;
 		BaseClass::Spawn( );
+		m_iItemCapacity = 20;
 	}
 	void Precache( void )
 	{
@@ -82,6 +84,7 @@ public:
 	{ 
 		Precache( );
 		SetModel( "models/items/boxsrounds.mdl" );
+		m_iItemID = 180;
 		BaseClass::Spawn( );
 	}
 	void Precache( void )
@@ -531,10 +534,8 @@ public:
 	{ 
 		Precache( );
 		SetModel( "models/items/boxbuckshot.mdl");
-		BaseClass::Spawn( );
 		m_iItemID = 184;
-		m_iItemCapacity = 20;
-		m_iItemMaxCapacity = 20;
+		BaseClass::Spawn( );
 	}
 	void Precache( void )
 	{
