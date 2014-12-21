@@ -112,8 +112,6 @@ public:
 		BaseClass::Spawn();
 
 		m_iItemID = 10;
-		m_iItemCapacity = 15;
-		m_iItemMaxCapacity = 15;
 	}
 
 	void Precache( void )
