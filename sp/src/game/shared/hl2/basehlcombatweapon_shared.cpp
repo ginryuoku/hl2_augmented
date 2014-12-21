@@ -63,7 +63,7 @@ void CBaseHLCombatWeapon::ItemHolsterFrame( void )
 	// We can't be active
 	if ( GetOwner()->GetActiveWeapon() == this )
 		return;
-
+#if 0
 	// If it's been longer than three seconds, reload
 	if ( ( gpGlobals->curtime - m_flHolsterTime ) > sk_auto_reload_time.GetFloat() )
 	{
@@ -71,6 +71,7 @@ void CBaseHLCombatWeapon::ItemHolsterFrame( void )
 		FinishReload();
 		m_flHolsterTime = gpGlobals->curtime;
 	}
+#endif
 }
 
 //-----------------------------------------------------------------------------
