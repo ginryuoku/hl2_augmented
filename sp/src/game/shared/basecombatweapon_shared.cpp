@@ -2297,7 +2297,10 @@ void CBaseCombatWeapon::FinishReload( void )
 		else if (UsesMagazines())
 		{
 			int remaining = m_iClip1;
-			m_iClip1 = pPlayer->m_pInventory.SwapMagazines(GetPrimaryMagazineID(), remaining);
+			int swapped = pPlayer->m_pInventory.SwapMagazines(GetPrimaryMagazineID(), remaining);
+			if (swapped == -1)
+				return;
+			m_iClip1 = swapped;
 		} 
 		else if (!UsesMagazines() && GetPrimaryAmmoID() > 0)
 		{

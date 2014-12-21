@@ -19,9 +19,10 @@
 //350	WEAPON		10
 //500	KEY_ITEM	11
 
-#define TYPE_MAGAZINE 9
+#define ITEM_AMMO     8
+#define ITEM_MAGAZINE 9
 
-extern ITEM_FILE_INFO_HANDLE m_hInventoryFileInfo;
+extern ITEM_FILE_INFO_HANDLE m_hFileInventoryInfo;
 
 class CBaseInventory
 {
@@ -39,6 +40,9 @@ public:
 	int GetItemCapacity( int element );
 	int GetItemMaxCapacity( int element );
 	int GetItemType(int element);
+	int GetItemContains(int element);
+
+	void SetItemCapacity(int element, int newcapacity);
 
 	void PurgeObject( int element );
 	void PurgeAllObjects();
@@ -47,6 +51,9 @@ public:
 	int FindFirstObject(int itemid);
 	int FindFirstFreeObject();
 	int FindFirstFullObject(int itemid);
+	int FindFirstEmptyObject(int itemid);
+	int FindMagForReloading(int itemid);
+	int FindFirstObjectContainingThis(int itemid);
 	int FindFirstFullObjectByType(int itemtype);
 
 	int FindHealthItem();
@@ -54,7 +61,7 @@ public:
 
 	int FindItemType(int itemid);
 
-	int UseItem(int used, int object);
+	int UseItem(int used, int itemid);
 	int UseHealthItem(int used, int itemid);
 	int CountAllObjectContentsOfID(int itemid);
 	int CountAllObjectsOfID(int itemid);
@@ -63,6 +70,7 @@ public:
 
 	void NewObject( int ObjectIndex, int NewItemID, int NewItemCap, int NewItemMaxCap );
 	const FileInventoryInfo_t &GetItemInfo(void) const;
+
 private:
 	int  ItemID     [MAX_INVENTORY];
 	int  ItemCap    [MAX_INVENTORY];

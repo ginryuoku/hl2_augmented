@@ -54,6 +54,8 @@ void CBaseInventory::PurgeObject( int element )
 	ItemType[element] = 0;
 	ItemContains[element] = 0;
 	ItemDirty[element] = true;
+
+	DevMsg("Purged index %d\n", element);
 }
 
 void CBaseInventory::PurgeAllObjects()
@@ -83,6 +85,26 @@ int CBaseInventory::GetItemType( int element )
 {
 	return ItemType[element];
 }
+
+int CBaseInventory::GetItemContains(int element)
+{
+	return ItemContains[element];
+}
+
+void CBaseInventory::SetItemCapacity(int element, int newcapacity)
+{
+	if (newcapacity > GetItemMaxCapacity(element))
+	{
+		ItemCap[element] = GetItemMaxCapacity(element);
+		ItemDirty[element] = true;
+	}
+	else
+	{
+		ItemCap[element] = newcapacity;
+		ItemDirty[element] = true;
+	}
+}
+
 
 #if 0
 int CBaseInventory::GetItemTotalWeight( int element )
@@ -129,15 +151,33 @@ const FileInventoryInfo_t &CBaseInventory::GetItemInfo(void) const
 
 void CBaseInventory::NewObject( int ObjectIndex, int NewItemID, int NewItemCap, int NewItemMaxCap )
 {
-	ItemID[ObjectIndex] = NewItemID;
-	ItemCap[ObjectIndex] = NewItemCap;
-	ItemMaxCap[ObjectIndex] = NewItemMaxCap;
-	ItemType[ObjectIndex] = FindItemType(NewItemID);
-	ItemContains[ObjectIndex] = GetItemInfo().item_contains;
-	
-	ItemDirty[ObjectIndex] = true;
-	
-	Msg("Server: Created new object at position %d of type %d with capacity %d and max capacity %d\n", ObjectIndex, NewItemID, NewItemCap, NewItemMaxCap);
+	if (ReadItemDataFromFileInSlot(filesystem, NewItemID, &m_hInventoryFileInfo))
+	{
+		ItemID[ObjectIndex] = NewItemID;
+		ItemCap[ObjectIndex] = NewItemCap;
+		ItemMaxCap[ObjectIndex] = NewItemMaxCap;
+		ItemType[ObjectIndex] = FindItemType(NewItemID);
+		ItemContains[ObjectIndex] = GetItemInfo().item_contains;
+
+		ItemDirty[ObjectIndex] = true;
+
+		Msg("Server: Created new object at position %d, item ID %d, capacity %d, max capacity %d, which contains %d\n",
+			ObjectIndex, NewItemID, NewItemCap, NewItemMaxCap, ItemContains[ObjectIndex]);
+
+	}
+	else
+	{
+		ItemID[ObjectIndex] = NewItemID;
+		ItemCap[ObjectIndex] = NewItemCap;
+		ItemMaxCap[ObjectIndex] = NewItemMaxCap;
+		ItemType[ObjectIndex] = FindItemType(NewItemID);
+		ItemContains[ObjectIndex] = 0;
+
+		ItemDirty[ObjectIndex] = true;
+
+		Msg("Server: Created new object at position %d, item ID %d, capacity %d, max capacity %d\n", ObjectIndex, NewItemID, NewItemCap, NewItemMaxCap);
+
+	}
 }
 
 int CBaseInventory::FindFirstObject(int itemid)
@@ -183,6 +223,42 @@ int CBaseInventory::FindFirstFullObject(int itemid)
 	return element;
 }
 
+// Returns -1 if not found, otherwise returns index of object
+int CBaseInventory::FindFirstEmptyObject(int itemid)
+{
+	int element = GetItemInfo().item_maxcapacity;
+	int item_index = -1;
+	for (int i = 0; i < MAX_INVENTORY; ++i)
+	{
+		if (GetItemID(i) == itemid)
+		{
+			if (GetItemCapacity(i) == 0)
+				return i;
+
+			if (GetItemCapacity(i) < element)
+			{
+				element = GetItemCapacity(i);
+				item_index = i;
+			}
+		}
+	}
+	return item_index;
+}
+
+
+int CBaseInventory::FindFirstObjectContainingThis(int itemid)
+{
+	for (int i = 0; i < MAX_INVENTORY; ++i)
+	{
+		if (ItemContains[i] == itemid)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+
+
 // This function is *exclusively* for fungible items. Fungibles include healing items,
 // power items and armor items. 
 int CBaseInventory::FindFirstFullObjectByType(int itemtype)
@@ -213,7 +289,7 @@ int CBaseInventory::FindFirstFullObjectByType(int itemtype)
 	else
 		return element;
 }
-
+// Takes an item ID and types it.
 int CBaseInventory::FindItemType(int itemid)
 {
 	if (itemid >= 1000)
@@ -223,9 +299,9 @@ int CBaseInventory::FindItemType(int itemid)
 	else if (itemid >= 350)
 		return 10;	// WEAPON
 	else if (itemid >= 250)
-		return 9;	// MAGAZINE
+		return ITEM_MAGAZINE;	// MAGAZINE
 	else if (itemid >= 180)
-		return 8;	// AMMO
+		return ITEM_AMMO;	// AMMO
 	else if (itemid >= 120)
 		return 7;	// W_ACCESSORY
 	else if (itemid >= 60)
@@ -255,21 +331,21 @@ int CBaseInventory::FindArmorItem()
 
 // Returns amount actually used.
 // Takes 'used' (amount you need from such item), and object (index of item)
-int CBaseInventory::UseItem(int used, int object)
+int CBaseInventory::UseItem(int used, int itemid)
 {
-	if (used > ItemCap[object])
+	if (used > ItemCap[itemid])
 		return 0; // you can't use more than the object has
-	ItemCap[object] = ItemCap[object] - used;
+	ItemCap[itemid] = ItemCap[itemid] - used;
 	
-	if (ItemCap[object] == 0 && FindItemType(object) != TYPE_MAGAZINE)
+	if (ItemCap[itemid] == 0 && FindItemType(itemid) != ITEM_MAGAZINE)
 	{
-		PurgeObject(object); // it's empty, throw it away.
+		PurgeObject(itemid); // it's empty, throw it away.
 		return used;
 	}
 	
 	else
 	{
-		ItemDirty[object] = true; // we changed it, so it's just dirty.
+		ItemDirty[itemid] = true; // we changed it, so it's just dirty.
 		return used;
 	}
 
@@ -303,6 +379,11 @@ int CBaseInventory::CountAllObjectsOfID(int itemid)
 
 int CBaseInventory::SwapMagazines(int itemid, int remaining)
 {
+	if (FindItemType(itemid) != ITEM_MAGAZINE)
+	{
+		return -1;
+	}
+
 	int mag = FindFirstFullObject(itemid);
 	int used = GetItemCapacity(mag);
 
@@ -312,9 +393,87 @@ int CBaseInventory::SwapMagazines(int itemid, int remaining)
 	return used;
 }
 
+int CBaseInventory::FindMagForReloading(int itemid)
+{
+	int index = -1;
+	if (FindItemType(itemid) != ITEM_AMMO)
+		return -1;
+
+	for (int i = 0; i < MAX_INVENTORY; ++i)
+	{
+		if (GetItemContains(i) == itemid && GetItemID(i) != itemid && 
+			FindItemType(GetItemID(i)) == ITEM_MAGAZINE)
+		{
+			return FindFirstEmptyObject(GetItemID(i));
+		}
+	}
+
+	return index;
+}
+
+
+
+void UseItemFromInventory(const CCommand &args)
+{
+	if (args.ArgC() < 1)
+	{
+		Msg("Usage: use_item <item index>. You normally need not call this manually.\n");
+		return;
+	}
+
+	int itemindex = atoi(args.Arg(1));
+	if (itemindex < 0 || itemindex > 100)
+	{
+		Msg("Was passed nonsense value %d, ignoring command\n", itemindex);
+	}
+
+	Msg("Item index passed: %d\n", itemindex);
+
+	CBasePlayer *pPlayer = UTIL_GetCommandClient();
+
+	if (pPlayer)
+	{
+		int itemtype = pPlayer->m_pInventory.FindItemType(pPlayer->m_pInventory.GetItemID(itemindex));
+		int itemcontains = pPlayer->m_pInventory.GetItemContains(itemindex);
+		switch (itemtype)
+		{
+		case ITEM_MAGAZINE:
+			break;
+		case ITEM_AMMO:
+		{
+			if (itemcontains == -1)
+				return;
+			int ammobox = pPlayer->m_pInventory.GetItemID(itemindex);
+
+			int mag = pPlayer->m_pInventory.FindMagForReloading(ammobox);
+			if (mag == -1)
+				return;
+
+			int used = pPlayer->m_pInventory.GetItemMaxCapacity(mag) - pPlayer->m_pInventory.GetItemCapacity(mag);
+			if (used > pPlayer->m_pInventory.GetItemCapacity(itemindex))
+			{
+				used = pPlayer->m_pInventory.GetItemCapacity(itemindex);
+			}
+
+			int newmag = pPlayer->m_pInventory.GetItemCapacity(mag) + pPlayer->m_pInventory.UseItem(used, itemindex);
+			if (newmag == 0)
+				return;
+
+			pPlayer->m_pInventory.SetItemCapacity(mag, newmag);
+			
+			break;
+		}
+
+		default:
+			return;
+		};
+	}
+}
+ConCommand use_item("use_item", UseItemFromInventory, "use_item <item index>", 0);
+
 void UseHealthItem(const CCommand &args)
 {
-	CBasePlayer *pPlayer = UTIL_GetLocalPlayer();
+	CBasePlayer *pPlayer = UTIL_GetCommandClient();
 
 	if (pPlayer)
 	{
@@ -328,7 +487,7 @@ ConCommand use_heal("use_heal", UseHealthItem, "Use first healing item in invent
 
 void UseArmorItem(const CCommand &args)
 {
-	CBasePlayer *pPlayer = UTIL_GetLocalPlayer();
+	CBasePlayer *pPlayer = UTIL_GetCommandClient();
 
 	if (pPlayer)
 	{
