@@ -22,6 +22,11 @@ WeaponData
 	"item_flags"			"ITEM_FLAG_SELECTONEMPTY"
 	"BuiltRightHanded"		"1"
 	"AllowFlipping"			"1"
+    
+    "primary_ammo_id"       "180"
+    "primary_mag_id"        "270"
+    "uses_magazines"        "1"
+    
 	// Sounds for the weapon. There is a max of 16 sounds per category (i.e. max 16 "single_shot" sounds)
 	SoundData
 	{

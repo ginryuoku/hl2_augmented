@@ -33,4 +33,5 @@
 	"upgrade_armor"			"1000"
     
     "item_mag_9x19_15"      "35"
+    "item_mag_9x19_30mp5"   "60"
 }
