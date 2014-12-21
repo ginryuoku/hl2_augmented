@@ -12,9 +12,9 @@ ItemData
 	"item_baseprice"			"20"	// Price for the item, empty.
 	"item_unitprice"			"1"		// Price for each element contained within the item.
 
-    // Shipping weight of Beretta 92-series magazine is 0.25 pounds
+    // Dry weight of Beretta M9 15rd magazine is 3.5oz, or 99g
     // 9mm 115gr in NATO spec seems to be around 11.5 grams, rounding up.
 	
-    "item_baseweight" 			"113"	// Weight in grams of the empty item. 
+    "item_baseweight" 			"99"	// Weight in grams of the empty item. 
 	"item_unitweight" 			"12"	// Weight in grams of each element.
 }
