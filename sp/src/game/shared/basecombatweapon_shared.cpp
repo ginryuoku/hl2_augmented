@@ -539,6 +539,21 @@ const char *CBaseCombatWeapon::GetShootSound( int iIndex ) const
 	return GetWpnData().aShootSounds[ iIndex ];
 }
 
+int CBaseCombatWeapon::GetPrimaryMagazineID(void) const
+{
+	return GetWpnData().iPrimaryMagazineID;
+}
+
+int CBaseCombatWeapon::GetSecondaryMagazineID(void) const
+{
+	return GetWpnData().iSecondaryMagazineID;
+}
+
+bool CBaseCombatWeapon::UsesMagazines(void) const
+{
+	return GetWpnData().m_bUsesMagazines;
+}
+
 //-----------------------------------------------------------------------------
 // Purpose:
 //-----------------------------------------------------------------------------
