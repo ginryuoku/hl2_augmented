@@ -370,6 +370,7 @@ CBaseEntity::CBaseEntity( bool bServerOnly )
 	m_iItemID = -1;
 	m_iItemCapacity = 0;
 	m_iItemMaxCapacity = 0;
+	m_iItemContains = 0;
 	// clear debug overlays
 	m_debugOverlays  = 0;
 	m_pTimedOverlay  = NULL;
@@ -1770,6 +1771,12 @@ BEGIN_DATADESC_NO_BASE( CBaseEntity )
 	DEFINE_KEYFIELD( m_iParent, FIELD_STRING, "parentname" ),
 
 	DEFINE_KEYFIELD( m_iHammerID, FIELD_INTEGER, "hammerid" ), // save ID numbers so that entities can be tracked between save/restore and vmf
+
+	DEFINE_FIELD( m_iCash, FIELD_INTEGER),
+	DEFINE_FIELD(m_iItemID, FIELD_INTEGER),
+	DEFINE_FIELD(m_iItemCapacity, FIELD_INTEGER),
+	DEFINE_FIELD(m_iItemMaxCapacity, FIELD_INTEGER),
+	DEFINE_FIELD(m_iItemContains, FIELD_INTEGER),
 
 	DEFINE_KEYFIELD( m_flSpeed, FIELD_FLOAT, "speed" ),
 	DEFINE_KEYFIELD( m_nRenderFX, FIELD_CHARACTER, "renderfx" ),
