@@ -16,13 +16,13 @@
 	"weapon_rpg"			"6500"
 
 	"item_ammo_357_large"		"10"
-	"item_ammo_pistol_large"	"50"
-	"item_ammo_smg1_large"		"100"
+	"item_ammo_pistol_large"	"220"
+	"item_ammo_smg1_large"		"450"
 
 	"item_ammo_ar2_large"		"500"
-	"item_box_buckshot"		"15"
+	"item_box_buckshot"		"25"
 	"item_ammo_crossbow"		"21"
-	"item_ammo_rpg_round"		"400"
+	"item_rpg_round"		"400"
 	"item_ammo_smg1_grenade"	"100"
 
 	"item_battery"			"175"

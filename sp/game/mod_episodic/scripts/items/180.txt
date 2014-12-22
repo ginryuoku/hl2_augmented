@@ -4,8 +4,8 @@ ItemData
 	"item_friendlyname"			"#CE_Ammo_9mm_Name" // Friendly name. We use the localizer here.
 	"item_friendlydescription"	"#CE_Ammo_9mm_Desc" // Friendly description, also localized.
 
-	"item_capacity"				"100"	// Capacity of the item.
-	"item_maxcapacity"			"100"	// Max capacity of the item.
+	"item_capacity"				"200"	// Capacity of the item.
+	"item_maxcapacity"			"200"	// Max capacity of the item.
     
     "item_contains"             "180"   // Usually for magazines; refers to what the item contains.
 
