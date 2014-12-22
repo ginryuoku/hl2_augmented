@@ -119,7 +119,9 @@ public:
 	{ 
 		Precache( );
 		SetModel( "models/items/boxmrounds.mdl");
+		m_iItemID = 182;
 		BaseClass::Spawn( );
+		m_iItemCapacity = SIZE_AMMO_SMG1;
 	}
 	void Precache( void )
 	{
@@ -153,6 +155,7 @@ public:
 	{ 
 		Precache( );
 		SetModel( "models/items/boxmrounds.mdl");
+		m_iItemID = 182;
 		BaseClass::Spawn( );
 	}
 	void Precache( void )
