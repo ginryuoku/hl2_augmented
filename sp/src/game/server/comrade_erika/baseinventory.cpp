@@ -403,13 +403,18 @@ int CBaseInventory::FindMagForReloading(int itemid)
 	int index = -1;
 	if (FindItemType(itemid) != ITEM_AMMO)
 		return -1;
-
+	int candidate = 999;
 	for (int i = 0; i < MAX_INVENTORY; ++i)
 	{
 		if (GetItemContains(i) == itemid && GetItemID(i) != itemid && 
 			FindItemType(GetItemID(i)) == ITEM_MAGAZINE)
 		{
-			return FindFirstEmptyObject(GetItemID(i));
+			if (GetItemCapacity(i) < candidate && GetItemCapacity(i) < GetItemMaxCapacity(i))
+			{
+				candidate = GetItemCapacity(i);
+				index = i;
+				Msg("Candidate: index %d, with capacity %d\n", candidate, GetItemCapacity(i));
+			}
 		}
 	}
 
@@ -475,6 +480,8 @@ void UseItemFromInventory(const CCommand &args)
 
 			int mag = pPlayer->m_pInventory.FindMagForReloading(ammobox);
 			if (mag == -1)
+				return;
+			if (pPlayer->m_pInventory.GetItemCapacity(mag) == pPlayer->m_pInventory.GetItemMaxCapacity(mag))
 				return;
 
 			int used = pPlayer->m_pInventory.GetItemMaxCapacity(mag) - pPlayer->m_pInventory.GetItemCapacity(mag);
