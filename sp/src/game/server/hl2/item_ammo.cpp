@@ -189,8 +189,10 @@ public:
 	void Spawn( void )
 	{ 
 		Precache( );
+		m_iItemID = 183;
 		SetModel( "models/items/combine_rifle_cartridge01.mdl");
 		BaseClass::Spawn( );
+		m_iItemCapacity = SIZE_AMMO_AR2;
 	}
 	void Precache( void )
 	{
@@ -223,6 +225,7 @@ public:
 	void Spawn( void )
 	{ 
 		Precache( );
+		m_iItemID = 183;
 		SetModel( "models/items/combine_rifle_cartridge01.mdl");
 		BaseClass::Spawn( );
 	}
@@ -262,8 +265,10 @@ public:
 	void Spawn( void )
 	{ 
 		Precache( );
+		m_iItemID = 181;
 		SetModel( "models/items/357ammo.mdl");
 		BaseClass::Spawn( );
+		m_iItemCapacity = SIZE_AMMO_357;
 	}
 
 	bool MyTouch( CBasePlayer *pPlayer )
@@ -297,6 +302,7 @@ public:
 	void Spawn( void )
 	{ 
 		Precache( );
+		m_iItemID = 181;
 		SetModel( "models/items/357ammobox.mdl");
 		BaseClass::Spawn( );
 	}
