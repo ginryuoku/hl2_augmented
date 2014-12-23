@@ -95,12 +95,17 @@ int CBaseInventory::CountAllObjectContentsOfID(int itemid)
 	return itemcount;
 }
 
-int CBaseInventory::CountAllObjectsOfID(int itemid)
+int CBaseInventory::CountAllObjectsOfID(int itemid, bool non_empty /*= false*/)
 {
 	int items = 0;
 	for (int i = 0; i < MAX_INVENTORY; ++i)
 	{
-		if (GetItemID(i) == itemid)
+		if (non_empty)
+		{
+			if (GetItemCapacity(i) != 0 && GetItemID(i) == itemid)
+				++items;
+		}
+		else if (GetItemID(i) == itemid)
 			++items;
 	}
 	return items;

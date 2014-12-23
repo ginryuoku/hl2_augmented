@@ -31,7 +31,7 @@ public:
 	void ItemIsClean(int element);
 
 	int CountAllObjectContentsOfID(int itemid);
-	int CountAllObjectsOfID(int itemid);
+	int CountAllObjectsOfID(int itemid, bool non_empty = false);
 
 	int FindFirstFullObject(int itemid);
 	int UseItem(int used, int object);
