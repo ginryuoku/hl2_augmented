@@ -402,6 +402,11 @@ CHL2_Player::CHL2_Player()
 
 	m_fHealthRegenRemainder = 0;
 	m_fArmorRegenRemainder = 0;
+
+	m_iHealthKitBuffer = 0;
+	m_iArmorBatteryBuffer = 0;
+
+	m_fRegenBufferWait = 0.0f;
 }
 
 //
@@ -910,41 +915,118 @@ void CHL2_Player::PostThink( void )
 		 HandleAdmireGlovesAnimation();
 	}
 
-	m_pInventory.FlushPendingObjects(this);
+	CBasePlayer *pPlayer = UTIL_GetLocalPlayer();
+
+	if (pPlayer)
+	{
+		if (m_iHealthKitBuffer == 0 && GetHealth() < GetMaxHealth() && m_fRegenBufferWait >= 3.0f)
+		{
+			int itemindex = pPlayer->m_pInventory.FindHealthItem();
+			if (itemindex > -1 && itemindex < (MAX_INVENTORY + 1))
+			{
+				m_iHealthKitBuffer = pPlayer->m_pInventory.UseItem(pPlayer->m_pInventory.GetItemCapacity(itemindex), itemindex) * 4;
+				m_fRegenBufferWait = 0.0f;
+			}
+		}
+		if (m_iArmorBatteryBuffer == 0 && ArmorValue() < MaxArmorValue())
+		{
+			int itemindex = pPlayer->m_pInventory.FindArmorItem();
+			if (itemindex > -1 && itemindex < (MAX_INVENTORY + 1))
+			{
+				m_iArmorBatteryBuffer = pPlayer->m_pInventory.UseItem(pPlayer->m_pInventory.GetItemCapacity(itemindex), itemindex) * 4;
+				m_fRegenBufferWait = 0.0f;
+			}
+		}
+	}
+
+	m_fRegenBufferWait += 1.0 * gpGlobals->frametime;
 
 	if ( IsAlive() && ( GetHealth() < GetMaxHealth() || ArmorValue() < MaxArmorValue() ) && IsSuitEquipped() )
 	{
-		if ( gpGlobals->curtime > m_flLastDamageTime + 1 && GetHealth() % 20 != 0 && GetHealth() < GetMaxHealth())
+		bool used_armor_buffer = false;
+		bool used_health_buffer = false;
+		if ( gpGlobals->curtime > m_flLastDamageTime + 5 && GetHealth() % 20 != 0 && GetHealth() < GetMaxHealth())
 		{
 			//Regenerate based on rate, and scale it by the frametime
-			m_fHealthRegenRemainder += 0.5 * gpGlobals->frametime;
+			m_fHealthRegenRemainder += 0.8 * gpGlobals->frametime;
+
+			if (m_iHealthKitBuffer > 0) {
+				m_fHealthRegenRemainder += 0.8 * gpGlobals->frametime;
+				used_health_buffer = true;
+			}
 
 			if(m_fHealthRegenRemainder >= 1)
 			{
 				TakeHealth( m_fHealthRegenRemainder, DMG_GENERIC );
 				--m_fHealthRegenRemainder;
+				if (used_health_buffer)
+					--m_iHealthKitBuffer;
 			}
 		}
-		if ( gpGlobals->curtime > m_flLastDamageTime + 5 && (ArmorValue() % 20 != 0 || ArmorValue() == 0 ))
+		if ( gpGlobals->curtime > m_flLastDamageTime + 2 && (ArmorValue() % 20 != 0 || ArmorValue() == 0 ))
 		{
 			// Regenerate based on rate, and scale it by the frametime
 			// If we're regenerating while health is regenerating, we take a penalty.
-			if (GetHealth() % 25 > 0)
+			if (GetHealth() % 20 > 0)
 			{
-				m_fArmorRegenRemainder += 0.05 * gpGlobals->frametime;
+				m_fArmorRegenRemainder += 0.6 * gpGlobals->frametime;
 			} 
 			else
 			{
-				m_fArmorRegenRemainder += 0.4 * gpGlobals->frametime;
+				m_fArmorRegenRemainder += 1.2 * gpGlobals->frametime;
+			}
+
+			if (m_iArmorBatteryBuffer > 0)
+			{
+				m_fArmorRegenRemainder += 1.2 * gpGlobals->frametime;
+				used_armor_buffer = true;
 			}
 
 			if(m_fArmorRegenRemainder >= 1)
 			{
 				IncrementArmorValue( 1, MaxArmorValue() );
 				--m_fArmorRegenRemainder;
+				if (used_armor_buffer)
+					--m_iArmorBatteryBuffer;
 			}
 		}
+
+		used_armor_buffer = false;
+		used_health_buffer = false;
+
+		if (gpGlobals->curtime > m_flLastDamageTime + 10)
+		{
+			if (m_iArmorBatteryBuffer > 0)
+			{
+				m_fArmorRegenRemainder += 1.2 * gpGlobals->frametime;
+				used_armor_buffer = true;
+			}
+
+			if (m_fArmorRegenRemainder >= 1)
+			{
+				IncrementArmorValue(1, MaxArmorValue());
+				--m_fArmorRegenRemainder;
+				if (used_armor_buffer)
+					--m_iArmorBatteryBuffer;
+			}
+
+			if (m_iHealthKitBuffer > 0) {
+				m_fHealthRegenRemainder += 0.8 * gpGlobals->frametime;
+				used_health_buffer = true;
+			}
+
+			if (m_fHealthRegenRemainder >= 1)
+			{
+				TakeHealth(m_fHealthRegenRemainder, DMG_GENERIC);
+				--m_fHealthRegenRemainder;
+				if (used_health_buffer)
+					--m_iHealthKitBuffer;
+			}
+		}
+
 	}
+
+	m_pInventory.FlushPendingObjects(this);
 }
 
 void CHL2_Player::StartAdmireGlovesAnimation( void )

@@ -22,13 +22,11 @@ public:
 
 	void Spawn( void )
 	{ 
+		m_iItemID = 30;
+
 		Precache( );
 		SetModel( "models/items/battery.mdl" );
 		BaseClass::Spawn( );
-
-		m_iItemID = 30;
-		m_iItemCapacity = 15;
-		m_iItemMaxCapacity = 15;
 	}
 	void Precache( void )
 	{

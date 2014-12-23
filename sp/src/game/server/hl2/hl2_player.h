@@ -363,6 +363,11 @@ private:
 
 	float				m_fHealthRegenRemainder;
 	float				m_fArmorRegenRemainder;
+
+	int					m_iHealthKitBuffer;
+	int					m_iArmorBatteryBuffer;
+
+	float				m_fRegenBufferWait;
 	
 	friend class CHL2GameMovement;
 };
