@@ -211,7 +211,7 @@ int CBaseInventory::FindFirstFreeObject()
 
 int CBaseInventory::FindFirstFullObject(int itemid)
 {
-	int element = 0;
+	int element = -1;
 	for (int i = 0; i < MAX_INVENTORY; ++i)
 	{
 		if (GetItemID(i) == itemid)
