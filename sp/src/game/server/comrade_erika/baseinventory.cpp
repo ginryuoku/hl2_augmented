@@ -443,7 +443,30 @@ void UseItemFromInventory(const CCommand &args)
 		switch (itemtype)
 		{
 		case ITEM_MAGAZINE:
-			break;
+		{
+			if (itemcontains == -1)
+				return;
+			int needed = pPlayer->m_pInventory.GetItemMaxCapacity(itemindex) - pPlayer->m_pInventory.GetItemCapacity(itemindex);
+			if (needed == 0)
+			{
+				return;
+			}
+			int ammobox = pPlayer->m_pInventory.FindFirstFullObject(itemcontains);
+			if (pPlayer->m_pInventory.FindItemType(pPlayer->m_pInventory.GetItemID(ammobox)) != ITEM_AMMO || pPlayer->m_pInventory.GetItemCapacity(ammobox) == 0)
+				return;
+
+			if (needed > pPlayer->m_pInventory.GetItemCapacity(ammobox))
+			{
+				needed = pPlayer->m_pInventory.GetItemCapacity(ammobox);
+			}
+
+			int newmag = pPlayer->m_pInventory.GetItemCapacity(itemindex) + pPlayer->m_pInventory.UseItem(needed, ammobox);
+			if (newmag == 0)
+				return;
+
+			pPlayer->m_pInventory.SetItemCapacity(itemindex, newmag);
+		}
+
 		case ITEM_AMMO:
 		{
 			if (itemcontains == -1)
