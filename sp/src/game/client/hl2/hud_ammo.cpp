@@ -156,7 +156,7 @@ void CHudAmmo::UpdatePlayerAmmo( C_BasePlayer *player )
 	{
 		if (wpn->UsesMagazines())
 		{
-			ammo2 = player->m_pInventory.CountAllObjectsOfID(wpn->GetPrimaryMagazineID());
+			ammo2 = player->m_pInventory.CountAllObjectsOfID(wpn->GetPrimaryMagazineID(), true);
 		} 
 		else if (!wpn->UsesMagazines() && wpn->GetPrimaryAmmoID() > 0)
 		{
