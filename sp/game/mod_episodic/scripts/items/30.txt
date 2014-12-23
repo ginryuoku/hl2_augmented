@@ -1,0 +1,15 @@
+ItemData
+{
+	"entity_name"				"item_battery" // entity name must match numeric ID
+	"item_friendlyname"			"#CE_Battery" // Friendly name. We use the localizer here.
+	"item_friendlydescription"	"#CE_Battery_Desc" // Friendly description, also localized.
+
+	"item_capacity"				"50"	// Capacity of the item.
+	"item_maxcapacity"			"50"	// Max capacity of the item.
+
+	"item_baseprice"			"100"		// Price for the item, empty.
+	"item_unitprice"			"0"		// Price for each element contained within the item.
+
+	"item_baseweight" 			"250"	// Weight in grams of the empty item.
+	"item_unitweight" 			"0"	// Weight in grams of each element.
+}

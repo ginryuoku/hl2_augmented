@@ -64,7 +64,7 @@ bool CHealthUpgrade::MyTouch( CBasePlayer *pPlayer )
 {
 	++pPlayer->m_Local.m_iHealthUpgrades;
 	pPlayer->ResetMaxHealth();
-
+	Msg("Health upgrades now: %d\n", pPlayer->m_Local.m_iHealthUpgrades);
 	return true;
 }
 
@@ -89,6 +89,7 @@ public:
 	bool MyTouch( CBasePlayer *pPlayer )
 	{
 		++pPlayer->m_Local.m_iArmorUpgrades;
+		Msg("Armor upgrades now: %d\n", pPlayer->m_Local.m_iArmorUpgrades);
 		return true;
 	}
 };
