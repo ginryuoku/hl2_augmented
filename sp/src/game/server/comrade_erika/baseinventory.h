@@ -70,7 +70,9 @@ public:
 
 	void NewObject( int ObjectIndex, int NewItemID, int NewItemCap, int NewItemMaxCap );
 	const FileInventoryInfo_t &GetItemInfo(void) const;
-
+	void CombineItems(int itemindex1, int itemindex2);
+	void SwapItems(int itemindex1, int itemindex2);
+	void ConsolidateAmmo(void);
 private:
 	int  ItemID     [MAX_INVENTORY];
 	int  ItemCap    [MAX_INVENTORY];

@@ -93,12 +93,17 @@ int CBaseInventory::GetItemContains(int element)
 
 void CBaseInventory::SetItemCapacity(int element, int newcapacity)
 {
+	if (newcapacity == 0)
+	{
+		PurgeObject(element);
+	}
+
 	if (newcapacity > GetItemMaxCapacity(element))
 	{
 		ItemCap[element] = GetItemMaxCapacity(element);
 		ItemDirty[element] = true;
 	}
-	else
+	else 
 	{
 		ItemCap[element] = newcapacity;
 		ItemDirty[element] = true;
@@ -214,7 +219,7 @@ int CBaseInventory::FindFirstFullObject(int itemid)
 			if (GetItemCapacity(i) == GetItemMaxCapacity(i))
 				return i;
 
-			if (GetItemCapacity(i) > GetItemCapacity(element))
+			if (GetItemCapacity(i) > GetItemCapacity(element) && GetItemCapacity(i) <= GetItemMaxCapacity(i))
 			{
 				element = i;
 			}
@@ -421,7 +426,105 @@ int CBaseInventory::FindMagForReloading(int itemid)
 	return index;
 }
 
+void CBaseInventory::CombineItems(int itemindex1, int itemindex2)
+{
+	int newcap1 = 0;
+	int newcap2 = 0;
 
+	if (GetItemID(itemindex1) != GetItemID(itemindex2))
+		return;
+	if (GetItemContains(itemindex1) != (GetItemContains(itemindex2)))
+		return;
+
+	if (GetItemCapacity(itemindex1) + GetItemCapacity(itemindex1) > GetItemMaxCapacity(itemindex1))
+	{
+		newcap1 = GetItemMaxCapacity(newcap1);
+		newcap2 = GetItemMaxCapacity(itemindex1) - GetItemCapacity(itemindex1) - GetItemCapacity(itemindex2);
+	}
+	else
+	{
+		newcap1 = GetItemCapacity(itemindex1) + GetItemCapacity(itemindex2);
+		newcap2 = 0;
+	}
+
+	SetItemCapacity(itemindex1, newcap1);
+	SetItemCapacity(itemindex2, newcap2);
+}
+
+void CBaseInventory::SwapItems(int itemindex1, int itemindex2)
+{
+	int newid1 = GetItemID(itemindex2);
+	int newcap1 = GetItemCapacity(itemindex2);
+	int newmaxcap1 = GetItemMaxCapacity(itemindex2);
+	int newcontains1 = GetItemContains(itemindex2);
+
+	int newid2 = GetItemID(itemindex1);
+	int newcap2 = GetItemCapacity(itemindex1);
+	int newmaxcap2 = GetItemMaxCapacity(itemindex1);
+	int newcontains2 = GetItemContains(itemindex1);
+
+	ItemID[itemindex1] = newid1;
+	ItemCap[itemindex1] = newcap1;
+	ItemMaxCap[itemindex1] = newmaxcap1;
+	ItemContains[itemindex1] = newcontains1;
+	
+	ItemID[itemindex2] = newid2;
+	ItemCap[itemindex2] = newcap2;
+	ItemMaxCap[itemindex2] = newmaxcap2;
+	ItemContains[itemindex2] = newcontains2;
+
+	ItemDirty[itemindex1] = true;
+	ItemDirty[itemindex2] = true;
+}
+
+void CBaseInventory::ConsolidateAmmo(void)
+{
+	for (int i = 180; i < 190; ++i)
+	{
+		int totalammo = 0;
+		if (FindFirstObject(i) > 0)
+		{
+			int maxcap = GetItemMaxCapacity(FindFirstObject(i));
+			if (maxcap > 0)
+			{
+				for (int x = 0; x < MAX_INVENTORY; ++x)
+				{
+					if (GetItemID(x) == i)
+					{
+						totalammo = totalammo + GetItemCapacity(x);
+						PurgeObject(x);
+					}
+				}
+
+				Msg("Total ammo for type %d: %d\n", i, totalammo);
+
+				while (totalammo > 0)
+				{
+					if (totalammo > maxcap)
+					{
+						NewObject(FindFirstFreeObject(), i, maxcap, maxcap);
+						totalammo = totalammo - maxcap;
+					}
+					else if (totalammo < maxcap && totalammo > 0)
+					{
+						NewObject(FindFirstFreeObject(), i, totalammo, maxcap);
+						totalammo = 0;
+					}
+				}
+			}
+		}
+	}
+}
+
+void ConsolidateAmmoManually(const CCommand &args)
+{
+	CBasePlayer *pPlayer = UTIL_GetCommandClient();
+	if (pPlayer)
+	{
+		pPlayer->m_pInventory.ConsolidateAmmo();
+	}
+}
+ConCommand mergeammo("mergeammo", ConsolidateAmmoManually, "Consolidates ammunition.", 0);
 
 void UseItemFromInventory(const CCommand &args)
 {
