@@ -109,9 +109,9 @@ public:
 		Precache();
 		SetModel( "models/healthvial.mdl" );
 
-		BaseClass::Spawn();
-
 		m_iItemID = 10;
+
+		BaseClass::Spawn();
 	}
 
 	void Precache( void )
