@@ -267,7 +267,7 @@ void CHUDQuickInfo::Paint()
 		UpdateEventTime();
 		m_lastHealth = health;
 
-		if ( health <= HEALTH_WARNING_THRESHOLD )
+		if ( health <= player->GetMaxHealth() / 4 )
 		{
 			if ( m_warnHealth == false )
 			{
@@ -335,7 +335,7 @@ void CHUDQuickInfo::Paint()
 	}
 	else
 	{
-		float healthPerc = (float) health / 100.0f;
+		float healthPerc = (float) health / (float) player->GetMaxHealth();
 		healthPerc = clamp( healthPerc, 0.0f, 1.0f );
 
 		Color healthColor = m_warnHealth ? gHUD.m_clrCaution : gHUD.m_clrNormal;

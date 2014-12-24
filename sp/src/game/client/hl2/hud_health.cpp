@@ -128,7 +128,7 @@ void CHudHealth::OnThink()
 
 	m_iHealth = newHealth;
 
-	if ( m_iHealth >= 20 )
+	if ( m_iHealth >= local->GetMaxHealth() / 5 )
 	{
 		g_pClientMode->GetViewportAnimationController()->StartAnimationSequence("HealthIncreasedAbove20");
 	}
