@@ -457,9 +457,8 @@ bool CSingleplayRules::Damage_ShouldNotBleed( int iDmgType )
 	//=========================================================
 	float CSingleplayRules::FlHealthChargerRechargeTime( void )
 	{
-		return 0;// don't recharge
+		return 30.0f;
 	}
-
 	//=========================================================
 	//=========================================================
 	int CSingleplayRules::DeadPlayerWeapons( CBasePlayer *pPlayer )

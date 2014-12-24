@@ -273,11 +273,11 @@ void CRecharge::Use( CBaseEntity *pActivator, CBaseEntity *pCaller, USE_TYPE use
 	CBasePlayer *pl = (CBasePlayer *) m_hActivator.Get();
 
 	// charge the player
-	int nMaxArmor = 100;
+	int nMaxArmor = pl->MaxArmorValue();
 	int nIncrementArmor = 1;
 	if ( HasSpawnFlags(	SF_CITADEL_RECHARGER ) )
 	{
-		nMaxArmor = sk_suitcharger_citadel_maxarmor.GetInt();
+		nMaxArmor = pl->MaxArmorValue() * 2;
 		nIncrementArmor = 10;
 
 		// Also give health for the citadel version.
@@ -643,10 +643,10 @@ void CNewRecharge::Use( CBaseEntity *pActivator, CBaseEntity *pCaller, USE_TYPE 
 	}
 
 	// Get our maximum armor value
-	int nMaxArmor = 100;
+	int nMaxArmor = pPlayer->MaxArmorValue();
 	if ( HasSpawnFlags(	SF_CITADEL_RECHARGER ) )
 	{
-		nMaxArmor = sk_suitcharger_citadel_maxarmor.GetInt();
+		nMaxArmor = pPlayer->MaxArmorValue();
 	}
 	
 	int nIncrementArmor = 1;
