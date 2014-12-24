@@ -35,6 +35,8 @@ struct Ammo_t
 	const ConVar*		pPlrDmgCVar;	// CVar for player damage amount
 	const ConVar*		pNPCDmgCVar;	// CVar for NPC damage amount
 	const ConVar*		pMaxCarryCVar;	// CVar for maximum number can carry
+
+	int					itemid;			// Inventory system ID
 };
 
 // Used to tell AmmoDef to use the cvars, not the integers
@@ -81,10 +83,11 @@ public:
 	float				DamageForce(int nAmmoIndex);
 	int					MinSplashSize(int nAmmoIndex);
 	int					MaxSplashSize(int nAmmoIndex);
+	int					ItemID(int nAmmoIndex);
 	int					Flags(int nAmmoIndex);
 
-	void				AddAmmoType(char const* name, int damageType, int tracerType, int plr_dmg, int npc_dmg, int carry, float physicsForceImpulse, int nFlags, int minSplashSize = 4, int maxSplashSize = 8 );
-	void				AddAmmoType(char const* name, int damageType, int tracerType, char const* plr_cvar, char const* npc_var, char const* carry_cvar, float physicsForceImpulse, int nFlags, int minSplashSize = 4, int maxSplashSize = 8 );
+	void				AddAmmoType(char const* name, int damageType, int tracerType, int plr_dmg, int npc_dmg, int carry, float physicsForceImpulse, int nFlags, int itemid = 0, int minSplashSize = 4, int maxSplashSize = 8 );
+	void				AddAmmoType(char const* name, int damageType, int tracerType, char const* plr_cvar, char const* npc_var, char const* carry_cvar, float physicsForceImpulse, int nFlags, int itemid = 0, int minSplashSize = 4, int maxSplashSize = 8 );
 
 	CAmmoDef(void);
 	virtual ~CAmmoDef( void );

@@ -170,6 +170,14 @@ int	CAmmoDef::MaxSplashSize(int nAmmoIndex)
 	return m_AmmoType[nAmmoIndex].nMaxSplashSize;
 }
 
+int CAmmoDef::ItemID(int nAmmoIndex)
+{
+	if (nAmmoIndex < 1 || nAmmoIndex >= m_nAmmoIndex)
+		return 0;
+
+	return m_AmmoType[nAmmoIndex].itemid;
+}
+
 //-----------------------------------------------------------------------------
 // Purpose:
 // Input  :
@@ -218,7 +226,7 @@ bool CAmmoDef::AddAmmoType(char const* name, int damageType, int tracerType, int
 //-----------------------------------------------------------------------------
 void CAmmoDef::AddAmmoType(char const* name, int damageType, int tracerType, 
 	char const* plr_cvar, char const* npc_cvar, char const* carry_cvar, 
-	float physicsForceImpulse, int nFlags, int minSplashSize, int maxSplashSize)
+	float physicsForceImpulse, int nFlags, int itemid, int minSplashSize, int maxSplashSize)
 {
 	if ( AddAmmoType( name, damageType, tracerType, nFlags, minSplashSize, maxSplashSize ) == false )
 		return;
@@ -251,6 +259,7 @@ void CAmmoDef::AddAmmoType(char const* name, int damageType, int tracerType,
 		m_AmmoType[m_nAmmoIndex].pMaxCarry = USE_CVAR;
 	}
 	m_AmmoType[m_nAmmoIndex].physicsForceImpulse = physicsForceImpulse;
+	m_AmmoType[m_nAmmoIndex].itemid = itemid;
 	m_nAmmoIndex++;
 }
 
@@ -259,7 +268,7 @@ void CAmmoDef::AddAmmoType(char const* name, int damageType, int tracerType,
 //-----------------------------------------------------------------------------
 void CAmmoDef::AddAmmoType(char const* name, int damageType, int tracerType, 
 	int plr_dmg, int npc_dmg, int carry, float physicsForceImpulse, 
-	int nFlags, int minSplashSize, int maxSplashSize )
+	int nFlags, int itemid, int minSplashSize, int maxSplashSize )
 {
 	if ( AddAmmoType( name, damageType, tracerType, nFlags, minSplashSize, maxSplashSize ) == false )
 		return;
@@ -268,6 +277,7 @@ void CAmmoDef::AddAmmoType(char const* name, int damageType, int tracerType,
 	m_AmmoType[m_nAmmoIndex].pNPCDmg = npc_dmg;
 	m_AmmoType[m_nAmmoIndex].pMaxCarry = carry;
 	m_AmmoType[m_nAmmoIndex].physicsForceImpulse = physicsForceImpulse;
+	m_AmmoType[m_nAmmoIndex].itemid = itemid;
 
 	m_nAmmoIndex++;
 }
