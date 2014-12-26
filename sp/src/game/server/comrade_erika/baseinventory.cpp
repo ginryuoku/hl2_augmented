@@ -518,7 +518,7 @@ void CBaseInventory::ConsolidateAmmo(void)
 	for (int i = 180; i < 190; ++i)
 	{
 		int totalammo = 0;
-		if (FindFirstObject(i) > 0)
+		if (FindFirstObject(i) > -1)
 		{
 			int maxcap = GetItemMaxCapacity(FindFirstObject(i));
 			if (maxcap > 0)
