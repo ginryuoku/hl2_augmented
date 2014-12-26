@@ -340,6 +340,7 @@ public:
 	{ 
 		Precache( );
 		SetModel( "models/items/crossbowrounds.mdl");
+		m_iItemID = 189;
 		BaseClass::Spawn( );
 	}
 
