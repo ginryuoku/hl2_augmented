@@ -541,7 +541,7 @@ void CBaseInventory::ConsolidateAmmo(void)
 						NewObject(FindFirstFreeObject(), i, maxcap, maxcap);
 						totalammo = totalammo - maxcap;
 					}
-					else if (totalammo < maxcap && totalammo > 0)
+					else if (totalammo <= maxcap && totalammo > 0)
 					{
 						NewObject(FindFirstFreeObject(), i, totalammo, maxcap);
 						totalammo = 0;
