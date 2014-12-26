@@ -65,6 +65,7 @@ public:
 	void PrimaryAttack( void );
 	void SecondaryAttack( void );
 	void WeaponIdle( void );
+	bool Deploy(void);
 };
 
 IMPLEMENT_SERVERCLASS_ST(CWeaponM4A1, DT_WeaponM4A1)
@@ -474,3 +475,19 @@ const WeaponProficiencyInfo_t *CWeaponM4A1::GetProficiencyValues()
 
 	return proficiencyTable;
 }
+
+bool CWeaponM4A1::Deploy(void)
+{
+	if (m_bIsSuppressed)
+	{
+		DefaultDeploy((char*)GetViewModel(), (char*)GetWorldModel(), ACT_VM_IDLE_SILENCED, (char*)GetAnimPrefix());
+	} 
+	else
+	{
+		DefaultDeploy((char*)GetViewModel(), (char*)GetWorldModel(), ACT_VM_IDLE, (char*)GetAnimPrefix());
+	}
+
+	return BaseClass::Deploy();
+}
+
+
