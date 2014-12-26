@@ -457,24 +457,60 @@ void CBaseInventory::SwapItems(int itemindex1, int itemindex2)
 	int newcap1 = GetItemCapacity(itemindex2);
 	int newmaxcap1 = GetItemMaxCapacity(itemindex2);
 	int newcontains1 = GetItemContains(itemindex2);
+	int newtype1 = GetItemType(itemindex2);
 
 	int newid2 = GetItemID(itemindex1);
 	int newcap2 = GetItemCapacity(itemindex1);
 	int newmaxcap2 = GetItemMaxCapacity(itemindex1);
 	int newcontains2 = GetItemContains(itemindex1);
+	int newtype2 = GetItemType(itemindex1);
 
 	ItemID[itemindex1] = newid1;
 	ItemCap[itemindex1] = newcap1;
 	ItemMaxCap[itemindex1] = newmaxcap1;
 	ItemContains[itemindex1] = newcontains1;
+	ItemType[itemindex1] = newtype1;
 	
 	ItemID[itemindex2] = newid2;
 	ItemCap[itemindex2] = newcap2;
 	ItemMaxCap[itemindex2] = newmaxcap2;
 	ItemContains[itemindex2] = newcontains2;
+	ItemType[itemindex2] = newtype2;
 
 	ItemDirty[itemindex1] = true;
 	ItemDirty[itemindex2] = true;
+}
+
+int CBaseInventory::QSPartition(int p, int r)
+{
+	int x = GetItemID(p);
+	int i = p - 1;
+	int j = r;
+
+	while (1)
+	{
+		do --j; while (GetItemID(j) > x);
+		do ++i; while (GetItemID(i) < x);
+
+		if (i < j)
+			SwapItems(i, j);
+		else
+			return j + 1;
+	}
+}
+
+void CBaseInventory::QuickSort(int indexleft, int indexright)
+{
+	int q;
+
+	// Hoare partitioning breaks on cases of 0/1 separation
+	if (indexright - indexleft < 2)
+		return;
+	
+	q = QSPartition(indexleft, indexright);
+
+	QuickSort(indexleft, q);
+	QuickSort(q, indexright);
 }
 
 void CBaseInventory::ConsolidateAmmo(void)
@@ -522,6 +558,8 @@ void ConsolidateAmmoManually(const CCommand &args)
 	if (pPlayer)
 	{
 		pPlayer->m_pInventory.ConsolidateAmmo();
+		// Until we figure out why my QS seems to be eating data (if it indeed *is*), I'm disabling it.
+		//pPlayer->m_pInventory.QuickSort(0, MAX_INVENTORY);
 	}
 }
 ConCommand mergeammo("mergeammo", ConsolidateAmmoManually, "Consolidates ammunition.", 0);

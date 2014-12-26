@@ -73,6 +73,9 @@ public:
 	void CombineItems(int itemindex1, int itemindex2);
 	void SwapItems(int itemindex1, int itemindex2);
 	void ConsolidateAmmo(void);
+	int QSPartition(int p, int r);
+	void QuickSort(int indexleft, int indexright);
+
 private:
 	int  ItemID     [MAX_INVENTORY];
 	int  ItemCap    [MAX_INVENTORY];
