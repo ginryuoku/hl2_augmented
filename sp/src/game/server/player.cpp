@@ -9549,6 +9549,77 @@ void CBasePlayer::AdjustDrownDmg( int nAmount )
 	}
 }
 
+int CBasePlayer::GiveAmmo(int iCount, int iAmmoIndex, bool bSuppressSound)
+{
+	if (iCount <= 0)
+		return 0;
+
+	if (!g_pGameRules->CanHaveAmmo(this, iAmmoIndex))
+	{
+		// game rules say I can't have any more of this ammo type.
+		return 0;
+	}
+
+	if (iAmmoIndex < 0 || iAmmoIndex >= MAX_AMMO_SLOTS)
+		return 0;
+
+	int iAdd = 0;
+	if (GetAmmoDef()->ItemID(iAmmoIndex) > 0) 
+	{
+		iAdd = iCount;
+
+		// Ammo pickup sound
+		if (!bSuppressSound)
+		{
+			EmitSound("BaseCombatCharacter.AmmoPickup");
+		}
+		int iAddTemp = iAdd;
+		int maxcap = m_pInventory.GetItemInfo().item_maxcapacity;
+		while (iAddTemp > 0)
+		{
+			if (iAddTemp > maxcap)
+			{
+				m_pInventory.NewObject(m_pInventory.FindFirstFreeObject(), GetAmmoDef()->ItemID(iAmmoIndex), maxcap, maxcap);
+				iAddTemp -= maxcap;
+			}
+			else if (iAddTemp <= maxcap && iAddTemp > 0)
+			{
+				m_pInventory.NewObject(m_pInventory.FindFirstFreeObject(), GetAmmoDef()->ItemID(iAmmoIndex), iAddTemp, maxcap);
+			}
+		}
+
+	}
+	else
+	{
+		int iMax = GetAmmoDef()->MaxCarry(iAmmoIndex);
+		iAdd = MIN(iCount, iMax - m_iAmmo[iAmmoIndex]);
+		if (iAdd < 1)
+			return 0;
+
+		// Ammo pickup sound
+		if (!bSuppressSound)
+		{
+			EmitSound("BaseCombatCharacter.AmmoPickup");
+		}
+
+		m_iAmmo.Set(iAmmoIndex, m_iAmmo[iAmmoIndex] + iAdd);
+	}
+
+	return iAdd;
+}
+
+int CBasePlayer::GiveAmmo(int iCount, const char *szName, bool bSuppressSound /*= false*/)
+{
+	int iAmmoType = GetAmmoDef()->Index(szName);
+	if (iAmmoType == -1)
+	{
+		Msg("ERROR: Attempting to give unknown ammo type (%s)\n", szName);
+		return 0;
+	}
+	return GiveAmmo(iCount, iAmmoType, bSuppressSound);
+}
+
+
 
 
 #if !defined(NO_STEAM)
