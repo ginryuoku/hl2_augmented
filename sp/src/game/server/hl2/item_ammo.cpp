@@ -652,10 +652,12 @@ protected:
 
 	int		m_nAmmoType;
 	int		m_nAmmoIndex;
+	int		m_nAmmoLeft;
 
 	static const char *m_lpzModelNames[NUM_AMMO_CRATE_TYPES];
 	static const char *m_lpzAmmoNames[NUM_AMMO_CRATE_TYPES];
 	static int m_nAmmoAmounts[NUM_AMMO_CRATE_TYPES];
+	static int m_nMaxCrateHold[NUM_AMMO_CRATE_TYPES];
 	static const char *m_pGiveWeapon[NUM_AMMO_CRATE_TYPES];
 
 	float	m_flCloseTime;
@@ -673,6 +675,7 @@ BEGIN_DATADESC( CItem_AmmoCrate )
 
 	DEFINE_FIELD( m_flCloseTime, FIELD_FLOAT ),
 	DEFINE_FIELD( m_hActivator, FIELD_EHANDLE ),
+	DEFINE_FIELD( m_nAmmoLeft, FIELD_INTEGER),
 
 	// These can be recreated
 	//DEFINE_FIELD( m_nAmmoIndex,		FIELD_INTEGER ),
@@ -727,16 +730,30 @@ const char *CItem_AmmoCrate::m_lpzAmmoNames[NUM_AMMO_CRATE_TYPES] =
 // Ammo amount given per +use
 int CItem_AmmoCrate::m_nAmmoAmounts[NUM_AMMO_CRATE_TYPES] =
 {
-	300,	// Pistol
-	300,	// SMG1
-	300,	// AR2
-	3,		// RPG rounds
-	120,	// Buckshot
-	5,		// Grenades
-	50,		// 357
-	50,		// Crossbow
-	3,		// AR2 alt-fire
-	5,
+	200,	// Pistol
+	200,	// SMG1
+	200,	// AR2
+	2,		// RPG rounds
+	20,	// Buckshot
+	4,		// Grenades
+	20,		// 357
+	7,		// Crossbow
+	2,		// AR2 alt-fire
+	2,
+};
+
+int CItem_AmmoCrate::m_nMaxCrateHold[NUM_AMMO_CRATE_TYPES] =
+{
+	800,	// Pistol
+	800,	// SMG1
+	800,	// AR2
+	20,		// RPG rounds
+	200,		// Buckshot
+	20,		// Grenades
+	200,		// 357
+	70,		// Crossbow
+	20,		// AR2 alt-fire
+	20,
 };
 
 const char *CItem_AmmoCrate::m_pGiveWeapon[NUM_AMMO_CRATE_TYPES] =
@@ -776,7 +793,7 @@ void CItem_AmmoCrate::Spawn( void )
 	m_flAnimTime = gpGlobals->curtime;
 	m_flPlaybackRate = 0.0;
 	SetCycle( 0 );
-
+	m_nAmmoLeft = m_nMaxCrateHold[m_nAmmoType];
 	m_takedamage = DAMAGE_EVENTS_ONLY;
 
 }
@@ -911,8 +928,13 @@ void CItem_AmmoCrate::HandleAnimEvent( animevent_t *pEvent )
 {
 	if ( pEvent->event == AE_AMMOCRATE_PICKUP_AMMO )
 	{
+		if (m_nAmmoLeft < 0)
+		{
+			return;
+		}
 		if ( m_hActivator )
 		{
+
 			if ( m_pGiveWeapon[m_nAmmoType] && !m_hActivator->Weapon_OwnsThisType( m_pGiveWeapon[m_nAmmoType] ) )
 			{
 				CBaseEntity *pEntity = CreateEntityByName( m_pGiveWeapon[m_nAmmoType] );
@@ -933,10 +955,11 @@ void CItem_AmmoCrate::HandleAnimEvent( animevent_t *pEvent )
 					}
 				}
 			}
-
-			if ( m_hActivator->GiveAmmo( m_nAmmoAmounts[m_nAmmoType], m_nAmmoIndex ) != 0 )
+			int ammogiven = m_hActivator->GiveAmmo(m_nAmmoAmounts[m_nAmmoType], m_nAmmoIndex);
+			if ( ammogiven != 0 )
 			{
 				SetBodygroup( 1, false );
+				m_nAmmoLeft -= ammogiven;
 			}
 			m_hActivator = NULL;
 		}
