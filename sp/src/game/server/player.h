@@ -850,6 +850,8 @@ public:
 	CBaseInventory		m_pInventory;
 
 	bool ImportEntityIntoInventory( CBaseEntity *pEntity );
+	int GiveAmmo(int iCount, int iAmmoIndex, bool bSuppressSound = false);
+	int GiveAmmo(int iCount, const char *szName, bool bSuppressSound = false);
 
 #if defined USES_ECON_ITEMS
 	CNetworkVarEmbedded( CAttributeList,	m_AttributeList );
