@@ -10,7 +10,7 @@ ItemData
     "item_contains"             "189"   // Usually for magazines; refers to what the item contains.
 
 	"item_baseprice"			"0"	// Price for the item, empty.
-	"item_unitprice"			"10"		// Price for each element contained within the item.
+	"item_unitprice"			"3"		// Price for each element contained within the item.
 
     // No base weight.
     // Rod size appears to be 4, which weighs 0.67lb per linear foot, or 302 grams.
