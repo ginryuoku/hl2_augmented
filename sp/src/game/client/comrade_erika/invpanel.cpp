@@ -66,9 +66,7 @@ CInvPanel::CInvPanel(IViewPort *pViewPort) : BaseClass(NULL, PANEL_INVENTORY)
 void CInvPanel::ShowPanel(bool bShow)
 {
 	if ( BaseClass::IsVisible() == bShow)
-	{
 		return;
-	}
 	
 	if (bShow)
 	{
@@ -80,11 +78,13 @@ void CInvPanel::ShowPanel(bool bShow)
 		{
 			m_iInvKey = gameuifuncs->GetButtonCodeForBind( "inventory" );
 		}
+		engine->ClientCmd_Unrestricted("gameui_preventescapetoshow\n");
 	}
 	else
 	{
 		SetVisible(false);
 		SetMouseInputEnabled(false);
+		engine->ClientCmd_Unrestricted("gameui_allowescapetoshow\n");
 	}
 
 }
@@ -150,4 +150,23 @@ void CInvPanel::OnCommand(const char *command)
 	Close();
 	gViewPortInterface->ShowBackGround( false );
 	BaseClass::OnCommand(command);
+}
+
+void CInvPanel::OnClose()
+{
+	engine->ClientCmd_Unrestricted("gameui_allowescapetoshow\n");
+	BaseClass::OnClose();
+}
+
+void CInvPanel::OnKeyCodeTyped(KeyCode code)
+{
+	if (code == KEY_ESCAPE ||
+		code == m_iInvKey) 
+	{
+		OnClose();
+	}
+	else
+	{
+		BaseClass::OnKeyCodeTyped(code);
+	}
 }

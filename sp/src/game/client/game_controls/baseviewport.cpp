@@ -42,6 +42,8 @@
 #include "NavProgress.h"
 #include "commentary_modelviewer.h"
 #include "comrade_erika/invpanel.h"
+#include "buymenu.h"
+#include "buysubmenu.h"
 
 // our definition
 #include "baseviewport.h"
@@ -102,6 +104,17 @@ CON_COMMAND( inventory, "Shows or hides the inventory" )
 	bool bState = m_pInventoryPanel->IsVisible();
 
 	gViewPortInterface->ShowPanel(PANEL_INVENTORY, !bState);
+}
+
+CON_COMMAND(buymenu, "Shows or hides the buy menu")
+{
+	if (!gViewPortInterface)
+		return;
+	IViewPortPanel *m_pBuyMenuPanel = gViewPortInterface->FindPanelByName(PANEL_BUY);
+
+	bool bState = m_pBuyMenuPanel->IsVisible();
+
+	gViewPortInterface->ShowPanel(PANEL_BUY, !bState);
 }
 
 /* global helper functions
@@ -239,14 +252,14 @@ void CBaseViewport::OnScreenSizeChanged(int iOldWide, int iOldTall)
 void CBaseViewport::CreateDefaultPanels( void )
 {
 #ifndef _XBOX
-	AddNewPanel( CreatePanelByName( PANEL_SCOREBOARD ), "PANEL_SCOREBOARD" );
-	AddNewPanel( CreatePanelByName( PANEL_INFO ), "PANEL_INFO" );
-	AddNewPanel( CreatePanelByName( PANEL_SPECGUI ), "PANEL_SPECGUI" );
-	AddNewPanel( CreatePanelByName( PANEL_SPECMENU ), "PANEL_SPECMENU" );
-	AddNewPanel( CreatePanelByName( PANEL_NAV_PROGRESS ), "PANEL_NAV_PROGRESS" );
+	//AddNewPanel( CreatePanelByName( PANEL_SCOREBOARD ), "PANEL_SCOREBOARD" );
+	//AddNewPanel( CreatePanelByName( PANEL_INFO ), "PANEL_INFO" );
+	//AddNewPanel( CreatePanelByName( PANEL_SPECGUI ), "PANEL_SPECGUI" );
+	//AddNewPanel( CreatePanelByName( PANEL_SPECMENU ), "PANEL_SPECMENU" );
+	//AddNewPanel( CreatePanelByName( PANEL_NAV_PROGRESS ), "PANEL_NAV_PROGRESS" );
 	// AddNewPanel( CreatePanelByName( PANEL_TEAM ), "PANEL_TEAM" );
 	// AddNewPanel( CreatePanelByName( PANEL_CLASS ), "PANEL_CLASS" );
-	// AddNewPanel( CreatePanelByName( PANEL_BUY ), "PANEL_BUY" );
+	AddNewPanel( CreatePanelByName( PANEL_BUY ), "PANEL_BUY" );
 	AddNewPanel( CreatePanelByName( PANEL_INVENTORY ), "PANEL_INVENTORY");
 #endif
 }
@@ -270,6 +283,7 @@ IViewPortPanel* CBaseViewport::CreatePanelByName(const char *szPanelName)
 {
 	IViewPortPanel* newpanel = NULL;
 
+#if 0
 #ifndef _XBOX
 	if ( Q_strcmp(PANEL_SCOREBOARD, szPanelName) == 0 )
 	{
@@ -308,13 +322,17 @@ IViewPortPanel* CBaseViewport::CreatePanelByName(const char *szPanelName)
 	{
 		newpanel = new CCommentaryModelViewer( this );
 	}
+#endif
+	if ( Q_strcmp(PANEL_BUY, szPanelName) == 0)
+	{
+		newpanel = new CBuyMenu(this);
+	}
 
 	if ( Q_strcmp(PANEL_INVENTORY, szPanelName) == 0)
 	{
 		newpanel = new CInvPanel( this );
 	}
 
-	
 	return newpanel; 
 }
 

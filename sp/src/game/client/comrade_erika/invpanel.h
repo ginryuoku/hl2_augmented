@@ -31,7 +31,8 @@ public:
 	virtual void SetParent( vgui::VPANEL parent ) { BaseClass::SetParent( parent ); }
 	virtual void OnThink();
 	virtual void OnCommand(const char *command);
-
+	void OnClose();
+	void OnKeyCodeTyped(KeyCode code);
 protected:
 	//VGUI overrides:
 	IViewPort *m_pViewPort;

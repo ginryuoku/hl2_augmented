@@ -569,9 +569,11 @@ void EditablePanel::LoadControlSettings(const char *resourceName, const char *pa
 	// Since nobody wants to fix this assert, I'm making it a Msg instead:
 	//     editablepanel.cpp (535) : Resource file "resource\DebugOptionsPanel.res" not found on disk!
 	// AssertMsg( g_pFullFileSystem->FileExists( resourceName ), CFmtStr( "Resource file \"%s\" not found on disk!", resourceName ).Access() );
+	Msg("Trying to load resource file \"%s\"\n", resourceName);
+
 	if ( !g_pFullFileSystem->FileExists( resourceName ) )
 	{
-		Msg( "Resource file \"%s\" not found on disk!", resourceName );
+		Msg( "Resource file \"%s\" not found on disk!\n", resourceName );
 	}
 #endif
 	_buildGroup->LoadControlSettings(resourceName, pathID, pKeyValues, pConditions);

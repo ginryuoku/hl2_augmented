@@ -21,7 +21,7 @@ using namespace vgui;
 //-----------------------------------------------------------------------------
 CBuyMenu::CBuyMenu(IViewPort *pViewPort) : WizardPanel( NULL, PANEL_BUY )
 {
-	SetScheme("ClientScheme");
+	SetScheme(vgui::scheme()->LoadSchemeFromFile("resource/SourceScheme.res", "SourceScheme"));
 	SetTitle( "#Cstrike_Buy_Menu", true);
 
 	SetMoveable(false);
@@ -32,15 +32,16 @@ CBuyMenu::CBuyMenu(IViewPort *pViewPort) : WizardPanel( NULL, PANEL_BUY )
 	SetTitleBarVisible( false );
 
 	SetAutoDelete( false ); // we reuse this panel, don't let WizardPanel delete us
-	
+
+	m_pMainMenu = new CBuySubMenu( this, "mainmenu" );
+	m_pMainMenu->LoadControlSettings( "resource/ui/mainbuymenu.res" );
+	m_pMainMenu->SetVisible( false );
+
 	LoadControlSettings( "Resource/UI/BuyMenu.res" );
+	
 	ShowButtons( false );
 
 	m_pViewPort = pViewPort;
-
-	m_pMainMenu = new CBuySubMenu( this, "mainmenu" );
-	m_pMainMenu->LoadControlSettings( "Resource/UI/MainBuyMenu.res" );
-	m_pMainMenu->SetVisible( false );
 }
 
 
