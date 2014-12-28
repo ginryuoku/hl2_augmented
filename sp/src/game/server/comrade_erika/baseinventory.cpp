@@ -149,6 +149,11 @@ void CBaseInventory::ConvertEntityToObject( CBaseEntity *pEntity )
 	return;
 }
 
+bool CBaseInventory::LoadInfo(int itemid)
+{
+	return ReadItemDataFromFileInSlot(filesystem, itemid, &m_hInventoryFileInfo);
+}
+// ALL CALLS MUST BE PRECEDED BY LOADINFO!
 const FileInventoryInfo_t &CBaseInventory::GetItemInfo(void) const
 {
 	return *GetFileItemInfoFromHandle(m_hInventoryFileInfo);
@@ -156,7 +161,7 @@ const FileInventoryInfo_t &CBaseInventory::GetItemInfo(void) const
 
 void CBaseInventory::NewObject( int ObjectIndex, int NewItemID, int NewItemCap, int NewItemMaxCap )
 {
-	if (ReadItemDataFromFileInSlot(filesystem, NewItemID, &m_hInventoryFileInfo))
+	if (LoadInfo(NewItemID))
 	{
 		ItemID[ObjectIndex] = NewItemID;
 		ItemCap[ObjectIndex] = NewItemCap;
