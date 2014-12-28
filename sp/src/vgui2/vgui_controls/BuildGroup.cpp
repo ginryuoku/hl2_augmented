@@ -869,6 +869,10 @@ void BuildGroup::PanelAdded(Panel *panel)
 //-----------------------------------------------------------------------------
 void BuildGroup::LoadControlSettings(const char *controlResourceName, const char *pathID, KeyValues *pPreloadedKeyValues, KeyValues *pConditions)
 {
+	if (controlResourceName == NULL)
+	{
+		return; // bail out!
+	}
 	// make sure the file is registered
 	RegisterControlSettingsFile(controlResourceName, pathID);
 
