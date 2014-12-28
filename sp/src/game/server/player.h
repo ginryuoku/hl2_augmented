@@ -683,11 +683,14 @@ public:
 	}
 	void	AddPlayerCash(int cash)	
 	{ 
-		Msg("Received %d credits\n",cash);
+		if (cash != 0)
+			Msg("Received %d credits\n",cash);
 		m_Local.m_iPlayerCash = m_Local.m_iPlayerCash + cash;
 		return; 
 	}
 
+	void UpgradeHealth(void);
+	void UpgradeArmor(void);
 
 	int		GetObserverMode() const	{ return m_iObserverMode; }
 	CBaseEntity *GetObserverTarget() const	{ return m_hObserverTarget; }
