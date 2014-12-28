@@ -26,11 +26,7 @@ void UpgradeHealth(const CCommand &args)
 	CBasePlayer *pPlayer = UTIL_GetCommandClient();
 	if (pPlayer)
 	{
-		if (pPlayer->m_iCash < 1000)
-			return;
-		++pPlayer->m_Local.m_iHealthUpgrades;
-		pPlayer->ResetMaxHealth();
-		Msg("Health upgrades now: %d\n", pPlayer->m_Local.m_iHealthUpgrades);
+		pPlayer->UpgradeHealth();
 	}
 }
 
@@ -42,11 +38,7 @@ void UpgradeArmor(const CCommand &args)
 	CBasePlayer *pPlayer = UTIL_GetCommandClient();
 	if (pPlayer)
 	{
-		if (pPlayer->m_iCash < 1000)
-			return;
-
-		++pPlayer->m_Local.m_iArmorUpgrades;
-		Msg("Armor upgrades now: %d\n", pPlayer->m_Local.m_iArmorUpgrades);
+		pPlayer->UpgradeArmor();
 	}
 }
 ConCommand upgrade_armor("upgrade_armor", UpgradeArmor, "Upgrades armor");

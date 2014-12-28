@@ -9622,7 +9622,24 @@ int CBasePlayer::GiveAmmo(int iCount, const char *szName, bool bSuppressSound /*
 	return GiveAmmo(iCount, iAmmoType, bSuppressSound);
 }
 
+void CBasePlayer::UpgradeHealth(void)
+{
+	if (GetPlayerCash() < 1000)
+		return;
+	AddPlayerCash(-1000);
+	m_Local.m_iHealthUpgrades = m_Local.m_iHealthUpgrades + 1;
+	ResetMaxHealth();
+	Msg("Health upgrades now: %d\n", m_Local.m_iHealthUpgrades);
+}
 
+void CBasePlayer::UpgradeArmor(void)
+{
+	if (GetPlayerCash() < 1000)
+		return;
+	AddPlayerCash(-1000);
+	m_Local.m_iArmorUpgrades = m_Local.m_iArmorUpgrades + 1;
+	Msg("Armor upgrades now: %d\n", m_Local.m_iArmorUpgrades);
+}
 
 
 #if !defined(NO_STEAM)
@@ -9651,4 +9668,7 @@ uint64 CBasePlayer::GetSteamIDAsUInt64( void )
 		return steamIDForPlayer.ConvertToUint64();
 	return 0;
 }
+
+
+
 #endif // NO_STEAM
