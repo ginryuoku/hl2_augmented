@@ -16,84 +16,57 @@
 #include "tier0/memdbgon.h"
 
 //-----------------------------------------------------------------------------
-// Small health kit. Heals the player when picked up.
-//-----------------------------------------------------------------------------
-class CHealthUpgrade : public CItem
-{
-public:
-	DECLARE_CLASS( CHealthUpgrade, CItem );
-
-	void Spawn( void );
-	void Precache( void );
-	bool MyTouch( CBasePlayer *pPlayer );
-};
-
-LINK_ENTITY_TO_CLASS( upgrade_health, CHealthUpgrade );
-PRECACHE_REGISTER( upgrade_health );
-
-
-//-----------------------------------------------------------------------------
-// Purpose: 
-//-----------------------------------------------------------------------------
-void CHealthUpgrade::Spawn( void )
-{
-	Precache();
-	SetModel( "models/items/healthkit.mdl" );
-
-	BaseClass::Spawn();
-}
-
-
-//-----------------------------------------------------------------------------
-// Purpose: 
-//-----------------------------------------------------------------------------
-void CHealthUpgrade::Precache( void )
-{
-	PrecacheModel("models/items/healthkit.mdl");
-
-	PrecacheScriptSound( "HealthKit.Touch" );
-}
-
-
-//-----------------------------------------------------------------------------
 // Purpose: 
 // Input  : *pPlayer - 
 // Output : 
 //-----------------------------------------------------------------------------
-bool CHealthUpgrade::MyTouch( CBasePlayer *pPlayer )
+
+void UpgradeHealth(const CCommand &args)
 {
-	++pPlayer->m_Local.m_iHealthUpgrades;
-	pPlayer->ResetMaxHealth();
-	Msg("Health upgrades now: %d\n", pPlayer->m_Local.m_iHealthUpgrades);
-	return true;
+	CBasePlayer *pPlayer = UTIL_GetCommandClient();
+	if (pPlayer)
+	{
+		if (pPlayer->m_iCash < 1000)
+			return;
+		++pPlayer->m_Local.m_iHealthUpgrades;
+		pPlayer->ResetMaxHealth();
+		Msg("Health upgrades now: %d\n", pPlayer->m_Local.m_iHealthUpgrades);
+	}
 }
 
-class CArmorUpgrade : public CItem
+ConCommand upgrade_health("upgrade_health", UpgradeHealth, "Upgrades health");
+
+
+void UpgradeArmor(const CCommand &args)
 {
-public:
-	DECLARE_CLASS( CArmorUpgrade, CItem );
-
-	void Spawn( void )
-	{ 
-		Precache( );
-		SetModel( "models/items/battery.mdl" );
-		BaseClass::Spawn( );
-	}
-	void Precache( void )
+	CBasePlayer *pPlayer = UTIL_GetCommandClient();
+	if (pPlayer)
 	{
-		PrecacheModel ("models/items/battery.mdl");
+		if (pPlayer->m_iCash < 1000)
+			return;
 
-		PrecacheScriptSound( "ItemBattery.Touch" );
-
-	}
-	bool MyTouch( CBasePlayer *pPlayer )
-	{
 		++pPlayer->m_Local.m_iArmorUpgrades;
 		Msg("Armor upgrades now: %d\n", pPlayer->m_Local.m_iArmorUpgrades);
-		return true;
 	}
-};
+}
+ConCommand upgrade_armor("upgrade_armor", UpgradeArmor, "Upgrades armor");
 
-LINK_ENTITY_TO_CLASS(upgrade_armor, CArmorUpgrade);
-PRECACHE_REGISTER(upgrade_armor);
-
+void HL2ArmorCapacity(const CCommand &args)
+{
+	CBasePlayer *pPlayer = UTIL_GetCommandClient();
+	if (pPlayer)
+	{
+		if (pPlayer->m_Local.m_iHealthUpgrades < 3)
+		{
+			pPlayer->m_Local.m_iHealthUpgrades = 3;
+			pPlayer->ResetMaxHealth();
+		}
+		if (pPlayer->m_Local.m_iArmorUpgrades < 4 )
+		{
+			pPlayer->m_Local.m_iArmorUpgrades = 4;
+		}
+		Msg("Armor upgrades now: %d\n", pPlayer->m_Local.m_iArmorUpgrades);
+		Msg("Health upgrades now: %d\n", pPlayer->m_Local.m_iHealthUpgrades);
+	}
+}
+ConCommand hl2_hev("hl2_hev", HL2ArmorCapacity, "Sets armor/health upgrades to HL2 default");
