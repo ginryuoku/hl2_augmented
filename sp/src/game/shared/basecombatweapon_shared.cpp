@@ -2218,7 +2218,7 @@ void CBaseCombatWeapon::CheckReload( void )
 			}
 
 			// If out of ammo end reload
-			if (pOwner->GetAmmoCount(m_iPrimaryAmmoType) <=0)
+			if (pOwner->GetAmmoCount(m_iPrimaryAmmoType) <=0 || pOwner->m_pInventory.CountAllObjectContentsOfID(GetPrimaryAmmoID()))
 			{
 				FinishReload();
 				return;
@@ -2227,8 +2227,16 @@ void CBaseCombatWeapon::CheckReload( void )
 			else if (m_iClip1 < GetMaxClip1())
 			{
 				// Add them to the clip
-				m_iClip1 += 1;
-				pOwner->RemoveAmmo( 1, m_iPrimaryAmmoType );
+
+				if (GetPrimaryAmmoID() > 0)
+				{
+					m_iClip1 += pOwner->m_pInventory.UseItem(1, GetPrimaryAmmoID());
+				}
+				else
+				{
+					m_iClip1 += 1;
+					pOwner->RemoveAmmo(1, m_iPrimaryAmmoType);
+				}
 
 				Reload();
 				return;
@@ -2294,7 +2302,7 @@ void CBaseCombatWeapon::FinishReload( void )
 			m_iClip1 += primary;
 			pOwner->RemoveAmmo(primary, m_iPrimaryAmmoType);
 		}
-		else if (UsesMagazines())
+		else if (UsesClipsForAmmo1() && UsesMagazines())
 		{
 			int remaining = m_iClip1;
 			int swapped = pPlayer->m_pInventory.SwapMagazines(GetPrimaryMagazineID(), remaining);
@@ -2302,7 +2310,7 @@ void CBaseCombatWeapon::FinishReload( void )
 				return;
 			m_iClip1 = swapped;
 		} 
-		else if (!UsesMagazines() && GetPrimaryAmmoID() > 0)
+		else if (UsesClipsForAmmo1() && !UsesMagazines() && GetPrimaryAmmoID() > 0)
 		{
 			int primary = MIN(GetMaxClip1() - m_iClip1, pPlayer->m_pInventory.CountAllObjectContentsOfID(GetPrimaryAmmoID()));
 			m_iClip1 += primary;

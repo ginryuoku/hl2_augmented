@@ -135,6 +135,7 @@ CWeaponLauncher40mm::CWeaponLauncher40mm( )
 	m_fMaxRange1		= 1400;
 
 	m_bAltFiresUnderwater = false;
+	m_bReloadsSingly = true;
 }
 
 //-----------------------------------------------------------------------------
@@ -211,11 +212,13 @@ void CWeaponLauncher40mm::PrimaryAttack( void )
 		return;
 
 	//Must have ammo
-	if ( ( pPlayer->GetAmmoCount( m_iPrimaryAmmoType ) <= 0 ) || ( pPlayer->GetWaterLevel() == 3 ) )
+	if ( ( m_iClip1 < 1) || 
+		( pPlayer->GetWaterLevel() == 3 ) )
 	{
 		SendWeaponAnim( ACT_VM_DRYFIRE );
 		BaseClass::WeaponSound( EMPTY );
-		m_flNextSecondaryAttack = gpGlobals->curtime + 0.5f;
+		m_flNextPrimaryAttack = gpGlobals->curtime + 0.5f;
+		Reload();
 		return;
 	}
 
@@ -252,7 +255,7 @@ void CWeaponLauncher40mm::PrimaryAttack( void )
 	pPlayer->SetAnimation( PLAYER_ATTACK1 );
 
 	// Decrease ammo
-	pPlayer->RemoveAmmo( 1, m_iPrimaryAmmoType );
+	m_iClip1 -= 1;
 
 	// Can blow up after a short delay (so have time to release mouse button)
 	m_flNextPrimaryAttack = gpGlobals->curtime + 1.0f;
