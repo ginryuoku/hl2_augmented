@@ -15,8 +15,9 @@
     "weapon_launcher_40mm"	    "8000"
     "weapon_crossbow"		    "4000"
     "weapon_rpg"			    "6500"
+    "weapon_frag"               "200"
 
-    "item_ammo_357_large"		"10"
+    "item_ammo_357_large"		"40"
     "item_ammo_pistol_large"	"220"
     "item_ammo_smg1_large"		"450"
 

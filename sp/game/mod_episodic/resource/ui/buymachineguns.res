@@ -64,13 +64,12 @@
 		"visible"		"1"
 		"enabled"		"1"
 		"tabPosition"		"0"
-		"labelText"		"#Cstrike_M249"
+		"labelText"		"#CE_M249"
 		"textAlignment"		"west"
 		"dulltext"		"0"
 		"brighttext"		"0"
-		"command"		"buy m249"
+		"command"		"buy weapon_mg_m249"
 		"cost"			"5750"
-		"as_restrict"		"1"
 	}
 
 	"CancelButton"

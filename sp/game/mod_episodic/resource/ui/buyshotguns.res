@@ -51,10 +51,10 @@
 		"tabPosition"		"0"
 	}
 
-	"m3"
+	"870ae"
 	{
 		"ControlName"		"MouseOverPanelButton"
-		"fieldName"		"m3"
+		"fieldName"		"870ae"
 				"xpos"		"52"
 		"ypos"		"116"
 		"wide"		"170"
@@ -64,19 +64,19 @@
 		"visible"		"1"
 		"enabled"		"1"
 		"tabPosition"		"0"
-		"labelText"		"#Cstrike_M3"
+		"labelText"		"#Cstrike_870AE"
 		"textAlignment"		"west"
 		"dulltext"		"0"
 		"brighttext"		"0"
-		"command"		"buy m3"
-		"cost"			"1700"
+		"command"		"buy weapon_shot_870ae"
+		"cost"			"1200"
 		"as_restrict"		"1"
 	}
 
-	"xm1014"
+	"spas12"
 	{
 		"ControlName"		"MouseOverPanelButton"
-		"fieldName"		"xm1014"
+		"fieldName"		"spas12"
 				"xpos"		"52"
 		"xpos"		"0"
 		"ypos"		"148"
@@ -86,11 +86,11 @@
 		"visible"		"1"
 		"enabled"		"1"
 		"tabPosition"		"0"
-		"labelText"		"#Cstrike_XM1014"
+		"labelText"		"#weapon_shot_spas12"
 		"textAlignment"		"west"
 		"dulltext"		"0"
 		"brighttext"		"0"
-		"command"		"buy xm1014"
+		"command"		"buy weapon_shot_spas12"
 		"cost"			"3000"
 		"as_restrict"		"1"
 	}

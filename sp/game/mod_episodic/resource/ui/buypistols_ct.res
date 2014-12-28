@@ -51,10 +51,10 @@
 		"tabPosition"		"0"
 	}
 
-	"Glock18"
+	"M9"
 	{
 		"ControlName"		"MouseOverPanelButton"
-		"fieldName"		"Glock18"
+		"fieldName"		"M9"
 			"xpos"			"52"
 		"ypos"			"116"
 		"wide"			"170"
@@ -64,12 +64,12 @@
 		"visible"		"1"
 		"enabled"		"1"
 		"tabPosition"	"0"
-		"labelText"		"#Cstrike_Glock18"
+		"labelText"		"#CE_Beretta_M9"
 		"textAlignment"		"west"
 		"dulltext"		"0"
 		"brighttext"		"0"
-		"command"		"buy glock"
-		"cost"			"400"
+		"command"		"buy weapon_hgun_m9"
+		"cost"			"500"
 	}
 
 	"USP45"
@@ -114,10 +114,10 @@
 		"cost"			"600"
 	}
 	
-	"DesertEagle"
+	"MR96"
 	{
 		"ControlName"		"MouseOverPanelButton"
-		"fieldName"		"DesertEagle"
+		"fieldName"		"MR96"
 		"xpos"			"52"
 		"ypos"			"212"
 		"wide"			"170"
@@ -127,11 +127,11 @@
 		"visible"		"1"
 		"enabled"		"1"
 		"tabPosition"	"0"
-		"labelText"		"#Cstrike_DesertEagle"
+		"labelText"		"#CE_Manurhin_MR96"
 		"textAlignment"		"west"
 		"dulltext"		"0"
 		"brighttext"		"0"
-		"command"		"buy deagle"
+		"command"		"buy weapon_mag_mr96"
 		"cost"			"650"
 	}
 	
@@ -148,12 +148,12 @@
 		"visible"		"1"
 		"enabled"		"1"
 		"tabPosition"	"0"
-		"labelText"		"#Cstrike_FiveSeven"
+		"labelText"		"#CE_FNH_Five_Seven"
 		"textAlignment"		"west"
 		"dulltext"		"0"
 		"brighttext"		"0"
-		"command"		"buy fiveseven"
-		"cost"			"600"
+		"command"		"buy weapon_hgun_fiveseven"
+		"cost"			"900"
 	}
 
 	"CancelButton"

@@ -72,7 +72,7 @@
 		"cost"			"1250"
 	}
 
-	"mp5"
+	"a2"
 	{
 		"ControlName"		"MouseOverPanelButton"
 		"fieldName"		"mp5"
@@ -85,11 +85,11 @@
 		"visible"		"1"
 		"enabled"		"1"
 		"tabPosition"	"0"
-		"labelText"		"#Cstrike_MP5"
+		"labelText"		"#CS_MP5A2"
 		"textAlignment"		"west"
 		"dulltext"		"0"
 		"brighttext"		"0"
-		"command"		"buy mp5navy"
+		"command"		"buy weapon_smg_mp5a2"
 		"cost"			"1500"
 	}
 
@@ -127,11 +127,11 @@
 		"visible"		"1"
 		"enabled"		"1"
 		"tabPosition"	"0"
-		"labelText"		"#Cstrike_P90"
+		"labelText"		"#CE_P90"
 		"textAlignment"		"west"
 		"dulltext"		"0"
 		"brighttext"		"0"
-		"command"		"buy p90"
+		"command"		"buy weapon_pdw_p90"
 		"cost"			"2350"
 	}
 
