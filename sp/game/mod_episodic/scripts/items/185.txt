@@ -1,0 +1,20 @@
+ItemData
+{
+	"entity_name"				"item_ammo_smg1_grenade" // entity name must match numeric ID
+	"item_friendlyname"			"#CE_Ammo_40mm_Name" // Friendly name. We use the localizer here.
+	"item_friendlydescription"	"#CE_Ammo_40mm_Desc" // Friendly description, also localized.
+
+	"item_capacity"				"1"	// Capacity of the item.
+	"item_maxcapacity"			"1"	// Max capacity of the item.
+    
+    "item_contains"             "185"   // Usually for magazines; refers to what the item contains.
+
+	"item_baseprice"			"0"	// Price for the item, empty.
+	"item_unitprice"			"100" // Price for each element contained within the item.
+
+    // Weight of most issued HE rounds is 0.23kg 
+    // changes seemed to be more design revisions than any increase in projo weight
+	
+    "item_baseweight" 			"0"	// Weight in grams of the empty item. 
+	"item_unitweight" 			"230"	// Weight in grams of each element.
+}
