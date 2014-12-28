@@ -474,6 +474,7 @@ public:
 	{ 
 		Precache( );
 		SetModel( "models/items/ar2_grenade.mdl");
+		m_iItemID = 185;
 		BaseClass::Spawn( );
 	}
 	void Precache( void )
