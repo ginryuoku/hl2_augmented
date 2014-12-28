@@ -9574,20 +9574,23 @@ int CBasePlayer::GiveAmmo(int iCount, int iAmmoIndex, bool bSuppressSound)
 			EmitSound("BaseCombatCharacter.AmmoPickup");
 		}
 		int iAddTemp = iAdd;
-		int maxcap = m_pInventory.GetItemInfo().item_maxcapacity;
-		while (iAddTemp > 0)
+		if (m_pInventory.LoadInfo(GetAmmoDef()->ItemID(iAmmoIndex)))
 		{
-			if (iAddTemp > maxcap)
+			int maxcap = m_pInventory.GetItemInfo().item_maxcapacity;
+			while (iAddTemp > 0)
 			{
-				m_pInventory.NewObject(m_pInventory.FindFirstFreeObject(), GetAmmoDef()->ItemID(iAmmoIndex), maxcap, maxcap);
-				iAddTemp -= maxcap;
-			}
-			else if (iAddTemp <= maxcap && iAddTemp > 0)
-			{
-				m_pInventory.NewObject(m_pInventory.FindFirstFreeObject(), GetAmmoDef()->ItemID(iAmmoIndex), iAddTemp, maxcap);
+				if (iAddTemp > maxcap)
+				{
+					m_pInventory.NewObject(m_pInventory.FindFirstFreeObject(), GetAmmoDef()->ItemID(iAmmoIndex), maxcap, maxcap);
+					iAddTemp -= maxcap;
+				}
+				else if (iAddTemp <= maxcap && iAddTemp > 0)
+				{
+					m_pInventory.NewObject(m_pInventory.FindFirstFreeObject(), GetAmmoDef()->ItemID(iAmmoIndex), iAddTemp, maxcap);
+					iAddTemp = 0;
+				}
 			}
 		}
-
 	}
 	else
 	{

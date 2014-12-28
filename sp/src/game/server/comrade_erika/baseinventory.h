@@ -75,7 +75,7 @@ public:
 	void ConsolidateAmmo(void);
 	int QSPartition(int p, int r);
 	void QuickSort(int indexleft, int indexright);
-
+	bool LoadInfo(int itemid);
 private:
 	int  ItemID     [MAX_INVENTORY];
 	int  ItemCap    [MAX_INVENTORY];
