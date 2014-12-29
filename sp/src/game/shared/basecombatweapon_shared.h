@@ -374,6 +374,18 @@ public:
 	virtual int				Clip1() { return m_iClip1; }
 	virtual int				Clip2() { return m_iClip2; }
 
+
+	Vector                  GetIronsightPositionOffset(void) const;
+	QAngle                  GetIronsightAngleOffset(void) const;
+	float                   GetIronsightFOVOffset(void) const;
+
+	virtual bool            HasIronsights(void) { return true; } //default yes; override and return false for weapons with no ironsights (like weapon_crowbar)
+	bool                    IsIronsighted(void);
+	void                    ToggleIronsights(void);
+	void                    EnableIronsights(void);
+	void                    DisableIronsights(void);
+	void                    SetIronsightTime(void);
+
 	// Ammo quantity queries for weapons that do not use clips. These are only
 	// used to determine how much ammo is in a weapon that does not have an owner.
 	// That is, a weapon that's on the ground for the player to get ammo out of.
@@ -562,6 +574,9 @@ public:
 	CNetworkVar( int, m_iWorldModelIndex );
 	// Sounds
 	float					m_flNextEmptySoundTime;				// delay on empty sound playing
+
+	CNetworkVar(bool, m_bIsIronsighted);
+	CNetworkVar(float, m_flIronsightedTime);
 
 	Activity				GetIdealActivity( void ) { return m_IdealActivity; }
 	int						GetIdealSequence( void ) { return m_nIdealSequence; }
