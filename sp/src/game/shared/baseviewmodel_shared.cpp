@@ -381,6 +381,37 @@ void CBaseViewModel::SendViewModelMatchingSequence( int sequence )
 #if defined( CLIENT_DLL )
 #include "ivieweffects.h"
 #endif
+void CBaseViewModel::CalcIronsights(Vector &pos, QAngle &ang){
+	CBaseCombatWeapon *pWeapon = GetOwningWeapon();
+
+	if (!pWeapon)
+		return;
+
+	//get delta time for interpolation
+	float delta = (gpGlobals->curtime - pWeapon->m_flIronsightedTime) * 2.5f; //modify this value to adjust how fast the interpolation is
+	float exp = (pWeapon->IsIronsighted()) ?
+		(delta > 1.0f) ? 1.0f : delta : //normal blending
+		(delta > 1.0f) ? 0.0f : 1.0f - delta; //reverse interpolation
+
+	if (exp <= 0.001f) //fully not ironsighted; save performance
+		return;
+
+	Vector newPos = pos;
+	QAngle newAng = ang;
+
+	Vector vForward, vRight, vUp, vOffset;
+	AngleVectors(newAng, &vForward, &vRight, &vUp);
+	vOffset = pWeapon->GetIronsightPositionOffset();
+
+	newPos += vForward * vOffset.x;
+	newPos += vRight * vOffset.y;
+	newPos += vUp * vOffset.z;
+	newAng += pWeapon->GetIronsightAngleOffset();
+	//fov is handled by CBaseCombatWeapon
+
+	pos += (newPos - pos) * exp;
+	ang += (newAng - ang) * exp;
+}
 
 void CBaseViewModel::CalcViewModelView( CBasePlayer *owner, const Vector& eyePosition, const QAngle& eyeAngles )
 {
@@ -392,18 +423,22 @@ void CBaseViewModel::CalcViewModelView( CBasePlayer *owner, const Vector& eyePos
 
 	CBaseCombatWeapon *pWeapon = m_hWeapon.Get();
 	//Allow weapon lagging
-	if ( pWeapon != NULL )
+	if (pWeapon)
 	{
-#if defined( CLIENT_DLL )
-		if ( !prediction->InPrediction() )
-#endif
+		if (!pWeapon->IsIronsighted())
 		{
-			// add weapon-specific bob 
-			pWeapon->AddViewmodelBob( this, vmorigin, vmangles );
-#if defined ( CSTRIKE_DLL )
-			CalcViewModelLag( vmorigin, vmangles, vmangoriginal );
+#if defined( CLIENT_DLL )
+			if (!prediction->InPrediction())
 #endif
+			{
+				// add weapon-specific bob 
+				pWeapon->AddViewmodelBob(this, vmorigin, vmangles);
+#if defined ( CSTRIKE_DLL )
+				CalcViewModelLag( vmorigin, vmangles, vmangoriginal );
+#endif
+			}
 		}
+
 	}
 	// Add model-specific bob even if no weapon associated (for head bob for off hand models)
 	AddViewModelBob( owner, vmorigin, vmangles );
@@ -425,6 +460,8 @@ void CBaseViewModel::CalcViewModelView( CBasePlayer *owner, const Vector& eyePos
 	{
 		g_ClientVirtualReality.OverrideViewModelTransform( vmorigin, vmangles, pWeapon && pWeapon->ShouldUseLargeViewModelVROverride() );
 	}
+
+	CalcIronsights(vmorigin, vmangles);
 
 	SetLocalOrigin( vmorigin );
 	SetLocalAngles( vmangles );

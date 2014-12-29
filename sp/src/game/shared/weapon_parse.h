@@ -117,6 +117,12 @@ public:
 	int						iSecondaryMagazineID;
 	bool					m_bUsesMagazines;
 
+
+	Vector                 vecIronsightPosOffset;
+	QAngle                 angIronsightAngOffset;
+	float                  flIronsightFOVOffset;
+
+
 // CLIENT DLL
 	// Sprite data, read from the data file
 	int						iSpriteCount;

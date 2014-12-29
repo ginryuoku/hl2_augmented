@@ -60,6 +60,19 @@ ConVar tf_weapon_criticals_bucket_bottom( "tf_weapon_criticals_bucket_bottom", "
 ConVar tf_weapon_criticals_bucket_default( "tf_weapon_criticals_bucket_default", "300.0", FCVAR_REPLICATED | FCVAR_CHEAT );
 #endif // TF
 
+//forward declarations of callbacks used by viewmodel_adjust_enable and viewmodel_adjust_fov
+void vm_adjust_enable_callback(IConVar *pConVar, char const *pOldString, float flOldValue);
+void vm_adjust_fov_callback(IConVar *pConVar, const char *pOldString, float flOldValue);
+
+ConVar viewmodel_adjust_forward("viewmodel_adjust_forward", "0", FCVAR_REPLICATED);
+ConVar viewmodel_adjust_right("viewmodel_adjust_right", "0", FCVAR_REPLICATED);
+ConVar viewmodel_adjust_up("viewmodel_adjust_up", "0", FCVAR_REPLICATED);
+ConVar viewmodel_adjust_pitch("viewmodel_adjust_pitch", "0", FCVAR_REPLICATED);
+ConVar viewmodel_adjust_yaw("viewmodel_adjust_yaw", "0", FCVAR_REPLICATED);
+ConVar viewmodel_adjust_roll("viewmodel_adjust_roll", "0", FCVAR_REPLICATED);
+ConVar viewmodel_adjust_fov("viewmodel_adjust_fov", "0", FCVAR_REPLICATED, "Note: this feature is not available during any kind of zoom", vm_adjust_fov_callback);
+ConVar viewmodel_adjust_enabled("viewmodel_adjust_enabled", "0", FCVAR_REPLICATED | FCVAR_CHEAT, "enabled viewmodel adjusting", vm_adjust_enable_callback);
+
 CBaseCombatWeapon::CBaseCombatWeapon()
 {
 	// Constructor must call this
@@ -102,6 +115,10 @@ CBaseCombatWeapon::CBaseCombatWeapon()
 	m_nCritChecks = 1;
 	m_nCritSeedRequests = 0;
 #endif // TF
+
+	m_bIsIronsighted = false;
+	m_flIronsightedTime = 0.0f;
+
 }
 
 //-----------------------------------------------------------------------------
@@ -297,6 +314,38 @@ void CBaseCombatWeapon::Precache( void )
 		// Couldn't read data file, remove myself
 		Warning( "Error reading weapon data file for: %s\n", GetClassname() );
 	//	Remove( );	//don't remove, this gets released soon!
+	}
+}
+void vm_adjust_enable_callback(IConVar *pConVar, char const *pOldString, float flOldValue){
+	ConVarRef sv_cheats("sv_cheats");
+	if (!sv_cheats.IsValid() || sv_cheats.GetBool())
+		return;
+
+	ConVarRef var(pConVar);
+
+	if (var.GetBool())
+		var.SetValue("0");
+}
+
+void vm_adjust_fov_callback(IConVar *pConVar, char const *pOldString, float flOldValue){
+	if (!viewmodel_adjust_enabled.GetBool())
+		return;
+
+	ConVarRef var(pConVar);
+
+	CBasePlayer *pPlayer =
+#ifdef GAME_DLL
+		UTIL_GetCommandClient(); 
+#else
+		C_BasePlayer::GetLocalPlayer(); 
+#endif
+		if (!pPlayer)
+			return;
+
+	if (!pPlayer->SetFOV(pPlayer, (pPlayer->GetDefaultFOV() + var.GetInt()), 0.1f))
+	{
+		Warning("Could not set FOV\n");
+		var.SetValue("0");
 	}
 }
 
@@ -554,6 +603,24 @@ bool CBaseCombatWeapon::UsesMagazines(void) const
 	return GetWpnData().m_bUsesMagazines;
 }
 
+Vector CBaseCombatWeapon::GetIronsightPositionOffset(void) const{
+	if (viewmodel_adjust_enabled.GetBool())
+		return Vector(viewmodel_adjust_forward.GetFloat(), viewmodel_adjust_right.GetFloat(), viewmodel_adjust_up.GetFloat());
+	return GetWpnData().vecIronsightPosOffset;
+}
+
+QAngle CBaseCombatWeapon::GetIronsightAngleOffset(void) const{
+	if (viewmodel_adjust_enabled.GetBool())
+		return QAngle(viewmodel_adjust_pitch.GetFloat(), viewmodel_adjust_yaw.GetFloat(), viewmodel_adjust_roll.GetFloat());
+	return GetWpnData().angIronsightAngOffset;
+}
+
+float CBaseCombatWeapon::GetIronsightFOVOffset(void) const{
+	if (viewmodel_adjust_enabled.GetBool())
+		return viewmodel_adjust_fov.GetFloat();
+	return GetWpnData().flIronsightFOVOffset;
+}
+
 //-----------------------------------------------------------------------------
 // Purpose:
 //-----------------------------------------------------------------------------
@@ -695,6 +762,8 @@ void CBaseCombatWeapon::Drop( const Vector &vecVelocity )
 	// world.
 	SetRemoveable( true );
 	WeaponManager_AmmoMod( this );
+
+	DisableIronsights();
 
 	//If it was dropped then there's no need to respawn it.
 	AddSpawnFlags( SF_NORESPAWN );
@@ -1527,6 +1596,8 @@ bool CBaseCombatWeapon::Holster( CBaseCombatWeapon *pSwitchingTo )
 	m_bInReload = false; 
 	m_bFiringWholeClip = false;
 
+	DisableIronsights();
+
 	// kill any think functions
 	SetThink(NULL);
 
@@ -2057,7 +2128,6 @@ bool CBaseCombatWeapon::DefaultReload( int iClipSize1, int iClipSize2, int iActi
 			return false;
 	}
 
-
 	bool bReload = false;
 
 	// If you don't have clips, then don't try to reload them.
@@ -2103,6 +2173,8 @@ bool CBaseCombatWeapon::DefaultReload( int iClipSize1, int iClipSize2, int iActi
 
 	if ( !bReload )
 		return false;
+
+	DisableIronsights();
 
 #ifdef CLIENT_DLL
 	// Play reload
@@ -2570,6 +2642,59 @@ bool CBaseCombatWeapon::IsLocked( CBaseEntity *pAsker )
 {
 	return ( m_flUnlockTime > gpGlobals->curtime && m_hLocker != pAsker );
 }
+bool CBaseCombatWeapon::IsIronsighted(void)
+{
+	return (m_bIsIronsighted || viewmodel_adjust_enabled.GetBool());
+}
+
+void CBaseCombatWeapon::ToggleIronsights(void)
+{
+	if (m_bIsIronsighted)
+		DisableIronsights();
+	else
+		EnableIronsights();
+}
+
+void CBaseCombatWeapon::EnableIronsights(void)
+{
+
+	if (!HasIronsights() || m_bIsIronsighted)
+		return;
+
+	CBasePlayer *pOwner = ToBasePlayer(GetOwner());
+
+	if (!pOwner)
+		return;
+
+	if (pOwner->SetFOV(this, pOwner->GetDefaultFOV() + GetIronsightFOVOffset(), 0.4f)) //modify the last value to adjust how fast the fov is applied
+	{
+		m_bIsIronsighted = true;
+		SetIronsightTime();
+	}
+}
+
+void CBaseCombatWeapon::DisableIronsights(void)
+{
+
+	if (!HasIronsights() || !m_bIsIronsighted)
+		return;
+
+	CBasePlayer *pOwner = ToBasePlayer(GetOwner());
+
+	if (!pOwner)
+		return;
+
+	if (pOwner->SetFOV(this, 0, 0.2f)) //modify the last value to adjust how fast the fov is applied
+	{
+		m_bIsIronsighted = false;
+		SetIronsightTime();
+	}
+}
+
+void CBaseCombatWeapon::SetIronsightTime(void)
+{
+	m_flIronsightedTime = gpGlobals->curtime;
+}
 
 //-----------------------------------------------------------------------------
 // Purpose:
@@ -2714,6 +2839,10 @@ BEGIN_PREDICTION_DATA( CBaseCombatWeapon )
 	DEFINE_FIELD( m_iPrimaryAmmoCount, FIELD_INTEGER ),
 	DEFINE_FIELD( m_iSecondaryAmmoCount, FIELD_INTEGER ),
 
+	DEFINE_PRED_FIELD( m_bIsIronsighted, FIELD_BOOLEAN, FTYPEDESC_INSENDTABLE ),
+	DEFINE_PRED_FIELD( m_flIronsightedTime, FIELD_FLOAT, FTYPEDESC_INSENDTABLE ),
+
+
 	//DEFINE_PHYSPTR( m_pConstraint ),
 
 	// DEFINE_FIELD( m_iOldState, FIELD_INTEGER ),
@@ -2723,6 +2852,15 @@ BEGIN_PREDICTION_DATA( CBaseCombatWeapon )
 	// DEFINE_FIELD( m_pConstraint, FIELD_INTEGER ),
 
 END_PREDICTION_DATA()
+
+void RecvProxy_ToggleSights(const CRecvProxyData* pData, void* pStruct, void* pOut)
+{
+	CBaseCombatWeapon *pWeapon = (CBaseCombatWeapon*)pStruct;
+	if (pData->m_Value.m_Int)
+		pWeapon->EnableIronsights();
+	else
+		pWeapon->DisableIronsights();
+}
 
 #endif	// ! CLIENT_DLL
 
@@ -2758,6 +2896,9 @@ BEGIN_DATADESC( CBaseCombatWeapon )
 
 	DEFINE_FIELD( m_iPrimaryAmmoCount, FIELD_INTEGER ),
 	DEFINE_FIELD( m_iSecondaryAmmoCount, FIELD_INTEGER ),
+
+	DEFINE_FIELD(m_bIsIronsighted, FIELD_BOOLEAN),
+	DEFINE_FIELD(m_flIronsightedTime, FIELD_FLOAT),
 
 	DEFINE_FIELD( m_nViewModelIndex, FIELD_INTEGER ),
 
@@ -2900,6 +3041,10 @@ BEGIN_NETWORK_TABLE_NOBASE( CBaseCombatWeapon, DT_LocalActiveWeaponData )
 	SendPropInt( SENDINFO( m_nNextThinkTick ) ),
 	SendPropTime( SENDINFO( m_flTimeWeaponIdle ) ),
 
+	SendPropBool(SENDINFO(m_bIsIronsighted)),
+	SendPropFloat(SENDINFO(m_flIronsightedTime)),
+
+
 #if defined( TF_DLL )
 	SendPropExclude( "DT_AnimTimeMustBeFirst" , "m_flAnimTime" ),
 #endif
@@ -2909,6 +3054,11 @@ BEGIN_NETWORK_TABLE_NOBASE( CBaseCombatWeapon, DT_LocalActiveWeaponData )
 	RecvPropTime( RECVINFO( m_flNextSecondaryAttack ) ),
 	RecvPropInt( RECVINFO( m_nNextThinkTick ) ),
 	RecvPropTime( RECVINFO( m_flTimeWeaponIdle ) ),
+
+	RecvPropInt(RECVINFO(m_bIsIronsighted), 0, RecvProxy_ToggleSights), //note: RecvPropBool is actually RecvPropInt (see its implementation), but we need a proxy
+	RecvPropFloat(RECVINFO(m_flIronsightedTime)),
+
+
 #endif
 END_NETWORK_TABLE()
 

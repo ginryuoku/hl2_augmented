@@ -403,6 +403,22 @@ END_PREDICTION_DATA()
 
 LINK_ENTITY_TO_CLASS( player, C_BasePlayer );
 
+void CC_ToggleIronSights(void)
+{
+	C_BasePlayer* pPlayer = C_BasePlayer::GetLocalPlayer();
+	if (pPlayer == NULL)
+		return;
+
+	CBaseCombatWeapon *pWeapon = pPlayer->GetActiveWeapon();
+	if (pWeapon == NULL)
+		return;
+
+	pWeapon->ToggleIronsights();
+
+	engine->ServerCmd("toggle_ironsight"); //forward to server}
+}
+static ConCommand toggle_ironsight("toggle_ironsight", CC_ToggleIronSights);
+
 // -------------------------------------------------------------------------------- //
 // Functions.
 // -------------------------------------------------------------------------------- //
