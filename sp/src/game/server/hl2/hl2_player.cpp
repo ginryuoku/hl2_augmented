@@ -2795,8 +2795,16 @@ bool CHL2_Player::Weapon_CanUse( CBaseCombatWeapon *pWeapon )
 #ifndef HL2MP	
 	if ( pWeapon->ClassMatches( "weapon_stunstick" ) )
 	{
-		if ( ApplyBattery( 0.5 ) )
-			UTIL_Remove( pWeapon );
+		if (ApplyBattery(0.5)) {
+			CBasePlayer *pPlayer = ToBasePlayer(this);
+			if (pPlayer)
+			{
+				// We add a flat 200 cash.
+				pPlayer->AddPlayerCash(200);
+			}
+			UTIL_Remove(pWeapon);
+		}
+
 		return false;
 	}
 #endif
