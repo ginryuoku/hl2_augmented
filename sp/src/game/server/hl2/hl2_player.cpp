@@ -1366,6 +1366,10 @@ void CHL2_Player::StartSprinting( void )
 	if( !SuitPower_AddDevice( SuitDeviceSprint ) )
 		return;
 
+	CBaseCombatWeapon *pWeapon = GetActiveWeapon();
+	if (pWeapon)
+		pWeapon->DisableIronsights();
+
 	CPASAttenuationFilter filter( this );
 	filter.UsePredictionRules();
 	EmitSound( filter, entindex(), "HL2Player.SprintStart" );
