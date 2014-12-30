@@ -29,10 +29,10 @@ WeaponData
     
     IronSight
     {
-        "right"         "-1.955"
-        "up"            "0.28"
-        "pitch"         "-0.6"
-        "yaw"           "0"
+        "right"         "-2.075"
+        "up"            "0.2"
+        "pitch"         "-0.65"
+        "yaw"           "0.05"
         "fov"           "-10"
     }
 	// Sounds for the weapon. There is a max of 16 sounds per category (i.e. max 16 "single_shot" sounds)
