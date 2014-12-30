@@ -25,10 +25,10 @@ WeaponData
     "primary_ammo_id"               "184"
     IronSight
     {
-        "right"         "4.7"
+        "right"         "4.4"
         "up"            "2.5"
-        "pitch"         "-0.5"
-        "yaw"           "0"
+        "pitch"         "-0.25"
+        "yaw"           "-0.2"
         "fov"           "-10"
     }    
 	// Sounds for the weapon. There is a max of 16 sounds per category (i.e. max 16 "single_shot" sounds)
