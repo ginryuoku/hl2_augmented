@@ -102,7 +102,8 @@ void CHudSuitPower::OnThink( void )
 	bool flashlightActive = pPlayer->IsFlashlightActive();
 	bool sprintActive = pPlayer->IsSprinting();
 	bool breatherActive = pPlayer->IsBreatherActive();
-	int activeDevices = (int)flashlightActive + (int)sprintActive + (int)breatherActive;
+	bool meleeboostActive = pPlayer->IsMeleeBoosterActive();
+	int activeDevices = (int)flashlightActive + (int)sprintActive + (int)breatherActive + (int)meleeboostActive;
 
 	if (activeDevices != m_iActiveSuitDevices)
 	{
@@ -111,6 +112,9 @@ void CHudSuitPower::OnThink( void )
 		switch ( m_iActiveSuitDevices )
 		{
 		default:
+		case 4:
+			g_pClientMode->GetViewportAnimationController()->StartAnimationSequence("SuitAuxPowerFourItemsActive");
+			break;
 		case 3:
 			g_pClientMode->GetViewportAnimationController()->StartAnimationSequence("SuitAuxPowerThreeItemsActive");
 			break;
@@ -248,6 +252,23 @@ void CHudSuitPower::Paint()
 			else
 			{
 				surface()->DrawPrintText(L"SPRINT", wcslen(L"SPRINT"));
+			}
+			ypos += text2_gap;
+		}
+
+		if (pPlayer->IsMeleeBoosterActive())
+		{
+			tempString = g_pVGuiLocalize->Find("#CE_Hud_MELEEBOOST");
+
+			surface()->DrawSetTextPos(text2_xpos, ypos);
+
+			if (tempString)
+			{
+				surface()->DrawPrintText(tempString, wcslen(tempString));
+			}
+			else
+			{
+				surface()->DrawPrintText(L"MELEE BOOST", wcslen(L"MELEE BOOST"));
 			}
 			ypos += text2_gap;
 		}

@@ -407,6 +407,7 @@ CHL2_Player::CHL2_Player()
 	m_iArmorBatteryBuffer = 0;
 
 	m_fRegenBufferWait = 0.0f;
+	m_flMeleeBoostTime = 0.0f;
 }
 
 //
@@ -426,6 +427,7 @@ CHL2_Player::CHL2_Player()
 	CSuitPowerDevice SuitDeviceFlashlight( bits_SUIT_DEVICE_FLASHLIGHT, 2.222 );	// 100 units in 45 second
 #endif
 CSuitPowerDevice SuitDeviceBreather( bits_SUIT_DEVICE_BREATHER, 6.7f );		// 100 units in 15 seconds (plus three padded seconds)
+CSuitPowerDevice SuitDeviceMeleeBoost(bits_SUIT_DEVICE_MELEEBOOST, 10.0f); // 100 units = ten hits
 
 
 IMPLEMENT_SERVERCLASS_ST(CHL2_Player, DT_HL2_Player)
@@ -941,6 +943,12 @@ void CHL2_Player::PostThink( void )
 
 	m_fRegenBufferWait += 1.0 * gpGlobals->frametime;
 
+	m_flMeleeBoostTime += 1.0 * gpGlobals->frametime;
+	if (m_flMeleeBoostTime > 1.5f)
+	{
+		SuitPower_RemoveDevice(SuitDeviceMeleeBoost);
+	}
+
 	if ( IsAlive() && ( GetHealth() < GetMaxHealth() || ArmorValue() < MaxArmorValue() ) && IsSuitEquipped() )
 	{
 		bool used_armor_buffer = false;
@@ -1314,6 +1322,28 @@ void CHL2_Player::StartAutoSprint()
 	}
 }
 
+void CHL2_Player::UseMeleeBoost(void)
+{
+	if (CanMeleeBoost()) 
+	{
+		//
+		m_flMeleeBoostTime = 0.0f;
+	}
+	if (!SuitPower_AddDevice(SuitDeviceMeleeBoost))
+	{
+		return;
+	}
+}
+
+bool CHL2_Player::CanMeleeBoost()
+{
+	if (m_HL2Local.m_flSuitPower < 10 || m_flMeleeBoostTime < 1.5f || 
+		SuitPower_IsDeviceActive(SuitDeviceMeleeBoost) )
+	{
+		return false;
+	}
+	else return true;
+}
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 void CHL2_Player::StartSprinting( void )
