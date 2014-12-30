@@ -12,6 +12,8 @@
 "blank"			"#Erika_RPG"
 "blank"			"=========================="
 "inventory" 		"#Erika_InvPanelToggle"
+"buymenu"				"#CE_Buymenu"
+"toggle_ironsight"		"#CE_Toggle_Ironsight"
 "blank"			"=========================="
 "blank"			"#Valve_Combat_Title"
 "blank"			"=========================="

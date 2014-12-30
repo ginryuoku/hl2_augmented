@@ -1,6 +1,6 @@
 "Resource/UI/invpanel.res"
 {
- "invpanel"
+	"invpanel"
 	{
 	 "ControlName"  "CInvPanel"
 	 "fieldName"  "invpanel"
@@ -16,4 +16,20 @@
 	 "settitlebarvisible"  "0"
 	 "title"  "#Frame_Untitled"
 	}
+	"InvSubPanel"
+	{
+	 "ControlName"  "ControlGrid"
+	 "fieldName"  "InvSubPanel"
+	 "xpos"  "20"
+	 "ypos"  "20"
+	 "wide"  "600"
+	 "tall"  "400"
+	 "autoResize"  "0"
+	 "pinCorner"  "0"
+	 "visible"  "1"
+	 "enabled"  "1"
+	 "tabPosition"  "0"
+	 "settitlebarvisible"  "0"
+	 "title"  "#Frame_Untitled"
+	}	
 }

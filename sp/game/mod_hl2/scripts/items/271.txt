@@ -1,0 +1,21 @@
+ItemData
+{
+	"entity_name"				"item_mag_57x28_50p90" // entity name must match numeric ID
+	"item_friendlyname"			"#CE_Mag_P90_50_57x28_Name" // Friendly name. We use the localizer here.
+	"item_friendlydescription"	"#CE_Mag_P90_50_57x28_Desc" // Friendly description, also localized.
+
+	"item_capacity"				"50"	// Capacity of the item.
+	"item_maxcapacity"			"50"	// Max capacity of the item.
+    
+    "item_contains"             "182"   // Usually for magazines; refers to what the item contains.
+
+	"item_baseprice"			"50"	// Price for the item, empty.
+	"item_unitprice"			"1"		// Price for each element contained within the item.
+
+    // According to the Five-Seven forums, somebody weighed both an FN 50-rounder and an FNH 50-rounder.
+    // They both weighed 5 ounces (stated as 143 grams by the first answering poster)
+    // SS190 weighs 6 grams per round; the ballistic-tip rounds are heavier due to the 40gr bullet
+	
+    "item_baseweight" 			"143"	// Weight in grams of the empty item. 
+	"item_unitweight" 			"6"	// Weight in grams of each element.
+}

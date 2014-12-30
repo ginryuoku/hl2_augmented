@@ -1,0 +1,20 @@
+ItemData
+{
+	"entity_name"				"item_mag_9x19_15" // entity name must match numeric ID
+	"item_friendlyname"			"#CE_Mag_15_9x19_Name" // Friendly name. We use the localizer here.
+	"item_friendlydescription"	"#CE_Mag_15_9x19_Desc" // Friendly description, also localized.
+
+	"item_capacity"				"15"	// Capacity of the item.
+	"item_maxcapacity"			"15"	// Max capacity of the item.
+    
+    "item_contains"             "180"   // Usually for magazines; refers to what the item contains.
+
+	"item_baseprice"			"20"	// Price for the item, empty.
+	"item_unitprice"			"1"		// Price for each element contained within the item.
+
+    // Dry weight of Beretta M9 15rd magazine is 3.5oz, or 99g
+    // 9mm 115gr in NATO spec seems to be around 11.5 grams, rounding up.
+	
+    "item_baseweight" 			"99"	// Weight in grams of the empty item. 
+	"item_unitweight" 			"12"	// Weight in grams of each element.
+}

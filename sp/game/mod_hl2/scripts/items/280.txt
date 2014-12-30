@@ -1,0 +1,20 @@
+ItemData
+{
+	"entity_name"				"item_mag_556_stanag30" // entity name must match numeric ID
+	"item_friendlyname"			"#CE_Mag_556_stanag30_Name" // Friendly name. We use the localizer here.
+	"item_friendlydescription"	"#CE_Mag_556_stanag30_Desc" // Friendly description, also localized.
+
+	"item_capacity"				"30"	// Capacity of the item.
+	"item_maxcapacity"			"30"	// Max capacity of the item.
+    
+    "item_contains"             "183"   // Usually for magazines; refers to what the item contains.
+
+	"item_baseprice"			"30"	// Price for the item, empty.
+	"item_unitprice"			"1"		// Price for each element contained within the item.
+
+    // Thanks to Kate, the weight of a USGI 30rd mag (Magpul follower) is 4oz, or ~113.4 grams.
+    // SS109 weighs approximately 0.0269 pounds, or 12.2 grams
+	
+    "item_baseweight" 			"113"	// Weight in grams of the empty item. 
+	"item_unitweight" 			"12"	// Weight in grams of each element.
+}
