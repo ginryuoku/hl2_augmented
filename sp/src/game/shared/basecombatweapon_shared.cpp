@@ -31,6 +31,7 @@
 #include "eventqueue.h"
 #include "fmtstr.h"
 #include "gameweaponmanager.h"
+#include "hl2_player.h"
 
 #ifdef HL2MP
 	#include "hl2mp_gamerules.h"
@@ -2665,7 +2666,13 @@ void CBaseCombatWeapon::EnableIronsights(void)
 
 	if (!pOwner)
 		return;
+#ifndef CLIENT_DLL
+	CHL2_Player *pHL2Player = dynamic_cast<CHL2_Player*>(pOwner);
 
+	if (pHL2Player)
+		pHL2Player->StopSprinting();
+#endif
+	
 	if (pOwner->SetFOV(this, pOwner->GetDefaultFOV() + GetIronsightFOVOffset(), 0.4f)) //modify the last value to adjust how fast the fov is applied
 	{
 		pOwner->m_Local.m_iHideHUD ^= HIDEHUD_CROSSHAIR;
