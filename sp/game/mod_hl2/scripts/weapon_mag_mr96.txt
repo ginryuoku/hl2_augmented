@@ -23,6 +23,17 @@ WeaponData
 	"BuiltRightHanded"		"0"
 	"AllowFlipping"			"1"
 	
+    "primary_ammo_id"       "181"
+    "primary_mag_id"        "260"
+    "uses_magazines"        "1"
+    IronSight
+    {
+        "right"         "2.75"
+        "up"            "1.15"
+        "pitch"         "-0.1"
+        "yaw"           "-0.05"
+        "fov"           "-10"
+    }
 	// Sounds for the weapon. There is a max of 16 sounds per category (i.e. max 16 "single_shot" sounds)
 	SoundData
 	{

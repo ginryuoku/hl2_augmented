@@ -1,0 +1,20 @@
+ItemData
+{
+	"entity_name"				"item_ammo_pistol_large" // entity name must match numeric ID
+	"item_friendlyname"			"#CE_Ammo_9mm_Name" // Friendly name. We use the localizer here.
+	"item_friendlydescription"	"#CE_Ammo_9mm_Desc" // Friendly description, also localized.
+
+	"item_capacity"				"200"	// Capacity of the item.
+	"item_maxcapacity"			"200"	// Max capacity of the item.
+    
+    "item_contains"             "180"   // Usually for magazines; refers to what the item contains.
+
+	"item_baseprice"			"20"	// Price for the item, empty.
+	"item_unitprice"			"1"		// Price for each element contained within the item.
+
+    // Weight of empty .30 ammo can is 4 pounds; typical 100rd 9mm ammo boxes are much lighter
+    // 9mm 115gr in NATO spec seems to be around 11.5 grams, rounding up.
+	
+    "item_baseweight" 			"1814"	// Weight in grams of the empty item. 
+	"item_unitweight" 			"12"	// Weight in grams of each element.
+}

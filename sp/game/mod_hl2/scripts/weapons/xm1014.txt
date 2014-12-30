@@ -1,20 +1,11 @@
-"Weapon_xm1014.back"
+"Weapon_xm1014.cock"
 {
 	"channel"		"CHAN_ITEM"
 	"volume"		"1.0"
 	"CompatibilityAttenuation"	"1.0"
 	"pitch"			"95,105"
 
-	"wave"			"weapons/xm1014/Back.wav"
-}
-"Weapon_xm1014.forward"
-{
-	"channel"		"CHAN_ITEM"
-	"volume"		"1.0"
-	"CompatibilityAttenuation"	"1.0"
-	"pitch"			"95,105"
-
-	"wave"			"weapons/xm1014/Forward.wav"
+	"wave"			"weapons/xm1014/xm_cock.wav"
 }
 
 "Weapon_xm1014.insert"
@@ -24,7 +15,7 @@
 	"CompatibilityAttenuation"	"1.0"
 	"pitch"			"95,105"
 
-	"wave"			"weapons/xm1014/insert.wav"
+	"wave"			"weapons/xm1014/xm_insert.wav"
 }
 "Weapon_XM1014.Single"
 {

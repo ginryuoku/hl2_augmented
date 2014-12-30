@@ -23,8 +23,20 @@ WeaponData
 	"weight"				"3"
 	"rumble"			"3"
 	"item_flags"			"ITEM_FLAG_SELECTONEMPTY"
-	"BuiltRightHanded"		"1"
+	"BuiltRightHanded"		"0"
 	"AllowFlipping"			"1"
+    
+    "primary_ammo_id"       "182"
+    "primary_mag_id"        "271"
+    "uses_magazines"        "1"
+    IronSight
+    {
+        "right"         "3.7"
+        "up"            "0.44"
+        "pitch"         "0"
+        "yaw"           "-0.575"
+        "fov"           "-10"
+    }    
 	// Sounds for the weapon. There is a max of 16 sounds per category (i.e. max 16 "single_shot" sounds)
 	SoundData
 	{
