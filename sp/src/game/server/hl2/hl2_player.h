@@ -170,6 +170,10 @@ public:
 	bool IsSprinting( void ) { return m_fIsSprinting; }
 	bool CanSprint( void );
 	void EnableSprint( bool bEnable);
+	
+	void UseMeleeBoost(void);
+	bool CanMeleeBoost(void);
+	float m_flMeleeBoostTime;
 
 	bool CanZoom( CBaseEntity *pRequester );
 	void ToggleZoom(void);

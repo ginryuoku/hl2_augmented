@@ -21,6 +21,8 @@
 #include "te_effect_dispatch.h"
 #include "rumble_shared.h"
 #include "gamestats.h"
+// I hate to do this, but...
+#include "hl2_player.h"
 
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
@@ -146,6 +148,7 @@ void CBaseHLBludgeonWeapon::Hit( trace_t &traceHit, Activity nHitActivity, bool 
 	pPlayer->RumbleEffect( RUMBLE_AR2, 0, RUMBLE_FLAG_RESTART );
 
 	CBaseEntity	*pHitEntity = traceHit.m_pEnt;
+	CHL2_Player *pHL2Player = dynamic_cast<CHL2_Player*>(pPlayer);
 
 	//Apply damage to a hit target
 	if ( pHitEntity != NULL )
@@ -153,8 +156,13 @@ void CBaseHLBludgeonWeapon::Hit( trace_t &traceHit, Activity nHitActivity, bool 
 		Vector hitDirection;
 		pPlayer->EyeVectors( &hitDirection, NULL, NULL );
 		VectorNormalize( hitDirection );
-
-		CTakeDamageInfo info( GetOwner(), GetOwner(), GetDamageForActivity( nHitActivity ), DMG_CLUB );
+		int meleeboost = 1;
+		if (pHL2Player && pHL2Player->CanMeleeBoost())
+		{
+			pHL2Player->UseMeleeBoost();
+			meleeboost = 5;
+		}
+		CTakeDamageInfo info( GetOwner(), GetOwner(), GetDamageForActivity( nHitActivity ) * meleeboost, DMG_CLUB );
 
 		if( pPlayer && pHitEntity->IsNPC() )
 		{

@@ -209,8 +209,9 @@ enum CastVote
 #define bits_SUIT_DEVICE_SPRINT		0x00000001
 #define bits_SUIT_DEVICE_FLASHLIGHT	0x00000002
 #define bits_SUIT_DEVICE_BREATHER	0x00000004
+#define bits_SUIT_DEVICE_MELEEBOOST 0x00000008
 
-#define MAX_SUIT_DEVICES			3
+#define MAX_SUIT_DEVICES			4
 
 
 //===================================================================================================================
