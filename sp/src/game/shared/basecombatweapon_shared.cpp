@@ -2668,6 +2668,7 @@ void CBaseCombatWeapon::EnableIronsights(void)
 
 	if (pOwner->SetFOV(this, pOwner->GetDefaultFOV() + GetIronsightFOVOffset(), 0.4f)) //modify the last value to adjust how fast the fov is applied
 	{
+		pOwner->m_Local.m_iHideHUD ^= HIDEHUD_CROSSHAIR;
 		m_bIsIronsighted = true;
 		SetIronsightTime();
 	}
@@ -2686,6 +2687,7 @@ void CBaseCombatWeapon::DisableIronsights(void)
 
 	if (pOwner->SetFOV(this, 0, 0.2f)) //modify the last value to adjust how fast the fov is applied
 	{
+		pOwner->m_Local.m_iHideHUD ^= HIDEHUD_CROSSHAIR;
 		m_bIsIronsighted = false;
 		SetIronsightTime();
 	}
