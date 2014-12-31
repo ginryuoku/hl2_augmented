@@ -178,8 +178,14 @@ void CWeaponM4A1::DryFire( void )
 }
 void CWeaponM4A1::PrimaryAttack( void )
 {
-	CSoundEnt::InsertSound( SOUND_COMBAT, GetAbsOrigin(), SOUNDENT_VOLUME_PISTOL, 0.2, GetOwner() );
-
+	if (m_bIsSuppressed)
+	{
+		CSoundEnt::InsertSound(SOUND_WORLD, GetAbsOrigin(), SOUNDENT_VOLUME_EMPTY, 0.2, GetOwner());
+	}
+	else
+	{
+		CSoundEnt::InsertSound(SOUND_COMBAT, GetAbsOrigin(), SOUNDENT_VOLUME_MACHINEGUN, 0.2, GetOwner());
+	}
 	CBasePlayer *pOwner = ToBasePlayer( GetOwner() );
 
 	if( pOwner )
@@ -276,12 +282,16 @@ void CWeaponM4A1::PrimaryAttack( void )
 //-----------------------------------------------------------------------------
 void CWeaponM4A1::SecondaryAttack( void )
 {
-	if (m_bIsSuppressed) {
+	DisableIronsights();
+	if (m_bIsSuppressed) 
+	{
 		SendWeaponAnim( ACT_VM_DETACH_SILENCER );
 		m_flNextPrimaryAttack = gpGlobals->curtime + SequenceDuration();
 		m_flNextSecondaryAttack = gpGlobals->curtime + SequenceDuration();
 		m_bIsSuppressed = false;
-	} else {
+	} 
+	else 
+	{
 		SendWeaponAnim( ACT_VM_ATTACH_SILENCER );
 		m_flNextPrimaryAttack = gpGlobals->curtime + SequenceDuration();
 		m_flNextSecondaryAttack = gpGlobals->curtime + SequenceDuration();
@@ -415,7 +425,6 @@ bool CWeaponM4A1::Reload( void )
 		bool fRet = DefaultReload( GetMaxClip1(), GetMaxClip2(), ACT_VM_RELOAD_SILENCED );
 		if ( fRet )
 		{
-			WeaponSound( RELOAD );
 			// Play the player's reload animation
 			if ( pOwner->IsPlayer() )
 			{
@@ -427,7 +436,6 @@ bool CWeaponM4A1::Reload( void )
 		bool fRet = DefaultReload( GetMaxClip1(), GetMaxClip2(), ACT_VM_RELOAD );
 		if ( fRet )
 		{
-			WeaponSound( RELOAD );
 			// Play the player's reload animation
 			if ( pOwner->IsPlayer() )
 			{
@@ -480,11 +488,11 @@ bool CWeaponM4A1::Deploy(void)
 {
 	if (m_bIsSuppressed)
 	{
-		DefaultDeploy((char*)GetViewModel(), (char*)GetWorldModel(), ACT_VM_IDLE_SILENCED, (char*)GetAnimPrefix());
+		DefaultDeploy((char*)GetViewModel(), (char*)GetWorldModel(), ACT_VM_DRAW_SILENCED, (char*)GetAnimPrefix());
 	} 
 	else
 	{
-		DefaultDeploy((char*)GetViewModel(), (char*)GetWorldModel(), ACT_VM_IDLE, (char*)GetAnimPrefix());
+		DefaultDeploy((char*)GetViewModel(), (char*)GetWorldModel(), ACT_VM_DRAW, (char*)GetAnimPrefix());
 	}
 
 	return BaseClass::Deploy();
