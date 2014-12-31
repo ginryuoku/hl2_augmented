@@ -1,8 +1,8 @@
 ItemData
 {
 	"entity_name"				"item_ammo_357_large" // entity name must match numeric ID
-	"item_friendlyname"			"#CE_Ammo_9mm_Name" // Friendly name. We use the localizer here.
-	"item_friendlydescription"	"#CE_Ammo_9mm_Desc" // Friendly description, also localized.
+	"item_friendlyname"			"#CE_Ammo_357_Name" // Friendly name. We use the localizer here.
+	"item_friendlydescription"	"#CE_Ammo_357_Desc" // Friendly description, also localized.
 
 	"item_capacity"				"20"	// Capacity of the item.
 	"item_maxcapacity"			"20"	// Max capacity of the item.
