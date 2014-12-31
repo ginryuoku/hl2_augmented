@@ -3,6 +3,7 @@
 #include "vgui_grid.h"
 #include <vgui_controls/ImagePanel.h>
 #include <vgui_controls/Label.h>
+#include <vgui_controls/Panel.h>
 
 #include "invpanel.h"
 
@@ -48,6 +49,7 @@ CInvPanel::CInvPanel(IViewPort *pViewPort) : BaseClass(NULL, PANEL_INVENTORY)
 		imagePanel->SetImage(scheme()->GetImage("inv/0", false));
 		imagePanel->SetMinimumSize(32, 32);
 		imagePanel->SetProportional(true);
+		imagePanel->SetSize(scheme()->GetProportionalScaledValue(32), scheme()->GetProportionalScaledValue(32));
 
 		//Create Label
 		Q_snprintf(buffer, sizeof(buffer), "label%i", i);
