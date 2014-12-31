@@ -224,7 +224,7 @@ int CBaseInventory::FindFirstFullObject(int itemid)
 			if (GetItemCapacity(i) == GetItemMaxCapacity(i))
 				return i;
 
-			if (GetItemCapacity(i) > GetItemCapacity(element) && GetItemCapacity(i) <= GetItemMaxCapacity(i))
+			if ((GetItemCapacity(i) > GetItemCapacity(element) && GetItemCapacity(i) <= GetItemMaxCapacity(i)) || (GetItemCapacity(i) > 0 && element < 0))
 			{
 				element = i;
 			}
@@ -400,6 +400,8 @@ int CBaseInventory::SwapMagazines(int itemid, int remaining)
 	}
 
 	int mag = FindFirstFullObject(itemid);
+	if (mag < 1)
+		return -1;
 	int used = GetItemCapacity(mag);
 
 	ItemCap[mag] = remaining;
