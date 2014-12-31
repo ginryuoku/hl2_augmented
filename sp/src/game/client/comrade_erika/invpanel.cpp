@@ -117,8 +117,17 @@ void CInvPanel::BeginUpdates()
 					Label* label = dynamic_cast<Label*>(panel2);
 					if (label)
 					{
-						Q_snprintf(buffer, sizeof(buffer), "%i/%i", pPlayer->m_pInventory.GetItemCapacity(i), pPlayer->m_pInventory.GetItemMaxCapacity(i));
-						label->SetText(buffer);
+						if (pPlayer->m_pInventory.GetItemMaxCapacity(i) <= 1)
+						{
+							Q_snprintf(buffer, sizeof(buffer), "");
+							label->SetText(buffer);
+						}
+						else
+						{
+							Q_snprintf(buffer, sizeof(buffer), "%i/%i", pPlayer->m_pInventory.GetItemCapacity(i), pPlayer->m_pInventory.GetItemMaxCapacity(i));
+							label->SetText(buffer);
+						}
+
 					}
 				}
 				// Great. Now to 'clean' the item so that we don't waste time updating it.
