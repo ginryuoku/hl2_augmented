@@ -54,7 +54,7 @@ public:
 	void	Operator_HandleAnimEvent( animevent_t *pEvent, CBaseCombatCharacter *pOperator );
 	void	WeaponIdle( void );
 	void	SecondaryAttack( void );
-
+	bool	Deploy();
 	void	UpdatePenaltyTime( void );
 
 	int		CapabilitiesGet( void ) { return bits_CAP_WEAPON_RANGE_ATTACK1; }
@@ -244,9 +244,10 @@ void CWeaponM9::PrimaryAttack( void )
 
 	m_flLastAttackTime = gpGlobals->curtime;
 	m_flSoonestPrimaryAttack = gpGlobals->curtime + PISTOL_FASTEST_REFIRE_TIME;
+
 	if (m_bIsSuppressed)
 	{
-		CSoundEnt::InsertSound( SOUND_COMBAT, GetAbsOrigin(), SOUNDENT_VOLUME_EMPTY, 0.2, GetOwner() );
+		CSoundEnt::InsertSound( SOUND_WORLD, GetAbsOrigin(), SOUNDENT_VOLUME_EMPTY, 0.2, GetOwner() );
 	} 
 	else
 	{
@@ -499,6 +500,7 @@ void CWeaponM9::WeaponIdle( void )
 }
 void CWeaponM9::SecondaryAttack( void )
 {
+	DisableIronsights();
 	if (m_bIsSuppressed) {
 		SendWeaponAnim( ACT_VM_DETACH_SILENCER );
 		m_flNextPrimaryAttack = gpGlobals->curtime + SequenceDuration();
@@ -510,4 +512,18 @@ void CWeaponM9::SecondaryAttack( void )
 		m_flNextSecondaryAttack = gpGlobals->curtime + SequenceDuration();
 		m_bIsSuppressed = true;
 	}
+}
+
+bool CWeaponM9::Deploy(void)
+{
+	if (m_bIsSuppressed)
+	{
+		DefaultDeploy((char*)GetViewModel(), (char*)GetWorldModel(), ACT_VM_DRAW_SILENCED, (char*)GetAnimPrefix());
+	}
+	else
+	{
+		DefaultDeploy((char*)GetViewModel(), (char*)GetWorldModel(), ACT_VM_DRAW, (char*)GetAnimPrefix());
+	}
+
+	return BaseClass::Deploy();
 }
