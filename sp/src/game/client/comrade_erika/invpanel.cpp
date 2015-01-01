@@ -21,7 +21,7 @@ CInvPanel::CInvPanel(IViewPort *pViewPort) : BaseClass(NULL, PANEL_INVENTORY)
 	SetTitle("", true);
 
 	// load the new scheme early!!
-	SetScheme(vgui::scheme()->LoadSchemeFromFile("resource/SourceScheme.res", "SourceScheme"));
+	SetScheme(vgui::scheme()->LoadSchemeFromFile("resource/sourceschemebase.res", "SourceScheme"));
 	SetMoveable(false);
 	SetSizeable(false);
 
@@ -40,7 +40,8 @@ CInvPanel::CInvPanel(IViewPort *pViewPort) : BaseClass(NULL, PANEL_INVENTORY)
 	SetSize(ScreenWidth(), ScreenHeight());
 	
 	char buffer[40];
-
+	vgui::IScheme* pScheme = vgui::scheme()->GetIScheme(GetScheme());
+	vgui::HFont hFont = pScheme->GetFont("inv_labels");
 	for (int i = 0; i < MAX_INVENTORY; i++)
 	{
 		//Create Image
@@ -54,6 +55,7 @@ CInvPanel::CInvPanel(IViewPort *pViewPort) : BaseClass(NULL, PANEL_INVENTORY)
 		//Create Label
 		Q_snprintf(buffer, sizeof(buffer), "label%i", i);
 		Label* label = new Label(this, buffer, buffer);
+		label->SetFont(hFont);
 		label->SetText(buffer);
 
 		//Add Label and Image to PanelListPanel
