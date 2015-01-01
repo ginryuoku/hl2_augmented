@@ -3,45 +3,47 @@
 WeaponData
 {
 	// Weapon data is loaded by both the Game and Client DLLs.
-	"printname"	"#P90"
-	"viewmodel"				"models/weapons/v_smg_p90.mdl"
-	"playermodel"			"models/weapons/w_smg_p90.mdl"	//FIXME: 
+	"printname"	"#CE_HK_MP7A1"
+	"viewmodel"				"models/weapons/v_pdw_mp7a1.mdl"
+	"playermodel"			"models/weapons/w_pdw_mp7a1.mdl"	//FIXME: 
 	"anim_prefix"			"smg2"
 	"bucket"				"2"
-	"bucket_position"		"1"
+	"bucket_position"		"2"
 	"bucket_360"			"1"
 	"bucket_position_360"	"0"
 
-	"clip_size"				"50"
+	"clip_size"				"40"
 	"clip2_size"			"-1"
 
-	"default_clip"			"50"
+	"default_clip"			"40"
 	"default_clip2"			"-1"
 
-	"primary_ammo"			"57x28"
+	"primary_ammo"			"SMG1"
 
 	"weight"				"3"
 	"rumble"			"3"
 	"item_flags"			"ITEM_FLAG_SELECTONEMPTY"
-	"BuiltRightHanded"		"0"
+	"BuiltRightHanded"		"1"
 	"AllowFlipping"			"1"
     
-    "primary_ammo_id"       "190"
-    "primary_mag_id"        "271"
+    "primary_ammo_id"       "182"
+    "primary_mag_id"        "272"
     "uses_magazines"        "1"
+    
     IronSight
     {
-        "right"         "3.7"
-        "up"            "0.44"
-        "pitch"         "0"
-        "yaw"           "-0.575"
+        "right"         "-2.375"
+        "up"            "0.81"
+        "pitch"         "0.2"
+        "yaw"           "0.375"
         "fov"           "-10"
-    }    
+    }
+
 	// Sounds for the weapon. There is a max of 16 sounds per category (i.e. max 16 "single_shot" sounds)
 	SoundData
 	{
 		"empty"				"Default.ClipEmpty_Rifle"
-		"single_shot"			"Weapon_P90.Single"
+		"single_shot"			"Weapon_MP7.Single"
 	}
 
 	// Weapon Sprite data is loaded by the Client DLL.
@@ -66,6 +68,11 @@ WeaponData
 		{
 				"font"		"WeaponIconsSmall"
 				"character"	"r"
+		}
+		"ammo2"
+		{
+				"font"		"WeaponIconsSmall"
+				"character"	"t"
 		}
 		"crosshair"
 		{

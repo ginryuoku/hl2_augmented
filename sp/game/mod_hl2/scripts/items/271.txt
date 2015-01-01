@@ -7,7 +7,7 @@ ItemData
 	"item_capacity"				"50"	// Capacity of the item.
 	"item_maxcapacity"			"50"	// Max capacity of the item.
     
-    "item_contains"             "182"   // Usually for magazines; refers to what the item contains.
+    "item_contains"             "190"   // Usually for magazines; refers to what the item contains.
 
 	"item_baseprice"			"50"	// Price for the item, empty.
 	"item_unitprice"			"1"		// Price for each element contained within the item.
