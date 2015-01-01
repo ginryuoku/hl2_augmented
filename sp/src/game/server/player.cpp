@@ -6728,9 +6728,9 @@ bool CBasePlayer::BumpWeapon( CBaseCombatWeapon *pWeapon )
 					AddPlayerCash(3500 * (1.0 / m_Local.m_iGrabbedShotgun));
 				}
 				if (!Q_stricmp(pWeapon->GetClassname(), "weapon_crossbow"))
-					AddPlayerCash(5000 * 0.1);
+					AddPlayerCash(5000 * 0.5);
 				if (!Q_stricmp(pWeapon->GetClassname(), "weapon_rpg"))
-					AddPlayerCash(6500 * 0.1);
+					AddPlayerCash(6500 * 0.5);
 
 				UTIL_Remove(pWeapon);
 				return true;
