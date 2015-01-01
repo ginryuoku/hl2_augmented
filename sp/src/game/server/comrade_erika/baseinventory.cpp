@@ -414,7 +414,7 @@ int CBaseInventory::SwapMagazines(int itemid, int remaining)
 	}
 
 	int mag = FindFirstFullObject(itemid);
-	if (mag < 1)
+	if (mag == -1)
 		return -1;
 	int used = GetItemCapacity(mag);
 
@@ -536,7 +536,7 @@ void CBaseInventory::QuickSort(int indexleft, int indexright)
 
 void CBaseInventory::ConsolidateAmmo(void)
 {
-	for (int i = 180; i < 190; ++i)
+	for (int i = 180; i < 195; ++i)
 	{
 		int totalammo = 0;
 		if (FindFirstObject(i) > -1)
