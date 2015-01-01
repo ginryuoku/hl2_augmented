@@ -159,6 +159,16 @@ const FileInventoryInfo_t &CBaseInventory::GetItemInfo(void) const
 	return *GetFileItemInfoFromHandle(m_hInventoryFileInfo);
 }
 
+int CBaseInventory::ReturnPrice(int itemindex)
+{
+	if (LoadInfo(GetItemID(itemindex)))
+	{
+		int baseprice = GetItemInfo().item_baseprice;
+		int unitprice = GetItemCapacity(itemindex) * GetItemInfo().item_unitprice;
+		return baseprice + unitprice;
+	}
+	return 0;
+}
 void CBaseInventory::NewObject( int ObjectIndex, int NewItemID, int NewItemCap, int NewItemMaxCap )
 {
 	if (LoadInfo(NewItemID))
@@ -696,3 +706,32 @@ void UseArmorItem(const CCommand &args)
 }
 
 ConCommand use_armor("use_armor", UseArmorItem, "Use first armor item in inventory", 0);
+
+void SellItem(const CCommand &args)
+{
+	if (args.ArgC() < 1)
+	{
+		Msg("Usage: sell_item <item index>.\n");
+		return;
+	}
+
+	int itemindex = atoi(args.Arg(1));
+	if (itemindex < 0 || itemindex > 100)
+	{
+		Msg("Was passed nonsense value %d, ignoring command\n", itemindex);
+	}
+
+	Msg("Item index passed: %d\n", itemindex);
+
+	CBasePlayer *pPlayer = UTIL_GetCommandClient();
+	if (pPlayer)
+	{
+		int price = pPlayer->m_pInventory.ReturnPrice(itemindex);
+		if (price > 0)
+		{
+			pPlayer->AddPlayerCash(price);
+			pPlayer->m_pInventory.PurgeObject(itemindex);
+		}
+	}
+}
+ConCommand sell_item("sell_item", SellItem, "Sells the item at the item index", 0);

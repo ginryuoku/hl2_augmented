@@ -76,6 +76,7 @@ public:
 	int QSPartition(int p, int r);
 	void QuickSort(int indexleft, int indexright);
 	bool LoadInfo(int itemid);
+	int ReturnPrice(int itemindex);
 private:
 	int  ItemID     [MAX_INVENTORY];
 	int  ItemCap    [MAX_INVENTORY];
