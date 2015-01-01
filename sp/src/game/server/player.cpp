@@ -6797,9 +6797,9 @@ bool CBasePlayer::BumpWeapon( CBaseCombatWeapon *pWeapon )
 				m_pInventory.NewObject(m_pInventory.FindFirstFreeObject(), 184, primaryGiven, 20);
 			}
 			if (!Q_stricmp(pWeapon->GetClassname(), "weapon_crossbow"))
-				AddPlayerCash(5000 * 0.1);
+				AddPlayerCash(5000 * 0.5);
 			if (!Q_stricmp(pWeapon->GetClassname(), "weapon_rpg"))
-				AddPlayerCash(6500 * 0.1);
+				AddPlayerCash(6500 * 0.5);
 			
 			if (pWeapon->HasPrimaryAmmo())
 				return false;
