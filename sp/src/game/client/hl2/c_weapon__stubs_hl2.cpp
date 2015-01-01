@@ -54,6 +54,7 @@ STUB_WEAPON_CLASS( weapon_shot_spas12, WeaponSPAS12, C_BaseHLCombatWeapon );
 
 STUB_WEAPON_CLASS( weapon_smg_mp5a2, WeaponMP5A2, C_HLMachineGun );
 
+STUB_WEAPON_CLASS(weapon_pdw_mp7a1, WeaponMP7A1, C_HLMachineGun);
 STUB_WEAPON_CLASS( weapon_pdw_p90, WeaponP90, C_HLMachineGun );
 
 STUB_WEAPON_CLASS( weapon_arifle_m4a1, WeaponM4A1, C_HLMachineGun );

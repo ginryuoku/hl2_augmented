@@ -13,7 +13,7 @@ WeaponData
 	"bucket_position_360"	"0"
 
 	"clip_size"			"20"
-	"primary_ammo"		"SMG1"
+	"primary_ammo"		"57x28"
 	"secondary_ammo"	"None"
 
 	"weight"		"2"
@@ -23,7 +23,7 @@ WeaponData
 	"BuiltRightHanded" "1" 
 	"AllowFlipping" "1"
     
-    "primary_ammo_id"       "182"
+    "primary_ammo_id"       "190"
     "primary_mag_id"        "251"
     "uses_magazines"        "1"
     
@@ -65,7 +65,7 @@ WeaponData
 		"ammo"
 		{
 				"font"		"WeaponIconsSmall"
-				"character"	"p"
+				"character"	"r"
 		}
 		"crosshair"
 		{

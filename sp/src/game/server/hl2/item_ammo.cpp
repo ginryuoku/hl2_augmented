@@ -106,7 +106,75 @@ public:
 };
 LINK_ENTITY_TO_CLASS(item_large_box_srounds, CItem_LargeBoxSRounds);
 LINK_ENTITY_TO_CLASS(item_ammo_pistol_large, CItem_LargeBoxSRounds);
+// ========================================================================
+//	>> BoxMRounds
+// ========================================================================
+class CItem_Ammo57x28Small : public CItem
+{
+public:
+	DECLARE_CLASS(CItem_Ammo57x28Small, CItem);
 
+	void Spawn(void)
+	{
+		Precache();
+		SetModel("models/items/boxmrounds.mdl");
+		m_iItemID = 190;
+		BaseClass::Spawn();
+		m_iItemCapacity = SIZE_AMMO_SMG1;
+	}
+	void Precache(void)
+	{
+		PrecacheModel("models/items/boxmrounds.mdl");
+	}
+	bool MyTouch(CBasePlayer *pPlayer)
+	{
+		if (ITEM_GiveAmmo(pPlayer, SIZE_AMMO_SMG1, "57x28"))
+		{
+			if (g_pGameRules->ItemShouldRespawn(this) == GR_ITEM_RESPAWN_NO)
+			{
+				UTIL_Remove(this);
+			}
+			return true;
+		}
+		return false;
+	}
+};
+LINK_ENTITY_TO_CLASS(item_ammo_57x28_small, CItem_Ammo57x28Small);
+
+
+// ========================================================================
+//	>> LargeBoxMRounds
+// ========================================================================
+class CItem_Ammo57x28 : public CItem
+{
+public:
+	DECLARE_CLASS(CItem_Ammo57x28, CItem);
+
+	void Spawn(void)
+	{
+		Precache();
+		SetModel("models/items/boxmrounds.mdl");
+		m_iItemID = 190;
+		BaseClass::Spawn();
+	}
+	void Precache(void)
+	{
+		PrecacheModel("models/items/boxmrounds.mdl");
+	}
+	bool MyTouch(CBasePlayer *pPlayer)
+	{
+		if (ITEM_GiveAmmo(pPlayer, SIZE_AMMO_SMG1_LARGE, "57x28"))
+		{
+			if (g_pGameRules->ItemShouldRespawn(this) == GR_ITEM_RESPAWN_NO)
+			{
+				UTIL_Remove(this);
+			}
+			return true;
+		}
+		return false;
+	}
+};
+LINK_ENTITY_TO_CLASS(item_ammo_57x28, CItem_Ammo57x28);
 // ========================================================================
 //	>> BoxMRounds
 // ========================================================================

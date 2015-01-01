@@ -1,0 +1,20 @@
+ItemData
+{
+	"entity_name"				"item_ammo_57x28" // entity name must match numeric ID
+	"item_friendlyname"			"#CE_Ammo_57x28_Name" // Friendly name. We use the localizer here.
+	"item_friendlydescription"	"#CE_Ammo_57x28_Desc" // Friendly description, also localized.
+
+	"item_capacity"				"200"	// Capacity of the item.
+	"item_maxcapacity"			"200"	// Max capacity of the item.
+    
+    "item_contains"             "190"   // Usually for magazines; refers to what the item contains.
+
+	"item_baseprice"			"50"	// Price for the item, empty.
+	"item_unitprice"			"2"		// Price for each element contained within the item.
+
+    // Weight of empty .50 ammo can is 5 pounds; typical handgun ammunition boxes are much lighter
+    // SS190 weighs 6 grams per round; the ballistic-tip rounds are heavier due to the 40gr bullet
+	
+    "item_baseweight" 			"2268"	// Weight in grams of the empty item. 
+	"item_unitweight" 			"6"	// Weight in grams of each element.
+}

@@ -6781,8 +6781,8 @@ bool CBasePlayer::BumpWeapon( CBaseCombatWeapon *pWeapon )
 			if (!Q_stricmp(pWeapon->GetClassname(), "weapon_smg1"))
 			{
 				++m_Local.m_iGrabbedSMG1;
-				AddPlayerCash(2500 * (1.0 / m_Local.m_iGrabbedSMG1));
-				m_pInventory.NewObject(m_pInventory.FindFirstFreeObject(), 182, primaryGiven, 200);
+				AddPlayerCash(3000 * (1.0 / m_Local.m_iGrabbedSMG1));
+				m_pInventory.NewObject(m_pInventory.FindFirstFreeObject(), 272, primaryGiven, 40);
 			}
 			if (!Q_stricmp(pWeapon->GetClassname(), "weapon_ar2"))
 			{
