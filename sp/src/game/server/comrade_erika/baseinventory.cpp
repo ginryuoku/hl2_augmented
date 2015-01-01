@@ -211,6 +211,7 @@ int CBaseInventory::FindFirstFreeObject()
 			return i;
 		}
 	}
+	UTIL_CenterPrintAll("You can't pick that up!");
 	return -1;
 }
 
@@ -221,10 +222,13 @@ int CBaseInventory::FindFirstFullObject(int itemid)
 	{
 		if (GetItemID(i) == itemid)
 		{
+			if (GetItemCapacity(i) > 0 && element < 0)
+				element = i;
+
 			if (GetItemCapacity(i) == GetItemMaxCapacity(i))
 				return i;
 
-			if ((GetItemCapacity(i) > GetItemCapacity(element) && GetItemCapacity(i) <= GetItemMaxCapacity(i)) || (GetItemCapacity(i) > 0 && element < 0))
+			if ((GetItemCapacity(i) > GetItemCapacity(element) && GetItemCapacity(i) <= GetItemMaxCapacity(i)))
 			{
 				element = i;
 			}
