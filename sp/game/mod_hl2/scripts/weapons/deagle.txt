@@ -1,60 +1,3 @@
-//deagle
-"Weapon_Deagle.cylinderout"
-{
-	"channel"		"CHAN_ITEM"
-	"volume"		"1.0" 
-	"CompatibilityAttenuation"	"1.0"
-	"pitch"		"PITCH_NORM"
-
-	"wave"			"weapons\deagle\cylinderin.wav" 
-}
-"Weapon_Deagle.cylinderin"
-{
-	"channel"		"CHAN_ITEM"
-	"volume"		"1.0" 
-	"CompatibilityAttenuation"	"1.0"
-	"pitch"		"PITCH_NORM"
-
-	"wave"			"weapons\deagle\cylinderout.wav" 
-}
-"Weapon_Deagle.bulletsin"
-{
-	"channel"		"CHAN_ITEM"
-	"volume"		"1.0"
-	"CompatibilityAttenuation"	"1.0"
-	"pitch"		"PITCH_NORM"
-
-	"wave"			"weapons\deagle\bulletsin.wav" 
-}
-"Weapon_Deagle.bulletsout"
-{
-	"channel"		"CHAN_ITEM"
-	"volume"		"1.0"
-	"CompatibilityAttenuation"	"1.0"
-	"pitch"		"PITCH_NORM"
-
-	"wave"			"weapons\deagle\bulletsout.wav" 
-}
-"Weapon_Deagle.Deploy"
-{
-	"channel"		"CHAN_ITEM"
-	"volume"		"1.0"
-	"CompatibilityAttenuation"	"1.0"
-	"pitch"		"PITCH_NORM"
-
-	"wave"			"weapons\deagle\draw.wav" 
-}
-"Weapon_Deagle.Spin"
-{
-	"channel"		"CHAN_ITEM"
-	"volume"		"1.0" 
-	"CompatibilityAttenuation"	"1.0"
-	"pitch"		"PITCH_NORM"
-
-	"wave"			"weapons\deagle\cylinderspin.wav" 
-}
-
-//DEAGLE
 "Weapon_DEagle.Single"
 {
 	"channel"		"CHAN_WEAPON"
@@ -62,6 +5,49 @@
 	"CompatibilityAttenuation"	"0.6"
 	"pitch"		"PITCH_NORM"
 
-	"wave"			")weapons/DEagle/deagle-1.wav"
+	"wave"			")weapons/desert_eagle/de_fire.wav"
+	
+}
+"DE.Slide"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons/desert_eagle/de_slide.wav"
+	
+}
+
+"DE.Clipout"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		".7"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons/desert_eagle/de_clipout.wav"
+	
+}
+
+"DE.Clipin"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons/desert_eagle/de_clipin.wav"
+	
+}
+
+"DE.Deploy"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"PITCH_NORM"
+
+	"wave"			"weapons/desert_eagle/de_deploy.wav"
 	
 }

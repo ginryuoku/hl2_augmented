@@ -1,0 +1,21 @@
+ItemData
+{
+	"entity_name"				"item_mag_357_deagle9" // entity name must match numeric ID
+	"item_friendlyname"			"#CE_Mag_357_deagle9_Name" // Friendly name. We use the localizer here.
+	"item_friendlydescription"	"#CE_Mag_357_deagle9_Desc" // Friendly description, also localized.
+
+	"item_capacity"				"9"	// Capacity of the item.
+	"item_maxcapacity"			"9"	// Max capacity of the item.
+    
+    "item_contains"             "181"   // Usually for magazines; refers to what the item contains.
+
+	"item_baseprice"			"100"	// Price for the item, empty.
+	"item_unitprice"			"1"		// Price for each element contained within the item.
+
+    // Shipping weight of Desert Eagle 9rd .357 magazine is 0.25lbs, or 113 grams
+    // Survivalistboards weight: 3.25lbs for Remington UMC 125gr @ 100 rds
+    // Conversion is 0.0325lbs, or 14.7g - 15 for our purposes
+	
+    "item_baseweight" 			"113"	// Weight in grams of the empty item. 
+	"item_unitweight" 			"15"	// Weight in grams of each element.
+}
