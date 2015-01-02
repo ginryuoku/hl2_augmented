@@ -93,10 +93,10 @@
 		"cost"			"500"
 	}
 
-	"P228"
+	"DEagle"
 	{
 		"ControlName"		"MouseOverPanelButton"
-		"fieldName"		"P228"
+		"fieldName"		"DEagle"
 			"xpos"			"52"
 		"ypos"			"180"
 		"wide"			"170"
@@ -106,11 +106,11 @@
 		"visible"		"1"
 		"enabled"		"1"
 		"tabPosition"	"0"
-		"labelText"		"#Cstrike_P228"
+		"labelText"		"#CE_DEagle_Name"
 		"textAlignment"		"west"
 		"dulltext"		"0"
 		"brighttext"		"0"
-		"command"		"buy p228"
+		"command"		"buy weapon_mag_deagle357"
 		"cost"			"600"
 	}
 	
