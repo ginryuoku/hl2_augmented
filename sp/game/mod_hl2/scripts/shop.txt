@@ -14,7 +14,7 @@
     "weapon_pdw_p90"		    "5000"
     "weapon_arifle_m4a1"	    "7500"
     "weapon_dissolver"		    "16000"
-    "weapon_launcher_40mm"	    "8000"
+    "weapon_launcher_m79"	    "8000"
     "weapon_crossbow"		    "4000"
     "weapon_rpg"			    "6500"
     "weapon_frag"               "200"

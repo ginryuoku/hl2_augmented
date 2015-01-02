@@ -23,26 +23,23 @@
 
 extern ConVar    sk_plr_dmg_smg1_grenade;	
 
-class CWeaponLauncher40mm : public CBaseHLCombatWeapon
+class CWeaponLauncherM79 : public CBaseHLCombatWeapon
 {
 	DECLARE_DATADESC();
 public:
-	DECLARE_CLASS( CWeaponLauncher40mm, CBaseHLCombatWeapon );
+	DECLARE_CLASS( CWeaponLauncherM79, CBaseHLCombatWeapon );
 
-	CWeaponLauncher40mm();
+	CWeaponLauncherM79();
 
 	DECLARE_SERVERCLASS();
 	
 	void	Precache( void );
 	void	PrimaryAttack( void );
 
-	int		GetMinBurst() { return 2; }
-	int		GetMaxBurst() { return 5; }
-
 	virtual void Equip( CBaseCombatCharacter *pOwner );
 	bool	Reload( void );
 
-	float	GetFireRate( void ) { return 0.5f; }	// 13.3hz
+	float	GetFireRate( void ) { return 0.5f; }
 	Activity	GetPrimaryAttackActivity( void );
 
 	virtual const Vector& GetBulletSpread( void )
@@ -61,20 +58,20 @@ protected:
 	float	m_flNextGrenadeCheck;
 };
 
-IMPLEMENT_SERVERCLASS_ST(CWeaponLauncher40mm, DT_WeaponLauncher40mm)
+IMPLEMENT_SERVERCLASS_ST(CWeaponLauncherM79, DT_WeaponLauncherM79)
 END_SEND_TABLE()
 
-LINK_ENTITY_TO_CLASS( weapon_launcher_40mm, CWeaponLauncher40mm );
-PRECACHE_WEAPON_REGISTER(weapon_launcher_40mm);
+LINK_ENTITY_TO_CLASS( weapon_launcher_m79, CWeaponLauncherM79 );
+PRECACHE_WEAPON_REGISTER(weapon_launcher_m79);
 
-BEGIN_DATADESC( CWeaponLauncher40mm )
+BEGIN_DATADESC( CWeaponLauncherM79 )
 
 	DEFINE_FIELD( m_vecTossVelocity, FIELD_VECTOR ),
 	DEFINE_FIELD( m_flNextGrenadeCheck, FIELD_TIME ),
 
 END_DATADESC()
 
-acttable_t	CWeaponLauncher40mm::m_acttable[] = 
+acttable_t	CWeaponLauncherM79::m_acttable[] = 
 {
 	{ ACT_RANGE_ATTACK1,			ACT_RANGE_ATTACK_SMG1,			true },
 	{ ACT_RELOAD,					ACT_RELOAD_SMG1,				true },
@@ -126,10 +123,10 @@ acttable_t	CWeaponLauncher40mm::m_acttable[] =
 	{ ACT_GESTURE_RELOAD,			ACT_GESTURE_RELOAD_SMG1,		true },
 };
 
-IMPLEMENT_ACTTABLE(CWeaponLauncher40mm);
+IMPLEMENT_ACTTABLE(CWeaponLauncherM79);
 
 //=========================================================
-CWeaponLauncher40mm::CWeaponLauncher40mm( )
+CWeaponLauncherM79::CWeaponLauncherM79( )
 {
 	m_fMinRange1		= 0;// No minimum range. 
 	m_fMaxRange1		= 1400;
@@ -141,7 +138,7 @@ CWeaponLauncher40mm::CWeaponLauncher40mm( )
 //-----------------------------------------------------------------------------
 // Purpose: 
 //-----------------------------------------------------------------------------
-void CWeaponLauncher40mm::Precache( void )
+void CWeaponLauncherM79::Precache( void )
 {
 	UTIL_PrecacheOther("grenade_ar2");
 
@@ -151,7 +148,7 @@ void CWeaponLauncher40mm::Precache( void )
 //-----------------------------------------------------------------------------
 // Purpose: Give this weapon longer range when wielded by an ally NPC.
 //-----------------------------------------------------------------------------
-void CWeaponLauncher40mm::Equip( CBaseCombatCharacter *pOwner )
+void CWeaponLauncherM79::Equip( CBaseCombatCharacter *pOwner )
 {
 	if( pOwner->Classify() == CLASS_PLAYER_ALLY )
 	{
@@ -170,30 +167,16 @@ void CWeaponLauncher40mm::Equip( CBaseCombatCharacter *pOwner )
 // Purpose: 
 // Output : Activity
 //-----------------------------------------------------------------------------
-Activity CWeaponLauncher40mm::GetPrimaryAttackActivity( void )
+Activity CWeaponLauncherM79::GetPrimaryAttackActivity( void )
 {
-	return ACT_VM_SECONDARYATTACK;
+	return ACT_VM_PRIMARYATTACK;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-bool CWeaponLauncher40mm::Reload( void )
+bool CWeaponLauncherM79::Reload( void )
 {
-	bool fRet;
-	float fCacheTime = m_flNextSecondaryAttack;
-
-	fRet = DefaultReload( GetMaxClip1(), GetMaxClip2(), ACT_VM_RELOAD );
-	if ( fRet )
-	{
-		// Undo whatever the reload process has done to our secondary
-		// attack timer. We allow you to interrupt reloading to fire
-		// a grenade.
-		m_flNextSecondaryAttack = GetOwner()->m_flNextAttack = fCacheTime;
-
-		WeaponSound( RELOAD );
-	}
-
-	return fRet;
+	return DefaultReload( GetMaxClip1(), GetMaxClip2(), ACT_VM_RELOAD );
 }
 
 //-----------------------------------------------------------------------------
@@ -203,7 +186,7 @@ bool CWeaponLauncher40mm::Reload( void )
 //-----------------------------------------------------------------------------
 // Purpose: 
 //-----------------------------------------------------------------------------
-void CWeaponLauncher40mm::PrimaryAttack( void )
+void CWeaponLauncherM79::PrimaryAttack( void )
 {
 	// Only the player fires this way so we can cast
 	CBasePlayer *pPlayer = ToBasePlayer( GetOwner() );
@@ -226,7 +209,7 @@ void CWeaponLauncher40mm::PrimaryAttack( void )
 		m_bInReload = false;
 
 	// MUST call sound before removing a round from the clip of a CMachineGun
-	BaseClass::WeaponSound( WPN_DOUBLE );
+	BaseClass::WeaponSound( SINGLE );
 
 	pPlayer->RumbleEffect( RUMBLE_357, 0, RUMBLE_FLAGS_NONE );
 
@@ -247,7 +230,7 @@ void CWeaponLauncher40mm::PrimaryAttack( void )
 	pGrenade->SetThrower( GetOwner() );
 	pGrenade->SetDamage( sk_plr_dmg_smg1_grenade.GetFloat() );
 
-	SendWeaponAnim( ACT_VM_SECONDARYATTACK );
+	SendWeaponAnim( ACT_VM_PRIMARYATTACK );
 
 	CSoundEnt::InsertSound( SOUND_COMBAT, GetAbsOrigin(), 1000, 0.2, GetOwner(), SOUNDENT_CHANNEL_WEAPON );
 
@@ -268,7 +251,7 @@ void CWeaponLauncher40mm::PrimaryAttack( void )
 }
 
 //-----------------------------------------------------------------------------
-const WeaponProficiencyInfo_t *CWeaponLauncher40mm::GetProficiencyValues()
+const WeaponProficiencyInfo_t *CWeaponLauncherM79::GetProficiencyValues()
 {
 	static WeaponProficiencyInfo_t proficiencyTable[] =
 	{
