@@ -1,44 +1,45 @@
-// 357
+// Pistol
 
 WeaponData
 {
 	// Weapon data is loaded by both the Game and Client DLLs.
-	"printname"			"#CE_Manurhin_MR96"
-	"viewmodel"			"models/weapons/v_mag_mr96.mdl"
-	"playermodel"		"models/weapons/v_mag_mr96.mdl"
-	"anim_prefix"		"python"
+	"printname"	"#CE_MRI_DEagle357"
+	"viewmodel"			"models/weapons/v_mag_deagle.mdl"
+	"playermodel"		"models/weapons/v_mag_deagle.mdl"
+	"anim_prefix"		"pistol"
 	"bucket"			"1"
-	"bucket_position"	"1"
+	"bucket_position"	"3"
 	"bucket_360"			"0"
-	"bucket_position_360"	"1"
+	"bucket_position_360"	"0"
 
-	"clip_size"			"6"
-	"default_clip"		"6"
+	"clip_size"			"9"
 	"primary_ammo"		"357"
 	"secondary_ammo"	"None"
 
-	"weight"		"7"
-	"rumble"		"2"
+	"weight"		"2"
+	"rumble"		"1"
 	"item_flags"		"0"
-	"BuiltRightHanded"		"0"
-	"AllowFlipping"			"1"
-	
+
+	"BuiltRightHanded" "1" 
+	"AllowFlipping" "1"
+    
     "primary_ammo_id"       "181"
-    "primary_mag_id"        "260"
+    "primary_mag_id"        "261"
     "uses_magazines"        "1"
+    
     IronSight
     {
-        "right"         "2.75"
-        "up"            "1.15"
-        "pitch"         "-0.1"
-        "yaw"           "-0.05"
+        "right"         "-2.25"
+        "up"            "0.6"
+        "pitch"         "-0.2"
+        "yaw"           "0.25"
         "fov"           "-10"
     }
 	// Sounds for the weapon. There is a max of 16 sounds per category (i.e. max 16 "single_shot" sounds)
 	SoundData
 	{
-		"empty"		"Default_ClipEmpty.Pistol"
-		"single_shot"	"Weapon_MR96.Single"
+		"empty"			"Default.ClipEmpty_Pistol"
+		"single_shot"	"Weapon_DEagle.Single"
 	}
 
 	// Weapon Sprite data is loaded by the Client DLL.
@@ -47,17 +48,17 @@ WeaponData
 		"weapon"
 		{
 				"font"		"WeaponIcons"
-				"character"	"e"
+				"character"	"d"
 		}
 		"weapon_s"
 		{	
 				"font"		"WeaponIconsSelected"
-				"character"	"e"
+				"character"	"d"
 		}
 		"weapon_small"
 		{
 				"font"		"WeaponIconsSmall"
-				"character"	"e"
+				"character"	"d"
 		}
 		"ammo"
 		{

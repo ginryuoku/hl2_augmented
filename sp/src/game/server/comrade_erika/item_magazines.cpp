@@ -161,6 +161,32 @@ public:
 };
 LINK_ENTITY_TO_CLASS(item_mag_357_speed6, CItem_Mag_357_Speed6)
 
+class CItem_Mag_357_Deagle9 : public CItem
+{
+public:
+	DECLARE_CLASS(CItem_Mag_357_Deagle9, CItem);
+
+	void Spawn(void)
+	{
+		Precache();
+		SetModel("models/items/boxsrounds.mdl");
+
+		// ItemID must be established before running the common spawn code
+		m_iItemID = 261;
+
+		BaseClass::Spawn();
+	}
+	void Precache(void)
+	{
+		PrecacheModel("models/items/boxsrounds.mdl");
+	}
+	bool MyTouch(CBasePlayer *pPlayer)
+	{
+		return false;
+	}
+};
+LINK_ENTITY_TO_CLASS(item_mag_357_deagle9, CItem_Mag_357_Deagle9)
+
 class CItem_Mag_556_STANAG30 : public CItem
 {
 public:

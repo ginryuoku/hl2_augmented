@@ -5,7 +5,8 @@
 
     "weapon_hgun_m9"		    "500"
     "weapon_hgun_fiveseven"     "900"
-    "weapon_mag_mr96"		    "800"		
+    "weapon_mag_mr96"		    "800"	
+    "weapon_mag_deagle357"      "2000"
     "weapon_shot_870ae"		    "1200"
     "weapon_shot_spas12"	    "3500"
     "weapon_smg_mp5a2"		    "2500"
@@ -36,6 +37,7 @@
     "item_mag_9x19_30mp5"       "60"
     "item_mag_57x28_50p90"      "100"
     "item_mag_357_speed6"       "26"
+    "item_mag_357_deagle9"      "109"
     "item_mag_556_stanag30"     "60"
     "item_mag_57x28_20fs"       "60"
     "item_mag_46x30_40mp7"      "90"

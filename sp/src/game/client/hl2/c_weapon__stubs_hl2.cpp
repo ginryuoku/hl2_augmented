@@ -48,7 +48,7 @@ STUB_WEAPON_CLASS( weapon_hgun_m9, WeaponM9, C_BaseHLCombatWeapon );
 STUB_WEAPON_CLASS(weapon_hgun_fiveseven, WeaponFiveSeven, C_BaseHLCombatWeapon);
 
 STUB_WEAPON_CLASS( weapon_mag_mr96, WeaponMR96, C_BaseHLCombatWeapon );
-
+STUB_WEAPON_CLASS(weapon_mag_deagle357, WeaponDEagle357, C_BaseHLCombatWeapon);
 STUB_WEAPON_CLASS( weapon_shot_870ae, Weapon870AE, C_BaseHLCombatWeapon );
 STUB_WEAPON_CLASS( weapon_shot_spas12, WeaponSPAS12, C_BaseHLCombatWeapon );
 
