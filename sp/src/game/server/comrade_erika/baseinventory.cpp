@@ -580,7 +580,7 @@ void ConsolidateAmmoManually(const CCommand &args)
 	{
 		pPlayer->m_pInventory.ConsolidateAmmo();
 		// Until we figure out why my QS seems to be eating data (if it indeed *is*), I'm disabling it.
-		//pPlayer->m_pInventory.QuickSort(0, MAX_INVENTORY);
+		pPlayer->m_pInventory.QuickSort(0, MAX_INVENTORY);
 	}
 }
 ConCommand mergeammo("mergeammo", ConsolidateAmmoManually, "Consolidates ammunition.", 0);
@@ -594,7 +594,7 @@ void UseItemFromInventory(const CCommand &args)
 	}
 
 	int itemindex = atoi(args.Arg(1));
-	if (itemindex < 0 || itemindex > 100)
+	if (itemindex < 0 || itemindex > MAX_INVENTORY)
 	{
 		Msg("Was passed nonsense value %d, ignoring command\n", itemindex);
 	}
@@ -716,7 +716,7 @@ void SellItem(const CCommand &args)
 	}
 
 	int itemindex = atoi(args.Arg(1));
-	if (itemindex < 0 || itemindex > 100)
+	if (itemindex < 0 || itemindex > MAX_INVENTORY)
 	{
 		Msg("Was passed nonsense value %d, ignoring command\n", itemindex);
 	}
