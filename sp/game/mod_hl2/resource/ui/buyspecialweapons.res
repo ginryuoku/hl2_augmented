@@ -51,10 +51,10 @@
 		"tabPosition"		"0"
 	}
 
-	"40mm_launcher"
+	"m79"
 	{
 		"ControlName"		"MouseOverPanelButton"
-		"fieldName"		"40mm_launcher"
+		"fieldName"		"m79"
 				"xpos"		"52"
 		"ypos"		"116"
 		"wide"		"170"
@@ -64,11 +64,11 @@
 		"visible"		"1"
 		"enabled"		"1"
 		"tabPosition"		"0"
-		"labelText"		"#CE_40mm_launcher"
+		"labelText"		"#CE_M79_Name"
 		"textAlignment"		"west"
 		"dulltext"		"0"
 		"brighttext"		"0"
-		"command"		"buy weapon_launcher_40mm"
+		"command"		"buy weapon_launcher_m79"
 		"cost"			"8000"
 	}
 

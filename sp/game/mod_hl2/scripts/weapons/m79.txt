@@ -1,0 +1,63 @@
+//COPY THIS TEXT TO YOUR SCRIPTS/GAME_SOUNDS_WEAPONS.TXT FILE
+
+//M79 LAUNCHER
+"Weapon_M79.Single"
+{
+	"channel"		"CHAN_WEAPON"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"ATTN_NORM"
+	"pitch"		"PITCH_NORM"
+
+	"wave"			"weapons/m79/m79-1.wav"
+	
+}
+"Weapon_M79.NPC_Single"
+{
+	"channel"		"CHAN_WEAPON"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"ATTN_NORM"
+	"pitch"		"PITCH_NORM"
+
+	"wave"			"^weapons/m79/m79-npc.wav"
+	
+}
+"Weapon_M79.Release"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons\m79\release.wav"
+	
+}
+"Weapon_M79.Load"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons\m79\load.wav"
+	
+}
+"Weapon_M79.Close"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons\m79\close.wav"
+	
+}
+"Weapon_M79.Draw"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons\m79\draw.wav"
+	
+}
