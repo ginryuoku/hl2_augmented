@@ -11,7 +11,7 @@
 
 #include "cbase.h"
 
-#define MAX_INVENTORY 100
+#define MAX_INVENTORY 135
 
 class CBaseInventory
 {
