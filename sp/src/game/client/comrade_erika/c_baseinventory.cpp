@@ -117,7 +117,7 @@ void CBaseInventory::ItemIsClean( int element )
 
 int CBaseInventory::FindFirstFullObject(int itemid)
 {
-	int element = 0;
+	int element = -1;
 	for (int i = 0; i < MAX_INVENTORY; ++i)
 	{
 		if (GetItemID(i) == itemid)
@@ -148,6 +148,8 @@ int CBaseInventory::UseItem(int used, int object)
 int CBaseInventory::SwapMagazines(int itemid, int remaining)
 {
 	int mag = FindFirstFullObject(itemid);
+	if (mag == -1)
+		return -1;
 	int used = GetItemCapacity(mag);
 
 	ItemCap[mag] = remaining;

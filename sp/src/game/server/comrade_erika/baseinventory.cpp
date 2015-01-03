@@ -60,7 +60,7 @@ void CBaseInventory::PurgeObject( int element )
 
 void CBaseInventory::PurgeAllObjects()
 {
-	for ( int i = 0; i < 100; ++i)
+	for ( int i = 0; i < MAX_INVENTORY; ++i)
 	{
 		PurgeObject(i);
 	}
