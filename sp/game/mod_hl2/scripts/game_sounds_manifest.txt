@@ -19,6 +19,7 @@ game_sounds_manifest
     "precache_file"     "scripts/weapons/mp7a1.txt"
 	"precache_file"		"scripts/weapons/deagle.txt"
 	"precache_file"		"scripts/weapons/m79.txt"
+    "precache_file"     "scripts/weapons/uspmatch.txt"
     
 //	"precache_file"		"scripts/game_sounds_weapons_cstrike.txt"
 	"precache_file"		"scripts/game_sounds_weapons_erika.txt"
