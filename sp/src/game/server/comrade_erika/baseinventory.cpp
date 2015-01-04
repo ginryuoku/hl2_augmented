@@ -736,3 +736,38 @@ void SellItem(const CCommand &args)
 	}
 }
 ConCommand sell_item("sell_item", SellItem, "Sells the item at the item index", 0);
+
+void CombineItems(const CCommand &args)
+{
+	if (args.ArgC() < 2)
+	{
+		Msg("Usage: combine_item <first index> <second index>.\n");
+		return;
+	}
+
+	int itemindex = atoi(args.Arg(1));
+	if (itemindex < 0 || itemindex > MAX_INVENTORY)
+	{
+		Msg("Was passed nonsense value %d, ignoring command\n", itemindex);
+		return;
+	}
+
+	int itemindex2 = atoi(args.Arg(1));
+	if (itemindex2 < 0 || itemindex2 > MAX_INVENTORY)
+	{
+		Msg("Was passed nonsense value %d, ignoring command\n", itemindex2);
+		return;
+	}
+
+	if (itemindex == itemindex2)
+		return;
+
+	CBasePlayer *pPlayer = UTIL_GetCommandClient();
+
+	if (pPlayer)
+	{
+		pPlayer->m_pInventory.CombineItems(itemindex, itemindex2);
+	}
+}
+
+ConCommand merge_items("merge_items", CombineItems, "Merges two items together\n", 0);
