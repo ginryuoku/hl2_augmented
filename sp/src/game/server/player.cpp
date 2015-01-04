@@ -5697,7 +5697,7 @@ CBaseEntity	*CBasePlayer::GiveNamedItem( const char *pszName, int iSubType )
 	if ( pent != NULL && !(pent->IsMarkedForDeletion()) ) 
 	{
 		pent->Touch( this );
-		if (pent->GetItemID() > 0)
+		if (pent->GetItemID() > 0 && pent->GetItemID() < 350)
 		{
 			ImportEntityIntoInventory(pent);
 		}
