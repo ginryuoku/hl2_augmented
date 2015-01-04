@@ -128,7 +128,7 @@ public:
 	}
 	bool MyTouch(CBasePlayer *pPlayer)
 	{
-		if (ITEM_GiveAmmo(pPlayer, SIZE_AMMO_SMG1, "57x28"))
+		if (ITEM_GiveAmmo(pPlayer, SIZE_AMMO_SMG1, "57x28mm"))
 		{
 			if (g_pGameRules->ItemShouldRespawn(this) == GR_ITEM_RESPAWN_NO)
 			{
@@ -163,7 +163,7 @@ public:
 	}
 	bool MyTouch(CBasePlayer *pPlayer)
 	{
-		if (ITEM_GiveAmmo(pPlayer, SIZE_AMMO_SMG1_LARGE, "57x28"))
+		if (ITEM_GiveAmmo(pPlayer, SIZE_AMMO_SMG1_LARGE, "57x28mm"))
 		{
 			if (g_pGameRules->ItemShouldRespawn(this) == GR_ITEM_RESPAWN_NO)
 			{

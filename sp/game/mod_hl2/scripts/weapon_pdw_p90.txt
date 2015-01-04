@@ -18,7 +18,7 @@ WeaponData
 	"default_clip"			"50"
 	"default_clip2"			"-1"
 
-	"primary_ammo"			"57x28"
+	"primary_ammo"			"57x28mm"
 
 	"weight"				"3"
 	"rumble"			"3"

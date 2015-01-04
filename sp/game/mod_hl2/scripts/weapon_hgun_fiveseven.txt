@@ -13,7 +13,7 @@ WeaponData
 	"bucket_position_360"	"0"
 
 	"clip_size"			"20"
-	"primary_ammo"		"57x28"
+	"primary_ammo"		"57x28mm"
 	"secondary_ammo"	"None"
 
 	"weight"		"2"
