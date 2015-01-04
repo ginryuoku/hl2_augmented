@@ -56,7 +56,7 @@ static DynamicResupplyItems_t g_DynamicResupplyAmmoItems[] =
 	{ "item_ammo_357",				"357",			SIZE_AMMO_357,			0.0f },
 	{ "item_ammo_crossbow",			"XBowBolt",		SIZE_AMMO_CROSSBOW,		0.0f },
 	{ "item_ammo_ar2_altfire",		"AR2AltFire",	SIZE_AMMO_AR2_ALTFIRE,	0.0f },
-	{ "item_ammo_57x28_small", "57x28", SIZE_AMMO_SMG1, 0.4f },
+	{ "item_ammo_57x28_small", "57x28mm", SIZE_AMMO_SMG1, 0.4f },
 };
 
 #define DS_HEALTH_INDEX		0
