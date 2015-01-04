@@ -5,6 +5,7 @@
 
     "weapon_hgun_92fs"		    "600"
     "weapon_hgun_fiveseven"     "900"
+    "weapon_hgun_uspmatch9"     "1200"
     "weapon_mag_mr96"		    "800"	
     "weapon_mag_deagle357"      "2000"
     "weapon_shot_870ae"		    "1200"
@@ -23,7 +24,7 @@
     "item_ammo_357_large"		"40"
     "item_ammo_pistol_large"	"220"
     "item_ammo_smg1_large"		"450"
-    "item_ammo_57x28"		"450"
+    "item_ammo_57x28"		    "450"
     "item_ammo_ar2_large"		"500"
     "item_box_buckshot"		    "25"
     "item_ammo_crossbow"		"21"
@@ -35,6 +36,7 @@
     "item_healthkit"		    "125"
 
     "item_mag_9x19_15"          "35"
+    "item_mag_9x19_18"          "68"
     "item_mag_9x19_30mp5"       "60"
     "item_mag_57x28_50p90"      "100"
     "item_mag_357_speed6"       "26"

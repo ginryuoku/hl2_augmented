@@ -8,7 +8,7 @@ WeaponData
 	"playermodel"		"models/weapons/v_mag_mr96.mdl"
 	"anim_prefix"		"python"
 	"bucket"			"1"
-	"bucket_position"	"1"
+	"bucket_position"	"3"
 	"bucket_360"			"0"
 	"bucket_position_360"	"1"
 
@@ -37,7 +37,7 @@ WeaponData
 	// Sounds for the weapon. There is a max of 16 sounds per category (i.e. max 16 "single_shot" sounds)
 	SoundData
 	{
-		"empty"		"Default_ClipEmpty.Pistol"
+		"empty"		"Default.ClipEmpty_Pistol"
 		"single_shot"	"Weapon_MR96.Single"
 	}
 
