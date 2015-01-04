@@ -51,10 +51,10 @@
 		"tabPosition"		"0"
 	}
 
-	"M9"
+	"92FS"
 	{
 		"ControlName"		"MouseOverPanelButton"
-		"fieldName"		"M9"
+		"fieldName"		"92FS"
 			"xpos"			"52"
 		"ypos"			"116"
 		"wide"			"170"
@@ -64,11 +64,11 @@
 		"visible"		"1"
 		"enabled"		"1"
 		"tabPosition"	"0"
-		"labelText"		"#CE_Beretta_M9"
+		"labelText"		"#CE_Beretta_92FS"
 		"textAlignment"		"west"
 		"dulltext"		"0"
 		"brighttext"		"0"
-		"command"		"buy weapon_hgun_m9"
+		"command"		"buy weapon_hgun_92fs"
 		"cost"			"500"
 	}
 

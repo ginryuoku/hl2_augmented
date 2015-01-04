@@ -33,14 +33,14 @@ extern  ConVar pistol_use_new_accuracy;
 // CWeaponPistol
 //-----------------------------------------------------------------------------
 
-class CWeaponM9 : public CBaseHLCombatWeapon
+class CWeapon92FS : public CBaseHLCombatWeapon
 {
 	DECLARE_DATADESC();
 
 public:
-	DECLARE_CLASS( CWeaponM9, CBaseHLCombatWeapon );
+	DECLARE_CLASS( CWeapon92FS, CBaseHLCombatWeapon );
 
-	CWeaponM9(void);
+	CWeapon92FS(void);
 
 	DECLARE_SERVERCLASS();
 
@@ -117,13 +117,13 @@ private:
 };
 
 
-IMPLEMENT_SERVERCLASS_ST(CWeaponM9, DT_WeaponM9)
+IMPLEMENT_SERVERCLASS_ST(CWeapon92FS, DT_Weapon92FS)
 END_SEND_TABLE()
 
-LINK_ENTITY_TO_CLASS( weapon_hgun_m9, CWeaponM9 );
-PRECACHE_WEAPON_REGISTER( weapon_hgun_m9 );
+LINK_ENTITY_TO_CLASS( weapon_hgun_92fs, CWeapon92FS );
+PRECACHE_WEAPON_REGISTER( weapon_hgun_92fs );
 
-BEGIN_DATADESC( CWeaponM9 )
+BEGIN_DATADESC( CWeapon92FS )
 
 	DEFINE_FIELD( m_flSoonestPrimaryAttack, FIELD_TIME ),
 	DEFINE_FIELD( m_flLastAttackTime,		FIELD_TIME ),
@@ -133,7 +133,7 @@ BEGIN_DATADESC( CWeaponM9 )
 
 END_DATADESC()
 
-acttable_t	CWeaponM9::m_acttable[] = 
+acttable_t	CWeapon92FS::m_acttable[] = 
 {
 	{ ACT_IDLE,						ACT_IDLE_PISTOL,				true },
 	{ ACT_IDLE_ANGRY,				ACT_IDLE_ANGRY_PISTOL,			true },
@@ -152,12 +152,12 @@ acttable_t	CWeaponM9::m_acttable[] =
 };
 
 
-IMPLEMENT_ACTTABLE( CWeaponM9 );
+IMPLEMENT_ACTTABLE( CWeapon92FS );
 
 //-----------------------------------------------------------------------------
 // Purpose: Constructor
 //-----------------------------------------------------------------------------
-CWeaponM9::CWeaponM9( void )
+CWeapon92FS::CWeapon92FS( void )
 {
 	m_flSoonestPrimaryAttack = gpGlobals->curtime;
 	m_flAccuracyPenalty = 0.0f;
@@ -174,7 +174,7 @@ CWeaponM9::CWeaponM9( void )
 //-----------------------------------------------------------------------------
 // Purpose: 
 //-----------------------------------------------------------------------------
-void CWeaponM9::Precache( void )
+void CWeapon92FS::Precache( void )
 {
 	BaseClass::Precache();
 }
@@ -184,7 +184,7 @@ void CWeaponM9::Precache( void )
 // Input  :
 // Output :
 //-----------------------------------------------------------------------------
-void CWeaponM9::Operator_HandleAnimEvent( animevent_t *pEvent, CBaseCombatCharacter *pOperator )
+void CWeapon92FS::Operator_HandleAnimEvent( animevent_t *pEvent, CBaseCombatCharacter *pOperator )
 {
 	switch( pEvent->event )
 	{
@@ -215,7 +215,7 @@ void CWeaponM9::Operator_HandleAnimEvent( animevent_t *pEvent, CBaseCombatCharac
 //-----------------------------------------------------------------------------
 // Purpose:
 //-----------------------------------------------------------------------------
-void CWeaponM9::DryFire( void )
+void CWeapon92FS::DryFire( void )
 {
 	WeaponSound( EMPTY );
 	if (m_bIsSuppressed) {
@@ -231,7 +231,7 @@ void CWeaponM9::DryFire( void )
 //-----------------------------------------------------------------------------
 // Purpose:
 //-----------------------------------------------------------------------------
-void CWeaponM9::PrimaryAttack( void )
+void CWeapon92FS::PrimaryAttack( void )
 {
 	if ( ( gpGlobals->curtime - m_flLastAttackTime ) > 0.5f )
 	{
@@ -365,7 +365,7 @@ void CWeaponM9::PrimaryAttack( void )
 //-----------------------------------------------------------------------------
 // Purpose: 
 //-----------------------------------------------------------------------------
-void CWeaponM9::UpdatePenaltyTime( void )
+void CWeapon92FS::UpdatePenaltyTime( void )
 {
 	CBasePlayer *pOwner = ToBasePlayer( GetOwner() );
 
@@ -383,7 +383,7 @@ void CWeaponM9::UpdatePenaltyTime( void )
 //-----------------------------------------------------------------------------
 // Purpose: 
 //-----------------------------------------------------------------------------
-void CWeaponM9::ItemPreFrame( void )
+void CWeapon92FS::ItemPreFrame( void )
 {
 	UpdatePenaltyTime();
 
@@ -393,7 +393,7 @@ void CWeaponM9::ItemPreFrame( void )
 //-----------------------------------------------------------------------------
 // Purpose: 
 //-----------------------------------------------------------------------------
-void CWeaponM9::ItemBusyFrame( void )
+void CWeapon92FS::ItemBusyFrame( void )
 {
 	UpdatePenaltyTime();
 
@@ -403,7 +403,7 @@ void CWeaponM9::ItemBusyFrame( void )
 //-----------------------------------------------------------------------------
 // Purpose: Allows firing as fast as button is pressed
 //-----------------------------------------------------------------------------
-void CWeaponM9::ItemPostFrame( void )
+void CWeapon92FS::ItemPostFrame( void )
 {
 	BaseClass::ItemPostFrame();
 
@@ -430,7 +430,7 @@ void CWeaponM9::ItemPostFrame( void )
 // Purpose: 
 // Output : int
 //-----------------------------------------------------------------------------
-Activity CWeaponM9::GetPrimaryAttackActivity( void )
+Activity CWeapon92FS::GetPrimaryAttackActivity( void )
 {
 	if (m_bIsSuppressed) {
 		return ACT_VM_PRIMARYATTACK_SILENCED;
@@ -441,7 +441,7 @@ Activity CWeaponM9::GetPrimaryAttackActivity( void )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-bool CWeaponM9::Reload( void )
+bool CWeapon92FS::Reload( void )
 {
 	if (m_bIsSuppressed) {
 		bool fRet = DefaultReload( GetMaxClip1(), GetMaxClip2(), ACT_VM_RELOAD_SILENCED );
@@ -465,7 +465,7 @@ bool CWeaponM9::Reload( void )
 //-----------------------------------------------------------------------------
 // Purpose: 
 //-----------------------------------------------------------------------------
-void CWeaponM9::AddViewKick( void )
+void CWeapon92FS::AddViewKick( void )
 {
 	CBasePlayer *pPlayer  = ToBasePlayer( GetOwner() );
 	
@@ -482,7 +482,7 @@ void CWeaponM9::AddViewKick( void )
 	pPlayer->ViewPunch( viewPunch );
 }
 
-void CWeaponM9::WeaponIdle( void )
+void CWeapon92FS::WeaponIdle( void )
 {
 	if (m_bIsSuppressed) {
 		//Idle again if we've finished
@@ -498,7 +498,7 @@ void CWeaponM9::WeaponIdle( void )
 		}
 	}
 }
-void CWeaponM9::SecondaryAttack( void )
+void CWeapon92FS::SecondaryAttack( void )
 {
 	DisableIronsights();
 	if (m_bIsSuppressed) {
@@ -514,7 +514,7 @@ void CWeaponM9::SecondaryAttack( void )
 	}
 }
 
-bool CWeaponM9::Deploy(void)
+bool CWeapon92FS::Deploy(void)
 {
 	if (m_bIsSuppressed)
 	{

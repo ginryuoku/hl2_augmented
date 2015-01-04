@@ -1,4 +1,4 @@
-"Weapon_USP.DetachSilencer"
+"Weapon_92FS.DetachSilencer"
 {
 	"channel"		"CHAN_ITEM"
 	"volume"		"1.0"
@@ -6,11 +6,11 @@
 	"soundlevel"	"SNDLVL_NORM"
 	"pitch"			"95,105"
 
-	"wave"			"weapons/usp/off.wav"
+	"wave"			"weapons/92fs/off.wav"
 	
 }
 
-"Weapon_USP.AttachSilencer"
+"Weapon_92FS.AttachSilencer"
 {
 	"channel"		"CHAN_ITEM"
 	"volume"		"1.0"
@@ -18,11 +18,11 @@
 	"soundlevel"	"SNDLVL_NORM"
 	"pitch"			"95,105"
 
-	"wave"			"weapons/usp/on.wav"
+	"wave"			"weapons/92fs/on.wav"
 	
 }
 
-"Weapon_USP.Clipout"
+"Weapon_92FS.Clipout"
 {
 	"channel"		"CHAN_ITEM"
 	"volume"		"1.0"
@@ -30,11 +30,11 @@
 	"soundlevel"	"SNDLVL_NORM"
 	"pitch"			"95,105"
 
-	"wave"			"weapons/usp/out.wav"
+	"wave"			"weapons/92fs/out.wav"
 	
 }
 
-"Weapon_USP.Clipin1"
+"Weapon_92FS.Clipin1"
 {
 	"channel"		"CHAN_ITEM"
 	"volume"		"1.0"
@@ -42,11 +42,11 @@
 	"soundlevel"	"SNDLVL_NORM"
 	"pitch"			"95,105"
 
-	"wave"			"weapons/usp/in1.wav"
+	"wave"			"weapons/92fs/in1.wav"
 	
 }
 
-"Weapon_USP.Clipin2"
+"Weapon_92FS.Clipin2"
 {
 	"channel"		"CHAN_ITEM"
 	"volume"		"1.0"
@@ -54,11 +54,11 @@
 	"soundlevel"	"SNDLVL_NORM"
 	"pitch"			"95,105"
 
-	"wave"			"weapons/usp/in2.wav"
+	"wave"			"weapons/92fs/in2.wav"
 	
 }
 
-"Weapon_USP.Sliderelease"
+"Weapon_92FS.Sliderelease"
 {
 	"channel"		"CHAN_ITEM"
 	"volume"		"1.0"
@@ -66,11 +66,11 @@
 	"soundlevel"	"SNDLVL_NORM"
 	"pitch"			"95,105"
 
-	"wave"			"weapons/usp/release.wav"
+	"wave"			"weapons/92fs/release.wav"
 	
 }
 
-"Weapon_USP.Slideback"
+"Weapon_92FS.Slideback"
 {
 	"channel"		"CHAN_ITEM"
 	"volume"		"1.0"
@@ -78,27 +78,27 @@
 	"soundlevel"	"SNDLVL_NORM"
 	"pitch"			"95,105"
 
-	"wave"			"weapons/usp/back.wav"
+	"wave"			"weapons/92fs/back.wav"
 	
 }
 
-"Weapon_USP.Single"
+"Weapon_92FS.Single"
 {
 	"channel"		"CHAN_WEAPON"
 	"volume"		"1.0"
 	"CompatibilityAttenuation"	"ATTN_NORM"
 	"pitch"		"PITCH_NORM"
 
-	"wave"			")weapons/usp/usp_unsil-1.wav"
+	"wave"			")weapons/92fs/92fs_unsil-1.wav"
 }
 
-"Weapon_USP.SilencedShot"
+"Weapon_92FS.SilencedShot"
 {
 	"channel"		"CHAN_ITEM"
 	"volume"		"1.0"
 	"CompatibilityAttenuation"	"ATTN_IDLE"
 	"pitch"		"PITCH_NORM"
 	
-	"wave"			")weapons/usp/usp1.wav"
+	"wave"			")weapons/92fs/92fs-1.wav"
 	
 }
