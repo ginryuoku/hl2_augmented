@@ -93,7 +93,7 @@ int CBaseInventory::GetItemContains(int element)
 
 void CBaseInventory::SetItemCapacity(int element, int newcapacity)
 {
-	if (newcapacity == 0)
+	if (newcapacity == 0 && GetItemType(element) != ITEM_MAGAZINE)
 	{
 		PurgeObject(element);
 	}
@@ -451,20 +451,23 @@ void CBaseInventory::CombineItems(int itemindex1, int itemindex2)
 {
 	int newcap1 = 0;
 	int newcap2 = 0;
+	int merged = 0;
 
 	if (GetItemID(itemindex1) != GetItemID(itemindex2))
 		return;
 	if (GetItemContains(itemindex1) != (GetItemContains(itemindex2)))
 		return;
 
-	if (GetItemCapacity(itemindex1) + GetItemCapacity(itemindex1) > GetItemMaxCapacity(itemindex1))
+	merged = GetItemCapacity(itemindex1) + GetItemCapacity(itemindex2);
+
+	if (merged > GetItemMaxCapacity(itemindex1))
 	{
-		newcap1 = GetItemMaxCapacity(newcap1);
-		newcap2 = GetItemMaxCapacity(itemindex1) - GetItemCapacity(itemindex1) - GetItemCapacity(itemindex2);
+		newcap1 = GetItemMaxCapacity(itemindex1);
+		newcap2 = merged - GetItemMaxCapacity(itemindex1);
 	}
 	else
 	{
-		newcap1 = GetItemCapacity(itemindex1) + GetItemCapacity(itemindex2);
+		newcap1 = merged;
 		newcap2 = 0;
 	}
 
@@ -741,7 +744,7 @@ void CombineItems(const CCommand &args)
 {
 	if (args.ArgC() < 2)
 	{
-		Msg("Usage: combine_item <first index> <second index>.\n");
+		Msg("Usage: merge_items <first index> <second index>.\n");
 		return;
 	}
 
@@ -752,7 +755,7 @@ void CombineItems(const CCommand &args)
 		return;
 	}
 
-	int itemindex2 = atoi(args.Arg(1));
+	int itemindex2 = atoi(args.Arg(2));
 	if (itemindex2 < 0 || itemindex2 > MAX_INVENTORY)
 	{
 		Msg("Was passed nonsense value %d, ignoring command\n", itemindex2);
