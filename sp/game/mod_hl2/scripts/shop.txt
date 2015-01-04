@@ -3,7 +3,7 @@
     "weapon_crowbar"		    "50"
     "weapon_stunstick"		    "250"
 
-    "weapon_hgun_m9"		    "500"
+    "weapon_hgun_92fs"		    "600"
     "weapon_hgun_fiveseven"     "900"
     "weapon_mag_mr96"		    "800"	
     "weapon_mag_deagle357"      "2000"
