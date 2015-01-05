@@ -49,7 +49,7 @@ public:
 		SetModel( "models/items/boxsrounds.mdl" );
 		m_iItemID = 180;
 		BaseClass::Spawn( );
-		m_iItemCapacity = 20;
+		m_iItemCapacity = SIZE_AMMO_PISTOL;
 	}
 	void Precache( void )
 	{

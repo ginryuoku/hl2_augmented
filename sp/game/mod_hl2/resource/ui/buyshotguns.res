@@ -111,7 +111,7 @@
 		"textAlignment"		"west"
 		"dulltext"		"0"
 		"brighttext"		"0"
-		"command"		"buy weapon_shot_striker"
+		"command"		"buy weapon_shot_striker12"
 		"cost"			"3000"
 		"as_restrict"		"1"
 	}

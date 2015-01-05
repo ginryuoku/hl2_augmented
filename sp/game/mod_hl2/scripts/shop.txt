@@ -10,7 +10,7 @@
     "weapon_mag_deagle357"      "2000"
     "weapon_shot_870ae"		    "1200"
     "weapon_shot_spas12"	    "3500"
-    "weapon_shot_striker"       "6500"
+    "weapon_shot_striker12"       "6500"
     "weapon_smg_mp5a2"		    "2500"
     "weapon_pdw_mp7a1"          "4000"
     "weapon_pdw_p90"		    "5000"
