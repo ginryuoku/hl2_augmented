@@ -9635,9 +9635,9 @@ int CBasePlayer::GiveAmmo(int iCount, const char *szName, bool bSuppressSound /*
 
 void CBasePlayer::UpgradeHealth(void)
 {
-	if (GetPlayerCash() < 1000)
+	if (GetPlayerCash() < 1000 * (m_Local.m_iHealthUpgrades + 1))
 		return;
-	AddPlayerCash(-1000);
+	AddPlayerCash(-1000 * (m_Local.m_iHealthUpgrades + 1));
 	m_Local.m_iHealthUpgrades = m_Local.m_iHealthUpgrades + 1;
 	ResetMaxHealth();
 	Msg("Health upgrades now: %d\n", m_Local.m_iHealthUpgrades);
@@ -9645,9 +9645,9 @@ void CBasePlayer::UpgradeHealth(void)
 
 void CBasePlayer::UpgradeArmor(void)
 {
-	if (GetPlayerCash() < 1000)
+	if (GetPlayerCash() < 1000 * (m_Local.m_iArmorUpgrades + 1))
 		return;
-	AddPlayerCash(-1000);
+	AddPlayerCash(-1000 * (m_Local.m_iArmorUpgrades + 1));
 	m_Local.m_iArmorUpgrades = m_Local.m_iArmorUpgrades + 1;
 	Msg("Armor upgrades now: %d\n", m_Local.m_iArmorUpgrades);
 }
