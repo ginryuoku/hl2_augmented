@@ -1529,6 +1529,10 @@ bool CBaseCombatWeapon::DefaultDeploy( char *szViewModel, char *szWeaponModel, i
 
 	// Weapons that don't autoswitch away when they run out of ammo 
 	// can still be deployed when they have no ammo.
+	
+	// Just in case.
+	DisableIronsights();
+	
 	if ( !HasAnyAmmo() && AllowsAutoSwitchFrom() )
 		return false;
 
@@ -2673,7 +2677,7 @@ void CBaseCombatWeapon::EnableIronsights(void)
 		pHL2Player->StopSprinting();
 #endif
 	
-	if (pOwner->SetFOV(this, pOwner->GetDefaultFOV() + GetIronsightFOVOffset(), 0.4f)) //modify the last value to adjust how fast the fov is applied
+	if (pOwner->SetFOV(this, pOwner->GetDefaultFOV() + GetIronsightFOVOffset(), 0.2f)) //modify the last value to adjust how fast the fov is applied
 	{
 		pOwner->m_Local.m_iHideHUD ^= HIDEHUD_CROSSHAIR;
 		m_bIsIronsighted = true;
@@ -2692,7 +2696,7 @@ void CBaseCombatWeapon::DisableIronsights(void)
 	if (!pOwner)
 		return;
 
-	if (pOwner->SetFOV(this, 0, 0.2f)) //modify the last value to adjust how fast the fov is applied
+	if (pOwner->SetFOV(this, 0, 0.1f)) //modify the last value to adjust how fast the fov is applied
 	{
 		pOwner->m_Local.m_iHideHUD ^= HIDEHUD_CROSSHAIR;
 		m_bIsIronsighted = false;
