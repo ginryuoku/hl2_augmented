@@ -169,6 +169,7 @@ int CBaseInventory::ReturnPrice(int itemindex)
 	}
 	return 0;
 }
+
 void CBaseInventory::NewObject( int ObjectIndex, int NewItemID, int NewItemCap, int NewItemMaxCap )
 {
 	if (ObjectIndex < 0)
