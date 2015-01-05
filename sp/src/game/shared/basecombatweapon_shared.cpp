@@ -2140,8 +2140,9 @@ bool CBaseCombatWeapon::DefaultReload( int iClipSize1, int iClipSize2, int iActi
 	{
 		if (pPlayer && UsesMagazines())
 		{
-			int primary = MIN(iClipSize1 - m_iClip1, pPlayer->m_pInventory.CountAllObjectContentsOfID(GetPrimaryMagazineID()));
-			if (primary != 0)
+			int candidate = pPlayer->m_pInventory.GetItemCapacity(pPlayer->m_pInventory.FindFirstFullObject(GetPrimaryMagazineID()));
+			int primary = MIN(iClipSize1 - m_iClip1, candidate);
+			if (primary != 0 && m_iClip1 < candidate)
 			{
 				bReload = true;
 			}
