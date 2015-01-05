@@ -171,6 +171,9 @@ int CBaseInventory::ReturnPrice(int itemindex)
 }
 void CBaseInventory::NewObject( int ObjectIndex, int NewItemID, int NewItemCap, int NewItemMaxCap )
 {
+	if (ObjectIndex < 0)
+		return;
+
 	if (LoadInfo(NewItemID))
 	{
 		ItemID[ObjectIndex] = NewItemID;
@@ -183,22 +186,10 @@ void CBaseInventory::NewObject( int ObjectIndex, int NewItemID, int NewItemCap, 
 
 		Msg("Server: Created new object at position %d, item ID %d, capacity %d, max capacity %d, which contains %d\n",
 			ObjectIndex, NewItemID, NewItemCap, NewItemMaxCap, ItemContains[ObjectIndex]);
-
 	}
-	else
-	{
-		ItemID[ObjectIndex] = NewItemID;
-		ItemCap[ObjectIndex] = NewItemCap;
-		ItemMaxCap[ObjectIndex] = NewItemMaxCap;
-		ItemType[ObjectIndex] = FindItemType(NewItemID);
-		ItemContains[ObjectIndex] = 0;
-
-		ItemDirty[ObjectIndex] = true;
-
-		Msg("Server: Created new object at position %d, item ID %d, capacity %d, max capacity %d\n", ObjectIndex, NewItemID, NewItemCap, NewItemMaxCap);
-
-	}
+	return;
 }
+
 
 int CBaseInventory::FindFirstObject(int itemid)
 {
@@ -523,6 +514,49 @@ int CBaseInventory::QSPartition(int p, int r)
 	}
 }
 
+bool CBaseInventory::SanityCheck(void)
+{
+	bool insanity = false;
+	for (int i = 0; i <= MAX_INVENTORY; ++i)
+	{
+		if (GetItemID(i) > 0)
+		{
+			if (!LoadInfo(GetItemID(i))) 
+			{
+				PurgeObject(i);
+				insanity = true;
+			}
+
+			if (GetItemCapacity(i) > GetItemMaxCapacity(i))
+			{
+				SetItemCapacity(i, GetItemMaxCapacity(i));
+				insanity = true;
+			}
+
+			if (GetItemInfo().item_maxcapacity != GetItemMaxCapacity(i))
+			{
+				ItemMaxCap[i] = GetItemInfo().item_maxcapacity;
+				ItemDirty[i] = true;
+				insanity = true;
+			}
+
+			if (GetItemInfo().item_contains != GetItemContains(i))
+			{
+				ItemContains[i] = GetItemInfo().item_contains;
+				ItemDirty[i] = true;
+				insanity = true;
+			}
+
+		}
+		else if (GetItemContains(i) > 0 || GetItemCapacity(i) > 0 || GetItemMaxCapacity(i) > 0 || GetItemType(i) > 0)
+		{
+			PurgeObject(i);
+			insanity = true;
+		}
+	}
+	return insanity;
+}
+
 void CBaseInventory::QuickSort(int indexleft, int indexright)
 {
 	int q;
@@ -774,3 +808,21 @@ void CombineItems(const CCommand &args)
 }
 
 ConCommand merge_items("merge_items", CombineItems, "Merges two items together\n", 0);
+
+void InvSanityCheck(const CCommand &args)
+{
+	CBasePlayer *pPlayer = UTIL_GetCommandClient();
+	if (pPlayer)
+	{
+		if (pPlayer->m_pInventory.SanityCheck())
+		{
+			Msg("Errors detected in inventory contents. You may have lost items. SAVE NOW!\n");
+		}
+		else
+		{
+			Msg("Inventory contents are sane.\n");
+		}
+	}
+}
+ConCommand inv_sanitycheck("inv_sanitycheck", InvSanityCheck, "Checks inventory for problems.\n", 0);
+

@@ -77,6 +77,7 @@ public:
 	void QuickSort(int indexleft, int indexright);
 	bool LoadInfo(int itemid);
 	int ReturnPrice(int itemindex);
+	bool SanityCheck(void);
 private:
 	int  ItemID     [MAX_INVENTORY];
 	int  ItemCap    [MAX_INVENTORY];
