@@ -334,13 +334,7 @@ Activity CWeaponDEagle357::GetPrimaryAttackActivity(void)
 //-----------------------------------------------------------------------------
 bool CWeaponDEagle357::Reload(void)
 {
-	bool fRet = DefaultReload(GetMaxClip1(), GetMaxClip2(), ACT_VM_RELOAD);
-	if (fRet)
-	{
-		WeaponSound(RELOAD);
-		m_flAccuracyPenalty = 0.0f;
-	}
-	return fRet;
+	return DefaultReload(GetMaxClip1(), GetMaxClip2(), ACT_VM_RELOAD);
 }
 
 //-----------------------------------------------------------------------------
