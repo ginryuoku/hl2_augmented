@@ -94,7 +94,7 @@ void URLLabel::OnMousePressed(MouseCode code)
 }
 
 //-----------------------------------------------------------------------------
-// Purpose: Applies resouce settings
+// Purpose: Applies resource settings
 //-----------------------------------------------------------------------------
 void URLLabel::ApplySettings(KeyValues *inResourceData)
 {
