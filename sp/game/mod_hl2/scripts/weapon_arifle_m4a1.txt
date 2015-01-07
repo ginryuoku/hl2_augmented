@@ -35,7 +35,7 @@ WeaponData
         "up"            "-0.07"
         "pitch"         "0"
         "yaw"           "-0.38"
-        "fov"           "-10"
+        "fov"           "-20"
     }
 
 
