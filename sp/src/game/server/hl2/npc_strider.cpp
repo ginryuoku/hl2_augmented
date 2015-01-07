@@ -3170,13 +3170,13 @@ int CNPC_Strider::OnTakeDamage_Alive( const CTakeDamageInfo &info )
 #endif
 	}
 
-#if 0
+
 	if ( (info.GetDamageType() & DMG_BULLET) && info.GetDamage() > 1  && m_iHealth > 1 )
 	{
-		m_iHealth -= 1;
-		return 1;
+		m_iHealth -= info.GetDamage() / 2;
+		return info.GetDamage() / 2;
 	}
-#endif
+
 
 	return 0;
 }
