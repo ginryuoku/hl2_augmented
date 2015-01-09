@@ -499,14 +499,14 @@ void CBaseInventory::SwapItems(int itemindex1, int itemindex2)
 
 int CBaseInventory::QSPartition(int p, int r)
 {
-	int x = GetItemID(p);
+	unsigned int x = GetItemID(p);
 	int i = p - 1;
 	int j = r;
 
 	while (1)
 	{
-		do --j; while (GetItemID(j) > x);
-		do ++i; while (GetItemID(i) < x);
+		do --j; while ((unsigned int) GetItemID(j) > x);
+		do ++i; while ((unsigned int) GetItemID(i) < x);
 
 		if (i < j)
 			SwapItems(i, j);
