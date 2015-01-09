@@ -217,7 +217,7 @@ void CWeaponLauncherM79::PrimaryAttack( void )
 	Vector	vecThrow;
 	// Don't autoaim on grenade tosses
 	AngleVectors( pPlayer->EyeAngles() + pPlayer->GetPunchAngle(), &vecThrow );
-	VectorScale( vecThrow, 1000.0f, vecThrow );
+	VectorScale( vecThrow, 4000.0f, vecThrow );
 	
 	//Create the grenade
 	QAngle angles;
