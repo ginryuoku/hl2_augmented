@@ -1,12 +1,11 @@
 //The following include files are necessary to allow your MyPanel.cpp to compile.
 #include "cbase.h"
 #include "vgui_grid.h"
-#include <vgui_controls/ImagePanel.h>
 #include <vgui_controls/Label.h>
 #include <vgui_controls/Panel.h>
 
 #include "invpanel.h"
-
+#include "invpanel_itempanel.h"
 #include "IGameUIFuncs.h" // for key bindings
 
 #include "tier0/memdbgon.h"
@@ -46,11 +45,10 @@ CInvPanel::CInvPanel(IViewPort *pViewPort) : BaseClass(NULL, PANEL_INVENTORY)
 	{
 		//Create Image
 		Q_snprintf(buffer, sizeof(buffer), "image%i", i);
-		ImagePanel* imagePanel = new ImagePanel(this, buffer);
-		imagePanel->SetImage(scheme()->GetImage("inv/0", false));
-		imagePanel->SetMinimumSize(32, 32);
-		imagePanel->SetProportional(true);
-		imagePanel->SetSize(scheme()->GetProportionalScaledValue(32), scheme()->GetProportionalScaledValue(32));
+		ItemPanel* itempanel = new ItemPanel(this, buffer, "inv/0", i);
+		itempanel->SetMinimumSize(32, 32);
+		itempanel->SetProportional(true);
+		itempanel->SetSize(scheme()->GetProportionalScaledValue(32), scheme()->GetProportionalScaledValue(32));
 
 		//Create Label
 		Q_snprintf(buffer, sizeof(buffer), "label%i", i);
@@ -59,7 +57,7 @@ CInvPanel::CInvPanel(IViewPort *pViewPort) : BaseClass(NULL, PANEL_INVENTORY)
 		label->SetText(buffer);
 
 		//Add Label and Image to PanelListPanel
-		InvSubPanel->AddItem(imagePanel, label);
+		InvSubPanel->AddItem(itempanel, label);
 	}
 
 	vgui::ivgui()->AddTickSignal(GetVPanel(), 100);
@@ -107,11 +105,12 @@ void CInvPanel::BeginUpdates()
 				Panel* panel = InvSubPanel->GetItemPanel(i);
 				if (panel)
 				{
-					ImagePanel* imagepanel = dynamic_cast<ImagePanel*>(panel);
-					if (imagepanel)
+					ItemPanel* itempanel = dynamic_cast<ItemPanel*>(panel);
+					if (itempanel)
 					{
 						Q_snprintf(buffer, sizeof(buffer), "inv/%i", pPlayer->m_pInventory.GetItemID(i));
-						imagepanel->SetImage(scheme()->GetImage(buffer, false));
+						itempanel->ChangeNormalImage(buffer);
+						itempanel->SetNormalImage();
 					}
 				}
 				// Next, grab the label panel.
