@@ -1911,14 +1911,6 @@ void CBaseCombatCharacter::Weapon_Drop( CBaseCombatWeapon *pWeapon, const Vector
 		if ( pWeapon->UsesClipsForAmmo1() )
 		{
 			pWeapon->m_iClip1 = pWeapon->GetDefaultClip1();
-
-			if( FClassnameIs( pWeapon, "weapon_smg1" ) )
-			{
-				// Drop enough ammo to kill 2 of me.
-				// Figure out how much damage one piece of this type of ammo does to this type of enemy.
-				float flAmmoDamage = g_pGameRules->GetAmmoDamage( UTIL_PlayerByIndex(1), this, pWeapon->GetPrimaryAmmoType() );
-				pWeapon->m_iClip1 = (GetMaxHealth() / flAmmoDamage) * 2;
-			}
 		}
 		if ( pWeapon->UsesClipsForAmmo2() )
 		{
