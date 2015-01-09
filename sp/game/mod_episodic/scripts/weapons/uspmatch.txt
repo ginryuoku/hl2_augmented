@@ -1,0 +1,118 @@
+"Weapon_USPMatch.AttachSilencer1"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons/uspmatch/usp_silencer_on_1.wav"
+	
+}
+
+"Weapon_USPMatch.Cloth"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons/uspmatch/usp_cloth.wav"
+	
+}
+"Weapon_USPMatch.Single"
+{
+	"channel"		"CHAN_WEAPON"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"ATTN_NORM"
+	"pitch"		"PITCH_NORM"
+
+	"wave"			")weapons/uspmatch/usp_unsil-1.wav"
+}
+
+"Weapon_USPMatch.SilencedShot"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"ATTN_IDLE"
+	"pitch"		"PITCH_NORM"
+	
+	"wave"			")weapons/uspmatch/usp1.wav"
+	
+}
+
+"Weapon_USPMatch.DetachSilencer"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons/uspmatch/usp_silencer_off.wav"
+	
+}
+
+"Weapon_USPMatch.AttachSilencer"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons/uspmatch/usp_silencer_on.wav"
+	
+}
+
+"Weapon_USPMatch.Clipout"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons/uspmatch/usp_clipout.wav"
+	
+}
+
+"Weapon_USPMatch.Clipin"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons/uspmatch/usp_clipin.wav"
+	
+}
+
+"Weapon_USPMatch.Sliderelease"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons/uspmatch/usp_sliderelease.wav"
+	
+}
+
+"Weapon_USPMatch.Slideback"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons/uspmatch/usp_slideback.wav"
+	
+}
+
+"Weapon_USPMatch.Slideback2"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons/uspmatch/usp_slideback2.wav"
+	
+}

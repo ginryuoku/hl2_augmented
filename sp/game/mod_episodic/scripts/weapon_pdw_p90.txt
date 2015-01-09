@@ -18,7 +18,7 @@ WeaponData
 	"default_clip"			"50"
 	"default_clip2"			"-1"
 
-	"primary_ammo"			"SMG1"
+	"primary_ammo"			"57x28mm"
 
 	"weight"				"3"
 	"rumble"			"3"
@@ -26,7 +26,7 @@ WeaponData
 	"BuiltRightHanded"		"0"
 	"AllowFlipping"			"1"
     
-    "primary_ammo_id"       "182"
+    "primary_ammo_id"       "190"
     "primary_mag_id"        "271"
     "uses_magazines"        "1"
     IronSight
@@ -66,11 +66,6 @@ WeaponData
 		{
 				"font"		"WeaponIconsSmall"
 				"character"	"r"
-		}
-		"ammo2"
-		{
-				"font"		"WeaponIconsSmall"
-				"character"	"t"
 		}
 		"crosshair"
 		{

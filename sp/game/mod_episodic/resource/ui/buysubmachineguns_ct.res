@@ -72,10 +72,10 @@
 		"cost"			"1250"
 	}
 
-	"a2"
+	"mp5a2"
 	{
 		"ControlName"		"MouseOverPanelButton"
-		"fieldName"		"mp5"
+		"fieldName"		"mp5a2"
 		"xpos"			"52"
 		"ypos"			"148"
 		"wide"			"170"
@@ -114,10 +114,10 @@
 		"cost"			"1700"
 	}
 	
-	"p90"
+	"mp7a1"
 	{
 		"ControlName"		"MouseOverPanelButton"
-		"fieldName"		"p90"
+		"fieldName"		"mp7a1"
 		"xpos"			"52"
 		"ypos"			"212"
 		"wide"			"170"
@@ -127,14 +127,33 @@
 		"visible"		"1"
 		"enabled"		"1"
 		"tabPosition"	"0"
-		"labelText"		"#CE_P90"
+		"labelText"		"#CE_HK_MP7A1"
+		"textAlignment"		"west"
+		"dulltext"		"0"
+		"brighttext"		"0"
+		"command"		"buy weapon_pdw_mp7a1"
+		"cost"			"2350"
+	}
+	"p90"
+	{
+		"ControlName"		"MouseOverPanelButton"
+		"fieldName"		"p90"
+		"xpos"			"52"
+		"ypos"			"244"
+		"wide"			"170"
+		"tall"			"20"
+		"autoResize"	"0"
+		"pinCorner"		"2"
+		"visible"		"1"
+		"enabled"		"1"
+		"tabPosition"	"0"
+		"labelText"		"#CE_FNH_P90"
 		"textAlignment"		"west"
 		"dulltext"		"0"
 		"brighttext"		"0"
 		"command"		"buy weapon_pdw_p90"
 		"cost"			"2350"
 	}
-
 	"CancelButton"
 	{
 		"ControlName"		"MouseOverPanelButton"

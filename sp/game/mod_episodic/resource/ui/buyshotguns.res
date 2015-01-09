@@ -94,7 +94,27 @@
 		"cost"			"3000"
 		"as_restrict"		"1"
 	}
-
+	"striker"
+	{
+		"ControlName"		"MouseOverPanelButton"
+		"fieldName"		"striker"
+				"xpos"		"52"
+		"xpos"		"0"
+		"ypos"		"180"
+		"wide"		"170"
+		"tall"		"20"
+		"pinCorner"		"2"
+		"visible"		"1"
+		"enabled"		"1"
+		"tabPosition"		"0"
+		"labelText"		"#CE_CSI_Striker-12"
+		"textAlignment"		"west"
+		"dulltext"		"0"
+		"brighttext"		"0"
+		"command"		"buy weapon_shot_striker12"
+		"cost"			"3000"
+		"as_restrict"		"1"
+	}
 	"CancelButton"
 	{
 		"ControlName"		"MouseOverPanelButton"

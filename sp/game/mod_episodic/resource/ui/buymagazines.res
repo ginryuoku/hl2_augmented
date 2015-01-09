@@ -51,10 +51,10 @@
 		"tabPosition"		"0"
 	}
 
-	"9x19_15"
+	"PistolMags"
 	{
 		"ControlName"		"MouseOverPanelButton"
-		"fieldName"		"9x19_15"
+		"fieldName"		"PistolMags"
 		"xpos"		"52"
 		"ypos"		"116"
 		"wide"		"170"
@@ -64,11 +64,11 @@
 		"visible"		"1"
 		"enabled"		"1"
 		"tabPosition"	"0"
-		"labelText"		"#CE_Mag_9x19_15"
+		"labelText"		"#CE_PistolMags"
 		"textAlignment"		"west"
 		"dulltext"		"0"
 		"brighttext"		"0"
-		"command"		"buy item_mag_9x19_15"
+		"command"		"Resource/UI/BuyPistolMagazines.res"
 		"cost"			"650"
 	}
 
@@ -93,11 +93,10 @@
 		"command"		"buy item_mag_9x19_30mp5"
 		"cost"			"1000"
 	}
-
-	"357_speed6"
+    "46x30_40mp7"
 	{
 		"ControlName"		"MouseOverPanelButton"
-		"fieldName"		"357_speed6"
+		"fieldName"		"46x30_40mp7"
 				"xpos"		"52"
 		"xpos"		"0"
 		"ypos"		"180"
@@ -108,32 +107,11 @@
 		"visible"		"1"
 		"enabled"		"1"
 		"tabPosition"	"0"
-		"labelText"		"#CE_Mag_357_Speed6"
+		"labelText"		"#CE_Mag_46x30_40mp7"
 		"textAlignment"		"west"
 		"dulltext"		"0"
 		"brighttext"		"0"
-		"command"		"buy item_mag_357_speed6"
-		"cost"			"1000"
-	}
-	"57x28_20fs"
-	{
-		"ControlName"		"MouseOverPanelButton"
-		"fieldName"		"57x28_20fs"
-				"xpos"		"52"
-		"xpos"		"0"
-		"ypos"		"212"
-		"wide"		"170"
-		"tall"		"20"
-		"autoResize"	"0"
-		"pinCorner"		"2"
-		"visible"		"1"
-		"enabled"		"1"
-		"tabPosition"	"0"
-		"labelText"		"#CE_Mag_57x28_20fs"
-		"textAlignment"		"west"
-		"dulltext"		"0"
-		"brighttext"		"0"
-		"command"		"buy item_mag_57x28_20fs"
+		"command"		"buy item_mag_46x30_40mp7"
 		"cost"			"1000"
 	}
 	"57x28_50p90"
@@ -142,7 +120,7 @@
 		"fieldName"		"57x28_50p90"
 				"xpos"		"52"
 		"xpos"		"0"
-		"ypos"		"244"
+		"ypos"		"212"
 		"wide"		"170"
 		"tall"		"20"
 		"autoResize"	"0"
@@ -163,7 +141,7 @@
 		"fieldName"		"556_stanag30"
 				"xpos"		"52"
 		"xpos"		"0"
-		"ypos"		"276"
+		"ypos"		"244"
 		"wide"		"170"
 		"tall"		"20"
 		"autoResize"	"0"
@@ -178,6 +156,7 @@
 		"command"		"buy item_mag_556_stanag30"
 		"cost"			"1000"
 	}
+
 	"CancelButton"
 	{
 		"ControlName"		"MouseOverPanelButton"

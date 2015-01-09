@@ -1,0 +1,67 @@
+//mr96
+"Weapon_MR96.cylinderout"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0" 
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"		"PITCH_NORM"
+
+	"wave"			"weapons\mr96\cylinderin.wav" 
+}
+"Weapon_MR96.cylinderin"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0" 
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"		"PITCH_NORM"
+
+	"wave"			"weapons\mr96\cylinderout.wav" 
+}
+"Weapon_MR96.bulletsin"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"		"PITCH_NORM"
+
+	"wave"			"weapons\mr96\bulletsin.wav" 
+}
+"Weapon_MR96.bulletsout"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"		"PITCH_NORM"
+
+	"wave"			"weapons\mr96\bulletsout.wav" 
+}
+"Weapon_MR96.Deploy"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"		"PITCH_NORM"
+
+	"wave"			"weapons\mr96\draw.wav" 
+}
+"Weapon_MR96.Spin"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0" 
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"		"PITCH_NORM"
+
+	"wave"			"weapons\mr96\cylinderspin.wav" 
+}
+
+//mr96
+"Weapon_MR96.Single"
+{
+	"channel"		"CHAN_WEAPON"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"0.6"
+	"pitch"		"PITCH_NORM"
+
+	"wave"			")weapons/mr96/mr96-1.wav"
+	
+}

@@ -1,0 +1,21 @@
+ItemData
+{
+	"entity_name"				"item_mag_46x30_40mp7" // entity name must match numeric ID
+	"item_friendlyname"			"#CE_Mag_40_MP7_46x30_Name" // Friendly name. We use the localizer here.
+	"item_friendlydescription"	"#CE_Mag_40_MP7_46x30_Desc" // Friendly description, also localized.
+
+	"item_capacity"				"40"	// Capacity of the item.
+	"item_maxcapacity"			"40"	// Max capacity of the item.
+    
+    "item_contains"             "182"   // Usually for magazines; refers to what the item contains.
+
+	"item_baseprice"			"50"	// Price for the item, empty.
+	"item_unitprice"			"2"		// Price for each element contained within the item.
+
+    // According to H&K's datasheet for their MP7A1 military product, the 40rd magazine weighs 200g.
+    // Thanks for not making this a pain in the ass to find, H&K! :D
+    // The 2.7g FMJ round weighs 7 grams according to H&K.
+	
+    "item_baseweight" 			"200"	// Weight in grams of the empty item. 
+	"item_unitweight" 			"7"	// Weight in grams of each element.
+}

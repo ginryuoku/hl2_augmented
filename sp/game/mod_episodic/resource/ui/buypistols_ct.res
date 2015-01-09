@@ -51,10 +51,10 @@
 		"tabPosition"		"0"
 	}
 
-	"M9"
+	"92FS"
 	{
 		"ControlName"		"MouseOverPanelButton"
-		"fieldName"		"M9"
+		"fieldName"		"92FS"
 			"xpos"			"52"
 		"ypos"			"116"
 		"wide"			"170"
@@ -64,18 +64,18 @@
 		"visible"		"1"
 		"enabled"		"1"
 		"tabPosition"	"0"
-		"labelText"		"#CE_Beretta_M9"
+		"labelText"		"#CE_Beretta_92FS"
 		"textAlignment"		"west"
 		"dulltext"		"0"
 		"brighttext"		"0"
-		"command"		"buy weapon_hgun_m9"
+		"command"		"buy weapon_hgun_92fs"
 		"cost"			"500"
 	}
 
-	"USP45"
+	"USPMatch9"
 	{
 		"ControlName"		"MouseOverPanelButton"
-		"fieldName"		"USP45"
+		"fieldName"		"USPMatch9"
 			"xpos"			"52"
 		"ypos"			"148"
 		"wide"			"170"
@@ -85,18 +85,18 @@
 		"visible"		"1"
 		"enabled"		"1"
 		"tabPosition"	"0"
-		"labelText"		"#Cstrike_USP45"
+		"labelText"		"#CE_HK_USP_Match9"
 		"textAlignment"		"west"
 		"dulltext"		"0"
 		"brighttext"		"0"
-		"command"		"buy usp"
+		"command"		"buy weapon_hgun_uspmatch9"
 		"cost"			"500"
 	}
 
-	"P228"
+	"DEagle"
 	{
 		"ControlName"		"MouseOverPanelButton"
-		"fieldName"		"P228"
+		"fieldName"		"DEagle"
 			"xpos"			"52"
 		"ypos"			"180"
 		"wide"			"170"
@@ -106,11 +106,11 @@
 		"visible"		"1"
 		"enabled"		"1"
 		"tabPosition"	"0"
-		"labelText"		"#Cstrike_P228"
+		"labelText"		"#CE_DEagle357_Name"
 		"textAlignment"		"west"
 		"dulltext"		"0"
 		"brighttext"		"0"
-		"command"		"buy p228"
+		"command"		"buy weapon_mag_deagle357"
 		"cost"			"600"
 	}
 	
@@ -148,7 +148,7 @@
 		"visible"		"1"
 		"enabled"		"1"
 		"tabPosition"	"0"
-		"labelText"		"#CE_FNH_Five_Seven"
+		"labelText"		"#CE_FNH_Five-Seven"
 		"textAlignment"		"west"
 		"dulltext"		"0"
 		"brighttext"		"0"

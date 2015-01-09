@@ -1,0 +1,85 @@
+// Pistol
+
+WeaponData
+{
+	// Weapon data is loaded by both the Game and Client DLLs.
+	"printname"	"#CE_Beretta_92FS"
+	"viewmodel"			"models/weapons/v_hgun_92fs.mdl"
+	"playermodel"		"models/weapons/w_hgun_92fs.mdl"
+	"anim_prefix"		"pistol"
+	"bucket"			"1"
+	"bucket_position"	"0"
+	"bucket_360"			"0"
+	"bucket_position_360"	"0"
+
+	"clip_size"			"15"
+	"primary_ammo"		"Pistol"
+	"secondary_ammo"	"None"
+
+	"weight"		"2"
+	"rumble"		"1"
+	"item_flags"		"0"
+
+	"BuiltRightHanded" "0" 
+	"AllowFlipping" "1"
+    
+    "primary_ammo_id"       "180"
+    "primary_mag_id"        "250"
+    "uses_magazines"        "1"
+    IronSight
+    {
+        "right"         "2.775"
+        "up"            "2.075"
+        "pitch"         "-0.325"
+        "yaw"           "0"
+        "fov"           "-10"
+    }
+	// Sounds for the weapon. There is a max of 16 sounds per category (i.e. max 16 "single_shot" sounds)
+	SoundData
+	{
+
+		"reload_npc"	"Weapon_Pistol.NPC_Reload"
+		"empty"			"Default.ClipEmpty_Pistol"
+		"single_shot"	"Weapon_92FS.Single"
+		"single_shot_npc"	"Weapon_Pistol.NPC_Single"
+		"special1"		"Weapon_92FS.SilencedShot"
+	}
+
+	// Weapon Sprite data is loaded by the Client DLL.
+	TextureData
+	{
+		"weapon"
+		{
+				"font"		"WeaponIcons"
+				"character"	"d"
+		}
+		"weapon_s"
+		{	
+				"font"		"WeaponIconsSelected"
+				"character"	"d"
+		}
+		"weapon_small"
+		{
+				"font"		"WeaponIconsSmall"
+				"character"	"d"
+		}
+		"ammo"
+		{
+				"font"		"WeaponIconsSmall"
+				"character"	"p"
+		}
+		"crosshair"
+		{
+				"font"		"Crosshairs"
+				"character"	"Q"
+		}
+		"autoaim"
+		{
+				"file"		"sprites/crosshairs"
+				"x"			"0"
+				"y"			"48"
+				"width"		"24"
+				"height"	"24"
+		}
+	}
+}

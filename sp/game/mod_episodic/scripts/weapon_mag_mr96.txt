@@ -3,12 +3,12 @@
 WeaponData
 {
 	// Weapon data is loaded by both the Game and Client DLLs.
-	"printname"			"#HL2_357Handgun"
-	"viewmodel"			"models/weapons/v_pist_deagle.mdl"
-	"playermodel"		"models/weapons/w_pist_deagle.mdl"
+	"printname"			"#CE_Manurhin_MR96"
+	"viewmodel"			"models/weapons/v_mag_mr96.mdl"
+	"playermodel"		"models/weapons/v_mag_mr96.mdl"
 	"anim_prefix"		"python"
 	"bucket"			"1"
-	"bucket_position"	"1"
+	"bucket_position"	"3"
 	"bucket_360"			"0"
 	"bucket_position_360"	"1"
 
@@ -37,8 +37,8 @@ WeaponData
 	// Sounds for the weapon. There is a max of 16 sounds per category (i.e. max 16 "single_shot" sounds)
 	SoundData
 	{
-		"empty"		"Default_ClipEmpty.Pistol"
-		"single_shot"	"Weapon_DEagle.Single"
+		"empty"		"Default.ClipEmpty_Pistol"
+		"single_shot"	"Weapon_MR96.Single"
 	}
 
 	// Weapon Sprite data is loaded by the Client DLL.

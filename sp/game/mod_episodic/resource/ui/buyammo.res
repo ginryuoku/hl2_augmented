@@ -94,10 +94,10 @@
 		"cost"			"40"
 	}
 
-	"57x28"
+	"46x30"
 	{
 		"ControlName"		"MouseOverPanelButton"
-		"fieldName"		"57x28"
+		"fieldName"		"46x30"
 				"xpos"		"52"
 		"xpos"		"0"
 		"ypos"		"180"
@@ -199,7 +199,26 @@
 		"command"		"buy item_box_buckshot"
 		"cost"			"25"
 	}
-
+	"57x28mm"
+	{
+		"ControlName"		"MouseOverPanelButton"
+		"fieldName"		"57x28mm"
+		"xpos"			"52"
+		"ypos"			"340"
+		"wide"			"170"
+		"tall"			"20"
+		"autoResize"	"0"
+		"pinCorner"		"2"
+		"visible"		"1"
+		"enabled"		"1"
+		"tabPosition"	"0"
+		"labelText"		"#item_ammo_57x28"
+		"textAlignment"		"west"
+		"dulltext"		"0"
+		"brighttext"		"0"
+		"command"		"buy item_ammo_57x28"
+		"cost"			"25"
+	}
 	"CancelButton"
 	{
 		"ControlName"		"MouseOverPanelButton"

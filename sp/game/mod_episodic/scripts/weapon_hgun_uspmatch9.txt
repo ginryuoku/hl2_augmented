@@ -3,16 +3,16 @@
 WeaponData
 {
 	// Weapon data is loaded by both the Game and Client DLLs.
-	"printname"	"#M9"
-	"viewmodel"			"models/weapons/v_pist_usp.mdl"
-	"playermodel"		"models/weapons/w_pist_usp.mdl"
+	"printname"	"#CE_HK_USP_Match9"
+	"viewmodel"			"models/weapons/v_hgun_uspmatch.mdl"
+	"playermodel"		"models/weapons/w_hgun_uspmatch.mdl"
 	"anim_prefix"		"pistol"
 	"bucket"			"1"
-	"bucket_position"	"0"
+	"bucket_position"	"1"
 	"bucket_360"			"0"
 	"bucket_position_360"	"0"
 
-	"clip_size"			"15"
+	"clip_size"			"18"
 	"primary_ammo"		"Pistol"
 	"secondary_ammo"	"None"
 
@@ -24,13 +24,13 @@ WeaponData
 	"AllowFlipping" "1"
     
     "primary_ammo_id"       "180"
-    "primary_mag_id"        "250"
+    "primary_mag_id"        "252"
     "uses_magazines"        "1"
     IronSight
     {
-        "right"         "2.86"
-        "up"            "2.1"
-        "pitch"         "0.1"
+        "right"         "2.275"
+        "up"            "0.78"
+        "pitch"         "-0.4"
         "yaw"           "0"
         "fov"           "-10"
     }
@@ -40,9 +40,9 @@ WeaponData
 
 		"reload_npc"	"Weapon_Pistol.NPC_Reload"
 		"empty"			"Default.ClipEmpty_Pistol"
-		"single_shot"	"Weapon_USP.Single"
+		"single_shot"	"Weapon_USPMatch.Single"
 		"single_shot_npc"	"Weapon_Pistol.NPC_Single"
-		"special1"		"Weapon_USP.SilencedShot"
+		"special1"		"Weapon_USPMatch.SilencedShot"
 	}
 
 	// Weapon Sprite data is loaded by the Client DLL.
