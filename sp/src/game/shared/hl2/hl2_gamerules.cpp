@@ -1835,6 +1835,37 @@ CON_COMMAND( buy, "Sell item to player.\n\tArguments: <item_name>" )
 		pPlayer->GiveNamedItem( item_to_give );
 	}
 }
+
+CON_COMMAND(sell_weapon, "Sell item to player.\n\tArguments: <item_name>")
+{
+	if (HL2GameRules()->g_ItemPrices.Count() == 0)
+		HL2GameRules()->LoadItemPrices();
+
+	CBasePlayer *pPlayer = UTIL_GetLocalPlayer();
+	if (!pPlayer || args.ArgC() < 2)
+		return;
+
+	if (pPlayer && args.ArgC() >= 2)
+	{
+		char item_to_give[256];
+		Q_strncpy(item_to_give, args[1], sizeof(item_to_give));
+		Q_strlower(item_to_give);
+
+		CHalfLife2::itemPrice_s *item = HL2GameRules()->FindItemPrice(item_to_give);
+
+		if (!item)
+		{
+			Msg("item %s not found\n", item_to_give);
+			return;
+		}
+		CBaseCombatWeapon *pWeapon = pPlayer->Weapon_OwnsThisType(item_to_give);
+		if (pWeapon)
+		{
+			pWeapon->DestroyItem();
+			pPlayer->AddPlayerCash(item->price);
+		}
+	}
+}
 #endif // !CLIENT_DLL
 
 #ifndef HL2MP
