@@ -17,12 +17,13 @@ CInvPanelContext::CInvPanelContext(vgui::Panel *pParent, int itemindex) : BaseCl
 
 	for (int i = 0; i <= 2; ++i)
 	{
+		m_pContextButtons[i]->SetScheme(vgui::scheme()->LoadSchemeFromFile("resource/clientscheme.res", "SourceScheme"));
 		m_pContextButtons[i]->SetPaintBackgroundEnabled(true);
 		m_pContextButtons[i]->SetPaintBackgroundType(0);
 		m_pContextButtons[i]->SetBgColor(GetSchemeColor("ListPanel.BgColor", GetBgColor(), pScheme));
 	}
 
-	SetScheme(vgui::scheme()->LoadSchemeFromFile("resource/sourceschemebase.res", "SourceScheme"));
+	SetScheme(vgui::scheme()->LoadSchemeFromFile("resource/clientscheme.res", "ClientScheme"));
 	LoadControlSettings("Resource/UI/invbutton.res");
 
 	SetPaintBackgroundType(2);
