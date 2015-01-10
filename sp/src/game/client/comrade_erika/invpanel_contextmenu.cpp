@@ -13,10 +13,20 @@ CInvPanelContext::CInvPanelContext(vgui::Panel *pParent, int itemindex) : BaseCl
 	m_pContextButtons[1] = new Button(this, "ButtonSellItem", "#CE_ButtonSellItem");
 	m_pContextButtons[2] = new Button(this, "ButtonUseItem", "#CE_ButtonUseItem");
 
+	vgui::IScheme* pScheme = vgui::scheme()->GetIScheme(GetScheme());
+
+	for (int i = 0; i <= 2; ++i)
+	{
+		m_pContextButtons[i]->SetPaintBackgroundEnabled(true);
+		m_pContextButtons[i]->SetPaintBackgroundType(0);
+		m_pContextButtons[i]->SetBgColor(GetSchemeColor("ListPanel.BgColor", GetBgColor(), pScheme));
+	}
+
 	SetScheme(vgui::scheme()->LoadSchemeFromFile("resource/sourceschemebase.res", "SourceScheme"));
 	LoadControlSettings("Resource/UI/invbutton.res");
 
-	SetPaintBackgroundType(0);
+	SetPaintBackgroundType(2);
+
 }
 
 CInvPanelContext::~CInvPanelContext()

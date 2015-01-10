@@ -28,11 +28,14 @@ CInvPanel::CInvPanel(IViewPort *pViewPort) : BaseClass(NULL, PANEL_INVENTORY)
 	SetTitleBarVisible( false );
 	SetProportional(true);
 	
+	int num_cols = scheme()->GetProportionalScaledValue(600) / 72;
+	Msg("Number of proposed columns: %i, ScreenWidth reports: %i\n", num_cols, ScreenWidth());
 	InvSubPanel = new ControlGrid(this, "InvSubPanel");
-	InvSubPanel->SetNumColumns(15);
+	InvSubPanel->SetNumColumns(num_cols);
 	InvSubPanel->SetShouldDrawLabels(true);
 	InvSubPanel->SetProportional(true);
-	InvSubPanel->SetMinimumSize(600, 400);
+	InvSubPanel->SetBounds(scheme()->GetProportionalScaledValue(20), scheme()->GetProportionalScaledValue(20),
+		scheme()->GetProportionalScaledValue(600), scheme()->GetProportionalScaledValue(400));
 
 	LoadControlSettings("resource/UI/invpanel.res");
 	InvalidateLayout();
@@ -46,9 +49,11 @@ CInvPanel::CInvPanel(IViewPort *pViewPort) : BaseClass(NULL, PANEL_INVENTORY)
 		//Create Image
 		Q_snprintf(buffer, sizeof(buffer), "image%i", i);
 		ItemPanel* itempanel = new ItemPanel(this, buffer, "inv/0", i);
-		itempanel->SetMinimumSize(32, 32);
-		itempanel->SetProportional(true);
-		itempanel->SetSize(scheme()->GetProportionalScaledValue(32), scheme()->GetProportionalScaledValue(32));
+		itempanel->SetProportional(false);
+		itempanel->SetSize(64, 64);
+		itempanel->SetMinimumSize(64, 64);
+		itempanel->SetPaintBackgroundEnabled(true);
+		itempanel->SetPaintBackgroundType(2);
 
 		//Create Label
 		Q_snprintf(buffer, sizeof(buffer), "label%i", i);
