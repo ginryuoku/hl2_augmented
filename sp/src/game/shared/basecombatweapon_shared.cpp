@@ -1909,6 +1909,12 @@ void CBaseCombatWeapon::ItemPostFrame( void )
 		Reload();
 		m_fFireDuration = 0.0f;
 	}
+	
+	// -----------------------
+	// Change fire rate/mode
+	// -----------------------
+
+	if (pOwner->m_nButtons & IN_FIREMODE) { FireMode(); }
 
 	// -----------------------
 	//  No buttons down

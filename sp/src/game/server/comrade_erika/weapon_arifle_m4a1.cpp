@@ -138,6 +138,21 @@ CWeaponM4A1::CWeaponM4A1( )
 	m_fMaxRange1		= 1400;
 	m_bIsSuppressed = false;
 	m_bAltFiresUnderwater = false;
+
+	m_nFireMode = 0;
+	m_nShotsLeft = m_nFireMode;
+	m_nBurstRate = 3;
+	m_nBurstToothState = m_nBurstRate;
+	m_bFMAutomatic = true;
+	m_bHasSemiAuto = true;
+	m_bHasBurstGroup = false;
+	m_bHKBurstType = false; // if this M4A1 somehow sprouted a burst group, it'd be the special snowflake.
+	m_bIsClosedBolt = true;
+	m_bManuallyOperated = false;
+	m_bFMCycleDirection = true;
+	m_bUsesSwitchToChange = true;
+	m_bAcceleratesFA = false;
+	m_fAlternateBurstROF = 10.0f;
 }
 
 //-----------------------------------------------------------------------------
@@ -178,6 +193,17 @@ void CWeaponM4A1::DryFire( void )
 }
 void CWeaponM4A1::PrimaryAttack( void )
 {
+	// If there is less than 1 shot left in this firing mode... return
+	if (m_nShotsLeft < 1)
+		return;
+
+	// If the firing mode is less than four, remove one from the shots left counter...
+	if (m_nFireMode < 3)
+		m_nShotsLeft--;
+
+	// and update the burst tooth state.
+	--m_nBurstToothState;
+
 	if (m_bIsSuppressed)
 	{
 		CSoundEnt::InsertSound(SOUND_WORLD, GetAbsOrigin(), SOUNDENT_VOLUME_EMPTY, 0.2, GetOwner());
@@ -237,7 +263,14 @@ void CWeaponM4A1::PrimaryAttack( void )
 	// To make the firing framerate independent, we may have to fire more than one bullet here on low-framerate systems, 
 	// especially if the weapon we're firing has a really fast rate of fire.
 	info.m_iShots = 0;
-	float fireRate = GetFireRate();
+
+	float fireRate = 0.5f;
+	// If I accelerate ROF in burst, and I'm in the appropriate fire mode 
+	// (Nikonov weapons in burst/FA, G11 in burst), use the alternate rate of fire.
+	if (m_fAlternateBurstROF < 5 && ((m_bAcceleratesFA && m_nFireMode > 1) || (!m_bAcceleratesFA && m_nFireMode == 2)))
+		fireRate = m_fAlternateBurstROF;
+	else
+		fireRate = GetFireRate();
 
 	while ( m_flNextPrimaryAttack <= gpGlobals->curtime )
 	{
@@ -267,11 +300,12 @@ void CWeaponM4A1::PrimaryAttack( void )
 	info.m_vecSpread = pPlayer->GetAttackSpread( this );
 
 	pPlayer->FireBullets( info );
-
-	if (!m_iClip1 && pPlayer->GetAmmoCount(m_iPrimaryAmmoType) <= 0)
+	if (!m_iClip1 && pPlayer->GetAmmoCount(m_iPrimaryAmmoType) <= 0 &&
+		((!UsesMagazines() && pPlayer->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()) <= 0)) ||
+		(UsesMagazines() && pPlayer->m_pInventory.CountAllObjectContentsOfID(GetPrimaryMagazineID())))
 	{
 		// HEV suit - indicate out of ammo condition
-		pPlayer->SetSuitUpdate("!HEV_AMO0", FALSE, 0); 
+		pPlayer->SetSuitUpdate("!HEV_AMO0", FALSE, 0);
 	}
 
 	//Add our view kick in
@@ -494,6 +528,9 @@ bool CWeaponM4A1::Deploy(void)
 	{
 		DefaultDeploy((char*)GetViewModel(), (char*)GetWorldModel(), ACT_VM_DRAW, (char*)GetAnimPrefix());
 	}
+
+	m_nShotsFired = 0;
+	m_bFMReady = true;
 
 	return BaseClass::Deploy();
 }

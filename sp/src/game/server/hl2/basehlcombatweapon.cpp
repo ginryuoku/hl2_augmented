@@ -34,6 +34,21 @@ END_DATADESC()
 //-----------------------------------------------------------------------------
 CHLMachineGun::CHLMachineGun( void )
 {
+	// I'm assuming a typical H&K weapon here.
+	m_nFireMode = 0;
+	m_nShotsLeft = m_nFireMode;
+	m_nBurstRate = 3;
+	m_nBurstToothState = m_nBurstRate;
+	m_bFMAutomatic = true;
+	m_bHasSemiAuto = true;
+	m_bHasBurstGroup = true;
+	m_bHKBurstType = true;
+	m_bIsClosedBolt = true;
+	m_bManuallyOperated = false;
+	m_bFMCycleDirection = true;
+	m_bUsesSwitchToChange = true;
+	m_bAcceleratesFA = false;
+	m_fAlternateBurstROF = 10.0f;
 }
 
 const Vector &CHLMachineGun::GetBulletSpread( void )
@@ -49,10 +64,22 @@ const Vector &CHLMachineGun::GetBulletSpread( void )
 //-----------------------------------------------------------------------------
 void CHLMachineGun::PrimaryAttack( void )
 {
+	// If there is less than 1 shot left in this firing mode... return
+	if (m_nShotsLeft < 1)
+		return;
+
+	// If the firing mode is less than four, remove one from the shots left counter...
+	if (m_nFireMode < 3)
+		m_nShotsLeft--;
+
+	// and update the burst tooth state.
+	--m_nBurstToothState;
+
 	// Only the player fires this way so we can cast
 	CBasePlayer *pPlayer = ToBasePlayer( GetOwner() );
 	if (!pPlayer)
 		return;
+
 	
 	// Abort here to handle burst and auto fire modes
 	if ( (UsesClipsForAmmo1() && m_iClip1 == 0) || ( !UsesClipsForAmmo1() && !pPlayer->GetAmmoCount(m_iPrimaryAmmoType) ) )
@@ -62,10 +89,16 @@ void CHLMachineGun::PrimaryAttack( void )
 
 	pPlayer->DoMuzzleFlash();
 
-	// To make the firing framerate independent, we may have to fire more than one bullet here on low-framerate systems, 
+	// To make the firing frame-rate independent, we may have to fire more than one bullet here on low-framerate systems, 
 	// especially if the weapon we're firing has a really fast rate of fire.
 	int iBulletsToFire = 0;
-	float fireRate = GetFireRate();
+	float fireRate = 0.5f;
+	// If I accelerate ROF in burst, and I'm in the appropriate fire mode 
+	// (Nikonov weapons in burst/FA, G11 in burst), use the alternate rate of fire.
+	if (m_fAlternateBurstROF < 5 && ((m_bAcceleratesFA && m_nFireMode > 1) || (!m_bAcceleratesFA && m_nFireMode == 2)))
+		fireRate = m_fAlternateBurstROF;
+	else
+		fireRate = GetFireRate();
 
 	// MUST call sound before removing a round from the clip of a CHLMachineGun
 	while ( m_flNextPrimaryAttack <= gpGlobals->curtime )
@@ -206,11 +239,141 @@ void CHLMachineGun::DoMachineGunKick( CBasePlayer *pPlayer, float dampEasy, floa
 bool CHLMachineGun::Deploy( void )
 {
 	m_nShotsFired = 0;
+	m_bFMReady = true;
 
 	return BaseClass::Deploy();
 }
 
+bool CHLMachineGun::Holster(CBaseCombatWeapon *pSwitchingTo)
+{
+	m_nShotsLeft = 0;
+	m_nFireMode = 0;
+	return BaseClass::Holster(pSwitchingTo);
+}
 
+//----------------------------------------------------------
+// Purpose: Implementation of firemode in all machine guns
+//----------------------------------------------------------
+void CHLMachineGun::FireMode(void)
+{
+	int oldmode = m_nFireMode;
+	// Grab the current player
+	CBasePlayer *pPlayer = ToBasePlayer(GetOwner());
+	if (!pPlayer) // if there isn't one, return...
+		return;
+
+	// If player is pushing the firemode button and is okay to change mode,
+	if (((pPlayer->m_nButtons & IN_FIREMODE) && (m_bFMReady == true)) && !(pPlayer->m_nButtons & IN_ATTACK))
+	{
+		if (m_bFMCycleDirection)
+		{
+			switch (m_nFireMode)
+			{
+			case 0:
+			{
+				if (m_bHasSemiAuto)
+					m_nFireMode = 1;
+				else // slam it to full-auto. Nobody known builds a burst-only weapon.
+					m_nFireMode = 3;
+				break;
+			}
+			case 1:
+			{
+				if (m_bHasBurstGroup)
+					m_nFireMode = 2;
+				else if (m_bFMAutomatic)
+					m_nFireMode = 3;
+				break; // get out. For semi-autos.
+			}
+			case 2:
+			{
+				if (m_bFMAutomatic)
+					m_nFireMode = 3;
+				else m_nFireMode = 1;
+				break;
+			}
+			case 3:
+			{
+				if (m_bHasSemiAuto)
+					m_nFireMode = 1;
+				break; // If we're auto-only, do nothing.
+			}
+			default:
+			{
+				m_nFireMode = 0; // on safe, it'll at least go into a known-valid state.
+				break;
+			}
+			}
+		}
+		else // We're an AK or other weapon with a reversed order of fire modes.
+		{
+			switch (m_nFireMode)
+			{
+			case 0: // we're at the top of the rotation.
+			{
+				if (m_bFMAutomatic)
+					m_nFireMode = 3;
+				else if (m_bHasBurstGroup)
+					m_nFireMode = 2;
+				else
+					m_nFireMode = 1;
+				break;
+			}
+			case 1: // we're at the bottom of the rotation.
+			{
+				if (m_bHasBurstGroup)
+					m_nFireMode = 2;
+				else if (m_bFMAutomatic)
+					m_nFireMode = 3;
+				break; 
+			}
+			case 2:
+			{
+				if (m_bFMAutomatic)
+					m_nFireMode = 3;
+				else m_nFireMode = 1; // change this to add safety functionality.
+				break;
+			}
+			case 3:
+			{
+				if (m_bHasBurstGroup)
+					m_nFireMode = 2;
+				else m_nFireMode = 1; // change this to add safety functionality.
+				break;
+			}
+			default:
+			{
+				m_nFireMode = 0; // on safe, it'll at least go into a known-valid state.
+				break;
+			}
+			}
+		}
+
+		if (m_bUsesSwitchToChange && m_nFireMode != oldmode)
+			// play weapon sound so you know the button has been pressed
+			WeaponSound(EMPTY);
+
+		if (m_bHKBurstType)
+		{
+			if (m_nFireMode == 2)// sets the counter to the correct amount (depending on firing mode
+				m_nShotsLeft = m_nBurstRate;
+			else
+				m_nShotsLeft = m_nFireMode;
+		}
+		else {
+			if (m_nFireMode == 2)// sets the counter to the correct amount (depending on firing mode
+				m_nShotsLeft = m_nBurstToothState;
+			else
+				m_nShotsLeft = m_nFireMode;
+		}
+
+		// and set ready to false to keep from running through the list over and over
+		m_bFMReady = false;
+		//DevMsg("There are %d bullets being fired at a time...\\n", m_nFireMode);
+	}
+
+	return;
+}
 
 //-----------------------------------------------------------------------------
 // Purpose: Make enough sound events to fill the estimated think interval
@@ -257,11 +420,31 @@ void CHLMachineGun::ItemPostFrame( void )
 	if ( pOwner == NULL )
 		return;
 
+	if (m_nBurstToothState <= 0)
+		m_nBurstToothState = m_nBurstRate;
+
 	// Debounce the recoiling counter
 	if ( ( pOwner->m_nButtons & IN_ATTACK ) == false )
 	{
+		if (m_bHKBurstType)
+		{
+			if (m_nFireMode == 2)// sets the counter to the correct amount (depending on firing mode
+				m_nShotsLeft = m_nBurstRate;
+			else
+				m_nShotsLeft = m_nFireMode;
+		}
+		else {
+			if (m_nFireMode == 2)// sets the counter to the correct amount (depending on firing mode
+				m_nShotsLeft = m_nBurstToothState;
+			else
+				m_nShotsLeft = m_nFireMode;
+		}
+
 		m_nShotsFired = 0;
 	}
+	
+	if (!(pOwner->m_nButtons & IN_FIREMODE)) // when not pressing firemode button
+		m_bFMReady = true; // set ready to true
 
 	BaseClass::ItemPostFrame();
 }

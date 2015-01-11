@@ -39,7 +39,20 @@ BEGIN_DATADESC( CBaseHLCombatWeapon )
 	DEFINE_FIELD( m_flHolsterTime,		FIELD_TIME ),
 	DEFINE_FIELD( m_iPrimaryAttacks,	FIELD_INTEGER ),
 	DEFINE_FIELD( m_iSecondaryAttacks,	FIELD_INTEGER ),
-
+	DEFINE_FIELD(m_nBurstRate, FIELD_INTEGER),    // Burst fires this many bullets
+	DEFINE_FIELD(m_nShotsLeft, FIELD_INTEGER),    // keeps track of shots left in this firing mode
+	DEFINE_FIELD(m_nFireMode, FIELD_INTEGER),     // keeps track of firing mode
+	DEFINE_FIELD(m_nBurstToothState, FIELD_INTEGER),    // Number 1-3. Blame Colt for this particular horseshit.
+	DEFINE_FIELD(m_bFMReady, FIELD_BOOLEAN),      // firing mode change readiness
+	DEFINE_FIELD(m_bFMAutomatic, FIELD_BOOLEAN),  // firing mode change readiness
+	DEFINE_FIELD(m_bHasBurstGroup, FIELD_BOOLEAN),		// Do I even have a burst FCG?
+	DEFINE_FIELD(m_bHKBurstType, FIELD_BOOLEAN),        // Does my burst FCG reset?
+	DEFINE_FIELD(m_bIsClosedBolt, FIELD_BOOLEAN),       // Do I fire from a closed bolt?
+	DEFINE_FIELD(m_bManuallyOperated, FIELD_BOOLEAN),   // Am I manually operated?
+	DEFINE_FIELD(m_bFMCycleDirection, FIELD_BOOLEAN),   // Does full-auto come first, or semi-auto?
+	DEFINE_FIELD(m_bUsesSwitchToChange, FIELD_BOOLEAN), // Is there a separate control to fire?
+	DEFINE_FIELD(m_bAcceleratesFA, FIELD_BOOLEAN),      // Do I fire a fast burst in FA mode?
+	DEFINE_FIELD(m_fAlternateBurstROF, FIELD_FLOAT),    // How fast am I in 'fast burst'?
 END_DATADESC()
 
 #endif

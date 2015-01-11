@@ -144,6 +144,7 @@ static  kbutton_t   in_grenade1;
 static  kbutton_t   in_grenade2;
 static	kbutton_t	in_attack3;
 kbutton_t	in_ducktoggle;
+kbutton_t   in_firemode;
 
 /*
 ===========
@@ -490,6 +491,8 @@ void IN_Grenade2Down( const CCommand &args ) { KeyDown( &in_grenade2, args[1] );
 void IN_XboxStub( const CCommand &args ) { /*do nothing*/ }
 void IN_Attack3Down( const CCommand &args ) { KeyDown(&in_attack3, args[1] );}
 void IN_Attack3Up( const CCommand &args ) { KeyUp(&in_attack3, args[1] );}
+void IN_FireModeDown(const CCommand &args) { KeyDown(&in_firemode, args[1]); }
+void IN_FireModeUp(const CCommand &args) { KeyUp(&in_firemode, args[1] ); }
 
 void IN_DuckToggle( const CCommand &args ) 
 { 
@@ -1469,6 +1472,7 @@ int CInput::GetButtonBits( int bResetState )
 	CalcButtonBits( bits, IN_GRENADE1, s_ClearInputState, &in_grenade1, bResetState );
 	CalcButtonBits( bits, IN_GRENADE2, s_ClearInputState, &in_grenade2, bResetState );
 	CalcButtonBits( bits, IN_ATTACK3, s_ClearInputState, &in_attack3, bResetState );
+	CalcButtonBits( bits, IN_FIREMODE, s_ClearInputState, &in_firemode, bResetState );
 
 	if ( KeyState(&in_ducktoggle) )
 	{
@@ -1634,6 +1638,9 @@ static ConCommand toggle_duck( "toggle_duck", IN_DuckToggle );
 // Xbox 360 stub commands
 static ConCommand xboxmove("xmove", IN_XboxStub);
 static ConCommand xboxlook("xlook", IN_XboxStub);
+
+static ConCommand startfiremode("+firemode", IN_FireModeDown);
+static ConCommand endfiremode("-firemode", IN_FireModeUp);
 
 /*
 ============

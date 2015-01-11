@@ -33,15 +33,17 @@ public:
 	virtual float	GetFireRate( void ) = 0;
 	virtual int		WeaponRangeAttack1Condition( float flDot, float flDist );
 	virtual bool	Deploy( void );
+	virtual bool	Holster(CBaseCombatWeapon *pSwitchingTo);
 
 	virtual const Vector &GetBulletSpread( void );
 
 	int				WeaponSoundRealtime( WeaponSound_t shoot_type );
-
+	void			FireMode(void);
 	// utility function
 	static void DoMachineGunKick( CBasePlayer *pPlayer, float dampEasy, float maxVerticleKickAngle, float fireDurationTime, float slideLimitTime );
 
 protected:
+
 
 	int	m_nShotsFired;	// Number of consecutive shots fired
 

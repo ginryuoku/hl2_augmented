@@ -131,6 +131,21 @@ CWeaponMP7A1::CWeaponMP7A1()
 	m_fMaxRange1 = 1400;
 
 	m_bAltFiresUnderwater = false;
+
+	m_nFireMode = 0;
+	m_nShotsLeft = m_nFireMode;
+	m_nBurstRate = 2; // if it *had* the burst option, it would be 2rd burst.
+	m_nBurstToothState = m_nBurstRate;
+	m_bFMAutomatic = true;
+	m_bHasSemiAuto = true;
+	m_bHasBurstGroup = false;
+	m_bHKBurstType = true;
+	m_bIsClosedBolt = true;
+	m_bManuallyOperated = false;
+	m_bFMCycleDirection = true;
+	m_bUsesSwitchToChange = true;
+	m_bAcceleratesFA = false;
+	m_fAlternateBurstROF = 10.0f;
 }
 
 //-----------------------------------------------------------------------------

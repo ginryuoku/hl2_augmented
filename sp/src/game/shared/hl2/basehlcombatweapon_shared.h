@@ -61,6 +61,28 @@ protected:
 	bool			m_bLowered;			// Whether the viewmodel is raised or lowered
 	float			m_flRaiseTime;		// If lowered, the time we should raise the viewmodel
 	float			m_flHolsterTime;	// When the weapon was holstered
+
+	int m_nShotsLeft;			// Fire mode remaining shots
+	bool m_bFMReady;			// Fire mode Ready switch
+	bool m_bFMAutomatic;		// Can I go full-auto?
+	bool m_bHasSemiAuto;		// Some automatic weapons are not actually select-fire.
+	bool m_bHasBurstGroup;		// Does my FCG even *have* a burst mode?
+	bool m_bHKBurstType;		// Does this weapon have a fire control group that resets?
+								// NB: HK weapons do, ARs don't, because reasons.
+	bool m_bIsClosedBolt;		// Do I fire from a closed bolt?
+	bool m_bManuallyOperated;	// Weapon cannot automatically cycle itself.
+	bool m_bFMCycleDirection;	// true for most automatics, false for AKs.
+	bool m_bUsesSwitchToChange;	// For special snowflake weapons like the AUG, Uzi and TMP
+	// that select fire modes by squeezing the trigger harder.
+	bool m_bAcceleratesFA;		// AN-94 shoots twice really fast in full-auto and goes to
+	// normal speed after burst.
+	float m_fAlternateBurstROF;	// For the AN-94 Abakan, G11 and other weapons that
+	// have a mechanism for accelerating rate of fire during
+	// bursts. 
+	int m_nBurstRate;			// How many bullets are fired in one burst-mode burst?
+	int m_nFireMode;			// Fire mode value (0 safety,1 single fire,2 burst,3 auto)
+
+	int m_nBurstToothState;		// The burst FCG of an AR-based weapon is a special snowflake.
 };
 
 #endif // BASEHLCOMBATWEAPON_SHARED_H
