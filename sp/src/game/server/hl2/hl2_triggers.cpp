@@ -7,6 +7,7 @@
 #include "cbase.h"
 #include "weapon_physcannon.h"
 #include "hl2_player.h"
+#include "hl2_gamerules.h"
 #include "saverestore_utlvector.h"
 #include "triggers.h"
 
@@ -260,6 +261,12 @@ void CTriggerWeaponDissolve::DissolveThink( void )
 		// Randomly dissolve them all
 		float flLifetime = random->RandomFloat( 2.5f, 4.0f );
 		CreateBeam( vecConduit, pWeapon, flLifetime );
+		
+		CHalfLife2::itemPrice_s *item = HL2GameRules()->FindItemPrice(pWeapon->GetName());
+		CBasePlayer *pPlayer = ToBasePlayer(pWeapon);
+		if (pPlayer)
+			pPlayer->AddPlayerCash(item->price * 0.9);
+
 		pWeapon->Dissolve( NULL, gpGlobals->curtime + ( 3.0f - flLifetime ), false );
 
 		m_OnDissolveWeapon.FireOutput( this, this );
@@ -334,6 +341,11 @@ void CTriggerWeaponStrip::StartTouch(CBaseEntity *pOther)
 			CBaseCombatWeapon *pWeapon = pCharacter->GetWeapon( i );
 			if ( !pWeapon )
 				continue;
+
+			CHalfLife2::itemPrice_s *item = HL2GameRules()->FindItemPrice(pWeapon->GetName());
+			CBasePlayer *pPlayer = ToBasePlayer(pWeapon);
+			if (pPlayer)
+				pPlayer->AddPlayerCash(item->price * 0.9);
 
 			pCharacter->Weapon_Drop( pWeapon );
 			UTIL_Remove( pWeapon );
