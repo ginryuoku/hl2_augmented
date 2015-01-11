@@ -124,13 +124,11 @@ LINK_ENTITY_TO_CLASS( weapon_hgun_92fs, CWeapon92FS );
 PRECACHE_WEAPON_REGISTER( weapon_hgun_92fs );
 
 BEGIN_DATADESC( CWeapon92FS )
-
 	DEFINE_FIELD( m_flSoonestPrimaryAttack, FIELD_TIME ),
 	DEFINE_FIELD( m_flLastAttackTime,		FIELD_TIME ),
 	DEFINE_FIELD( m_flAccuracyPenalty,		FIELD_FLOAT ), //NOTENOTE: This is NOT tracking game time
 	DEFINE_FIELD( m_nNumShotsFired,			FIELD_INTEGER ),
 	DEFINE_FIELD( m_bIsSuppressed,			FIELD_BOOLEAN ),
-
 END_DATADESC()
 
 acttable_t	CWeapon92FS::m_acttable[] = 

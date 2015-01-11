@@ -75,6 +75,7 @@ LINK_ENTITY_TO_CLASS( weapon_arifle_m4a1, CWeaponM4A1 );
 PRECACHE_WEAPON_REGISTER(weapon_arifle_m4a1);
 
 BEGIN_DATADESC( CWeaponM4A1 )
+	DEFINE_FIELD(m_bIsSuppressed, FIELD_BOOLEAN),
 END_DATADESC()
 
 acttable_t	CWeaponM4A1::m_acttable[] = 

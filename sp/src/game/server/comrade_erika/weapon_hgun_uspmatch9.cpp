@@ -124,13 +124,11 @@ LINK_ENTITY_TO_CLASS(weapon_hgun_uspmatch9, CWeaponUSPMatch9);
 PRECACHE_WEAPON_REGISTER(weapon_hgun_uspmatch9);
 
 BEGIN_DATADESC(CWeaponUSPMatch9)
-
-DEFINE_FIELD(m_flSoonestPrimaryAttack, FIELD_TIME),
-DEFINE_FIELD(m_flLastAttackTime, FIELD_TIME),
-DEFINE_FIELD(m_flAccuracyPenalty, FIELD_FLOAT), //NOTENOTE: This is NOT tracking game time
-DEFINE_FIELD(m_nNumShotsFired, FIELD_INTEGER),
-DEFINE_FIELD(m_bIsSuppressed, FIELD_BOOLEAN),
-
+	DEFINE_FIELD(m_flSoonestPrimaryAttack, FIELD_TIME),
+	DEFINE_FIELD(m_flLastAttackTime, FIELD_TIME),
+	DEFINE_FIELD(m_flAccuracyPenalty, FIELD_FLOAT), //NOTENOTE: This is NOT tracking game time
+	DEFINE_FIELD(m_nNumShotsFired, FIELD_INTEGER),
+	DEFINE_FIELD(m_bIsSuppressed, FIELD_BOOLEAN),
 END_DATADESC()
 
 acttable_t	CWeaponUSPMatch9::m_acttable[] =
