@@ -4,7 +4,7 @@
 #include "cbase.h"
 #include "comrade_erika/inventory_parse.h"
 
-#define MAX_INVENTORY 135
+#define MAX_INVENTORY 200
 
 //ID	TYPENAME	TYPENUMBER
 //10	HEALTH		1
