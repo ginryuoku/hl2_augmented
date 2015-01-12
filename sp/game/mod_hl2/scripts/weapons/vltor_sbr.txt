@@ -30,7 +30,7 @@
 
 	"wave"			"weapons/vltorsbr/unfold.wav"
 }
-"Weapon_VltorSBR.pull"
+"Weapon_VltorSBR.boltpull"
 {
 	"channel"		"CHAN_ITEM"
 	"volume"		"1.0"
