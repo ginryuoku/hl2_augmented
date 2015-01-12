@@ -8,7 +8,7 @@ WeaponData
 	"playermodel"	"models/weapons/w_crossbow.mdl"
 	"anim_prefix"	"bow"
 	"bucket"			"3"
-	"bucket_position"	"1"
+	"bucket_position"	"2"
 	"bucket_360"			"0"
 	"bucket_position_360"	"2"
 

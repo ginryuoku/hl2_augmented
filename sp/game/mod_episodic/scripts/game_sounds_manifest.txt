@@ -10,7 +10,8 @@ game_sounds_manifest
 
 	"precache_file"		"scripts/weapons/p90.txt"
 	"precache_file"		"scripts/weapons/92fs.txt"
-	"precache_file"		"scripts/weapons/m4a1.txt"	
+	"precache_file"		"scripts/weapons/m4a1.txt"
+    "precache_file"     "scripts/weapons/vltor_sbr.txt"
 	"precache_file"		"scripts/weapons/mp5.txt"
 	"precache_file"		"scripts/weapons/m3.txt"
 	"precache_file"		"scripts/weapons/mr96.txt"

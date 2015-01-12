@@ -1,0 +1,91 @@
+"Weapon_VltorSBR.Clipout"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"soundlevel"	"SNDLVL_NORM"
+	"pitch"			"95,105"
+
+	"wave"			"weapons/vltorsbr/magout.wav"
+}
+
+"Weapon_VltorSBR.Clipin"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"soundlevel"	"SNDLVL_NORM"
+	"pitch"			"95,105"
+
+	"wave"			"weapons/vltorsbr/magin.wav"
+}
+
+"Weapon_VltorSBR.unfold"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"soundlevel"	"SNDLVL_NORM"
+	"pitch"			"95,105"
+
+	"wave"			"weapons/vltorsbr/unfold.wav"
+}
+"Weapon_VltorSBR.pull"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"soundlevel"	"SNDLVL_NORM"
+	"pitch"			"95,105"
+
+	"wave"			"weapons/vltorsbr/pull.wav"
+}
+"Weapon_VltorSBR.forward"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"soundlevel"	"SNDLVL_NORM"
+	"pitch"			"95,105"
+
+	"wave"			"weapons/vltorsbr/forward.wav"
+}
+"Weapon_VltorSBR.Cloth"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"soundlevel"	"SNDLVL_NORM"
+	"pitch"			"95,105"
+
+	"wave"			"weapons/vltorsbr/cloth.wav"
+}
+"Weapon_VltorSBR.Cloth2"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"soundlevel"	"SNDLVL_NORM"
+	"pitch"			"95,105"
+
+	"wave"			"weapons/vltorsbr/cloth2.wav"
+}
+"Weapon_VltorSBR.Cloth3"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"soundlevel"	"SNDLVL_NORM"
+	"pitch"			"95,105"
+
+	"wave"			"weapons/vltorsbr/cloth3.wav"
+}
+"Weapon_VltorSBR.Single"
+{
+	"channel"		"CHAN_WEAPON"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"0.48"
+	"pitch"		"PITCH_NORM"
+
+	"wave"			")weapons/vltorsbr/vltorsbr-1.wav"
+}

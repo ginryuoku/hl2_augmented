@@ -62,6 +62,7 @@ STUB_WEAPON_CLASS(weapon_pdw_mp7a1, WeaponMP7A1, C_HLMachineGun);
 STUB_WEAPON_CLASS( weapon_pdw_p90, WeaponP90, C_HLMachineGun );
 
 STUB_WEAPON_CLASS( weapon_arifle_m4a1, WeaponM4A1, C_HLMachineGun );
+STUB_WEAPON_CLASS(weapon_arifle_vltorsbr, WeaponVltorSBR, C_HLMachineGun);
 
 STUB_WEAPON_CLASS( weapon_launcher_m79, WeaponLauncherM79, C_BaseHLCombatWeapon );
 STUB_WEAPON_CLASS( weapon_dissolver, WeaponDissolver, C_BaseHLCombatWeapon );
