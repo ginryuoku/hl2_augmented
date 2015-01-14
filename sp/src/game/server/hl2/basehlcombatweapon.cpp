@@ -249,7 +249,6 @@ bool CHLMachineGun::Deploy( void )
 bool CHLMachineGun::Holster(CBaseCombatWeapon *pSwitchingTo)
 {
 	m_nShotsLeft = 0;
-	m_nFireMode = 0;
 	return BaseClass::Holster(pSwitchingTo);
 }
 
