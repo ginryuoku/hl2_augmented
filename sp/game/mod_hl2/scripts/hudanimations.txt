@@ -121,7 +121,7 @@ event SuitAuxPowerNoItemsActive
 {
 	// resize the aux power to be the smallest size
 	Animate HudSuitPower Size			"102 26"			Linear 0.0 0.4	[$WIN32]
-	Animate HudSuitPower Position		"16 400"			Linear 0.0 0.4	[$WIN32]
+	Animate HudSuitPower Position		"200 442"			Linear 0.0 0.4	[$WIN32]
 	Animate HudSuitPower Size			"102 32"			Linear 0.0 0.4	[$X360]
 	Animate HudSuitPower Position		"48 378"			Linear 0.0 0.4	[$X360]
 }
@@ -130,7 +130,7 @@ event SuitAuxPowerOneItemActive
 {
 	// resize the aux power to fit one item
 	Animate HudSuitPower Size			"102 36"			Linear 0.0 0.4	[$WIN32]
-	Animate HudSuitPower Position		"16 390"			Linear 0.0 0.4	[$WIN32]
+	Animate HudSuitPower Position		"200 432"			Linear 0.0 0.4	[$WIN32]
 	Animate HudSuitPower Size			"102 42"			Linear 0.0 0.4	[$X360]
 	Animate HudSuitPower Position		"48 368"			Linear 0.0 0.4	[$X360]
 }
@@ -139,7 +139,7 @@ event SuitAuxPowerTwoItemsActive
 {
 	// resize the aux power to fit two items
 	Animate HudSuitPower Size			"102 46"			Linear 0.0 0.4	[$WIN32]
-	Animate HudSuitPower Position		"16 380"			Linear 0.0 0.4	[$WIN32]
+	Animate HudSuitPower Position		"200 422"			Linear 0.0 0.4	[$WIN32]
 	Animate HudSuitPower Size			"102 52"			Linear 0.0 0.4	[$X360]
 	Animate HudSuitPower Position		"48 358"			Linear 0.0 0.4	[$X360]
 }
@@ -148,7 +148,7 @@ event SuitAuxPowerThreeItemsActive
 {
 	// resize the aux power to fit three items
 	Animate HudSuitPower Size			"102 56"			Linear 0.0 0.4	[$WIN32]
-	Animate HudSuitPower Position		"16 370"			Linear 0.0 0.4	[$WIN32]
+	Animate HudSuitPower Position		"200 412"			Linear 0.0 0.4	[$WIN32]
 	Animate HudSuitPower Size			"102 62"			Linear 0.0 0.4	[$X360]
 	Animate HudSuitPower Position		"48 348"			Linear 0.0 0.4	[$X360]
 }
@@ -156,7 +156,7 @@ event SuitAuxPowerFourItemsActive
 {
 	// resize the aux power to fit four items
 	Animate HudSuitPower Size			"102 66"			Linear 0.0 0.4	[$WIN32]
-	Animate HudSuitPower Position		"16 370"			Linear 0.0 0.4	[$WIN32]
+	Animate HudSuitPower Position		"200 402"			Linear 0.0 0.4	[$WIN32]
 	Animate HudSuitPower Size			"102 72"			Linear 0.0 0.4	[$X360]
 	Animate HudSuitPower Position		"48 348"			Linear 0.0 0.4	[$X360]
 }

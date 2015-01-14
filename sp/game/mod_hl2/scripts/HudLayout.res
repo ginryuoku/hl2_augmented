@@ -5,7 +5,7 @@
 		"fieldName"		"HudHealth"
 		"xpos"	"16"
 		"ypos"	"432"
-		"wide"	"102"
+		"wide"	"108"
 		"tall"  "36"
 		"visible" "1"
 		"enabled" "1"
@@ -15,7 +15,11 @@
 		"text_xpos" "8"
 		"text_ypos" "20"
 		"digit_xpos" "50"
-		"digit_ypos" "2"
+		"digit_ypos" "20"
+        
+        "NumberFont" "Default"
+        "NumberGlowFont" "Default"
+        "SmallNumberFont" "Default"
 	}
 	HudHealth [$X360]
 	{
@@ -38,8 +42,8 @@
 	HudSuit [$WIN32]
 	{
 		"fieldName"		"HudSuit"
-		"xpos"	"140"
-		"ypos"	"432"
+		"xpos"	"16"
+		"ypos"	"392"
 		"wide"	"108"
 		"tall"  "36"
 		"visible" "1"
@@ -50,7 +54,11 @@
 		"text_xpos" "8"
 		"text_ypos" "20"
 		"digit_xpos" "50"
-		"digit_ypos" "2"
+		"digit_ypos" "20"
+        
+        "NumberFont" "Default"
+        "NumberGlowFont" "Default"
+        "SmallNumberFont" "Default"
 	}
 	HudSuit [$X360]
 	{
@@ -149,8 +157,8 @@
 		"fieldName" "HudSuitPower"
 		"visible" "1"
 		"enabled" "1"
-		"xpos"	"16"
-		"ypos"	"396"
+		"xpos"	"200"
+		"ypos"	"442"
 		"wide"	"102"
 		"tall"	"26"
 		

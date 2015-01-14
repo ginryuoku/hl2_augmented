@@ -17,6 +17,7 @@
 #include "hud_numericdisplay.h"
 #include "iclientmode.h"
 
+#include <vgui/ISurface.h>
 #include "vgui_controls/AnimationController.h"
 #include "vgui/ILocalize.h"
 
@@ -40,6 +41,7 @@ public:
 	void OnThink( void );
 	void MsgFunc_Battery(bf_read &msg );
 	bool ShouldDraw();
+	void Paint();
 	
 private:
 	int		m_iBat;	
@@ -144,4 +146,44 @@ void CHudBattery::OnThink( void )
 void CHudBattery::MsgFunc_Battery( bf_read &msg )
 {
 	m_iNewBat = msg.ReadShort();
+}
+
+void CHudBattery::Paint(void)
+{
+	int chunkCount = 1;
+	C_BasePlayer *local = C_BasePlayer::GetLocalPlayer();
+	if (local)
+		chunkCount = local->m_Local.m_iArmorUpgrades + 1;
+
+	bool transition_chunk = false;
+	int transition_chunk_alpha = 15 + (12 * (m_iBat % 20));
+	int enabledChunks = (int)(m_iBat / 20);
+	if (m_iBat % 20)
+	{
+		transition_chunk = true;
+	}
+
+	vgui::surface()->DrawSetColor(Color(255, 220, 0, 255));
+	int xpos = 8, ypos = 8;
+
+	for (int i = 0; i < enabledChunks; ++i)
+	{
+		vgui::surface()->DrawFilledRect(xpos, ypos, xpos + 10, ypos + 10);
+		xpos += 12;
+	}
+
+	if (transition_chunk)
+	{
+		vgui::surface()->DrawSetColor(Color(255, 220, 0, transition_chunk_alpha));
+		vgui::surface()->DrawFilledRect(xpos, ypos, xpos + 10, ypos + 10);
+	}
+
+	vgui::surface()->DrawSetColor(Color(255, 220, 0, 15));
+	for (int i = enabledChunks; i < chunkCount; ++i)
+	{
+		vgui::surface()->DrawFilledRect(xpos, ypos, xpos + 10, ypos + 10);
+		xpos += 12;
+	}
+
+	BaseClass::Paint();
 }

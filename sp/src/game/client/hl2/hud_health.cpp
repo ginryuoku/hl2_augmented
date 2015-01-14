@@ -50,6 +50,7 @@ public:
 	virtual void Reset( void );
 	virtual void OnThink();
 			void MsgFunc_Damage( bf_read &msg );
+	virtual void Paint(void);
 
 private:
 	// old variables
@@ -167,4 +168,44 @@ void CHudHealth::MsgFunc_Damage( bf_read &msg )
 			g_pClientMode->GetViewportAnimationController()->StartAnimationSequence("HealthDamageTaken");
 		}
 	}
+}
+
+void CHudHealth::Paint(void)
+{
+	int chunkCount = 2;
+	C_BasePlayer *local = C_BasePlayer::GetLocalPlayer();
+	if (local)
+		chunkCount = local->m_Local.m_iHealthUpgrades + 2;
+
+	bool transition_chunk = false;
+	int transition_chunk_alpha = 15 + (12 * (m_iHealth % 20));
+	int enabledChunks = (int)(m_iHealth / 20);
+	if (m_iHealth % 20)
+	{
+		transition_chunk = true;
+	}
+
+	surface()->DrawSetColor(Color(255, 220, 0, 255));
+	int xpos = 8, ypos = 8;
+
+	for (int i = 0; i < enabledChunks; ++i)
+	{
+		surface()->DrawFilledRect(xpos, ypos, xpos + 10, ypos + 10);
+		xpos += 12;
+	}
+
+	if (transition_chunk)
+	{
+		surface()->DrawSetColor(Color(255, 220, 0, transition_chunk_alpha));
+		surface()->DrawFilledRect(xpos, ypos, xpos + 10, ypos + 10);
+	}
+
+	surface()->DrawSetColor(Color(255, 220, 0, 15));
+	for (int i = enabledChunks; i < chunkCount; ++i)
+	{
+		surface()->DrawFilledRect(xpos, ypos, xpos + 10, ypos + 10);
+		xpos += 12;
+	}
+
+	BaseClass::Paint();
 }
