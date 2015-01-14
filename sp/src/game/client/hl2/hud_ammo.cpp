@@ -50,6 +50,8 @@ private:
 	CHandle< C_BaseEntity > m_hCurrentVehicle;
 	int		m_iAmmo;
 	int		m_iAmmo2;
+	int		m_iFireMode;
+	int		m_iBurstSize;
 	CHudTexture *m_iconPrimaryAmmo;
 };
 
@@ -75,6 +77,8 @@ void CHudAmmo::Init( void )
 {
 	m_iAmmo		= -1;
 	m_iAmmo2	= -1;
+	m_iFireMode = 0;
+	m_iBurstSize = 3;
 	
 	m_iconPrimaryAmmo = NULL;
 
@@ -107,6 +111,8 @@ void CHudAmmo::Reset()
 	m_hCurrentVehicle = NULL;
 	m_iAmmo = 0;
 	m_iAmmo2 = 0;
+	m_iBurstSize = 3;
+	m_iFireMode = 0;
 
 	UpdateAmmoDisplays();
 }
@@ -137,6 +143,8 @@ void CHudAmmo::UpdatePlayerAmmo( C_BasePlayer *player )
 	SetPaintEnabled(true);
 	SetPaintBackgroundEnabled(true);
 
+	m_iFireMode = wpn->GetFireMode();
+	m_iBurstSize = wpn->GetBurstSize();
 	// Get our icons for the ammo types
 	m_iconPrimaryAmmo = gWR.GetAmmoIconFromWeapon( wpn->GetPrimaryAmmoType() );
 
@@ -237,7 +245,7 @@ void CHudAmmo::UpdateVehicleAmmo( C_BasePlayer *player, IClientVehicle *pVehicle
 	}
 	else
 	{
-		// diferent weapon, change without triggering
+		// different weapon, change without triggering
 		SetAmmo(ammo1, false);
 		SetAmmo2(ammo2, false);
 
@@ -347,20 +355,57 @@ void CHudAmmo::Paint( void )
 {
 	BaseClass::Paint();
 
-#ifndef HL2MP
-	if ( m_hCurrentVehicle == NULL && m_iconPrimaryAmmo )
+	if (m_iFireMode >= 0)
 	{
-		int nLabelHeight;
-		int nLabelWidth;
-		surface()->GetTextSize( m_hTextFont, m_LabelText, nLabelWidth, nLabelHeight );
+		wchar_t *tempString = nullptr;
+		switch (m_iFireMode)
+		{
+		case 0:
+		{
+			tempString = g_pVGuiLocalize->Find("#CE_FM_Safe");
+			if (!tempString)
+				tempString = L"SAFE";
+			break;
+		}
+		case 1:
+		{
+			tempString = g_pVGuiLocalize->Find("#CE_FM_Semi");
+			if (!tempString)
+				tempString = L"SEMI";
+			break;
+		}
+		case 2:
+		{
+			tempString = g_pVGuiLocalize->Find("#CE_FM_Burst");
+			if (!tempString)
+				tempString = L"BURST";
+			break;
+		}
+		case 3:
+		{
+			tempString = g_pVGuiLocalize->Find("#CE_FM_Auto");
+			if (!tempString)
+				tempString = L"AUTO";
+			break;
+		}
+		default:
+			break;
+		}
 
-		// Figure out where we're going to put this
-		int x = text_xpos + ( nLabelWidth - m_iconPrimaryAmmo->Width() ) / 2;
-		int y = text_ypos - ( nLabelHeight + ( m_iconPrimaryAmmo->Height() / 2 ) );
-		
-		m_iconPrimaryAmmo->DrawSelf( x, y, GetFgColor() );
+		Color fmcolor = Color(255, 255, 255, 255);
+		if (m_iFireMode > 0)
+		{
+			fmcolor = Color(255, 0, 0, 255);
+		}
+
+		int x = text_xpos;
+		int y = text_ypos - 2 - surface()->GetFontTall(m_hTextFont);
+
+		surface()->DrawSetTextFont(m_hTextFont);
+		surface()->DrawSetTextColor(fmcolor);
+		surface()->DrawSetTextPos(x, y);
+		surface()->DrawPrintText(tempString, wcslen(tempString));
 	}
-#endif // HL2MP
 }
 
 //-----------------------------------------------------------------------------

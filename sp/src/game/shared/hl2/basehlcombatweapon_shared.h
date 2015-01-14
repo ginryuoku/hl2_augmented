@@ -45,6 +45,9 @@ public:
 	virtual void	AddViewmodelBob( CBaseViewModel *viewmodel, Vector &origin, QAngle &angles );
 	virtual	float	CalcViewmodelBob( void );
 
+	int GetFireMode(void) { return m_nFireMode; }
+	int GetBurstSize(void) { return m_nBurstRate; }
+
 	virtual Vector	GetBulletSpread( WeaponProficiency_t proficiency );
 	virtual float	GetSpreadBias( WeaponProficiency_t proficiency );
 
@@ -76,13 +79,10 @@ protected:
 	// that select fire modes by squeezing the trigger harder.
 	bool m_bAcceleratesFA;		// AN-94 shoots twice really fast in full-auto and goes to
 	// normal speed after burst.
-	float m_fAlternateBurstROF;	// For the AN-94 Abakan, G11 and other weapons that
-	// have a mechanism for accelerating rate of fire during
-	// bursts. 
-	int m_nBurstRate;			// How many bullets are fired in one burst-mode burst?
-	int m_nFireMode;			// Fire mode value (0 safety,1 single fire,2 burst,3 auto)
+	float m_fAlternateBurstROF;	// For the AN-94, G11 and other weapons that
+	// have a mechanism for accelerating rate of fire during bursts. 
 
-	int m_nBurstToothState;		// The burst FCG of an AR-based weapon is a special snowflake.
+	int m_nBurstToothState;		// The burst FCG of an AR-based weapon is the special snowflakiest.
 };
 
 #endif // BASEHLCOMBATWEAPON_SHARED_H

@@ -92,6 +92,9 @@ CBaseCombatWeapon::CBaseCombatWeapon()
 
 	m_bFlipViewModel	= false;
 
+	m_nFireMode = 1;
+	m_nBurstRate = 3;
+
 #if defined( CLIENT_DLL )
 	m_iState = m_iOldState = WEAPON_NOT_CARRIED;
 	m_iClip1 = -1;
@@ -2859,6 +2862,9 @@ BEGIN_PREDICTION_DATA( CBaseCombatWeapon )
 	DEFINE_FIELD( m_iPrimaryAmmoCount, FIELD_INTEGER ),
 	DEFINE_FIELD( m_iSecondaryAmmoCount, FIELD_INTEGER ),
 
+	DEFINE_FIELD(m_nFireMode, FIELD_INTEGER),     // keeps track of firing mode
+	DEFINE_FIELD(m_nBurstRate, FIELD_INTEGER),    // Burst fires this many bullets
+
 	DEFINE_PRED_FIELD( m_bIsIronsighted, FIELD_BOOLEAN, FTYPEDESC_INSENDTABLE ),
 	DEFINE_PRED_FIELD( m_flIronsightedTime, FIELD_FLOAT, FTYPEDESC_INSENDTABLE ),
 
@@ -2916,6 +2922,9 @@ BEGIN_DATADESC( CBaseCombatWeapon )
 
 	DEFINE_FIELD( m_iPrimaryAmmoCount, FIELD_INTEGER ),
 	DEFINE_FIELD( m_iSecondaryAmmoCount, FIELD_INTEGER ),
+
+	DEFINE_FIELD(m_nFireMode, FIELD_INTEGER),     // keeps track of firing mode
+	DEFINE_FIELD(m_nBurstRate, FIELD_INTEGER),    // Burst fires this many bullets
 
 	DEFINE_FIELD(m_bIsIronsighted, FIELD_BOOLEAN),
 	DEFINE_FIELD(m_flIronsightedTime, FIELD_FLOAT),
@@ -3093,7 +3102,8 @@ BEGIN_NETWORK_TABLE_NOBASE( CBaseCombatWeapon, DT_LocalWeaponData )
 	SendPropInt( SENDINFO(m_iSecondaryAmmoType ), 8 ),
 
 	SendPropInt( SENDINFO( m_nViewModelIndex ), VIEWMODEL_INDEX_BITS, SPROP_UNSIGNED ),
-
+	SendPropInt( SENDINFO(m_nFireMode)),
+	SendPropInt(SENDINFO(m_nBurstRate)),
 	SendPropInt( SENDINFO( m_bFlipViewModel ) ),
 
 #if defined( TF_DLL )
@@ -3105,7 +3115,8 @@ BEGIN_NETWORK_TABLE_NOBASE( CBaseCombatWeapon, DT_LocalWeaponData )
 	RecvPropIntWithMinusOneFlag( RECVINFO(m_iClip2 )),
 	RecvPropInt( RECVINFO(m_iPrimaryAmmoType )),
 	RecvPropInt( RECVINFO(m_iSecondaryAmmoType )),
-
+	RecvPropInt(RECVINFO(m_nFireMode)),
+	RecvPropInt(RECVINFO(m_nBurstRate)),
 	RecvPropInt( RECVINFO( m_nViewModelIndex ) ),
 
 	RecvPropBool( RECVINFO( m_bFlipViewModel ) ),

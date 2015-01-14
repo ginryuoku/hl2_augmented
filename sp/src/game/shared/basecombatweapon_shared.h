@@ -273,6 +273,9 @@ public:
 	virtual void			PrimaryAttack( void );						// do "+ATTACK"
 	virtual void			SecondaryAttack( void ) { return; }			// do "+ATTACK2"
 	virtual void			FireMode(void) { return; }					// do "+FIREMODE"
+	
+	virtual int				GetFireMode(void) { return m_nFireMode; }
+	virtual int				GetBurstSize(void) { return m_nBurstRate; }
 	// Firing animations
 	virtual Activity		GetPrimaryAttackActivity( void );
 	virtual Activity		GetSecondaryAttackActivity( void );
@@ -293,7 +296,7 @@ public:
 	virtual void			WeaponSound( WeaponSound_t sound_type, float soundtime = 0.0f );
 	virtual void			StopWeaponSound( WeaponSound_t sound_type );
 	virtual const WeaponProficiencyInfo_t *GetProficiencyValues();
-
+	
 	// Autoaim
 	virtual float			GetMaxAutoAimDeflection() { return 0.99f; }
 	virtual float			WeaponAutoAimScale() { return 1.0f; } // allows a weapon to influence the perceived size of the target's autoaim radius.
@@ -616,6 +619,8 @@ public:
 	bool					m_bReloadsSingly;		// True if this weapon reloads 1 round at a time
 	float					m_fFireDuration;		// The amount of time that the weapon has sustained firing
 	int						m_iSubType;
+	CNetworkVar(int, m_nBurstRate);			// How many bullets are fired in one burst-mode burst?
+	CNetworkVar(int, m_nFireMode);			// Fire mode value (0 safety,1 single fire,2 burst,3 auto)
 
 	float					m_flUnlockTime;
 	EHANDLE					m_hLocker;				// Who locked this weapon.
