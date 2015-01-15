@@ -1,6 +1,6 @@
 "GameInfo"
 {
-	game 		"Comrade Erika"
+	game 		"Comrade Erika (HL2)"
 	title 		"HALF-LIFE'"
 	title2		""
 	supportsvr	1
