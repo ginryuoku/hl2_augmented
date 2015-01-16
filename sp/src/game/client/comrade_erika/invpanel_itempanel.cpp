@@ -19,12 +19,15 @@ ItemPanel::ItemPanel(Panel *parent, const char *name, const char *normalImage, i
 	m_hLabel = new Label(this, buffer, buffer);
 	m_hLabel->SetFont(hFont);
 	m_hLabel->SetText(buffer);
+	m_hLabel->SetEnabled(true);
+	m_hLabel->SetParentNeedsCursorMoveEvents(true);
 		
 	// We hard-code these values for now; this will eventually be calculated by the size of the image.
-	int x = 2;
-	int y = 64 - 2 - 8;
-
-	m_hLabel->SetPos(x, y);
+	m_hLabel->SetPos(0, 48);
+	m_hLabel->SetSize(48, 16);
+	m_hLabel->SetTextInset(6, 0);
+	m_hLabel->SetContentAlignment(Label::a_southwest);
+	m_hLabel->SetAssociatedControl(this);
 }
 
 void ItemPanel::OnMousePressed(vgui::MouseCode code)

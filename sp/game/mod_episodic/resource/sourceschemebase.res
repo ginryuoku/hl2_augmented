@@ -876,6 +876,7 @@ Scheme
                 "tall"      "8"
                 "weight"    "0"
                 "antialias" "0"
+                "outline" "1"
             }
         }
 	}
