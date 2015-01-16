@@ -32,7 +32,7 @@ CInvPanel::CInvPanel(IViewPort *pViewPort) : BaseClass(NULL, PANEL_INVENTORY)
 	Msg("Number of proposed columns: %i, ScreenWidth reports: %i\n", num_cols, ScreenWidth());
 	InvSubPanel = new ControlGrid(this, "InvSubPanel");
 	InvSubPanel->SetNumColumns(num_cols);
-	InvSubPanel->SetShouldDrawLabels(true);
+	InvSubPanel->SetShouldDrawLabels(false);
 	InvSubPanel->SetProportional(true);
 	InvSubPanel->SetBounds(scheme()->GetProportionalScaledValue(20), scheme()->GetProportionalScaledValue(20),
 		scheme()->GetProportionalScaledValue(600), scheme()->GetProportionalScaledValue(400));
@@ -42,8 +42,7 @@ CInvPanel::CInvPanel(IViewPort *pViewPort) : BaseClass(NULL, PANEL_INVENTORY)
 	SetSize(ScreenWidth(), ScreenHeight());
 	
 	char buffer[40];
-	vgui::IScheme* pScheme = vgui::scheme()->GetIScheme(GetScheme());
-	vgui::HFont hFont = pScheme->GetFont("inv_labels");
+
 	for (int i = 0; i < MAX_INVENTORY; i++)
 	{
 		//Create Image
@@ -55,14 +54,8 @@ CInvPanel::CInvPanel(IViewPort *pViewPort) : BaseClass(NULL, PANEL_INVENTORY)
 		itempanel->SetPaintBackgroundEnabled(true);
 		itempanel->SetPaintBackgroundType(2);
 
-		//Create Label
-		Q_snprintf(buffer, sizeof(buffer), "label%i", i);
-		Label* label = new Label(this, buffer, buffer);
-		label->SetFont(hFont);
-		label->SetText(buffer);
-
-		//Add Label and Image to PanelListPanel
-		InvSubPanel->AddItem(itempanel, label);
+		//Add Image to PanelListPanel
+		InvSubPanel->AddItem(itempanel);
 	}
 
 	vgui::ivgui()->AddTickSignal(GetVPanel(), 100);
@@ -116,28 +109,19 @@ void CInvPanel::BeginUpdates()
 						Q_snprintf(buffer, sizeof(buffer), "inv/%i", pPlayer->m_pInventory.GetItemID(i));
 						itempanel->ChangeNormalImage(buffer);
 						itempanel->SetNormalImage();
-					}
-				}
-				// Next, grab the label panel.
-				Panel* panel2 = InvSubPanel->GetItemLabel(i);
-				if (panel2)
-				{
-					Label* label = dynamic_cast<Label*>(panel2);
-					if (label)
-					{
 						if (pPlayer->m_pInventory.GetItemMaxCapacity(i) <= 1)
 						{
 							Q_snprintf(buffer, sizeof(buffer), "");
-							label->SetText(buffer);
+							itempanel->UpdateLabel(buffer);
 						}
 						else
 						{
 							Q_snprintf(buffer, sizeof(buffer), "%i/%i", pPlayer->m_pInventory.GetItemCapacity(i), pPlayer->m_pInventory.GetItemMaxCapacity(i));
-							label->SetText(buffer);
+							itempanel->UpdateLabel(buffer);
 						}
-
 					}
 				}
+
 				// Great. Now to 'clean' the item so that we don't waste time updating it.
 				pPlayer->m_pInventory.ItemIsClean(i);
 			}

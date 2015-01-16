@@ -12,11 +12,13 @@ namespace vgui
 	public:
 		ItemPanel(Panel *parent, const char *name, const char *normalImage, int item_index, const char *mouseOverImage = NULL, const char *mouseClickImage = NULL, const char *pCmd = NULL);
 		virtual void OnMousePressed(vgui::MouseCode code);
+		void UpdateLabel(const char *contents);
 
 	private:
 		int m_iItemIndex;
 		bool hasMouseClickImage;
 		CInvPanelContext *m_hContextMenu;
+		Label *m_hLabel;
 	};
 }
 

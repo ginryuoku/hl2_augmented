@@ -10,6 +10,21 @@ ItemPanel::ItemPanel(Panel *parent, const char *name, const char *normalImage, i
 {
 	m_iItemIndex = item_index;
 	m_hContextMenu = nullptr;
+	char buffer[40];
+
+	vgui::IScheme* pScheme = vgui::scheme()->GetIScheme(GetScheme());
+	vgui::HFont hFont = pScheme->GetFont("inv_labels");
+
+	Q_snprintf(buffer, sizeof(buffer), "label%i", item_index);
+	m_hLabel = new Label(this, buffer, buffer);
+	m_hLabel->SetFont(hFont);
+	m_hLabel->SetText(buffer);
+		
+	// We hard-code these values for now; this will eventually be calculated by the size of the image.
+	int x = 2;
+	int y = 64 - 2 - 8;
+
+	m_hLabel->SetPos(x, y);
 }
 
 void ItemPanel::OnMousePressed(vgui::MouseCode code)
@@ -26,4 +41,10 @@ void ItemPanel::OnMousePressed(vgui::MouseCode code)
 		m_hContextMenu = new CInvPanelContext(this, m_iItemIndex);
 		m_hContextMenu->Activate();
 	}
+}
+
+void vgui::ItemPanel::UpdateLabel(const char *contents)
+{
+	m_hLabel->SetText(contents);
+	Repaint();
 }
