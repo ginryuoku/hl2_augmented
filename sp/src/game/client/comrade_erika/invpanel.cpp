@@ -78,6 +78,9 @@ void CInvPanel::ShowPanel(bool bShow)
 		{
 			m_iInvKey = gameuifuncs->GetButtonCodeForBind( "inventory" );
 		}
+
+		engine->ServerCmd("mergeammo");
+
 		engine->ClientCmd_Unrestricted("gameui_preventescapetoshow\n");
 	}
 	else
