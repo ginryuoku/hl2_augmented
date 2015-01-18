@@ -647,31 +647,24 @@ void UseItemFromInventory(const CCommand &args)
 		int itemcontains = pPlayer->m_pInventory.GetItemContains(itemindex);
 		switch (itemtype)
 		{
-		case ITEM_MAGAZINE:
+		case ITEM_HEALTH:
 		{
-			if (itemcontains == -1)
-				return;
-			int needed = pPlayer->m_pInventory.GetItemMaxCapacity(itemindex) - pPlayer->m_pInventory.GetItemCapacity(itemindex);
-			if (needed == 0)
-			{
-				return;
-			}
-			int ammobox = pPlayer->m_pInventory.FindFirstFullObject(itemcontains);
-			if (pPlayer->m_pInventory.FindItemType(pPlayer->m_pInventory.GetItemID(ammobox)) != ITEM_AMMO || pPlayer->m_pInventory.GetItemCapacity(ammobox) == 0)
-				return;
-
-			if (needed > pPlayer->m_pInventory.GetItemCapacity(ammobox))
-			{
-				needed = pPlayer->m_pInventory.GetItemCapacity(ammobox);
-			}
-
-			int newmag = pPlayer->m_pInventory.GetItemCapacity(itemindex) + pPlayer->m_pInventory.UseItem(needed, ammobox);
-			if (newmag == 0)
-				return;
-
-			pPlayer->m_pInventory.SetItemCapacity(itemindex, newmag);
+			int used = pPlayer->TakeHealth(pPlayer->m_pInventory.GetItemCapacity(itemindex), DMG_GENERIC);
+			pPlayer->m_pInventory.UseItem(used, itemindex);
+			break;
 		}
+		case ITEM_POWER:
+		{
+			int used = pPlayer->MaxArmorValue() - pPlayer->ArmorValue();
+			if (used <= 0)
+				return;
 
+			if (used > pPlayer->m_pInventory.GetItemCapacity(itemindex))
+				used = pPlayer->m_pInventory.GetItemCapacity(itemindex);
+
+			pPlayer->IncrementArmorValue(used, pPlayer->MaxArmorValue());
+			pPlayer->m_pInventory.UseItem(used, itemindex);
+		}
 		case ITEM_AMMO:
 		{
 			if (itemcontains == -1)
@@ -698,7 +691,30 @@ void UseItemFromInventory(const CCommand &args)
 			
 			break;
 		}
+		case ITEM_MAGAZINE:
+		{
+			if (itemcontains == -1)
+				return;
+			int needed = pPlayer->m_pInventory.GetItemMaxCapacity(itemindex) - pPlayer->m_pInventory.GetItemCapacity(itemindex);
+			if (needed == 0)
+			{
+				return;
+			}
+			int ammobox = pPlayer->m_pInventory.FindFirstFullObject(itemcontains);
+			if (pPlayer->m_pInventory.FindItemType(pPlayer->m_pInventory.GetItemID(ammobox)) != ITEM_AMMO || pPlayer->m_pInventory.GetItemCapacity(ammobox) == 0)
+				return;
 
+			if (needed > pPlayer->m_pInventory.GetItemCapacity(ammobox))
+			{
+				needed = pPlayer->m_pInventory.GetItemCapacity(ammobox);
+			}
+
+			int newmag = pPlayer->m_pInventory.GetItemCapacity(itemindex) + pPlayer->m_pInventory.UseItem(needed, ammobox);
+			if (newmag == 0)
+				return;
+
+			pPlayer->m_pInventory.SetItemCapacity(itemindex, newmag);
+		}
 		default:
 			return;
 		};
@@ -713,7 +729,7 @@ void UseHealthItem(const CCommand &args)
 	if (pPlayer)
 	{
 		int itemid = pPlayer->m_pInventory.FindHealthItem();
-		int used = pPlayer->TakeHealth(pPlayer->m_pInventory.GetItemCapacity(itemid), itemid);
+		int used = pPlayer->TakeHealth(pPlayer->m_pInventory.GetItemCapacity(itemid), DMG_GENERIC);
 		pPlayer->m_pInventory.UseItem(used, itemid);
 	}
 }

@@ -19,6 +19,8 @@
 //350	WEAPON		10
 //500	KEY_ITEM	11
 
+#define ITEM_HEALTH   1
+#define ITEM_POWER    3
 #define ITEM_AMMO     8
 #define ITEM_MAGAZINE 9
 
