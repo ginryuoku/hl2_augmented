@@ -136,7 +136,7 @@ void CHLMachineGun::PrimaryAttack( void )
 	CSoundEnt::InsertSound( SOUND_COMBAT, GetAbsOrigin(), SOUNDENT_VOLUME_MACHINEGUN, 0.2, pPlayer );
 	
 	if (!m_iClip1 && pPlayer->GetAmmoCount(m_iPrimaryAmmoType) <= 0 && 
-		((!UsesMagazines() && pPlayer->m_pInventory.CountAllObjectsOfID(GetPrimaryAmmoID()) <= 0)) &&
+		((!UsesMagazines() && pPlayer->m_pInventory.CountAllObjectContentsOfID(GetPrimaryAmmoID()) <= 0)) &&
 		(UsesMagazines() && pPlayer->m_pInventory.CountAllObjectContentsOfID(GetPrimaryMagazineID()) <= 0) )
 	{
 		// HEV suit - indicate out of ammo condition
