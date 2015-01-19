@@ -51,10 +51,10 @@
 		"tabPosition"		"0"
 	}
 
-	"tmp"
+	"mp5k"
 	{
 		"ControlName"		"MouseOverPanelButton"
-		"fieldName"		"tmp"
+		"fieldName"		"mp5k"
 		"xpos"			"52"
 		"ypos"			"116"
 		"wide"			"170"
@@ -64,11 +64,11 @@
 		"visible"		"1"
 		"enabled"		"1"
 		"tabPosition"	"0"
-		"labelText"		"#Cstrike_Tmp"
+		"labelText"		"#CE_HK_MP5K"
 		"textAlignment"		"west"
 		"dulltext"		"0"
 		"brighttext"		"0"
-		"command"		"buy tmp"
+		"command"		"buy weapon_smg_mp5k"
 		"cost"			"1250"
 	}
 

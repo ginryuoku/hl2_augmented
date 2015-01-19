@@ -55,8 +55,8 @@ STUB_WEAPON_CLASS( weapon_shot_870ae, Weapon870AE, C_BaseHLCombatWeapon );
 STUB_WEAPON_CLASS( weapon_shot_spas12, WeaponSPAS12, C_BaseHLCombatWeapon );
 STUB_WEAPON_CLASS(weapon_shot_striker12, WeaponStriker12, C_BaseHLCombatWeapon);
 
-
 STUB_WEAPON_CLASS( weapon_smg_mp5a2, WeaponMP5A2, C_HLMachineGun );
+STUB_WEAPON_CLASS(weapon_smg_mp5k, WeaponMP5K, C_HLMachineGun);
 
 STUB_WEAPON_CLASS(weapon_pdw_mp7a1, WeaponMP7A1, C_HLMachineGun);
 STUB_WEAPON_CLASS( weapon_pdw_p90, WeaponP90, C_HLMachineGun );

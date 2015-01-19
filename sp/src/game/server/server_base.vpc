@@ -89,6 +89,7 @@ $Project
             $File "comrade_erika\inventory_parse.h"
             $File "comrade_erika\inventory_parse_default.cpp"
 			$File "comrade_erika\weapon_arifle_m4a1.cpp"
+			$File "comrade_erika\weapon_arifle_vltorsbr.cpp"
 			$File "comrade_erika\weapon_launcher_m79.cpp"
 			$File "comrade_erika\weapon_dissolver.cpp"
 
@@ -97,6 +98,7 @@ $Project
 			$File "comrade_erika\weapon_shot_spas12.cpp"
 			$File "comrade_erika\weapon_shot_870ae.cpp"
 			$File "comrade_erika\weapon_shot_striker12.cpp"
+			$File "comrade_erika\weapon_smg_mp5k.cpp"
 			$File "comrade_erika\weapon_smg_mp5a2.cpp"
 			$File "comrade_erika\weapon_pdw_mp7a1.cpp"
 			$File "comrade_erika\weapon_pdw_p90.cpp"
