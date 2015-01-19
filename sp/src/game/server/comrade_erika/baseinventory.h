@@ -65,7 +65,7 @@ public:
 
 	int UseItem(int used, int itemid);
 	int UseHealthItem(int used, int itemid);
-	int CountAllObjectContentsOfID(int itemid);
+	int CountAllObjectContentsOfID(int itemid, bool use_contents = false);
 	int CountAllObjectsOfID(int itemid, bool non_empty = false);
 
 	int SwapMagazines(int itemid, int remaining);

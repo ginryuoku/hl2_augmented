@@ -367,16 +367,27 @@ int CBaseInventory::UseItem(int used, int itemid)
 
 }
 
-int CBaseInventory::CountAllObjectContentsOfID(int itemid)
+int CBaseInventory::CountAllObjectContentsOfID(int itemid, bool use_contents)
 {
 	int itemcount = 0;
 
 	for (int i = 0; i < MAX_INVENTORY; ++i)
 	{
-		if (GetItemID(i) == itemid)
+		if (use_contents)
 		{
-			itemcount = itemcount + GetItemCapacity(i);
+			if (GetItemContains(i) == itemid)
+			{
+				itemcount = itemcount + GetItemCapacity(i);
+			}
 		}
+		else
+		{
+			if (GetItemID(i) == itemid)
+			{
+				itemcount = itemcount + GetItemCapacity(i);
+			}
+		}
+
 	}
 
 	return itemcount;
