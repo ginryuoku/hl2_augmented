@@ -57,6 +57,7 @@ static DynamicResupplyItems_t g_DynamicResupplyAmmoItems[] =
 	{ "item_ammo_crossbow",			"XBowBolt",		SIZE_AMMO_CROSSBOW,		0.0f },
 	{ "item_ammo_ar2_altfire",		"AR2AltFire",	SIZE_AMMO_AR2_ALTFIRE,	0.0f },
 	{ "item_ammo_57x28_small", "57x28mm", SIZE_AMMO_SMG1, 0.4f },
+	{ "item_ammo_762nato_small", "762nato", SIZE_AMMO_SMG1, 0.4f },
 };
 
 #define DS_HEALTH_INDEX		0
@@ -151,7 +152,7 @@ BEGIN_DATADESC( CItem_DynamicResupply )
 	DEFINE_KEYFIELD( m_flDesiredAmmo[8], FIELD_FLOAT, "DesiredAmmoCrossbow" ),
 	DEFINE_KEYFIELD( m_flDesiredAmmo[9], FIELD_FLOAT, "DesiredAmmoAR2_AltFire" ),
 	DEFINE_KEYFIELD(m_flDesiredAmmo[10], FIELD_FLOAT, "DesiredAmmo57x28mm"),
-
+	DEFINE_KEYFIELD(m_flDesiredAmmo[11], FIELD_FLOAT, "DesiredAmmo762nato"),
 
 	DEFINE_FIELD( m_version, FIELD_INTEGER ),
 	DEFINE_FIELD( m_bIsMaster, FIELD_BOOLEAN ),
@@ -185,6 +186,7 @@ CItem_DynamicResupply::CItem_DynamicResupply( void )
 	m_flDesiredAmmo[8] = 0.05;	// Crossbow
 	m_flDesiredAmmo[9] = 0.05;	// AR2 alt-fire
 	m_flDesiredAmmo[10] = 0.4;	// 5.7x28mm
+	m_flDesiredAmmo[11] = 0.2;	// 7.62mm NATO
 }
 
 

@@ -1,0 +1,82 @@
+"Weapon_MK17SV.clipout"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"PITCH_NORM"
+	"wave"			"weapons\mk17sv\magout.wav"
+	
+}
+"Weapon_MK17SV.clipin"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"PITCH_NORM"
+	"wave"			"weapons\mk17sv\magin.wav"
+	
+}
+"Weapon_MK17SV.BoltRelease"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"PITCH_NORM"
+	"wave"			"weapons\mk17sv\Boltslap.wav"
+	
+}
+"Weapon_MK17SV.Clipdrop"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"PITCH_NORM"
+	"wave"			"weapons\mk17sv\magdrop.wav"
+	
+}
+"Weapon_MK17SV.clap"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"PITCH_NORM"
+	"wave"			"weapons\mk17sv\magtap.wav"
+	
+}
+"Weapon_MK17SV.draw"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"PITCH_NORM"
+	"wave"			"weapons\mk17sv\safety.wav"
+	
+}
+"Weapon_MK17SV.cloth"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"PITCH_NORM"
+	"wave"			"weapons\mk17sv\deploy.wav"
+	
+}
+"weapon_mk17sv.single"
+{
+	"channel"		"chan_weapon"
+	"volume"		"1.0"
+	"compatibilityattenuation"	"1.0"
+	"pitch"		"pitch_norm"
+
+	"wave"			")weapons/mk17sv/fire.wav"
+}
+"3rd_Weapon_MK17SV.Single"
+{
+	"channel"		"CHAN_WEAPON"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"0.52"
+	"pitch"		"PITCH_NORM"
+
+	"wave"			")weapons/mk17sv/fire.wav"
+	
+}

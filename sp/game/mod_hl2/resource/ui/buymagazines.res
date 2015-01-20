@@ -156,7 +156,27 @@
 		"command"		"buy item_mag_556_stanag30"
 		"cost"			"1000"
 	}
-
+	"762n_scar20"
+	{
+		"ControlName"		"MouseOverPanelButton"
+		"fieldName"		"762n_scar20"
+				"xpos"		"52"
+		"xpos"		"0"
+		"ypos"		"276"
+		"wide"		"170"
+		"tall"		"20"
+		"autoResize"	"0"
+		"pinCorner"		"2"
+		"visible"		"1"
+		"enabled"		"1"
+		"tabPosition"	"0"
+		"labelText"		"#CE_Mag_762n_scar20"
+		"textAlignment"		"west"
+		"dulltext"		"0"
+		"brighttext"		"0"
+		"command"		"buy item_mag_762n_scar20"
+		"cost"			"1000"
+	}
 	"CancelButton"
 	{
 		"ControlName"		"MouseOverPanelButton"

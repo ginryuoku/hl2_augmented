@@ -238,3 +238,29 @@ public:
 	}
 };
 LINK_ENTITY_TO_CLASS(item_mag_556_stanag30, CItem_Mag_556_STANAG30)
+
+class CItem_Mag_762N_SCAR20 : public CItem
+{
+public:
+	DECLARE_CLASS(CItem_Mag_762N_SCAR20, CItem);
+
+	void Spawn(void)
+	{
+		Precache();
+		SetModel("models/items/boxsrounds.mdl");
+
+		// ItemID must be established before running the common spawn code
+		m_iItemID = 281;
+
+		BaseClass::Spawn();
+	}
+	void Precache(void)
+	{
+		PrecacheModel("models/items/boxsrounds.mdl");
+	}
+	bool MyTouch(CBasePlayer *pPlayer)
+	{
+		return false;
+	}
+};
+LINK_ENTITY_TO_CLASS(item_mag_762n_scar20, CItem_Mag_762N_SCAR20)

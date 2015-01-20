@@ -1,0 +1,120 @@
+"Weapon_MK17STD.Single"
+{
+	"channel"		"CHAN_WEAPON"
+	"volume"		"1"
+	"CompatibilityAttenuation"	"ATTN_NORM"
+	"soundlevel"	"SNDLVL_GUNFIRE"
+	"pitch"		"PITCH_NORM"
+
+	"wave"			"weapons/mk17std/mk17std_unsil-1.wav"
+}
+"Weapon_MK17STD.Silenced"
+{
+	"channel"		"CHAN_WEAPON"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"ATTN_NORM"
+	"pitch"		"PITCH_NORM"
+
+	"wave"			")weapons/mk17std/mk17std-1.wav"
+}
+"Weapon_MK17STD.Deploy"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons\mk17std\mk17std_deploy.wav"
+	
+}
+
+"Weapon_MK17STD.Clipin"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons\mk17std\clipin.wav"
+	
+}
+
+"Weapon_MK17STD.Clipout"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons\mk17std\clipout.wav"
+	
+}
+
+"Weapon_MK17STD.Cliptap"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons\mk17std\cliptap.wav"
+	
+}
+
+"Weapon_MK17STD.Boltpull"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons\mk17std\boltpull.wav"
+	
+}
+
+"Weapon_MK17STD.Boltrelease"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons\mk17std\boltrelease.wav"
+	
+}
+
+"Weapon_MK17STD.Deploy"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"0.8"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons\mk17std\deploy.wav"
+	
+}
+
+
+"Weapon_MK17STD.Silencer_off"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons\mk17std\siloff.wav"
+	
+}
+
+
+"Weapon_MK17STD.Silencer_on"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons\mk17std\silon.wav"
+	
+}
+

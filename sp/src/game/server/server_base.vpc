@@ -90,6 +90,8 @@ $Project
             $File "comrade_erika\inventory_parse_default.cpp"
 			$File "comrade_erika\weapon_arifle_m4a1.cpp"
 			$File "comrade_erika\weapon_arifle_vltorsbr.cpp"
+			$File "comrade_erika\weapon_arifle_mk17mod0.cpp"
+			$File "comrade_erika\weapon_srifle_mk17mod0sv.cpp"
 			$File "comrade_erika\weapon_launcher_m79.cpp"
 			$File "comrade_erika\weapon_dissolver.cpp"
 

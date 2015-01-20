@@ -19,6 +19,8 @@
     "weapon_arifle_vltorsbr"    "8000"
     "weapon_dissolver"		    "16000"
     "weapon_launcher_m79"	    "8000"
+    "weapon_arifle_mk17mod0"    "10000"
+    "weapon_srifle_mk17mod0sv"  "15000"
     "weapon_crossbow"		    "4000"
     "weapon_rpg"			    "6500"
     "weapon_frag"               "200"
@@ -32,6 +34,7 @@
     "item_ammo_crossbow"		"21"
     "item_rpg_round"		    "400"
     "item_ammo_smg1_grenade"	"100"
+    "item_ammo_762nato"         "850"
 
     "item_battery"			    "175"
     "item_healthvial"		    "75"
@@ -46,4 +49,5 @@
     "item_mag_556_stanag30"     "60"
     "item_mag_57x28_20fs"       "60"
     "item_mag_46x30_40mp7"      "90"
+    "item_mag_762n_scar20"      "120"
 }
