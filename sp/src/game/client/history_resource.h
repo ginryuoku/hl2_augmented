@@ -21,6 +21,7 @@ enum
 	HISTSLOT_WEAP,
 	HISTSLOT_ITEM,
 	HISTSLOT_AMMODENIED,
+	HISTSLOT_MONEY,
 };
 
 namespace vgui
@@ -73,6 +74,7 @@ public:
 	void	AddToHistory( C_BaseCombatWeapon *weapon );
 	void	MsgFunc_ItemPickup( bf_read &msg );
 	void	MsgFunc_AmmoDenied( bf_read &msg );
+	void	MsgFunc_Money(bf_read &msg);
 	
 	void	CheckClearHistory( void );
 	void	SetHistoryGap( int iNewHistoryGap );
@@ -86,9 +88,9 @@ private:
 	wchar_t m_wcsAmmoFullMsg[16];
 	bool	m_bNeedsDraw;
 
-	CPanelAnimationVarAliasType( float, m_flHistoryGap, "history_gap", "42", "proportional_float" );
-	CPanelAnimationVarAliasType( float, m_flIconInset, "icon_inset", "28", "proportional_float" );
-	CPanelAnimationVarAliasType( float, m_flTextInset, "text_inset", "26", "proportional_float" );
+	CPanelAnimationVarAliasType( float, m_flHistoryGap, "history_gap", "20", "proportional_float" );
+	CPanelAnimationVarAliasType( float, m_flIconInset, "icon_inset", "48", "proportional_float" );
+	CPanelAnimationVarAliasType( float, m_flTextInset, "text_inset", "46", "proportional_float" );
 	CPanelAnimationVar( vgui::HFont, m_hNumberFont, "NumberFont", "HudNumbersSmall" );
 	CPanelAnimationVar( vgui::HFont, m_hTextFont, "TextFont", "Default" );
 };

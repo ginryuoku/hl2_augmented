@@ -9654,6 +9654,23 @@ void CBasePlayer::UpgradeArmor(void)
 	Msg("Armor upgrades now: %d\n", m_Local.m_iArmorUpgrades);
 }
 
+void CBasePlayer::AddPlayerCash(int cash)
+{
+	if (cash != 0)
+	{
+		DevMsg("Received %d credits\n", cash);
+
+		CSingleUserRecipientFilter user(this);
+		user.MakeReliable();
+
+		UserMessageBegin(user, "Money");
+		WRITE_SHORT(cash);
+		MessageEnd();
+	}
+	m_Local.m_iPlayerCash = m_Local.m_iPlayerCash + cash;
+	return;
+}
+
 
 #if !defined(NO_STEAM)
 //-----------------------------------------------------------------------------
@@ -9681,7 +9698,5 @@ uint64 CBasePlayer::GetSteamIDAsUInt64( void )
 		return steamIDForPlayer.ConvertToUint64();
 	return 0;
 }
-
-
 
 #endif // NO_STEAM

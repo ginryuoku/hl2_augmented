@@ -405,6 +405,20 @@ Scheme
 				"custom"	"1"
 			}
 		}
+        HudNumbersSmall2
+		{
+			"1"
+			{
+				"name"		"Verdana" [!$OSX]
+				"name"		"Helvetica Bold" [$OSX]
+				"tall"		"16"	[$WIN32]
+				"tall"		"22"	[$X360]
+				"weight"	"1000"
+				"additive"	"1"
+				"antialias" "1"
+				"custom"	"1"
+			}
+		}
 		HudSelectionNumbers
 		{
 			"1"

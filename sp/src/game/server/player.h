@@ -681,13 +681,7 @@ public:
 	{ 
 		return m_Local.m_iPlayerCash; 
 	}
-	void	AddPlayerCash(int cash)	
-	{ 
-		if (cash != 0)
-			Msg("Received %d credits\n",cash);
-		m_Local.m_iPlayerCash = m_Local.m_iPlayerCash + cash;
-		return; 
-	}
+	void	AddPlayerCash(int cash);
 
 	void UpgradeHealth(void);
 	void UpgradeArmor(void);

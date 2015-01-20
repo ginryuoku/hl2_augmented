@@ -28,6 +28,11 @@
 				"font"		"WeaponIcons"
 				"character"	"+"
 		}
+        "money"
+        {
+                "font"      "HudNumbersSmall2"
+                "character" "$"
+        }
 		"crosshair"
 		{
 				"file"		"sprites/qi_center"

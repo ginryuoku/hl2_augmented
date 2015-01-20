@@ -23,6 +23,7 @@ extern ConVar hud_drawhistory_time;
 DECLARE_HUDELEMENT( CHudHistoryResource );
 DECLARE_HUD_MESSAGE( CHudHistoryResource, ItemPickup );
 DECLARE_HUD_MESSAGE( CHudHistoryResource, AmmoDenied );
+DECLARE_HUD_MESSAGE(CHudHistoryResource, Money);
 
 //-----------------------------------------------------------------------------
 // Purpose: Constructor
@@ -61,6 +62,7 @@ void CHudHistoryResource::Init( void )
 {
 	HOOK_HUD_MESSAGE( CHudHistoryResource, ItemPickup );
 	HOOK_HUD_MESSAGE( CHudHistoryResource, AmmoDenied );
+	HOOK_HUD_MESSAGE(CHudHistoryResource, Money);
 
 	Reset();
 }
@@ -87,7 +89,7 @@ void CHudHistoryResource::SetHistoryGap( int iNewHistoryGap )
 //-----------------------------------------------------------------------------
 void CHudHistoryResource::AddToHistory( C_BaseCombatWeapon *weapon )
 {
-	// don't draw exhaustable weapons (grenades) since they'll have an ammo pickup icon as well
+	// don't draw exhaustible weapons (grenades) since they'll have an ammo pickup icon as well
  	if ( weapon->GetWpnData().iFlags & ITEM_FLAG_EXHAUSTIBLE )
  		return;
 
@@ -256,6 +258,13 @@ void CHudHistoryResource::MsgFunc_AmmoDenied( bf_read &msg )
 	AddToHistory( HISTSLOT_AMMODENIED, iAmmo, 0 );
 }
 
+void CHudHistoryResource::MsgFunc_Money(bf_read &msg)
+{
+	int iMoney = msg.ReadShort();
+
+	AddToHistory(HISTSLOT_MONEY, 0, iMoney);
+}
+
 //-----------------------------------------------------------------------------
 // Purpose: If there aren't any items in the history, clear it out.
 //-----------------------------------------------------------------------------
@@ -402,6 +411,19 @@ void CHudHistoryResource::Paint( void )
 					bHalfHeight = false;
 				}
 				break;
+			case HISTSLOT_MONEY:
+			{
+				iAmount = m_PickupHistory[i].iCount;
+
+				if (iAmount < 0)
+				{
+					clr = gHUD.m_clrCaution;
+					clr[3] = MIN(scale, 255);
+				}
+
+				itemIcon = gHUD.GetIcon("money");
+				break;
+			}
 			default:
 				// unknown history type
 				Assert( 0 );
@@ -428,6 +450,11 @@ void CHudHistoryResource::Paint( void )
 			}
 #endif // HL2MP
 
+			if (m_PickupHistory[i].type == HISTSLOT_MONEY)
+			{
+				xpos -= 40;
+			}
+
 			itemIcon->DrawSelf( xpos, ypos, clr );
 
 			if ( itemAmmoIcon )
@@ -438,14 +465,22 @@ void CHudHistoryResource::Paint( void )
 			if ( iAmount )
 			{
 				wchar_t text[16];
-				_snwprintf( text, sizeof( text ) / sizeof(wchar_t), L"%i", m_PickupHistory[i].iCount );
+
+				_snwprintf(text, sizeof(text) / sizeof(wchar_t), L"%i", m_PickupHistory[i].iCount);
 
 				// offset the number to sit properly next to the icon
 				ypos -= ( surface()->GetFontTall( m_hNumberFont ) - itemIcon->Height() ) / 2;
 
 				vgui::surface()->DrawSetTextFont( m_hNumberFont );
 				vgui::surface()->DrawSetTextColor( clr );
-				vgui::surface()->DrawSetTextPos( wide - m_flTextInset, ypos );
+				if (m_PickupHistory[i].type == HISTSLOT_MONEY)
+				{
+					vgui::surface()->DrawSetTextPos(wide - m_flTextInset - 40, ypos);
+				} 
+				else
+				{
+					vgui::surface()->DrawSetTextPos(wide - m_flTextInset, ypos);
+				}
 				vgui::surface()->DrawUnicodeString( text );
 			}
 			else if ( bUseAmmoFullMsg )
