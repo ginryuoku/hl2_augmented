@@ -41,7 +41,7 @@ public:
 	virtual void Equip( CBaseCombatCharacter *pOwner );
 	bool	Reload( void );
 
-	float	GetFireRate( void ) { return 0.08; }	// 12.5hz, 750rpm
+	float	GetFireRate( void );	
 	int		CapabilitiesGet( void ) { return bits_CAP_WEAPON_RANGE_ATTACK1; }
 
 	Activity	GetPrimaryAttackActivity( void );
@@ -534,6 +534,18 @@ bool CWeaponM4A1::Deploy(void)
 	m_bFMReady = true;
 
 	return BaseClass::Deploy();
+}
+
+float CWeaponM4A1::GetFireRate(void)
+{
+	if (m_bIsSuppressed)
+	{
+		return 0.071f; // 14.167hz, 850rpm
+	} 
+	else
+	{
+		return 0.086f; // 11.67hz, 700rpm
+	}
 }
 
 
