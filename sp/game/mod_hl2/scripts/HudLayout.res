@@ -4,18 +4,18 @@
 	{
 		"fieldName"		"HudHealth"
 		"xpos"	"16"
-		"ypos"	"432"
-		"wide"	"108"
-		"tall"  "36"
+		"ypos"	"448"
+		"wide"	"270"
+		"tall"  "20"
 		"visible" "1"
 		"enabled" "1"
 
 		"PaintBackgroundType"	"2"
 		
 		"text_xpos" "8"
-		"text_ypos" "20"
-		"digit_xpos" "50"
-		"digit_ypos" "20"
+		"text_ypos" "6"
+		"digit_xpos" "250"
+		"digit_ypos" "6"
         
         "NumberFont" "Default"
         "NumberGlowFont" "Default"
@@ -43,18 +43,18 @@
 	{
 		"fieldName"		"HudSuit"
 		"xpos"	"16"
-		"ypos"	"392"
-		"wide"	"108"
-		"tall"  "36"
+		"ypos"	"424"
+		"wide"	"270"
+		"tall"  "20"
 		"visible" "1"
 		"enabled" "1"
 
 		"PaintBackgroundType"	"2"
 
 		"text_xpos" "8"
-		"text_ypos" "20"
-		"digit_xpos" "50"
-		"digit_ypos" "20"
+		"text_ypos" "6"
+		"digit_xpos" "250"
+		"digit_ypos" "6"
         
         "NumberFont" "Default"
         "NumberGlowFont" "Default"
@@ -151,13 +151,40 @@
 		"digit_xpos" "36"
 		"digit_ypos" "-1"
 	}
-	
+
+	HudPosture	[$WIN32]
+	{
+		"fieldName" 		"HudPosture"
+		"visible" 		"1"
+		"PaintBackgroundType"	"2"
+		"xpos"	"16"
+		"ypos"	"316"
+		"tall"  "36"
+		"wide"	"36"
+		"font"	"WeaponIconsSmall"
+		"icon_xpos"	"10"
+		"icon_ypos" 	"0"
+	}
+	HudPosture	[$X360]
+	{
+		"fieldName" 		"HudPosture"
+		"visible" 		"1"
+		"PaintBackgroundType"	"2"
+		"xpos"	"48"
+		"ypos"	"316"
+		"tall"  "36"
+		"wide"	"36"
+		"font"	"WeaponIconsSmall"
+		"icon_xpos"	"10"
+		"icon_ypos" 	"2"
+	}
+
 	HudSuitPower	[$WIN32]
 	{
 		"fieldName" "HudSuitPower"
 		"visible" "1"
 		"enabled" "1"
-		"xpos"	"200"
+		"xpos"	"300"
 		"ypos"	"442"
 		"wide"	"102"
 		"tall"	"26"
@@ -210,40 +237,13 @@
 
 		"PaintBackgroundType"	"2"
 	}
-
-	HudPosture	[$WIN32]
-	{
-		"fieldName" 		"HudPosture"
-		"visible" 		"1"
-		"PaintBackgroundType"	"2"
-		"xpos"	"16"
-		"ypos"	"316"
-		"tall"  "36"
-		"wide"	"36"
-		"font"	"WeaponIconsSmall"
-		"icon_xpos"	"10"
-		"icon_ypos" 	"0"
-	}
-	HudPosture	[$X360]
-	{
-		"fieldName" 		"HudPosture"
-		"visible" 		"1"
-		"PaintBackgroundType"	"2"
-		"xpos"	"48"
-		"ypos"	"316"
-		"tall"  "36"
-		"wide"	"36"
-		"font"	"WeaponIconsSmall"
-		"icon_xpos"	"10"
-		"icon_ypos" 	"2"
-	}
 	
 	HudFlashlight
 	{
 		"fieldName" "HudFlashlight"
 		"visible" "1"
 		"PaintBackgroundType"	"2"
-		"xpos"	"270"		[$WIN32]
+		"xpos"	"c-18"		[$WIN32]
 		"ypos"	"444"		[$WIN32]
 		"xpos_hidef"	"293"		[$X360]		// aligned to left
 		"xpos_lodef"	"c-18"		[$X360]		// centered in screen

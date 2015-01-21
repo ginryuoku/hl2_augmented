@@ -46,6 +46,9 @@ public:
 private:
 	int		m_iBat;	
 	int		m_iNewBat;
+
+	CPanelAnimationVarAliasType(float, m_flBarInsetX, "BarInsetX", "8", "proportional_float");
+	CPanelAnimationVarAliasType(float, m_flBarInsetY, "BarInsetY", "8", "proportional_float");
 };
 
 DECLARE_HUDELEMENT( CHudBattery );
@@ -154,35 +157,47 @@ void CHudBattery::Paint(void)
 	C_BasePlayer *local = C_BasePlayer::GetLocalPlayer();
 	if (local)
 		chunkCount = local->m_Local.m_iArmorUpgrades + 1;
-
+	
+	// Clamp the size of the health bar
+	if (chunkCount > 15)
+	{
+		chunkCount = 15;
+	}
 	bool transition_chunk = false;
 	int transition_chunk_alpha = 15 + (12 * (m_iBat % 20));
 	int enabledChunks = (int)(m_iBat / 20);
-	if (m_iBat % 20)
+	if (enabledChunks > 15)
+	{
+		enabledChunks = 15;
+	}
+	if (m_iBat % 20 && enabledChunks < 15)
 	{
 		transition_chunk = true;
 	}
 
+#define BOX_SIZE 10
+#define BOX_PADDING 2
 	vgui::surface()->DrawSetColor(Color(255, 220, 0, 255));
-	int xpos = 8, ypos = 8;
+	int xpos = vgui::scheme()->GetProportionalScaledValue(50);
+	int ypos = vgui::scheme()->GetProportionalScaledValue(6);
 
 	for (int i = 0; i < enabledChunks; ++i)
 	{
-		vgui::surface()->DrawFilledRect(xpos, ypos, xpos + 10, ypos + 10);
-		xpos += 12;
+		vgui::surface()->DrawFilledRect(xpos, ypos, xpos + vgui::scheme()->GetProportionalScaledValue(BOX_SIZE), ypos + vgui::scheme()->GetProportionalScaledValue(BOX_SIZE));
+		xpos += vgui::scheme()->GetProportionalScaledValue(BOX_PADDING + BOX_SIZE);
 	}
 
 	if (transition_chunk)
 	{
 		vgui::surface()->DrawSetColor(Color(255, 220, 0, transition_chunk_alpha));
-		vgui::surface()->DrawFilledRect(xpos, ypos, xpos + 10, ypos + 10);
+		vgui::surface()->DrawFilledRect(xpos, ypos, xpos + vgui::scheme()->GetProportionalScaledValue(BOX_SIZE), ypos + vgui::scheme()->GetProportionalScaledValue(BOX_SIZE));
 	}
 
 	vgui::surface()->DrawSetColor(Color(255, 220, 0, 15));
 	for (int i = enabledChunks; i < chunkCount; ++i)
 	{
-		vgui::surface()->DrawFilledRect(xpos, ypos, xpos + 10, ypos + 10);
-		xpos += 12;
+		vgui::surface()->DrawFilledRect(xpos, ypos, xpos + vgui::scheme()->GetProportionalScaledValue(BOX_SIZE), ypos + vgui::scheme()->GetProportionalScaledValue(BOX_SIZE));
+		xpos += vgui::scheme()->GetProportionalScaledValue(BOX_PADDING + BOX_SIZE);
 	}
 
 	BaseClass::Paint();

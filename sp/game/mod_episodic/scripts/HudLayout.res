@@ -4,18 +4,18 @@
 	{
 		"fieldName"		"HudHealth"
 		"xpos"	"16"
-		"ypos"	"432"
-		"wide"	"108"
-		"tall"  "36"
+		"ypos"	"448"
+		"wide"	"270"
+		"tall"  "20"
 		"visible" "1"
 		"enabled" "1"
 
 		"PaintBackgroundType"	"2"
 		
 		"text_xpos" "8"
-		"text_ypos" "20"
-		"digit_xpos" "50"
-		"digit_ypos" "20"
+		"text_ypos" "6"
+		"digit_xpos" "250"
+		"digit_ypos" "6"
         
         "NumberFont" "Default"
         "NumberGlowFont" "Default"
@@ -43,18 +43,18 @@
 	{
 		"fieldName"		"HudSuit"
 		"xpos"	"16"
-		"ypos"	"392"
-		"wide"	"108"
-		"tall"  "36"
+		"ypos"	"424"
+		"wide"	"270"
+		"tall"  "20"
 		"visible" "1"
 		"enabled" "1"
 
 		"PaintBackgroundType"	"2"
 
 		"text_xpos" "8"
-		"text_ypos" "20"
-		"digit_xpos" "50"
-		"digit_ypos" "20"
+		"text_ypos" "6"
+		"digit_xpos" "250"
+		"digit_ypos" "6"
         
         "NumberFont" "Default"
         "NumberGlowFont" "Default"
@@ -184,7 +184,7 @@
 		"fieldName" "HudSuitPower"
 		"visible" "1"
 		"enabled" "1"
-		"xpos"	"200"
+		"xpos"	"300"
 		"ypos"	"442"
 		"wide"	"102"
 		"tall"	"26"
