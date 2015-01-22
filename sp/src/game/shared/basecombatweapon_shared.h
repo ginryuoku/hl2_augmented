@@ -389,6 +389,9 @@ public:
 	void                    DisableIronsights(void);
 	void                    SetIronsightTime(void);
 
+	virtual int				GetBucketPosition(void);
+	virtual void			SetBucketPosition(int position);
+
 	// Ammo quantity queries for weapons that do not use clips. These are only
 	// used to determine how much ammo is in a weapon that does not have an owner.
 	// That is, a weapon that's on the ground for the player to get ammo out of.
@@ -621,6 +624,7 @@ public:
 	int						m_iSubType;
 	CNetworkVar(int, m_nBurstRate);			// How many bullets are fired in one burst-mode burst?
 	CNetworkVar(int, m_nFireMode);			// Fire mode value (0 safety,1 single fire,2 burst,3 auto)
+	CNetworkVar(int, m_iPosition);			// What category am I in?
 
 	float					m_flUnlockTime;
 	EHANDLE					m_hLocker;				// Who locked this weapon.

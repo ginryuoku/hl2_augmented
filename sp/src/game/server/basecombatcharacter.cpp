@@ -1,3 +1,4 @@
+MakeANetworkVar_m_angRotation
 //========= Copyright Valve Corporation, All rights reserved. ============//
 //
 // Purpose: Base combat character with no AI
@@ -2062,6 +2063,16 @@ void CBaseCombatCharacter::SetLightingOriginRelative( CBaseEntity *pLightingOrig
 //-----------------------------------------------------------------------------
 void CBaseCombatCharacter::Weapon_Equip( CBaseCombatWeapon *pWeapon )
 {
+	if (Weapon_GetPosition(pWeapon->GetSlot(), 0) == nullptr)
+	{
+		pWeapon->SetBucketPosition(0);
+	}
+	else if (Weapon_GetPosition(pWeapon->GetSlot(),1) == nullptr && pWeapon->GetSlot() > 0)
+	{
+		pWeapon->SetBucketPosition(1);
+	}
+	else return; // We can't equip this, wtf...
+	
 	// Add the weapon to my weapon inventory
 	for (int i=0;i<MAX_WEAPONS;i++) 
 	{
@@ -2216,10 +2227,34 @@ bool CBaseCombatCharacter::Weapon_SlotOccupied( CBaseCombatWeapon *pWeapon )
 		return false;
 
 	//Check to see if there's a resident weapon already in this slot
-	if ( Weapon_GetSlot( pWeapon->GetSlot() ) == NULL )
+	if ( Weapon_GetPosition( pWeapon->GetSlot(), 0 ) == NULL )
 		return false;
-
+	if (pWeapon->GetSlot() > 0) 
+	{
+		if (Weapon_GetPosition(pWeapon->GetSlot(), 1) == NULL)
+			return false;
+	}
 	return true;
+}
+
+CBaseCombatWeapon *CBaseCombatCharacter::Weapon_GetPosition(int slot, int position)
+{
+	int targetSlot = slot;
+	int targetPosition = position;
+	CBaseCombatWeapon *pWeapon = nullptr;
+
+	for (int i = 0; i < MAX_WEAPONS; i++)
+	{
+		if (m_hMyWeapons[i].Get() != NULL)
+		{
+			// If the slots match, it's already occupied
+			if (m_hMyWeapons[i]->GetSlot() == targetSlot &&
+				m_hMyWeapons[i]->GetBucketPosition() == targetPosition)
+				return m_hMyWeapons[i];
+		}
+	}
+
+	return pWeapon;
 }
 
 //-----------------------------------------------------------------------------

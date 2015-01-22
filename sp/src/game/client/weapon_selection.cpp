@@ -586,9 +586,9 @@ C_BaseCombatWeapon *CBaseHudWeaponSelection::GetFirstPos( int iSlot )
 		if ( ( pWeapon->GetSlot() == iSlot ) && (pWeapon->VisibleInWeaponSelection()) )
 		{
 			// If this weapon is lower in the slot than the current lowest, it's our new winner
-			if ( pWeapon->GetPosition() <= iLowestPosition )
+			if (pWeapon->GetBucketPosition() <= iLowestPosition)
 			{
-				iLowestPosition = pWeapon->GetPosition();
+				iLowestPosition = pWeapon->GetBucketPosition();
 				pFirstWeapon = pWeapon;
 			}
 		}
@@ -620,9 +620,9 @@ C_BaseCombatWeapon *CBaseHudWeaponSelection::GetNextActivePos( int iSlot, int iS
 		if ( CanBeSelectedInHUD( pWeapon ) && pWeapon->GetSlot() == iSlot )
 		{
 			// If this weapon is lower in the slot than the current lowest, and above our desired position, it's our new winner
-			if ( pWeapon->GetPosition() <= iLowestPosition && pWeapon->GetPosition() >= iSlotPos )
+			if (pWeapon->GetBucketPosition() <= iLowestPosition && pWeapon->GetBucketPosition() >= iSlotPos)
 			{
-				iLowestPosition = pWeapon->GetPosition();
+				iLowestPosition = pWeapon->GetBucketPosition();
 				pNextWeapon = pWeapon;
 			}
 		}

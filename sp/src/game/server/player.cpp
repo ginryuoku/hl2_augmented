@@ -6820,6 +6820,18 @@ bool CBasePlayer::BumpWeapon( CBaseCombatWeapon *pWeapon )
 	// -------------------------
 	else 
 	{
+		//Make sure we're not trying to take a new weapon type we already have
+		if (Weapon_SlotOccupied(pWeapon))
+		{
+			//Attempt to take ammo if this is the gun we're holding already
+			if (Weapon_OwnsThisType(pWeapon->GetClassname(), pWeapon->GetSubType()))
+			{
+				Weapon_EquipAmmoOnly(pWeapon);
+			}
+
+			return false;
+		}
+
 		pWeapon->CheckRespawn();
 
 		pWeapon->AddSolidFlags( FSOLID_NOT_SOLID );
@@ -7511,7 +7523,7 @@ void CBasePlayer::Weapon_Drop( CBaseCombatWeapon *pWeapon, const Vector *pvecTar
 // Purpose: 
 // Input  : weaponSlot - 
 //-----------------------------------------------------------------------------
-void CBasePlayer::Weapon_DropSlot( int weaponSlot )
+void CBasePlayer::Weapon_DropSlot( int weaponSlot, int weaponPosition )
 {
 	CBaseCombatWeapon *pWeapon;
 
@@ -7523,7 +7535,7 @@ void CBasePlayer::Weapon_DropSlot( int weaponSlot )
 		if ( pWeapon != NULL )
 		{
 			// If the slots match, it's already occupied
-			if ( pWeapon->GetSlot() == weaponSlot )
+			if ( pWeapon->GetSlot() == weaponSlot && pWeapon->GetBucketPosition() == weaponPosition)
 			{
 				Weapon_Drop( pWeapon, NULL, NULL );
 			}
@@ -9671,6 +9683,15 @@ void CBasePlayer::AddPlayerCash(int cash)
 	return;
 }
 
+void DropCurrent(const CCommand &args)
+{
+	CBasePlayer *pPlayer = UTIL_GetCommandClient();
+	if (pPlayer)
+	{
+		pPlayer->Weapon_Drop(pPlayer->GetActiveWeapon(), NULL, NULL);
+	}
+}
+ConCommand dropcurrent("drop", DropCurrent, "Drops current weapon");
 
 #if !defined(NO_STEAM)
 //-----------------------------------------------------------------------------

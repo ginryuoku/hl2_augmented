@@ -7,10 +7,10 @@ WeaponData
 	"viewmodel"				"models/weapons/v_shot_m3super90.mdl"
 	"playermodel"			"models/weapons/w_shot_m3super90.mdl"
 	"anim_prefix"			"shotgun"
-	"bucket"				"4"
+	"bucket"				"2"
 	"bucket_position"		"0"
-	"bucket_360"			"1"
-	"bucket_position_360"	"1"
+	"bucket_360"			"2"
+	"bucket_position_360"	"0"
 
 	"clip_size"				"4"
 	"primary_ammo"			"Buckshot"

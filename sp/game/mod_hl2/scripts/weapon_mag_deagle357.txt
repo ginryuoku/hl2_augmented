@@ -5,11 +5,11 @@ WeaponData
 	// Weapon data is loaded by both the Game and Client DLLs.
 	"printname"	"#CE_DEagle357_Name"
 	"viewmodel"			"models/weapons/v_mag_deagle.mdl"
-	"playermodel"		"models/weapons/v_mag_deagle.mdl"
+	"playermodel"		"models/weapons/w_mag_deagle.mdl"
 	"anim_prefix"		"pistol"
 	"bucket"			"1"
-	"bucket_position"	"4"
-	"bucket_360"			"0"
+	"bucket_position"	"0"
+	"bucket_360"			"1"
 	"bucket_position_360"	"0"
 
 	"clip_size"			"9"

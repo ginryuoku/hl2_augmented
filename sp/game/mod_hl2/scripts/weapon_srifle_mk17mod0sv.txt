@@ -7,10 +7,11 @@ WeaponData
 	"viewmodel"				"models/weapons/v_srifle_mk17mod0sv.mdl"
 	"playermodel"			"models/weapons/w_srifle_mk17mod0sv.mdl"	//FIXME: 
 	"anim_prefix"			"smg2"
-	"bucket"				"3"
-	"bucket_position"		"4"
-	//"weapon_category"		"12"
-
+	"bucket"				"2"
+	"bucket_position"		"0"
+	"bucket_360"			"2"
+	"bucket_position_360"	"0"
+    
 	"clip_size"				"20"
 	"clip2_size"			"-1"
 

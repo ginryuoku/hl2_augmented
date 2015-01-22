@@ -7,9 +7,10 @@ WeaponData
 	"viewmodel"				"models/weapons/v_rif_m4a1.mdl"
 	"playermodel"			"models/weapons/w_rif_m4a1.mdl"	//FIXME: 
 	"anim_prefix"			"smg2"
-	"bucket"				"3"
+	"bucket"				"2"
 	"bucket_position"		"0"
-	//"weapon_category"		"12"
+	"bucket_360"			"2"
+	"bucket_position_360"	"0"
 
 	"clip_size"				"30"
 	"clip2_size"			"-1"

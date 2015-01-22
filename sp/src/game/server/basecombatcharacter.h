@@ -236,6 +236,7 @@ public:
 	virtual	bool		Weapon_CanSwitchTo(CBaseCombatWeapon *pWeapon);
 	virtual bool		Weapon_SlotOccupied( CBaseCombatWeapon *pWeapon );
 	virtual CBaseCombatWeapon *Weapon_GetSlot( int slot ) const;
+	virtual CBaseCombatWeapon *Weapon_GetPosition(int slot, int position);
 	CBaseCombatWeapon	*Weapon_GetWpnForAmmo( int iAmmoIndex );
 
 

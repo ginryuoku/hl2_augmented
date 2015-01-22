@@ -7,12 +7,13 @@ WeaponData
 	"viewmodel"				"models/weapons/v_rpg.mdl"
 	"playermodel"			"models/weapons/w_rocket_launcher.mdl"
 	"anim_prefix"			"missile launcher"
-	"bucket"				"4"
-	"bucket_position"		"3"
-	"autoswitchfrom"		"0"
+	"bucket"				"3"
+	"bucket_position"		"0"
 	"bucket_360"			"3"
-	"bucket_position_360"	"1"
-
+	"bucket_position_360"	"0"
+    
+	"autoswitchfrom"		"0"
+    
 	"clip_size"				"-1"
 	"clip2_size"			"-1"
 	"default_clip"			"3"

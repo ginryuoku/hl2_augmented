@@ -3048,8 +3048,6 @@ void CHL2_Player::PlayerUse ( void )
 			usedSomething = true;
 		}
 
-#if	HL2_SINGLE_PRIMARY_WEAPON_MODE
-
 		//Check for weapon pick-up
 		if ( m_afButtonPressed & IN_USE )
 		{
@@ -3064,14 +3062,13 @@ void CHL2_Player::PlayerUse ( void )
 				}
 				else
 				{
-					Weapon_DropSlot( pWeapon->GetSlot() );
+					Weapon_DropSlot( pWeapon->GetSlot(), pWeapon->GetBucketPosition() );
 					Weapon_Equip( pWeapon );
 				}
 
 				usedSomething = true;
 			}
 		}
-#endif
 	}
 	else if ( m_afButtonPressed & IN_USE )
 	{

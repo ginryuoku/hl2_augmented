@@ -5,12 +5,12 @@ WeaponData
 	// Weapon data is loaded by both the Game and Client DLLs.
 	"printname"			"#CE_Manurhin_MR96"
 	"viewmodel"			"models/weapons/v_mag_mr96.mdl"
-	"playermodel"		"models/weapons/v_mag_mr96.mdl"
+	"playermodel"		"models/weapons/w_mag_mr96.mdl"
 	"anim_prefix"		"python"
 	"bucket"			"1"
-	"bucket_position"	"3"
-	"bucket_360"			"0"
-	"bucket_position_360"	"1"
+	"bucket_position"	"0"
+	"bucket_360"			"1"
+	"bucket_position_360"	"0"
 
 	"clip_size"			"6"
 	"default_clip"		"6"

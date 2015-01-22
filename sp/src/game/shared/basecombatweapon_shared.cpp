@@ -94,7 +94,7 @@ CBaseCombatWeapon::CBaseCombatWeapon()
 
 	m_nFireMode = 1;
 	m_nBurstRate = 3;
-
+	m_iPosition = -1;
 #if defined( CLIENT_DLL )
 	m_iState = m_iOldState = WEAPON_NOT_CARRIED;
 	m_iClip1 = -1;
@@ -668,6 +668,16 @@ void CBaseCombatWeapon::SetOwner( CBaseCombatCharacter *owner )
 #else
 	UpdateVisibility();
 #endif
+}
+
+int CBaseCombatWeapon::GetBucketPosition(void)
+{
+	return m_iPosition;
+}
+
+void CBaseCombatWeapon::SetBucketPosition(int position)
+{
+	m_iPosition = position;
 }
 
 //-----------------------------------------------------------------------------
@@ -2864,6 +2874,7 @@ BEGIN_PREDICTION_DATA( CBaseCombatWeapon )
 
 	DEFINE_FIELD(m_nFireMode, FIELD_INTEGER),     // keeps track of firing mode
 	DEFINE_FIELD(m_nBurstRate, FIELD_INTEGER),    // Burst fires this many bullets
+	DEFINE_FIELD(m_iPosition, FIELD_INTEGER),		// Position of weapon in bucket
 
 	DEFINE_PRED_FIELD( m_bIsIronsighted, FIELD_BOOLEAN, FTYPEDESC_INSENDTABLE ),
 	DEFINE_PRED_FIELD( m_flIronsightedTime, FIELD_FLOAT, FTYPEDESC_INSENDTABLE ),
@@ -2928,6 +2939,7 @@ BEGIN_DATADESC( CBaseCombatWeapon )
 
 	DEFINE_FIELD(m_bIsIronsighted, FIELD_BOOLEAN),
 	DEFINE_FIELD(m_flIronsightedTime, FIELD_FLOAT),
+	DEFINE_FIELD(m_iPosition, FIELD_INTEGER),		// What is my position in the weapon buckets?
 
 	DEFINE_FIELD( m_nViewModelIndex, FIELD_INTEGER ),
 
@@ -3105,6 +3117,7 @@ BEGIN_NETWORK_TABLE_NOBASE( CBaseCombatWeapon, DT_LocalWeaponData )
 	SendPropInt( SENDINFO(m_nFireMode)),
 	SendPropInt(SENDINFO(m_nBurstRate)),
 	SendPropInt( SENDINFO( m_bFlipViewModel ) ),
+	SendPropInt(SENDINFO(m_iPosition)),
 
 #if defined( TF_DLL )
 	SendPropExclude( "DT_AnimTimeMustBeFirst" , "m_flAnimTime" ),
@@ -3117,6 +3130,7 @@ BEGIN_NETWORK_TABLE_NOBASE( CBaseCombatWeapon, DT_LocalWeaponData )
 	RecvPropInt( RECVINFO(m_iSecondaryAmmoType )),
 	RecvPropInt(RECVINFO(m_nFireMode)),
 	RecvPropInt(RECVINFO(m_nBurstRate)),
+	RecvPropInt(RECVINFO(m_iPosition)),
 	RecvPropInt( RECVINFO( m_nViewModelIndex ) ),
 
 	RecvPropBool( RECVINFO( m_bFlipViewModel ) ),

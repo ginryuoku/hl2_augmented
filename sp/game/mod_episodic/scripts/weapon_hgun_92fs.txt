@@ -9,7 +9,7 @@ WeaponData
 	"anim_prefix"		"pistol"
 	"bucket"			"1"
 	"bucket_position"	"0"
-	"bucket_360"			"0"
+	"bucket_360"			"1"
 	"bucket_position_360"	"0"
 
 	"clip_size"			"15"

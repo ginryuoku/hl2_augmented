@@ -9,7 +9,7 @@ WeaponData
 	"anim_prefix"			"smg2"
 	"bucket"				"2"
 	"bucket_position"		"0"
-	"bucket_360"			"1"
+	"bucket_360"			"2"
 	"bucket_position_360"	"0"
 
 	"clip_size"				"30"
