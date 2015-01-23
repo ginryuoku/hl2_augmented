@@ -17,6 +17,8 @@
 "+firemode"             "#CE_Switch_Firemodes"
 "use_heal"              "#CE_HealSelf"
 "use_armor"             "#CE_RechargeArmor"
+"sellcurrentweapon"     "#CE_Sell_Held_Weapon"
+"drop"                  "#CE_DropWeapon"
 "blank"			"=========================="
 "blank"			"#Valve_Combat_Title"
 "blank"			"=========================="
