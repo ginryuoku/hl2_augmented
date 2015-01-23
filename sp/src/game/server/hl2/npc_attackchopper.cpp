@@ -3771,6 +3771,10 @@ void CNPC_AttackHelicopter::Event_Killed( const CTakeDamageInfo &info )
 		{
 			pPlayer->AddPlayerCash(GetCash());
 		}
+		if (!Q_strcmp("prop_vehicle_airboat", info.GetAttacker()->GetClassname()))
+		{
+			pPlayer->AddPlayerCash(GetCash());
+		}
 	}
 
 	m_OnDeath.FireOutput( info.GetAttacker(), this );
