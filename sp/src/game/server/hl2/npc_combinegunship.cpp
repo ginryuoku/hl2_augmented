@@ -532,10 +532,12 @@ void CNPC_CombineGunship::Spawn( void )
 
 	if ( HasSpawnFlags( SF_GUNSHIP_USE_CHOPPER_MODEL ) )
 	{
+		m_iCash = 2500;
 		SetModel( "models/combine_helicopter.mdl" );
 	}
 	else
 	{
+		m_iCash = 5000;
 		SetModel( "models/gunship.mdl" );
 	}
 	
