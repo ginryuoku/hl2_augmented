@@ -3764,6 +3764,15 @@ void CNPC_AttackHelicopter::Event_Killed( const CTakeDamageInfo &info )
 	m_iHealth = 0;
 	m_takedamage = DAMAGE_NO;
 
+	CBasePlayer *pPlayer = UTIL_GetLocalPlayer();
+	if (pPlayer)
+	{
+		if (info.GetAttacker() == pPlayer)
+		{
+			pPlayer->AddPlayerCash(GetCash());
+		}
+	}
+
 	m_OnDeath.FireOutput( info.GetAttacker(), this );
 }
 

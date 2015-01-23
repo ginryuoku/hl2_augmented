@@ -1870,6 +1870,14 @@ void CNPC_CombineGunship::Event_Killed( const CTakeDamageInfo &info )
 
 	BeginCrash();
 
+	CBasePlayer *pPlayer = UTIL_GetLocalPlayer();
+	if (pPlayer)
+	{
+		if (info.GetAttacker() == pPlayer)
+		{
+			pPlayer->AddPlayerCash(GetCash());
+		}
+	}
 	// we deliberately do not call BaseClass::EventKilled
 }
 

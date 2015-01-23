@@ -2092,6 +2092,16 @@ void CNPC_Barnacle::Event_Killed( const CTakeDamageInfo &info )
 	SetNextThink( gpGlobals->curtime + 0.1f );
 	SetThink ( &CNPC_Barnacle::WaitTillDead );
 
+	CBasePlayer *pPlayer = UTIL_GetLocalPlayer();
+
+	if (pPlayer)
+	{
+		if (info.GetAttacker() == pPlayer)
+		{
+			pPlayer->AddPlayerCash(GetCash());
+		}
+	}
+
 	// we deliberately do not call BaseClass::EventKilled
 }
 

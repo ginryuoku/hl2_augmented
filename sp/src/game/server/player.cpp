@@ -9543,6 +9543,7 @@ void CBasePlayer::Event_KilledOther( CBaseEntity *pVictim, const CTakeDamageInfo
 	BaseClass::Event_KilledOther( pVictim, info );
 	if ( pVictim != this )
 	{
+		AddPlayerCash(pVictim->GetCash());
 		gamestats->Event_PlayerKilledOther( this, pVictim, info );
 	}
 	else

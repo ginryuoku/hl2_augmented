@@ -301,6 +301,7 @@ void CNPC_Stalker::Spawn( void )
 	m_flDistTooFar	= MAX_STALKER_FIRE_RANGE;
 
 	m_iPlayerAggression = 0;
+	m_iCash = 50;
 
 	GetSenses()->SetDistLook(MAX_STALKER_FIRE_RANGE - 1);
 }
