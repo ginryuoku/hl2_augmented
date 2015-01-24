@@ -18,7 +18,7 @@ WeaponData
 
 	"weight"				"4"
 	"rumble"			"5"
-	"item_flags"			"0"
+	"item_flags"			"ITEM_FLAG_SELECTONEMPTY"
 	"BuiltRightHanded"		"0"
 	"AllowFlipping"			"1"
     

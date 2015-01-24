@@ -20,7 +20,7 @@ WeaponData
 
 	"weight"				"3"
 	"rumble"			"3"
-	"item_flags"			"0"
+	"item_flags"			"ITEM_FLAG_SELECTONEMPTY"
     "primary_ammo_id"       "185"
     IronSight
     {
