@@ -39,6 +39,8 @@ public:
 	bool				IsBreatherActive( void ) { return m_HL2Local.m_bitsActiveDevices & bits_SUIT_DEVICE_BREATHER; }
 	bool				IsMeleeBoosterActive(void) { return m_HL2Local.m_bitsActiveDevices & bits_SUIT_DEVICE_MELEEBOOST; }
 
+	float				SuitPower_GetMaxCharge(void) { return 50.0f + (50.0f * (float)m_HL2Local.m_iAuxPowerUpgradeCells); }
+
 	virtual int			DrawModel( int flags );
 	virtual	void		BuildTransformations( CStudioHdr *hdr, Vector *pos, Quaternion q[], const matrix3x4_t& cameraTransform, int boneMask, CBoneBitList &boneComputed );
 

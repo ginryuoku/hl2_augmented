@@ -136,7 +136,10 @@ public:
 	bool SuitPower_RemoveDevice( const CSuitPowerDevice &device );
 	bool SuitPower_ShouldRecharge( void );
 	float SuitPower_GetCurrentPercentage( void ) { return m_HL2Local.m_flSuitPower; }
-	
+
+	float SuitPower_GetMaxCharge(void) { return 50.0f + (50.0f * (float)m_HL2Local.m_iAuxPowerUpgradeCells); }
+	void UpgradeAuxPowerCells(void);
+
 	void SetFlashlightEnabled( bool bState );
 
 	// Apply a battery

@@ -295,6 +295,19 @@ void CC_ToggleDuck( void )
 
 static ConCommand toggle_duck("toggle_duck", CC_ToggleDuck, "Toggles duck" );
 
+void CC_UpgradeAuxPowerCells(void)
+{
+	CBasePlayer* pPlayer = UTIL_GetCommandClient();
+	if (pPlayer == nullptr)
+		return;
+
+	CHL2_Player *pHL2Player = dynamic_cast<CHL2_Player *>(pPlayer);
+	if (pHL2Player == nullptr)
+		return;
+	else pHL2Player->UpgradeAuxPowerCells();
+}
+static ConCommand upgrade_auxcells("upgrade_auxcells", CC_UpgradeAuxPowerCells, "Upgrades aux power cells.\n");
+
 #ifndef HL2MP
 #ifndef PORTAL
 LINK_ENTITY_TO_CLASS( player, CHL2_Player );
@@ -2012,7 +2025,7 @@ void CHL2_Player::SuitPower_Update( void )
 void CHL2_Player::SuitPower_Initialize( void )
 {
 	m_HL2Local.m_bitsActiveDevices = 0x00000000;
-	m_HL2Local.m_flSuitPower = 100.0;
+	m_HL2Local.m_flSuitPower = SuitPower_GetMaxCharge();
 	m_flSuitPowerLoad = 0.0;
 }
 
@@ -2049,10 +2062,10 @@ void CHL2_Player::SuitPower_Charge( float flPower )
 {
 	m_HL2Local.m_flSuitPower += flPower;
 
-	if( m_HL2Local.m_flSuitPower > 100.0 )
+	if (m_HL2Local.m_flSuitPower > SuitPower_GetMaxCharge())
 	{
 		// Full charge, clamp.
-		m_HL2Local.m_flSuitPower = 100.0;
+		m_HL2Local.m_flSuitPower = SuitPower_GetMaxCharge();
 	}
 }
 
@@ -2120,7 +2133,7 @@ bool CHL2_Player::SuitPower_ShouldRecharge( void )
 		return false;
 
 	// Is the system fully charged?
-	if( m_HL2Local.m_flSuitPower >= 100.0f )
+	if( m_HL2Local.m_flSuitPower >= SuitPower_GetMaxCharge())
 		return false; 
 
 	// Has the system been in a no-load state for long enough
@@ -2129,6 +2142,18 @@ bool CHL2_Player::SuitPower_ShouldRecharge( void )
 		return false;
 
 	return true;
+}
+
+void CHL2_Player::UpgradeAuxPowerCells(void)
+{
+	if (GetPlayerCash() < 2000 * (m_HL2Local.m_iAuxPowerUpgradeCells + 1))
+		return;
+	AddPlayerCash(-2000 * (m_HL2Local.m_iAuxPowerUpgradeCells + 1));
+	m_HL2Local.m_iAuxPowerUpgradeCells = m_HL2Local.m_iAuxPowerUpgradeCells + 1;
+
+	// Installing an extra aux power cell recharges the system and resets all suit devices.
+	SuitPower_Initialize();
+	Msg("Aux power upgrades now: %d\n", m_HL2Local.m_iAuxPowerUpgradeCells);
 }
 
 //-----------------------------------------------------------------------------

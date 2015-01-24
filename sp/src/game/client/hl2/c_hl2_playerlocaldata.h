@@ -45,7 +45,7 @@ public:
 	float	m_flFlashBattery;
 	Vector	m_vecLocatorOrigin;
 #endif
-
+	int		m_iAuxPowerUpgradeCells;
 	// Ladder related data
 	EHANDLE			m_hLadder;
 	LadderMove_t	m_LadderMove;
