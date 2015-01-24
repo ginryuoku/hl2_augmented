@@ -466,7 +466,7 @@ void CNPC_MetroPolice::NotifyDeadFriend( CBaseEntity* pFriend )
 //-----------------------------------------------------------------------------
 CNPC_MetroPolice::CNPC_MetroPolice()
 {
-	m_iCash = 40;
+	m_iCash = 100;
 }
 
 

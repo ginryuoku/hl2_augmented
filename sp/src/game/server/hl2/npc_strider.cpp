@@ -423,7 +423,7 @@ CNPC_Strider::CNPC_Strider()
 	m_hSmoke = NULL;
 	m_PlayerFreePass.SetOuter( this );
 	m_bExploding = false;
-	m_iCash = 2500;
+	m_iCash = 10000;
 }
 
 //---------------------------------------------------------
