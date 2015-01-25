@@ -664,7 +664,7 @@ public:
 	bool	IsDisconnecting() const	{ return m_iConnected == PlayerDisconnecting; }
 	bool	IsSuitEquipped() const	{ return m_Local.m_bWearingSuit; }
 	int		ArmorValue() const		{ return m_ArmorValue; }
-	int		MaxArmorValue()	const	{ return 20 + (m_Local.m_iArmorUpgrades * 20); }
+	int		MaxArmorValue()	const	{ return ArmorSegmentValue() + (m_Local.m_iArmorUpgrades * ArmorSegmentValue()); }
 	void	ResetMaxHealth();
 
 	bool	HUDNeedsRestart() const { return m_fInitHUD; }
@@ -685,6 +685,10 @@ public:
 
 	void UpgradeHealth(void);
 	void UpgradeArmor(void);
+	void UpgradeHealthSegments(void);
+	void UpgradeArmorSegments(void);
+	int  HealthSegmentValue() const { return 10 + (m_Local.m_iHealthSegmentUpgrades * 5); }
+	int  ArmorSegmentValue() const { return 10 + (m_Local.m_iArmorSegmentUpgrades * 5); }
 
 	int		GetObserverMode() const	{ return m_iObserverMode; }
 	CBaseEntity *GetObserverTarget() const	{ return m_hObserverTarget; }

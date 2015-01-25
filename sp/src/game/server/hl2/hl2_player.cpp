@@ -966,7 +966,7 @@ void CHL2_Player::PostThink( void )
 	{
 		bool used_armor_buffer = false;
 		bool used_health_buffer = false;
-		if ( gpGlobals->curtime > m_flLastDamageTime + 5 && GetHealth() % 20 != 0 && GetHealth() < GetMaxHealth())
+		if (gpGlobals->curtime > m_flLastDamageTime + 3 && GetHealth() % HealthSegmentValue() != 0 && GetHealth() < GetMaxHealth())
 		{
 			//Regenerate based on rate, and scale it by the frametime
 			m_fHealthRegenRemainder += 0.8 * gpGlobals->frametime;
@@ -984,11 +984,11 @@ void CHL2_Player::PostThink( void )
 					--m_iHealthKitBuffer;
 			}
 		}
-		if ( gpGlobals->curtime > m_flLastDamageTime + 2 && (ArmorValue() % 20 != 0 || ArmorValue() == 0 ))
+		if ( gpGlobals->curtime > m_flLastDamageTime + 2 && (ArmorValue() % ArmorSegmentValue() != 0 || ArmorValue() == 0 ))
 		{
 			// Regenerate based on rate, and scale it by the frametime
 			// If we're regenerating while health is regenerating, we take a penalty.
-			if (GetHealth() % 20 > 0)
+			if (GetHealth() % HealthSegmentValue() > 0)
 			{
 				m_fArmorRegenRemainder += 0.6 * gpGlobals->frametime;
 			} 

@@ -172,10 +172,14 @@ void CHudHealth::MsgFunc_Damage( bf_read &msg )
 
 void CHudHealth::Paint(void)
 {
-	int chunkCount = 2;
+	int chunkCount = 5;
+	int segment = 10;
 	C_BasePlayer *local = C_BasePlayer::GetLocalPlayer();
-	if (local)
-		chunkCount = local->m_Local.m_iHealthUpgrades + 2;
+	if (local) 
+	{
+		chunkCount = local->m_Local.m_iHealthUpgrades + 5;
+		segment = local->HealthSegmentValue();
+	}
 
 	// Clamp the size of the health bar
 	if (chunkCount > 15)
@@ -183,13 +187,13 @@ void CHudHealth::Paint(void)
 		chunkCount = 15;
 	}
 	bool transition_chunk = false;
-	int transition_chunk_alpha = 15 + (12 * (m_iHealth % 20));
-	int enabledChunks = (int)(m_iHealth / 20);
+	int transition_chunk_alpha = 15 + (((m_iHealth % segment) * 240) / segment);
+	int enabledChunks = (int)(m_iHealth / segment);
 	if (enabledChunks > 15)
 	{
 		enabledChunks = 15;
 	}
-	if (m_iHealth % 20 && enabledChunks < 15)
+	if (m_iHealth % segment && enabledChunks < 15)
 	{
 		transition_chunk = true;
 	}

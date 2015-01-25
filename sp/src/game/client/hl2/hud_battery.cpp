@@ -107,6 +107,12 @@ bool CHudBattery::ShouldDraw( void )
 //-----------------------------------------------------------------------------
 void CHudBattery::OnThink( void )
 {
+	int segment = 10;
+
+	C_BasePlayer *local = C_BasePlayer::GetLocalPlayer();
+	if (local)
+		segment = local->ArmorSegmentValue();
+
 	if ( m_iBat == m_iNewBat )
 		return;
 
@@ -120,7 +126,7 @@ void CHudBattery::OnThink( void )
 		g_pClientMode->GetViewportAnimationController()->StartAnimationSequence("SuitDamageTaken");
 
 		// play an extra animation if we're super low
-		if ( m_iNewBat < 20 )
+		if (m_iNewBat < segment)
 		{
 			g_pClientMode->GetViewportAnimationController()->StartAnimationSequence("SuitArmorLow");
 		}
@@ -128,7 +134,7 @@ void CHudBattery::OnThink( void )
 	else
 	{
 		// battery power has increased (if we had no previous armor, or if we just loaded the game, don't use alert state)
-		if ( m_iBat == INIT_BAT || m_iBat == 0 || m_iNewBat >= 20)
+		if (m_iBat == INIT_BAT || m_iBat == 0 || m_iNewBat >= segment)
 		{
 			g_pClientMode->GetViewportAnimationController()->StartAnimationSequence("SuitPowerIncreasedAbove20");
 		}
@@ -154,9 +160,13 @@ void CHudBattery::MsgFunc_Battery( bf_read &msg )
 void CHudBattery::Paint(void)
 {
 	int chunkCount = 1;
+	int segment = 10;
 	C_BasePlayer *local = C_BasePlayer::GetLocalPlayer();
 	if (local)
+	{
 		chunkCount = local->m_Local.m_iArmorUpgrades + 1;
+		segment = local->ArmorSegmentValue();
+	}
 	
 	// Clamp the size of the health bar
 	if (chunkCount > 15)
@@ -164,7 +174,8 @@ void CHudBattery::Paint(void)
 		chunkCount = 15;
 	}
 	bool transition_chunk = false;
-	int transition_chunk_alpha = 15 + (12 * (m_iBat % 20));
+	int transition_chunk_alpha = 15 + (((m_iBat % segment) * 240) / segment);
+
 	int enabledChunks = (int)(m_iBat / 20);
 	if (enabledChunks > 15)
 	{

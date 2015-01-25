@@ -181,8 +181,11 @@ public:
 		return m_Local.m_iPlayerCash;
 	}
 
+	int  HealthSegmentValue() const { return 10 + (m_Local.m_iHealthSegmentUpgrades * 5); }
+	int  ArmorSegmentValue() const { return 10 + (m_Local.m_iArmorSegmentUpgrades * 5); }
+
 	bool			IsSuitEquipped( void ) { return m_Local.m_bWearingSuit; };
-	int				GetMaxHealth(void) { return 40 + (20 * m_Local.m_iHealthUpgrades); }
+	int				GetMaxHealth(void) { return (HealthSegmentValue() * 4) + (HealthSegmentValue() * m_Local.m_iHealthUpgrades); }
 
 	// Team handlers
 	virtual void	TeamChange( int iNewTeam );

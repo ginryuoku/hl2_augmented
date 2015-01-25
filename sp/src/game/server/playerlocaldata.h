@@ -78,6 +78,8 @@ public:
 	CNetworkVar( int, m_iMaxArmor );
 	CNetworkVar( int, m_iHealthUpgrades );
 	CNetworkVar( int, m_iArmorUpgrades );
+	CNetworkVar(int, m_iHealthSegmentUpgrades);
+	CNetworkVar(int, m_iArmorSegmentUpgrades);
 
 	int	m_iGrabbedPistol;
 	int m_iGrabbed357;

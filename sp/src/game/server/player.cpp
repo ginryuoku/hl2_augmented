@@ -583,7 +583,8 @@ CBasePlayer::CBasePlayer( )
 	m_Local.m_iPlayerCash = 400; // Just enough to buy a handgun if you collect two in EP2.
 	m_Local.m_iArmorUpgrades = 0;
 	m_Local.m_iHealthUpgrades = 0;
-
+	m_Local.m_iArmorSegmentUpgrades = 0;
+	m_Local.m_iHealthSegmentUpgrades = 0;
 	m_Local.m_iGrabbed357 = 0;
 	m_Local.m_iGrabbedAR2 = 0;
 	m_Local.m_iGrabbedPistol = 0;
@@ -8837,7 +8838,7 @@ void CBasePlayer::RemoveSuit( void )
 
 void CBasePlayer::ResetMaxHealth( void )
 {
-	SetMaxHealth( 40 + ( 20 * m_Local.m_iHealthUpgrades));
+	SetMaxHealth( (HealthSegmentValue() * 5) + ( HealthSegmentValue() * m_Local.m_iHealthUpgrades));
 }
 
 //-----------------------------------------------------------------------------
@@ -9667,6 +9668,24 @@ void CBasePlayer::UpgradeArmor(void)
 	Msg("Armor upgrades now: %d\n", m_Local.m_iArmorUpgrades);
 }
 
+void CBasePlayer::UpgradeHealthSegments(void)
+{
+	if (GetPlayerCash() < 1000 * (m_Local.m_iHealthSegmentUpgrades + 1))
+		return;
+	AddPlayerCash(-1000 * (m_Local.m_iHealthSegmentUpgrades + 1));
+	m_Local.m_iHealthSegmentUpgrades = m_Local.m_iHealthSegmentUpgrades + 1;
+	ResetMaxHealth();
+	Msg("Health segment upgrades now: %d\n", m_Local.m_iHealthSegmentUpgrades);
+}
+void CBasePlayer::UpgradeArmorSegments(void)
+{
+	if (GetPlayerCash() < 1000 * (m_Local.m_iArmorSegmentUpgrades + 1))
+		return;
+	AddPlayerCash(-1000 * (m_Local.m_iArmorSegmentUpgrades + 1));
+	m_Local.m_iArmorSegmentUpgrades = m_Local.m_iArmorSegmentUpgrades + 1;
+	ResetMaxHealth();
+	Msg("Health segment upgrades now: %d\n", m_Local.m_iArmorSegmentUpgrades);
+}
 void CBasePlayer::AddPlayerCash(int cash)
 {
 	if (cash != 0)
