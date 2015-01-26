@@ -55,6 +55,8 @@ BEGIN_SEND_TABLE_NOBASE( CPlayerLocalData, DT_Local )
 	SendPropInt		(SENDINFO(m_iMaxArmor), -1, SPROP_UNSIGNED),
 	SendPropInt		(SENDINFO(m_iHealthUpgrades), -1, SPROP_UNSIGNED),
 	SendPropInt		(SENDINFO(m_iArmorUpgrades), -1, SPROP_UNSIGNED),
+	SendPropInt(SENDINFO(m_iHealthSegmentUpgrades), -1, SPROP_UNSIGNED),
+	SendPropInt(SENDINFO(m_iArmorSegmentUpgrades), -1, SPROP_UNSIGNED),
 	SendPropBool	(SENDINFO(m_bPoisoned)),
 
 	SendPropFloat	(SENDINFO(m_flStepSize), 16, SPROP_ROUNDUP, 0.0f, 128.0f ),
