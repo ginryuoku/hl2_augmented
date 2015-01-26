@@ -47,6 +47,8 @@
 #include "filters.h"
 #include "tier0/icommandline.h"
 
+#include "grenade_frag.h"
+
 #ifdef HL2_EPISODIC
 #include "npc_alyx_episodic.h"
 #endif
@@ -565,6 +567,105 @@ void CHL2_Player::HandleSpeedChanges( void )
 	}
 }
 
+void CHL2_Player::HandleThrowExplosiveGrenade(void)
+{
+	if ((m_afButtonPressed & IN_GRENADE1) && !m_bWantExplosiveGrenadeThrow && HasAnyAmmoOfType(12) && HasWeapons())
+	{
+		m_flGrenadeSequenceTimeHolster = NULL;
+		m_flGrenadeSequenceTimeThrow = NULL;
+		m_flGrenadeSequenceTimeDeploy = NULL;
+		m_bWantExplosiveGrenadeThrow = true;
+	}
+
+	ThrowExplosiveGrenade();
+}
+
+void CHL2_Player::ThrowExplosiveGrenade(void)
+{
+	if (m_bWantExplosiveGrenadeThrow)
+	{
+		CBaseViewModel *vm = GetViewModel(0);
+		CBaseViewModel *vm2 = GetViewModel(1);
+
+		//2nd viewmodel creation
+		if (!vm2)
+		{
+			CreateViewModel(1);
+			vm2 = GetViewModel(1);
+		}
+
+		//HOLSTER SEQUENCING
+		int sequence1 = vm->SelectWeightedSequence(ACT_VM_HOLSTER);
+		if ((m_flGrenadeSequenceTimeHolster == NULL) && (sequence1 >= 0))
+		{
+			vm->SendViewModelMatchingSequence(sequence1);
+			m_flGrenadeSequenceTimeHolster = (gpGlobals->curtime + vm->SequenceDuration(sequence1) + 0.5f);
+		}
+
+		//THROW SEQUENCING
+		if ((m_flGrenadeSequenceTimeHolster < gpGlobals->curtime) && (m_flGrenadeSequenceTimeHolster != NULL))
+		{
+			vm->AddEffects(EF_NODRAW);
+			vm2->SetWeaponModel("models/weapons/v_grenade.mdl", NULL);
+
+
+			int sequence2 = vm2->SelectWeightedSequence(ACT_VM_THROW);
+			if ((m_flGrenadeSequenceTimeThrow == NULL) && (sequence2 >= 0))
+			{
+				vm2->SendViewModelMatchingSequence(sequence2);
+				m_flGrenadeSequenceTimeThrow = (gpGlobals->curtime + vm2->SequenceDuration(sequence2));
+				CreateExplosiveGrenade();
+			}
+		}
+
+		if ((m_flGrenadeSequenceTimeThrow < gpGlobals->curtime) && (m_flGrenadeSequenceTimeThrow != NULL))
+		{
+			vm2->SetWeaponModel(NULL, NULL);
+			UTIL_RemoveImmediate(vm2);
+			vm->RemoveEffects(EF_NODRAW);
+			int sequence3 = vm->SelectWeightedSequence(ACT_VM_DRAW);
+			if ((m_flGrenadeSequenceTimeDeploy == NULL) && (sequence3 >= 0))
+			{
+				vm->SendViewModelMatchingSequence(sequence3);
+				m_flGrenadeSequenceTimeDeploy = (gpGlobals->curtime + vm->SequenceDuration(sequence3));
+			}
+		}
+
+		if ((m_flGrenadeSequenceTimeDeploy < gpGlobals->curtime) && (m_flGrenadeSequenceTimeDeploy != NULL))
+		{
+			//Successfully Thrown A Grenade! Decrement ammo
+			RemoveAmmo(1, 12);
+			m_bWantExplosiveGrenadeThrow = false;
+		}
+	}
+}
+
+void CHL2_Player::CreateExplosiveGrenade(void)
+{
+	Vector	vecEye = EyePosition();
+	Vector	vForward, vRight;
+
+	EyeVectors(&vForward, &vRight, NULL);
+	Vector vecSrc = vecEye + vForward * 18.0f + vRight * 8.0f;
+	trace_t tr;
+
+	UTIL_TraceHull(vecEye, vecSrc, -Vector(4.0f + 2, 4.0f + 2, 4.0f + 2), Vector(4.0f + 2, 4.0f + 2, 4.0f + 2),
+		PhysicsSolidMaskForEntity(), this, GetCollisionGroup(), &tr);
+
+	if (tr.DidHit())
+	{
+		vecSrc = tr.endpos;
+	}
+	vForward[2] += 0.1f;
+
+	Vector vecThrow;
+	GetVelocity(&vecThrow, NULL);
+	vecThrow += vForward * 1200;
+	Fraggrenade_Create(vecSrc, vec3_angle, vecThrow, AngularImpulse(600, random->RandomInt(-1200, 1200), 0), this, 3.0f, false);
+
+	gamestats->Event_WeaponFired(this, true, GetClassname());
+}
+
 //-----------------------------------------------------------------------------
 // This happens when we powerdown from the mega physcannon to the regular one
 //-----------------------------------------------------------------------------
@@ -672,6 +773,7 @@ void CHL2_Player::PreThink(void)
 
 	VPROF_SCOPE_BEGIN( "CHL2_Player::PreThink-Speed" );
 	HandleSpeedChanges();
+	HandleThrowExplosiveGrenade();
 #ifdef HL2_EPISODIC
 	HandleArmorReduction();
 #endif

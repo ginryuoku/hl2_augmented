@@ -269,6 +269,10 @@ public:
 	
 	void  HandleSpeedChanges( void );
 
+	void HandleThrowExplosiveGrenade(void);
+	void ThrowExplosiveGrenade(void);
+	void CreateExplosiveGrenade(void);
+	
 	void SetControlClass( Class_T controlClass ) { m_nControlClass = controlClass; }
 	
 	void StartWaterDeathSounds( void );
@@ -376,6 +380,11 @@ private:
 
 	float				m_fRegenBufferWait;
 	
+	float				m_flGrenadeSequenceTimeHolster;
+	float				m_flGrenadeSequenceTimeThrow;
+	float				m_flGrenadeSequenceTimeDeploy;
+	bool				m_bWantExplosiveGrenadeThrow;
+
 	friend class CHL2GameMovement;
 };
 
