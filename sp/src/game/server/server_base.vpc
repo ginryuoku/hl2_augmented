@@ -105,6 +105,7 @@ $Project
 			$File "comrade_erika\weapon_pdw_mp7a1.cpp"
 			$File "comrade_erika\weapon_pdw_p90.cpp"
 			$File "comrade_erika\weapon_hgun_92fs.cpp"
+			$File "comrade_erika\weapon_hgun_vp70m.cpp"
             $File "comrade_erika\weapon_hgun_fiveseven.cpp"
             $File "comrade_erika\weapon_hgun_uspmatch9.cpp"
 		}

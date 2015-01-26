@@ -92,12 +92,11 @@
 		"command"		"buy weapon_hgun_uspmatch9"
 		"cost"			"500"
 	}
-
-	"DEagle"
+	"FiveSeven"
 	{
 		"ControlName"		"MouseOverPanelButton"
-		"fieldName"		"DEagle"
-			"xpos"			"52"
+		"fieldName"		"FiveSeven"
+		"xpos"			"52"
 		"ypos"			"180"
 		"wide"			"170"
 		"tall"			"20"
@@ -106,14 +105,13 @@
 		"visible"		"1"
 		"enabled"		"1"
 		"tabPosition"	"0"
-		"labelText"		"#CE_DEagle357_Name"
+		"labelText"		"#CE_FNH_Five-Seven"
 		"textAlignment"		"west"
 		"dulltext"		"0"
 		"brighttext"		"0"
-		"command"		"buy weapon_mag_deagle357"
-		"cost"			"600"
+		"command"		"buy weapon_hgun_fiveseven"
+		"cost"			"900"
 	}
-	
 	"MR96"
 	{
 		"ControlName"		"MouseOverPanelButton"
@@ -134,12 +132,11 @@
 		"command"		"buy weapon_mag_mr96"
 		"cost"			"650"
 	}
-	
-	"FiveSeven"
+	"DEagle"
 	{
 		"ControlName"		"MouseOverPanelButton"
-		"fieldName"		"FiveSeven"
-		"xpos"			"52"
+		"fieldName"		"DEagle"
+			"xpos"			"52"
 		"ypos"			"244"
 		"wide"			"170"
 		"tall"			"20"
@@ -148,13 +145,33 @@
 		"visible"		"1"
 		"enabled"		"1"
 		"tabPosition"	"0"
-		"labelText"		"#CE_FNH_Five-Seven"
+		"labelText"		"#CE_DEagle357_Name"
 		"textAlignment"		"west"
 		"dulltext"		"0"
 		"brighttext"		"0"
-		"command"		"buy weapon_hgun_fiveseven"
-		"cost"			"900"
-	}
+		"command"		"buy weapon_mag_deagle357"
+		"cost"			"600"
+	}	
+	"vp70m"
+	{
+		"ControlName"		"MouseOverPanelButton"
+		"fieldName"		"vp70m"
+			"xpos"			"52"
+		"ypos"			"276"
+		"wide"			"170"
+		"tall"			"20"
+		"autoResize"	"0"
+		"pinCorner"		"2"
+		"visible"		"1"
+		"enabled"		"1"
+		"tabPosition"	"0"
+		"labelText"		"#CE_HK_VP70M"
+		"textAlignment"		"west"
+		"dulltext"		"0"
+		"brighttext"		"0"
+		"command"		"buy weapon_hgun_vp70m"
+		"cost"			"600"
+	}	
 
 	"CancelButton"
 	{

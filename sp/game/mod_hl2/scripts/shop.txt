@@ -6,6 +6,7 @@
     "weapon_hgun_92fs"		    "600"
     "weapon_hgun_fiveseven"     "900"
     "weapon_hgun_uspmatch9"     "1200"
+    "weapon_hgun_vp70m"         "2000"
     "weapon_mag_mr96"		    "800"	
     "weapon_mag_deagle357"      "2000"
     "weapon_shot_870ae"		    "1200"
