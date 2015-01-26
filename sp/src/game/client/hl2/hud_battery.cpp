@@ -176,12 +176,12 @@ void CHudBattery::Paint(void)
 	bool transition_chunk = false;
 	int transition_chunk_alpha = 15 + (((m_iBat % segment) * 240) / segment);
 
-	int enabledChunks = (int)(m_iBat / 20);
+	int enabledChunks = (int)(m_iBat / segment);
 	if (enabledChunks > 15)
 	{
 		enabledChunks = 15;
 	}
-	if (m_iBat % 20 && enabledChunks < 15)
+	if (m_iBat % segment && enabledChunks < 15)
 	{
 		transition_chunk = true;
 	}
