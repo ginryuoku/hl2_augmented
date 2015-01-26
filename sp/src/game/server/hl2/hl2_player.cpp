@@ -569,15 +569,20 @@ void CHL2_Player::HandleSpeedChanges( void )
 
 void CHL2_Player::HandleThrowExplosiveGrenade(void)
 {
-	if ((m_afButtonPressed & IN_GRENADE1) && !m_bWantExplosiveGrenadeThrow && HasAnyAmmoOfType(12) && HasWeapons())
+	CBasePlayer *pPlayer = ToBasePlayer(this);
+	if (pPlayer)
 	{
-		m_flGrenadeSequenceTimeHolster = NULL;
-		m_flGrenadeSequenceTimeThrow = NULL;
-		m_flGrenadeSequenceTimeDeploy = NULL;
-		m_bWantExplosiveGrenadeThrow = true;
+		if ((m_afButtonPressed & IN_GRENADE1) && !m_bWantExplosiveGrenadeThrow && pPlayer->m_pInventory.CountAllObjectsOfID(188, true) > 0 && HasWeapons())
+		{
+			m_flGrenadeSequenceTimeHolster = NULL;
+			m_flGrenadeSequenceTimeThrow = NULL;
+			m_flGrenadeSequenceTimeDeploy = NULL;
+			m_bWantExplosiveGrenadeThrow = true;
+		}
+
+		ThrowExplosiveGrenade();
 	}
 
-	ThrowExplosiveGrenade();
 }
 
 void CHL2_Player::ThrowExplosiveGrenade(void)
@@ -608,7 +613,6 @@ void CHL2_Player::ThrowExplosiveGrenade(void)
 			vm->AddEffects(EF_NODRAW);
 			vm2->SetWeaponModel("models/weapons/v_grenade.mdl", NULL);
 
-
 			int sequence2 = vm2->SelectWeightedSequence(ACT_VM_THROW);
 			if ((m_flGrenadeSequenceTimeThrow == NULL) && (sequence2 >= 0))
 			{
@@ -633,8 +637,12 @@ void CHL2_Player::ThrowExplosiveGrenade(void)
 
 		if ((m_flGrenadeSequenceTimeDeploy < gpGlobals->curtime) && (m_flGrenadeSequenceTimeDeploy != NULL))
 		{
-			//Successfully Thrown A Grenade! Decrement ammo
-			RemoveAmmo(1, 12);
+			CBasePlayer *pPlayer = ToBasePlayer(this);
+			if (pPlayer) 
+			{
+				pPlayer->m_pInventory.UseItem(1, pPlayer->m_pInventory.FindFirstObject(188));
+			}
+
 			m_bWantExplosiveGrenadeThrow = false;
 		}
 	}

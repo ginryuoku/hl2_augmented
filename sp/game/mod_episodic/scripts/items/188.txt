@@ -1,0 +1,20 @@
+ItemData
+{
+	"entity_name"				"item_grenade_m61" // entity name must match numeric ID
+	"item_friendlyname"			"#CE_Grenade_M61_Name" // Friendly name. We use the localizer here.
+	"item_friendlydescription"	"#CE_Grenade_M61_Desc" // Friendly description, also localized.
+
+	"item_capacity"				"1"	// Capacity of the item.
+	"item_maxcapacity"			"1"	// Max capacity of the item.
+    
+    "item_contains"             "188"   // Usually for magazines; refers to what the item contains.
+
+	"item_baseprice"			"0"	// Price for the item, empty.
+	"item_unitprice"			"100"		// Price for each element contained within the item.
+
+    // No base weight.
+    // M26/M26A1/M61 all weigh the same, supposedly - 454 grams.
+	
+    "item_baseweight" 			"0"	// Weight in grams of the empty item. 
+	"item_unitweight" 			"454"	// Weight in grams of each element.
+}

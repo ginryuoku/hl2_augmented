@@ -6622,7 +6622,9 @@ bool CBasePlayer::BumpWeapon( CBaseCombatWeapon *pWeapon )
 	if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_shotgun") )
 		IsProscribedWeapon = true;	
 	if ( !Q_stricmp( pWeapon->GetClassname(), "weapon_357") )
-		IsProscribedWeapon = true;	
+		IsProscribedWeapon = true;
+	if (!Q_stricmp(pWeapon->GetClassname(), "weapon_frag"))
+		IsProscribedWeapon = true;
 
 	// ----------------------------------------
 	// If I already have it just take the ammo
@@ -6807,6 +6809,10 @@ bool CBasePlayer::BumpWeapon( CBaseCombatWeapon *pWeapon )
 				AddPlayerCash(5000 * 0.5);
 			if (!Q_stricmp(pWeapon->GetClassname(), "weapon_rpg"))
 				AddPlayerCash(6500 * 0.5);
+			if (!Q_stricmp(pWeapon->GetClassname(), "weapon_frag"))
+			{
+				m_pInventory.NewObject(m_pInventory.FindFirstFreeObject(), 188, primaryGiven, 1);
+			}
 			
 			if (pWeapon->HasPrimaryAmmo())
 				return false;

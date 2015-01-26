@@ -498,7 +498,39 @@ public:
 };
 LINK_ENTITY_TO_CLASS(item_ammo_crossbow, CItem_BoxXBowRounds);
 
+// ========================================================================
+//	>> FlareRound
+// ========================================================================
+class CItem_M61FragGrenade : public CItem
+{
+public:
+	DECLARE_CLASS(CItem_M61FragGrenade, CItem);
 
+	void Spawn(void)
+	{
+		Precache();
+		SetModel("models/items/grenadeAmmo.mdl");
+		m_iItemID = 188;
+		BaseClass::Spawn();
+	}
+	void Precache(void)
+	{
+		PrecacheModel("models/items/grenadeAmmo.mdl");
+	}
+	bool MyTouch(CBasePlayer *pPlayer)
+	{
+		if (ITEM_GiveAmmo(pPlayer, 1, "Grenade"))
+		{
+			if (g_pGameRules->ItemShouldRespawn(this) == GR_ITEM_RESPAWN_NO)
+			{
+				UTIL_Remove(this);
+			}
+			return true;
+		}
+		return false;
+	}
+};
+LINK_ENTITY_TO_CLASS(item_grenade_m61, CItem_M61FragGrenade);
 // ========================================================================
 //	>> FlareRound
 // ========================================================================

@@ -6,6 +6,7 @@
     "weapon_hgun_92fs"		    "600"
     "weapon_hgun_fiveseven"     "900"
     "weapon_hgun_uspmatch9"     "1200"
+    "weapon_hgun_vp70m"         "2000"
     "weapon_mag_mr96"		    "800"	
     "weapon_mag_deagle357"      "2000"
     "weapon_shot_870ae"		    "1200"
@@ -23,7 +24,6 @@
     "weapon_srifle_mk17mod0sv"  "15000"
     "weapon_crossbow"		    "4000"
     "weapon_rpg"			    "6500"
-    "weapon_frag"               "200"
 
     "item_ammo_357_large"		"40"
     "item_ammo_pistol_large"	"220"
@@ -50,4 +50,6 @@
     "item_mag_57x28_20fs"       "60"
     "item_mag_46x30_40mp7"      "90"
     "item_mag_762n_scar20"      "120"
+
+	"item_grenade_m61"			"100"
 }

@@ -119,7 +119,7 @@
 	{
 		"ControlName"		"MouseOverPanelButton"
 		"fieldName"		"hegrenade"
-				"xpos"		"52"
+		"xpos"		"52"
 		"ypos"		"212"
 		"wide"		"170"
 		"tall"		"20"
@@ -128,11 +128,11 @@
 		"visible"		"1"
 		"enabled"		"1"
 		"tabPosition"	"0"
-		"labelText"		"#CE_HE_Grenade"
+		"labelText"		"#CE_Grenade_M61"
 		"textAlignment"		"west"
 		"dulltext"		"0"
 		"brighttext"		"0"
-		"command"		"buy weapon_frag"
+		"command"		"buy item_grenade_m61"
 		"cost"			"300"
 	}
 	
