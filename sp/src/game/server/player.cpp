@@ -4907,7 +4907,7 @@ void CBasePlayer::Spawn( void )
 
 	m_ArmorValue		= SpawnArmorValue();
 	SetBlocksLOS( false );
-	m_iMaxHealth		= 40 + (20 * m_Local.m_iHealthUpgrades);
+	m_iMaxHealth		= 50 + (m_Local.m_iHealthSegmentUpgrades * m_Local.m_iHealthUpgrades);
 	if (m_iMaxHealth < m_iHealth)
 	{
 		m_iHealth = m_iMaxHealth;
