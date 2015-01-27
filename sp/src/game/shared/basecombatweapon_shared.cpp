@@ -102,7 +102,7 @@ CBaseCombatWeapon::CBaseCombatWeapon()
 	m_iPrimaryAmmoType = -1;
 	m_iSecondaryAmmoType = -1;
 #endif
-
+	m_bPickedUpBefore = false;
 #if !defined( CLIENT_DLL )
 	m_pConstraint = NULL;
 	OnBaseCombatWeaponCreated( this );
@@ -2936,7 +2936,7 @@ BEGIN_DATADESC( CBaseCombatWeapon )
 	DEFINE_FIELD(m_bIsIronsighted, FIELD_BOOLEAN),
 	DEFINE_FIELD(m_flIronsightedTime, FIELD_FLOAT),
 	DEFINE_FIELD(m_iPosition, FIELD_INTEGER),		// What is my position in the weapon buckets?
-
+	DEFINE_FIELD(m_bPickedUpBefore, FIELD_INTEGER),
 	DEFINE_FIELD( m_nViewModelIndex, FIELD_INTEGER ),
 
 // don't save these, init to 0 and regenerate
@@ -3142,6 +3142,7 @@ BEGIN_NETWORK_TABLE(CBaseCombatWeapon, DT_BaseCombatWeapon)
 	SendPropModelIndex( SENDINFO(m_iWorldModelIndex) ),
 	SendPropInt( SENDINFO(m_iState ), 8, SPROP_UNSIGNED ),
 	SendPropEHandle( SENDINFO(m_hOwner) ),
+	SendPropBool( SENDINFO(m_bPickedUpBefore)),
 #else
 	RecvPropDataTable("LocalWeaponData", 0, 0, &REFERENCE_RECV_TABLE(DT_LocalWeaponData)),
 	RecvPropDataTable("LocalActiveWeaponData", 0, 0, &REFERENCE_RECV_TABLE(DT_LocalActiveWeaponData)),
@@ -3149,5 +3150,6 @@ BEGIN_NETWORK_TABLE(CBaseCombatWeapon, DT_BaseCombatWeapon)
 	RecvPropInt( RECVINFO(m_iWorldModelIndex)),
 	RecvPropInt( RECVINFO(m_iState )),
 	RecvPropEHandle( RECVINFO(m_hOwner ) ),
+	RecvPropBool(RECVINFO(m_bPickedUpBefore)),
 #endif
 END_NETWORK_TABLE()

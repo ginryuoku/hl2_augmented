@@ -389,6 +389,9 @@ public:
 	void                    DisableIronsights(void);
 	void                    SetIronsightTime(void);
 
+	bool GetPickedUpBefore(void) { return m_bPickedUpBefore; }
+	void SetPickedUpBefore(bool state) { m_bPickedUpBefore = state; }
+
 	virtual int				GetBucketPosition(void);
 	virtual void			SetBucketPosition(int position);
 
@@ -600,6 +603,7 @@ private:
 	int						m_iPrimaryAmmoCount;
 	int						m_iSecondaryAmmoCount;
 
+
 public:
 
 	IMPLEMENT_NETWORK_VAR_FOR_DERIVED( m_nNextThinkTick );
@@ -625,7 +629,7 @@ public:
 	CNetworkVar(int, m_nBurstRate);			// How many bullets are fired in one burst-mode burst?
 	CNetworkVar(int, m_nFireMode);			// Fire mode value (0 safety,1 single fire,2 burst,3 auto)
 	CNetworkVar(int, m_iPosition);			// What category am I in?
-
+	CNetworkVar(bool,m_bPickedUpBefore);
 	float					m_flUnlockTime;
 	EHANDLE					m_hLocker;				// Who locked this weapon.
 
