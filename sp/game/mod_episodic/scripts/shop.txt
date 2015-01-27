@@ -32,7 +32,7 @@
     "item_ammo_ar2_large"		"500"
     "item_box_buckshot"		    "25"
     "item_ammo_crossbow"		"21"
-    "item_rpg_round"		    "400"
+    "item_rpg_round"		    "1000"
     "item_ammo_smg1_grenade"	"100"
     "item_ammo_762nato"         "850"
 

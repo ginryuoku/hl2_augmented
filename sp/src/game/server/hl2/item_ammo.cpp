@@ -611,6 +611,7 @@ public:
 	{ 
 		Precache( );
 		SetModel( "models/weapons/w_missile_closed.mdl");
+		m_iItemID = 187;
 		BaseClass::Spawn( );
 	}
 	void Precache( void )

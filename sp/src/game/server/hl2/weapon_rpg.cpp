@@ -1592,6 +1592,15 @@ void CWeaponRPG::PrimaryAttack( void )
 	if ( GetActivity() == ACT_VM_RELOAD )
 		return;
 
+	if (m_iClip1 < 1)
+	{
+		SendWeaponAnim(ACT_VM_DRYFIRE);
+		BaseClass::WeaponSound(EMPTY);
+		m_flNextPrimaryAttack = gpGlobals->curtime + 0.5f;
+		Reload();
+		return;
+	}
+
 	Vector vecOrigin;
 	Vector vecForward;
 
@@ -1623,7 +1632,7 @@ void CWeaponRPG::PrimaryAttack( void )
 		m_hMissile->SetGracePeriod( 0.3 );
 	}
 
-	DecrementAmmo( GetOwner() );
+	m_iClip1 -= 1;
 
 	// Register a muzzleflash for the AI
 	pOwner->SetMuzzleFlashTime( gpGlobals->curtime + 0.5 );
@@ -1747,13 +1756,9 @@ void CWeaponRPG::ItemPostFrame( void )
 	}
 
 	//Player has toggled guidance state
-	//Adrian: Players are not allowed to remove the laser guide in single player anymore, bye!
-	if ( g_pGameRules->IsMultiplayer() == true )
+	if ( pPlayer->m_afButtonPressed & IN_ATTACK2 )
 	{
-		if ( pPlayer->m_afButtonPressed & IN_ATTACK2 )
-		{
-			ToggleGuiding();
-		}
+		ToggleGuiding();
 	}
 
 	//Move the laser
@@ -2009,7 +2014,17 @@ bool CWeaponRPG::Reload( void )
 	if ( pOwner == NULL )
 		return false;
 
-	if ( pOwner->GetAmmoCount(m_iPrimaryAmmoType) <= 0 )
+	CBasePlayer *pPlayer = ToBasePlayer(GetOwner());
+
+	if (pPlayer)
+	{
+		if (pPlayer->m_pInventory.CountAllObjectContentsOfID(GetPrimaryAmmoID()) > 0) 
+		{
+			m_iClip1 = pPlayer->m_pInventory.UseItem(1, pPlayer->m_pInventory.FindFirstObject(GetPrimaryAmmoID()));
+		}
+		else return false;
+	}
+	else if ( pOwner->GetAmmoCount(m_iPrimaryAmmoType) <= 0 )
 		return false;
 
 	WeaponSound( RELOAD );

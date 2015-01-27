@@ -14,7 +14,7 @@ WeaponData
     
 	"autoswitchfrom"		"0"
     
-	"clip_size"				"-1"
+	"clip_size"				"1"
 	"clip2_size"			"-1"
 	"default_clip"			"3"
 	"default_clip2"			"-1"
@@ -25,6 +25,8 @@ WeaponData
 	"autoswitchto"			"0"
 	"weight"				"0"
 	"item_flags"			"2"
+    
+    "primary_ammo_id"       "187"
 
 	// Sounds for the weapon. There is a max of 16 sounds per category (i.e. max 16 "single_shot" sounds)
 	SoundData
