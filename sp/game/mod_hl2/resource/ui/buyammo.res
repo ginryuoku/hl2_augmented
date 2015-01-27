@@ -156,7 +156,7 @@
 		"command"		"buy item_ammo_smg1_grenade"
 		"cost"			"100"
 	}
-	"buckshot"
+    "buckshot"
 	{
 		"ControlName"		"MouseOverPanelButton"
 		"fieldName"		"buckshot"
@@ -174,6 +174,26 @@
 		"dulltext"		"0"
 		"brighttext"		"0"
 		"command"		"buy item_box_buckshot"
+		"cost"			"25"
+	}
+	"dissolver"
+	{
+		"ControlName"		"MouseOverPanelButton"
+		"fieldName"		"dissolver"
+		"xpos"			"52"
+		"ypos"			"308"
+		"wide"			"170"
+		"tall"			"20"
+		"autoResize"	"0"
+		"pinCorner"		"2"
+		"visible"		"1"
+		"enabled"		"1"
+		"tabPosition"	"0"
+		"labelText"		"#item_ammo_ar2_altfire"
+		"textAlignment"		"west"
+		"dulltext"		"0"
+		"brighttext"	"0"
+		"command"		"buy item_ammo_ar2_altfire"
 		"cost"			"25"
 	}
 	"CancelButton"

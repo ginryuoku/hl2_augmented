@@ -756,6 +756,7 @@ public:
 	{ 
 		Precache( );
 		SetModel( "models/items/combine_rifle_ammo01.mdl");
+		m_iItemID = 186;
 		BaseClass::Spawn( );
 	}
 

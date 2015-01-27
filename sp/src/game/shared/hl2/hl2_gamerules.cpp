@@ -1983,8 +1983,7 @@ CAmmoDef *GetAmmoDef()
 
 		def.AddAmmoType("StriderMinigunDirect",	DMG_BULLET,				TRACER_LINE,			2, 2, 15, 1.0 * 750 * 12, AMMO_FORCE_DROP_IF_CARRIED ); // hit like a 1.0kg weight at 750 ft/s
 		def.AddAmmoType("HelicopterGun",	DMG_BULLET,					TRACER_LINE_AND_WHIZ,	"sk_npc_dmg_helicopter_to_plr", "sk_npc_dmg_helicopter",	"sk_max_smg1",	BULLET_IMPULSE(400, 1225), AMMO_FORCE_DROP_IF_CARRIED | AMMO_INTERPRET_PLRDAMAGE_AS_DAMAGE_TO_PLAYER );
-		def.AddAmmoType("AR2AltFire",		DMG_DISSOLVE,				TRACER_NONE,			0, 0, "sk_max_ar2_altfire", 0, 0 );
-		def.AddAmmoType("Grenade",			DMG_BURN,					TRACER_NONE,			"sk_plr_dmg_grenade",		"sk_npc_dmg_grenade",		"sk_max_grenade",		0, 0);
+		def.AddAmmoType("AR2AltFire",		DMG_DISSOLVE,				TRACER_NONE,			0, 0, "sk_max_ar2_altfire", 0, 0, 186 );
 		def.AddAmmoType("57x28mm", DMG_BULLET, TRACER_LINE_AND_WHIZ, 9, 9, 400, BULLET_IMPULSE(31, 2350), 0, 190);
 		// 7.62x51mm M80 Ball / DM111
 		def.AddAmmoType("762nato", DMG_BULLET | DMG_SNIPER, TRACER_LINE_AND_WHIZ, 25, 25, 200, BULLET_IMPULSE(147, 2733), 0, 191);

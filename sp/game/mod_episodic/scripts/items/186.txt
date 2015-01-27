@@ -1,0 +1,20 @@
+ItemData
+{
+	"entity_name"				"item_ammo_ar2_altfire" // entity name must match numeric ID
+	"item_friendlyname"			"#CE_Dissolver_Ammo_Name" // Friendly name. We use the localizer here.
+	"item_friendlydescription"	"#CE_Dissolver_Ammo_Desc" // Friendly description, also localized.
+
+	"item_capacity"				"1"	// Capacity of the item.
+	"item_maxcapacity"			"1"	// Max capacity of the item.
+    
+    "item_contains"             "186"   // Usually for magazines; refers to what the item contains.
+
+	"item_baseprice"			"0"	// Price for the item, empty.
+	"item_unitprice"			"500"		// Price for each element contained within the item.
+
+    // No base weight.
+    // The dissolver cartridge looks pretty heavy, so call it 750 grams?
+	
+    "item_baseweight" 			"0"	// Weight in grams of the empty item. 
+	"item_unitweight" 			"750"	// Weight in grams of each element.
+}

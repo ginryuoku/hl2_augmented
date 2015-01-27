@@ -1,0 +1,20 @@
+ItemData
+{
+	"entity_name"				"item_rpg_round" // entity name must match numeric ID
+	"item_friendlyname"			"#CE_RPG-7_Steerable_Name" // Friendly name. We use the localizer here.
+	"item_friendlydescription"	"#CE_RPG-7_Steerable_Desc" // Friendly description, also localized.
+
+	"item_capacity"				"1"	// Capacity of the item.
+	"item_maxcapacity"			"1"	// Max capacity of the item.
+    
+    "item_contains"             "187"   // Usually for magazines; refers to what the item contains.
+
+	"item_baseprice"			"0"	// Price for the item, empty.
+	"item_unitprice"			"1000"		// Price for each element contained within the item.
+
+    // No base weight.
+    // RPG-7VL (single-stage HEAT) weighs 2.6kg. We add an additional 300 grams for the steering mechanism.
+	
+    "item_baseweight" 			"0"	// Weight in grams of the empty item. 
+	"item_unitweight" 			"2900"	// Weight in grams of each element.
+}

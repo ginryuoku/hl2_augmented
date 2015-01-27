@@ -52,4 +52,5 @@
     "item_mag_762n_scar20"      "120"
 
 	"item_grenade_m61"			"100"
+    "item_ammo_ar2_altfire"     "500"
 }

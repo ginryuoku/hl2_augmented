@@ -230,7 +230,7 @@ void CWeaponDissolver::DelayedAttack( void )
 	if ( pOwner == NULL )
 		return;
 
-	if ( GetOwner() && pOwner->GetAmmoCount( m_iPrimaryAmmoType ) <= 0 )
+	if ( GetOwner() && m_iClip1 <= 0 )
 	{
 		SendWeaponAnim( ACT_VM_DRYFIRE );
 		BaseClass::WeaponSound( EMPTY );
@@ -282,7 +282,7 @@ void CWeaponDissolver::DelayedAttack( void )
 	pOwner->ViewPunch( QAngle( random->RandomInt( -8, -12 ), random->RandomInt( 1, 2 ), 0 ) );
 
 	// Decrease ammo
-	pOwner->RemoveAmmo( 1, m_iPrimaryAmmoType );
+	--m_iClip1;
 
 	// Can shoot again immediately
 	m_flNextPrimaryAttack = gpGlobals->curtime + 1.0f;
