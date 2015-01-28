@@ -196,6 +196,26 @@
 		"command"		"buy item_ammo_ar2_altfire"
 		"cost"			"25"
 	}
+    "rpg_round"
+	{
+		"ControlName"		"MouseOverPanelButton"
+		"fieldName"		"rpg_round"
+		"xpos"			"52"
+		"ypos"			"308"
+		"wide"			"170"
+		"tall"			"20"
+		"autoResize"	"0"
+		"pinCorner"		"2"
+		"visible"		"1"
+		"enabled"		"1"
+		"tabPosition"	"0"
+		"labelText"		"#item_rpg_round"
+		"textAlignment"		"west"
+		"dulltext"		"0"
+		"brighttext"	"0"
+		"command"		"buy item_rpg_round"
+		"cost"			"25"
+	}
 	"CancelButton"
 	{
 		"ControlName"		"MouseOverPanelButton"

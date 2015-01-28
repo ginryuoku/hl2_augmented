@@ -3,7 +3,7 @@
 WeaponData
 {
 	// Weapon data is loaded by both the Game and Client DLLs.
-	"printname"	"#CE_CSI_Striker-12"
+	"printname"	"#CE_CSI_Striker12"
 	"viewmodel"				"models/weapons/v_shot_striker.mdl"
 	"playermodel"			"models/weapons/w_shot_striker.mdl"
 	"anim_prefix"			"shotgun"

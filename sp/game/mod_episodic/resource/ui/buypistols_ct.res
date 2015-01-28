@@ -145,7 +145,7 @@
 		"visible"		"1"
 		"enabled"		"1"
 		"tabPosition"	"0"
-		"labelText"		"#CE_DEagle357_Name"
+		"labelText"		"#CE_DEagle357_SName"
 		"textAlignment"		"west"
 		"dulltext"		"0"
 		"brighttext"		"0"
