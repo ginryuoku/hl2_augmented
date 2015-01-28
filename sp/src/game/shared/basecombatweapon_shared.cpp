@@ -2936,7 +2936,7 @@ BEGIN_DATADESC( CBaseCombatWeapon )
 	DEFINE_FIELD(m_bIsIronsighted, FIELD_BOOLEAN),
 	DEFINE_FIELD(m_flIronsightedTime, FIELD_FLOAT),
 	DEFINE_FIELD(m_iPosition, FIELD_INTEGER),		// What is my position in the weapon buckets?
-	DEFINE_FIELD(m_bPickedUpBefore, FIELD_INTEGER),
+	DEFINE_FIELD(m_bPickedUpBefore, FIELD_BOOLEAN),
 	DEFINE_FIELD( m_nViewModelIndex, FIELD_INTEGER ),
 
 // don't save these, init to 0 and regenerate
