@@ -88,6 +88,7 @@ $Project
             $File "comrade_erika\inventory_parse.cpp"
             $File "comrade_erika\inventory_parse.h"
             $File "comrade_erika\inventory_parse_default.cpp"
+			$File "comrade_erika\weapon_arifle_akm.cpp"
 			$File "comrade_erika\weapon_arifle_m4a1.cpp"
 			$File "comrade_erika\weapon_arifle_vltorsbr.cpp"
 			$File "comrade_erika\weapon_arifle_mk17mod0.cpp"

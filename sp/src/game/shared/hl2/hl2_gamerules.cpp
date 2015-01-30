@@ -1987,6 +1987,7 @@ CAmmoDef *GetAmmoDef()
 		def.AddAmmoType("57x28mm", DMG_BULLET, TRACER_LINE_AND_WHIZ, 9, 9, 400, BULLET_IMPULSE(31, 2350), 0, 190);
 		// 7.62x51mm M80 Ball / DM111
 		def.AddAmmoType("762nato", DMG_BULLET | DMG_SNIPER, TRACER_LINE_AND_WHIZ, 25, 25, 200, BULLET_IMPULSE(147, 2733), 0, 191);
+		def.AddAmmoType("762x39", DMG_BULLET, TRACER_LINE_AND_WHIZ, 17, 17, 200, BULLET_IMPULSE(122, 2396), 0, 192);
 #ifdef HL2_EPISODIC
 		def.AddAmmoType("Hopwire",			DMG_BLAST,					TRACER_NONE,			"sk_plr_dmg_grenade",		"sk_npc_dmg_grenade",		"sk_max_hopwire",		0, 0);
 		def.AddAmmoType("CombineHeavyCannon",	DMG_BULLET,				TRACER_LINE,			40,	40, NULL, 10 * 750 * 12, AMMO_FORCE_DROP_IF_CARRIED ); // hit like a 10 kg weight at 750 ft/s

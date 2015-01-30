@@ -50,11 +50,10 @@
 		"enabled"		"1"
 		"tabPosition"		"0"
 	}
-
-	"XBow"
+    "AKM"
 	{
 		"ControlName"		"MouseOverPanelButton"
-		"fieldName"		"scout"
+		"fieldName"		"AKM"
 		"xpos"			"52"
 		"ypos"			"116"
 		"wide"			"170"
@@ -64,14 +63,15 @@
 		"visible"		"1"
 		"enabled"		"1"
 		"tabPosition"	"0"
-		"labelText"		"#HL2_Crossbow"
+		"labelText"		"#CE_AKM_Name"
 		"textAlignment"		"west"
 		"dulltext"		"0"
 		"brighttext"		"0"
-		"command"		"buy weapon_crossbow"
+		"command"		"buy weapon_arifle_akm"
 		"cost"			"2750"
 		"as_restrict"		"1"
 	}
+	
 
 	"m4a1"
 	{
@@ -153,6 +153,26 @@
 		"brighttext"		"0"
 		"command"		"buy weapon_srifle_mk17mod0sv"
 		"cost"			"3500"
+	}
+    "XBow"
+	{
+		"ControlName"		"MouseOverPanelButton"
+		"fieldName"		"XBow"
+		"xpos"			"52"
+		"ypos"			"276"
+		"wide"			"170"
+		"tall"			"20"
+		"autoResize"	"0"
+		"pinCorner"		"2"
+		"visible"		"1"
+		"enabled"		"1"
+		"tabPosition"	"0"
+		"labelText"		"#HL2_Crossbow"
+		"textAlignment"		"west"
+		"dulltext"		"0"
+		"brighttext"		"0"
+		"command"		"buy weapon_crossbow"
+		"cost"			"2750"
 	}
 	"CancelButton"
 	{

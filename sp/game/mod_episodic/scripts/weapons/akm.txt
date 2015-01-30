@@ -1,0 +1,49 @@
+//Sound script for ManTuna's FAL animations in AK47 Slot
+//	by CapnJack
+"Weapon_AKM.Single"
+{
+	"channel"	"CHAN_ITEM"
+	"volume"	"0.55"
+	"pitch"		"95,100"
+	"wave"		")weapons\akm\akm-1.wav"
+}
+"Weapon_AKM.Clipin"
+{
+	"channel"	"CHAN_ITEM"
+	"volume"	"0.8"
+	"pitch"		"90,105"
+	"wave"		")weapons\akm\akm_clipin.wav"
+}
+"Weapon_AKM.Clipout"
+{
+	"channel"	"CHAN_ITEM"
+	"volume"	"0.8"
+	"pitch"		"95,105"
+	"wave"		")weapons\akm\akm_clipout.wav"
+}
+"Weapon_AKM.BoltPull"
+{
+	"channel"	"CHAN_ITEM"
+	"volume"	"0.7"
+	"pitch"		"90,105"
+	"wave"		")weapons\akm\akm_boltpull.wav"
+}
+"Weapon_AKM.Cloth"
+{
+	"channel"	"CHAN_ITEM"
+	"volume"	"0.8"
+	"wave"		")weapons\akm\akm_cloth.wav"
+}
+"Weapon_AKM.ClothFast"
+{
+	"channel"	"CHAN_ITEM"
+	"volume"	"0.8"
+	"wave"		")weapons\akm\akm_cloth_fast.wav"
+}
+"Weapon_AKM.Safety"
+{
+	"channel"	"CHAN_ITEM"
+	"volume"	"0.8"
+	"pitch"		"90,100"
+	"wave"		")weapons\akm\akm_safety.wav"
+}

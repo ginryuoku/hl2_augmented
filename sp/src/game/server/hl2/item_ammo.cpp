@@ -175,7 +175,75 @@ public:
 	}
 };
 LINK_ENTITY_TO_CLASS(item_ammo_57x28, CItem_Ammo57x28);
+// ========================================================================
+//	>> BoxMRounds
+// ========================================================================
+class CItem_Ammo762x39Small : public CItem
+{
+public:
+	DECLARE_CLASS(CItem_Ammo762x39Small, CItem);
 
+	void Spawn(void)
+	{
+		Precache();
+		SetModel("models/items/boxmrounds.mdl");
+		m_iItemID = 192;
+		BaseClass::Spawn();
+		m_iItemCapacity = SIZE_AMMO_SMG1;
+	}
+	void Precache(void)
+	{
+		PrecacheModel("models/items/boxmrounds.mdl");
+	}
+	bool MyTouch(CBasePlayer *pPlayer)
+	{
+		if (ITEM_GiveAmmo(pPlayer, SIZE_AMMO_SMG1, "762x39"))
+		{
+			if (g_pGameRules->ItemShouldRespawn(this) == GR_ITEM_RESPAWN_NO)
+			{
+				UTIL_Remove(this);
+			}
+			return true;
+		}
+		return false;
+	}
+};
+LINK_ENTITY_TO_CLASS(item_ammo_762x39_small, CItem_Ammo762x39Small);
+
+
+// ========================================================================
+//	>> LargeBoxMRounds
+// ========================================================================
+class CItem_Ammo762x39 : public CItem
+{
+public:
+	DECLARE_CLASS(CItem_Ammo762x39, CItem);
+
+	void Spawn(void)
+	{
+		Precache();
+		SetModel("models/items/boxmrounds.mdl");
+		m_iItemID = 192;
+		BaseClass::Spawn();
+	}
+	void Precache(void)
+	{
+		PrecacheModel("models/items/boxmrounds.mdl");
+	}
+	bool MyTouch(CBasePlayer *pPlayer)
+	{
+		if (ITEM_GiveAmmo(pPlayer, SIZE_AMMO_SMG1_LARGE, "762x39"))
+		{
+			if (g_pGameRules->ItemShouldRespawn(this) == GR_ITEM_RESPAWN_NO)
+			{
+				UTIL_Remove(this);
+			}
+			return true;
+		}
+		return false;
+	}
+};
+LINK_ENTITY_TO_CLASS(item_ammo_762x39, CItem_Ammo762x39);
 // ========================================================================
 //	>> BoxMRounds
 // ========================================================================
@@ -233,7 +301,7 @@ public:
 	}
 	bool MyTouch(CBasePlayer *pPlayer)
 	{
-		if (ITEM_GiveAmmo(pPlayer, SIZE_AMMO_SMG1_LARGE, "57x28mm"))
+		if (ITEM_GiveAmmo(pPlayer, SIZE_AMMO_SMG1_LARGE, "762nato"))
 		{
 			if (g_pGameRules->ItemShouldRespawn(this) == GR_ITEM_RESPAWN_NO)
 			{

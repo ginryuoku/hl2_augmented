@@ -16,6 +16,7 @@
     "weapon_smg_mp5a2"		    "2400"
     "weapon_pdw_mp7a1"          "4000"
     "weapon_pdw_p90"		    "5000"
+    "weapon_arifle_akm"	    "2250"
     "weapon_arifle_m4a1"	    "5000"
     "weapon_arifle_vltorsbr"    "8000"
     "weapon_dissolver"		    "16000"
@@ -35,6 +36,7 @@
     "item_rpg_round"		    "1000"
     "item_ammo_smg1_grenade"	"100"
     "item_ammo_762nato"         "850"
+    "item_ammo_762x39"          "650"
 
     "item_battery"			    "175"
     "item_healthvial"		    "75"
@@ -50,6 +52,7 @@
     "item_mag_57x28_20fs"       "60"
     "item_mag_46x30_40mp7"      "90"
     "item_mag_762n_scar20"      "120"
+    "item_mag_762x39_30"        "110"
 
 	"item_grenade_m61"			"100"
     "item_ammo_ar2_altfire"     "500"

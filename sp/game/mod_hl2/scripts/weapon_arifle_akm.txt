@@ -1,0 +1,83 @@
+// Small Machine Gun 1
+
+WeaponData
+{
+	// Weapon data is loaded by both the Game and Client DLLs.
+	"printname"	"#CE_AKM_Name"
+	"viewmodel"				"models/weapons/v_arifle_akm.mdl"
+	"playermodel"			"models/weapons/w_arifle_akm.mdl"	//FIXME: 
+	"anim_prefix"			"smg2"
+	"bucket"				"2"
+	"bucket_position"		"0"
+	"bucket_360"			"2"
+	"bucket_position_360"	"0"
+
+	"clip_size"				"30"
+	"clip2_size"			"-1"
+
+	"default_clip"			"30"
+	"default_clip2"			"-1"
+
+	"primary_ammo"			"762x39"
+	"secondary_ammo"		"None"
+
+	"weight"				"3"
+	"item_flags"			"ITEM_FLAG_SELECTONEMPTY"
+	"builtrighthanded"		"1"
+	"allowflipping"			"1"
+	
+    "primary_ammo_id"       "192"
+    "primary_mag_id"        "282"
+    "uses_magazines"        "1"
+    
+    IronSight
+    {
+        "right"         "-2.325"
+        "up"            "0.67"
+        "pitch"         "0"
+        "yaw"           "0"
+        "fov"           "-20"
+    }
+
+
+	// Sounds for the weapon. There is a max of 16 sounds per category (i.e. max 16 "single_shot" sounds)
+	SoundData
+	{
+		"empty"				"Default.ClipEmpty_Rifle"
+		"single_shot"		"Weapon_AKM.Single"
+		"single_shot_npc"	"Weapon_AKM.Single"
+	}
+
+	// Weapon Sprite data is loaded by the Client DLL.
+	TextureData
+	{
+		"weapon"
+		{
+				"font"		"WeaponIcons"
+				"character"	"a"
+		}
+		"weapon_s"
+		{	
+				"font"		"WeaponIconsSelected"
+				"character"	"a"
+		}
+		"ammo"
+		{
+				"font"		"WeaponIcons"
+				"character"	"r"
+		}
+		"crosshair"
+		{
+				"font"		"Crosshairs"
+				"character"	"Q"
+		}
+		"autoaim"
+		{
+				"file"		"sprites/crosshairs"
+				"x"			"0"
+				"y"			"48"
+				"width"		"24"
+				"height"	"24"
+		}
+	}
+}
