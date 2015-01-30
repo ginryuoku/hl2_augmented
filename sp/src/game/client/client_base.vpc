@@ -178,6 +178,8 @@ $Project
 			$File "hud_score.cpp"
 			$File "comrade_erika\invpanel.cpp"
 			$File "comrade_erika\invpanel.h"
+			$File "comrade_erika\upgradepanel.cpp"
+			$File "comrade_erika\upgradepanel.h"
 			$File "comrade_erika\c_baseinventory.h"
 			$File "comrade_erika\c_baseinventory.cpp"
             $File "comrade_erika\vgui_controlgrid.h"

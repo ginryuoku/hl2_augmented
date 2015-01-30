@@ -42,6 +42,8 @@ vgui::IInputInternal *g_InputInternal = NULL;
 
 #include <vgui_controls/Controls.h>
 
+#include "comrade_erika/upgradepanel.h"
+
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
 
@@ -129,6 +131,7 @@ static void VGui_VideoMode_AdjustForModeChange( void )
 	fps->Destroy();
 	messagechars->Destroy();
 	loadingdisc->Destroy();
+	upgradepanel->Destroy();
 
 	// Recreate our panels.
 	VPANEL gameToolParent = enginevgui->GetPanel( PANEL_CLIENTDLL_TOOLS );
@@ -136,6 +139,7 @@ static void VGui_VideoMode_AdjustForModeChange( void )
 #if defined( TRACK_BLOCKING_IO )
 	VPANEL gameDLLPanel = enginevgui->GetPanel( PANEL_GAMEDLL );
 #endif
+	VPANEL gameParent = enginevgui->GetPanel(PANEL_INGAMESCREENS);
 
 	loadingdisc->Create( gameToolParent );
 	messagechars->Create( gameToolParent );
@@ -147,6 +151,7 @@ static void VGui_VideoMode_AdjustForModeChange( void )
 #endif
 	netgraphpanel->Create( toolParent );
 	debugoverlaypanel->Create( gameToolParent );
+	upgradepanel->Create(gameParent);
 }
 
 static void VGui_OneTimeInit()
@@ -197,6 +202,7 @@ void VGui_CreateGlobalPanels( void )
 {
 	VPANEL gameToolParent = enginevgui->GetPanel( PANEL_CLIENTDLL_TOOLS );
 	VPANEL toolParent = enginevgui->GetPanel( PANEL_TOOLS );
+	VPANEL gameParent = enginevgui->GetPanel( PANEL_INGAMESCREENS );
 #if defined( TRACK_BLOCKING_IO )
 	VPANEL gameDLLPanel = enginevgui->GetPanel( PANEL_GAMEDLL );
 #endif
@@ -212,6 +218,8 @@ void VGui_CreateGlobalPanels( void )
 #endif
 	netgraphpanel->Create( toolParent );
 	debugoverlaypanel->Create( gameToolParent );
+
+	upgradepanel->Create(gameParent);
 
 #ifndef _X360
 	// Create mp3 player off of tool parent panel
@@ -232,6 +240,9 @@ void VGui_Shutdown()
 
 	netgraphpanel->Destroy();
 	debugoverlaypanel->Destroy();
+
+	upgradepanel->Destroy();
+
 #if defined( TRACK_BLOCKING_IO )
 	iopanel->Destroy();
 #endif
