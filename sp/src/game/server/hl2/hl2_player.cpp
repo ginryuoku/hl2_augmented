@@ -606,7 +606,11 @@ void CHL2_Player::ThrowExplosiveGrenade(void)
 			vm->SendViewModelMatchingSequence(sequence1);
 			m_flGrenadeSequenceTimeHolster = (gpGlobals->curtime + vm->SequenceDuration(sequence1) + 0.5f);
 		}
-
+		else if ((m_flGrenadeSequenceTimeHolster == NULL) && (sequence1 == -1))
+		{
+			m_flGrenadeSequenceTimeHolster = (gpGlobals->curtime + 0.5f);
+		}
+		
 		//THROW SEQUENCING
 		if ((m_flGrenadeSequenceTimeHolster < gpGlobals->curtime) && (m_flGrenadeSequenceTimeHolster != NULL))
 		{
