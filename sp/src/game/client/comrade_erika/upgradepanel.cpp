@@ -1,4 +1,4 @@
-//The following include files are necessary to allow your MyPanel.cpp to compile.
+//The following include files are necessary to allow this to compile.
 #include "cbase.h"
 #include "upgradepanel.h"
 using namespace vgui;
@@ -9,7 +9,7 @@ using namespace vgui;
 class CUpgradePanel : public vgui::Frame
 {
 	DECLARE_CLASS_SIMPLE(CUpgradePanel, vgui::Frame);
-	//CMyPanel : This Class / vgui::Frame : BaseClass
+	//CUpgradePanel : This Class / vgui::Frame : BaseClass
 
 	CUpgradePanel(vgui::VPANEL parent); 	// Constructor
 	~CUpgradePanel(){};				// Destructor
@@ -78,7 +78,7 @@ public:
 static CUpgradePanelInterface g_UpgradePanel;
 IUpgradePanel* upgradepanel = (IUpgradePanel*)&g_UpgradePanel;
 
-ConVar cl_showupgradepanel("cl_showmypanel", "0", FCVAR_CLIENTDLL, "Sets the state of myPanel <state>");
+ConVar cl_showupgradepanel("cl_showupgradepanel", "0", FCVAR_CLIENTDLL, "Sets the state of the upgrade panel: <state>");
 
 void CUpgradePanel::OnTick()
 {
