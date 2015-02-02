@@ -8,9 +8,10 @@ using namespace vgui;
 
 #include "c_basehlplayer.h"
 
-#define MAX_AUGS 5 //
+#define MAX_AUGS 5  // Defines the number of augmentations
+#define MAX_STATS 3 // Defines the number of stats tracked by this panel
 
-//CMyPanel class: Tutorial example class
+//CUpgradePanel class
 class CUpgradePanel : public vgui::Frame
 {
 	DECLARE_CLASS_SIMPLE(CUpgradePanel, vgui::Frame);
@@ -26,7 +27,8 @@ protected:
 
 private:
 	//Other used VGUI control Elements:
-	Label *pLabel[MAX_AUGS - 1];
+	Label *pAugLabel[MAX_AUGS];
+	Label *pStatLabel[MAX_STATS];
 };
 
 // Constructor: Initializes the Panel
@@ -54,7 +56,13 @@ CUpgradePanel::CUpgradePanel(vgui::VPANEL parent)
 	for (int i = 0; i < MAX_AUGS; ++i)
 	{
 		Q_snprintf(buffer, sizeof(buffer), "auglabel%i", i + 1);
-		pLabel[i] = new Label(this, buffer, "BLANK");
+		pAugLabel[i] = new Label(this, buffer, "BLANK");
+	}
+
+	for (int i = 0; i < MAX_STATS; ++i)
+	{
+		Q_snprintf(buffer, sizeof(buffer), "statlabel%i", i + 1);
+		pStatLabel[i] = new Label(this, buffer, "BLANK");
 	}
 
 	LoadControlSettings("resource/UI/upgradepanel.res");
@@ -105,20 +113,35 @@ void CUpgradePanel::OnTick()
 		C_BaseHLPlayer *pHL2Player = dynamic_cast<C_BaseHLPlayer*>(pPlayer);
 		if (pHL2Player)
 		{
-			Q_snprintf(buffer, sizeof(buffer), "Next upgrade costs %i\nCurrent Upgrade %i / 10", (pPlayer->m_Local.m_iHealthUpgrades + 1) * 1000, pPlayer->m_Local.m_iHealthUpgrades);
-			pLabel[0]->SetText(buffer);
+			int healthups = pPlayer->m_Local.m_iHealthUpgrades;
+			int healthsegups = pPlayer->m_Local.m_iHealthSegmentUpgrades;
+			int armorups = pPlayer->m_Local.m_iArmorUpgrades;
+			int armorsegups = pPlayer->m_Local.m_iArmorSegmentUpgrades;
+			int auxcells = pHL2Player->m_HL2Local.m_iAuxPowerUpgradeCells;
 
-			Q_snprintf(buffer, sizeof(buffer), "Next upgrade costs %i\nCurrent Upgrade %i / 10", (pPlayer->m_Local.m_iHealthSegmentUpgrades + 1) * 1000, pPlayer->m_Local.m_iHealthSegmentUpgrades);
-			pLabel[1]->SetText(buffer);
+			Q_snprintf(buffer, sizeof(buffer), "Next upgrade costs %i\nCurrent Upgrade %i / 10", (healthups + 1) * 1000, healthups);
+			pAugLabel[0]->SetText(buffer);
 
-			Q_snprintf(buffer, sizeof(buffer), "Next upgrade costs %i\nCurrent Upgrade %i / 14", (pPlayer->m_Local.m_iArmorUpgrades + 1) * 1000, pPlayer->m_Local.m_iArmorUpgrades);
-			pLabel[2]->SetText(buffer);
+			Q_snprintf(buffer, sizeof(buffer), "Next upgrade costs %i\nCurrent Upgrade %i / 10", (healthsegups + 1) * 1000, healthsegups);
+			pAugLabel[1]->SetText(buffer);
 
-			Q_snprintf(buffer, sizeof(buffer), "Next upgrade costs %i\nCurrent Upgrade %i / 10", (pPlayer->m_Local.m_iArmorSegmentUpgrades + 1) * 1000, pPlayer->m_Local.m_iArmorSegmentUpgrades);
-			pLabel[3]->SetText(buffer);
+			Q_snprintf(buffer, sizeof(buffer), "Next upgrade costs %i\nCurrent Upgrade %i / 14", (armorups + 1) * 1000, armorups);
+			pAugLabel[2]->SetText(buffer);
 
-			Q_snprintf(buffer, sizeof(buffer), "Next upgrade costs %i\nCurrent Upgrade %i / 10", (pHL2Player->m_HL2Local.m_iAuxPowerUpgradeCells + 1) * 2000, pHL2Player->m_HL2Local.m_iAuxPowerUpgradeCells);
-			pLabel[4]->SetText(buffer);
+			Q_snprintf(buffer, sizeof(buffer), "Next upgrade costs %i\nCurrent Upgrade %i / 10", (armorsegups + 1) * 1000, armorsegups);
+			pAugLabel[3]->SetText(buffer);
+
+			Q_snprintf(buffer, sizeof(buffer), "Next upgrade costs %i\nCurrent Upgrade %i / 10", (auxcells + 1) * 2000, auxcells);
+			pAugLabel[4]->SetText(buffer);
+
+			Q_snprintf(buffer, sizeof(buffer), "Max Health: %i segments x %i segment strength = %i", (healthups + 5), (10 + (5 * healthsegups)), pPlayer->GetMaxHealth());
+			pStatLabel[0]->SetText(buffer);
+
+			Q_snprintf(buffer, sizeof(buffer), "Max Armor: %i segments x %i segment strength = %i", (armorups + 1), (10 + (5 * armorsegups)), (armorups + 1) * (10 + (5 * armorsegups)));
+			pStatLabel[1]->SetText(buffer);
+
+			Q_snprintf(buffer, sizeof(buffer), "Aux Power: 50 x %i power cells = %i", 1 + auxcells, (auxcells + 1) * 50);
+			pStatLabel[2]->SetText(buffer);
 		}
 	}
 }
