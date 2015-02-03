@@ -59,3 +59,5 @@ config.cfg
 *.sentinel
 sp/game/mod_hl2/maps/the_village.bsp
 *.png
+*.prt
+*.vmx

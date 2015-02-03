@@ -222,19 +222,7 @@ void CBaseHudWeaponSelection::HideSelection( void )
 //-----------------------------------------------------------------------------
 bool CBaseHudWeaponSelection::CanBeSelectedInHUD( C_BaseCombatWeapon *pWeapon )
 {
-	// Xbox: In plus type, weapons without ammo can still be selected in the HUD
-	if( HUDTYPE_PLUS == hud_fastswitch.GetInt() )
-	{
-		return pWeapon->VisibleInWeaponSelection();
-	}
-
-	if ( !pWeapon->VisibleInWeaponSelection() )
-	{
-		return false;
-	}
-
-	// All other current hud types
-	return pWeapon->CanBeSelected();
+	return pWeapon->VisibleInWeaponSelection();
 }
 
 //-----------------------------------------------------------------------------
