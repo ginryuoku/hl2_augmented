@@ -260,7 +260,8 @@ void CHudHistoryResource::MsgFunc_AmmoDenied( bf_read &msg )
 
 void CHudHistoryResource::MsgFunc_Money(bf_read &msg)
 {
-	int iMoney = msg.ReadShort();
+	int iMoney = msg.ReadLong();
+
 
 	AddToHistory(HISTSLOT_MONEY, 0, iMoney);
 }

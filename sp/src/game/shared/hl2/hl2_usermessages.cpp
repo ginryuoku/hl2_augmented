@@ -45,8 +45,8 @@ void RegisterUserMessages( void )
 	usermessages->Register( "LogoTimeMsg", 4 );
 	usermessages->Register( "AchievementEvent", -1 );
 	usermessages->Register( "UpdateJalopyRadar", -1 );
-	usermessages->Register("Money", 2);
 	usermessages->Register( "InventoryUpdate", 11 );
+	usermessages->Register("Money", 4);
 	
 #ifndef _X360
 	// NVNT register haptic user messages

@@ -9702,7 +9702,7 @@ void CBasePlayer::AddPlayerCash(int cash)
 		user.MakeReliable();
 
 		UserMessageBegin(user, "Money");
-		WRITE_SHORT(cash);
+		WRITE_LONG(cash);
 		MessageEnd();
 	}
 	m_Local.m_iPlayerCash = m_Local.m_iPlayerCash + cash;
