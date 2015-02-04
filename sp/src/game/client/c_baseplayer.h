@@ -185,7 +185,7 @@ public:
 	int  ArmorSegmentValue() const { return 10 + (m_Local.m_iArmorSegmentUpgrades * 5); }
 
 	bool			IsSuitEquipped( void ) { return m_Local.m_bWearingSuit; };
-	int				GetMaxHealth(void) { return (HealthSegmentValue() * 4) + (HealthSegmentValue() * m_Local.m_iHealthUpgrades); }
+	int				GetMaxHealth(void) { return (HealthSegmentValue() * 5) + (HealthSegmentValue() * m_Local.m_iHealthUpgrades); }
 
 	// Team handlers
 	virtual void	TeamChange( int iNewTeam );
