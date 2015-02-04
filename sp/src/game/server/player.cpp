@@ -9689,8 +9689,7 @@ void CBasePlayer::UpgradeArmorSegments(void)
 		return;
 	AddPlayerCash(-1000 * (m_Local.m_iArmorSegmentUpgrades + 1));
 	m_Local.m_iArmorSegmentUpgrades = m_Local.m_iArmorSegmentUpgrades + 1;
-	ResetMaxHealth();
-	Msg("Health segment upgrades now: %d\n", m_Local.m_iArmorSegmentUpgrades);
+	Msg("Armor segment upgrades now: %d\n", m_Local.m_iArmorSegmentUpgrades);
 }
 void CBasePlayer::AddPlayerCash(int cash)
 {
