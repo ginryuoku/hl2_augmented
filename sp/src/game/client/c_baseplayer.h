@@ -407,7 +407,7 @@ public:
 
 	virtual bool			CanUseFirstPersonCommand( void ){ return true; }
 	
-	void UpdateInventoryObject( int ObjectIndex, int NewItemID, int NewItemCap, int NewItemMaxCap );
+	void UpdateInventoryObject( int ObjectIndex, int NewItemID, int NewItemCap, int NewItemMaxCap, int NewItemBaseWeight, int NewItemUnitWeight );
 	
 protected:
 	fogparams_t				m_CurrentFog;

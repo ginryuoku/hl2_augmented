@@ -2262,9 +2262,9 @@ void C_BasePlayer::SetSuitUpdate(const char *name, int fgroup, int iNoRepeat)
 	// FIXME:  Do something here?
 }
 
-void C_BasePlayer::UpdateInventoryObject( int ObjectIndex, int NewItemID, int NewItemCap, int NewItemMaxCap )
+void C_BasePlayer::UpdateInventoryObject( int ObjectIndex, int NewItemID, int NewItemCap, int NewItemMaxCap, int NewItemBaseWeight, int NewItemUnitWeight )
 {
-	m_pInventory.UpdateObject(ObjectIndex, NewItemID, NewItemCap, NewItemMaxCap );
+	m_pInventory.UpdateObject(ObjectIndex, NewItemID, NewItemCap, NewItemMaxCap, NewItemBaseWeight, NewItemUnitWeight );
 }
 
 //-----------------------------------------------------------------------------

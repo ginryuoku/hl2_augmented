@@ -11,6 +11,8 @@ BEGIN_SIMPLE_DATADESC( CBaseInventory )
 	DEFINE_ARRAY(ItemMaxCap, FIELD_INTEGER, MAX_INVENTORY),
 	DEFINE_ARRAY(ItemType, FIELD_INTEGER, MAX_INVENTORY),
 	DEFINE_ARRAY(ItemContains, FIELD_INTEGER, MAX_INVENTORY),
+	DEFINE_ARRAY(ItemBaseWeight, FIELD_INTEGER, MAX_INVENTORY),
+	DEFINE_ARRAY(ItemUnitWeight, FIELD_INTEGER, MAX_INVENTORY),
 END_DATADESC()
 
 ITEM_FILE_INFO_HANDLE m_hInventoryFileInfo;
@@ -30,6 +32,8 @@ void CBaseInventory::ClientUpdateMessage( CBasePlayer *pBasePlayer, int element 
 	WRITE_LONG( ItemID[element] ); // Long required to express signed integer. Artifact of VS6?
 	WRITE_BYTE( ItemCap[element] );
 	WRITE_BYTE( ItemMaxCap[element] );
+	WRITE_SHORT(ItemBaseWeight[element]);
+	WRITE_SHORT(ItemUnitWeight[element]);
 	MessageEnd(); //send message
 	Msg("Server - pushing message: %d, %d, %d, %d\n", element, ItemID[element], ItemCap[element], ItemMaxCap[element]);
 	ItemDirty[element] = false;
@@ -53,6 +57,8 @@ void CBaseInventory::PurgeObject( int element )
 	ItemMaxCap[element] = 0;
 	ItemType[element] = 0;
 	ItemContains[element] = 0;
+	ItemBaseWeight[element] = 0;
+	ItemUnitWeight[element] = 0;
 	ItemDirty[element] = true;
 
 	DevMsg("Purged index %d\n", element);
@@ -110,11 +116,9 @@ void CBaseInventory::SetItemCapacity(int element, int newcapacity)
 	}
 }
 
-
-#if 0
 int CBaseInventory::GetItemTotalWeight( int element )
 {
-	if (ItemUnitWeight[element] && ItemBaseWeight[element])
+	if (ItemUnitWeight[element] || ItemBaseWeight[element])
 	{
 		int baseweight;
 		int totalunitweight;
@@ -129,7 +133,6 @@ int CBaseInventory::GetItemTotalWeight( int element )
 		return -1;
 	}
 }
-#endif
 
 void CBaseInventory::ConvertEntityToObject( CBaseEntity *pEntity )
 {
@@ -153,6 +156,7 @@ bool CBaseInventory::LoadInfo(int itemid)
 {
 	return ReadItemDataFromFileInSlot(filesystem, itemid, &m_hInventoryFileInfo);
 }
+
 // ALL CALLS MUST BE PRECEDED BY LOADINFO!
 const FileInventoryInfo_t &CBaseInventory::GetItemInfo(void) const
 {
@@ -182,6 +186,8 @@ void CBaseInventory::NewObject( int ObjectIndex, int NewItemID, int NewItemCap, 
 		ItemMaxCap[ObjectIndex] = NewItemMaxCap;
 		ItemType[ObjectIndex] = FindItemType(NewItemID);
 		ItemContains[ObjectIndex] = GetItemInfo().item_contains;
+		ItemBaseWeight[ObjectIndex] = GetItemInfo().item_baseweight;
+		ItemUnitWeight[ObjectIndex] = GetItemInfo().item_unitweight;
 
 		ItemDirty[ObjectIndex] = true;
 
@@ -442,7 +448,7 @@ int CBaseInventory::FindMagForReloading(int itemid)
 			{
 				candidate = GetItemCapacity(i);
 				index = i;
-				Msg("Candidate: index %d, with capacity %d\n", candidate, GetItemCapacity(i));
+				DevMsg("Magazine reload candidate: index %d, with capacity %d\n", candidate, GetItemCapacity(i));
 			}
 		}
 	}
@@ -485,24 +491,32 @@ void CBaseInventory::SwapItems(int itemindex1, int itemindex2)
 	int newmaxcap1 = GetItemMaxCapacity(itemindex2);
 	int newcontains1 = GetItemContains(itemindex2);
 	int newtype1 = GetItemType(itemindex2);
+	int newbweight = GetItemBaseWeight(itemindex2);
+	int newuweight = GetItemUnitWeight(itemindex2);
 
 	int newid2 = GetItemID(itemindex1);
 	int newcap2 = GetItemCapacity(itemindex1);
 	int newmaxcap2 = GetItemMaxCapacity(itemindex1);
 	int newcontains2 = GetItemContains(itemindex1);
 	int newtype2 = GetItemType(itemindex1);
+	int newbweight2 = GetItemBaseWeight(itemindex1);
+	int newuweight2 = GetItemUnitWeight(itemindex1);
 
 	ItemID[itemindex1] = newid1;
 	ItemCap[itemindex1] = newcap1;
 	ItemMaxCap[itemindex1] = newmaxcap1;
 	ItemContains[itemindex1] = newcontains1;
 	ItemType[itemindex1] = newtype1;
+	ItemBaseWeight[itemindex1] = newbweight;
+	ItemUnitWeight[itemindex1] = newuweight;
 	
 	ItemID[itemindex2] = newid2;
 	ItemCap[itemindex2] = newcap2;
 	ItemMaxCap[itemindex2] = newmaxcap2;
 	ItemContains[itemindex2] = newcontains2;
 	ItemType[itemindex2] = newtype2;
+	ItemBaseWeight[itemindex2] = newbweight2;
+	ItemUnitWeight[itemindex2] = newuweight2;
 
 	ItemDirty[itemindex1] = true;
 	ItemDirty[itemindex2] = true;
@@ -558,9 +572,20 @@ bool CBaseInventory::SanityCheck(void)
 				ItemDirty[i] = true;
 				insanity = true;
 			}
-
+			if (GetItemInfo().item_baseweight != GetItemBaseWeight(i))
+			{
+				ItemBaseWeight[i] = GetItemInfo().item_baseweight;
+				ItemDirty[i] = true;
+				insanity = true;
+			}
+			if (GetItemInfo().item_unitweight != GetItemUnitWeight(i))
+			{
+				ItemUnitWeight[i] = GetItemInfo().item_unitweight;
+				ItemDirty[i] = true;
+				insanity = true;
+			}
 		}
-		else if (GetItemContains(i) > 0 || GetItemCapacity(i) > 0 || GetItemMaxCapacity(i) > 0 || GetItemType(i) > 0)
+		else if (GetItemContains(i) > 0 || GetItemCapacity(i) > 0 || GetItemMaxCapacity(i) > 0 || GetItemType(i) > 0 || GetItemBaseWeight(i) > 0 || GetItemUnitWeight(i) > 0)
 		{
 			PurgeObject(i);
 			insanity = true;
@@ -620,6 +645,16 @@ void CBaseInventory::ConsolidateAmmo(void)
 			}
 		}
 	}
+}
+
+int CBaseInventory::GetItemBaseWeight(int itemindex)
+{
+	return ItemBaseWeight[itemindex];
+}
+
+int CBaseInventory::GetItemUnitWeight(int itemindex)
+{
+	return ItemUnitWeight[itemindex];
 }
 
 void ConsolidateAmmoManually(const CCommand &args)

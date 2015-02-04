@@ -15,7 +15,7 @@ CBaseInventory::CBaseInventory()
 {
 	for (int i = 0; i < MAX_INVENTORY; ++i)
 	{
-		UpdateObject( i, -1, 0, 0);
+		UpdateObject( i, -1, 0, 0, 0, 0);
 	}
 }
 
@@ -23,15 +23,18 @@ CBaseInventory::CBaseInventory()
 void __MsgFunc_InventoryUpdate( bf_read &msg )
 {
 	int element = msg.ReadByte();
-	int id = msg.ReadLong(); // No integer type. Huh.
+	// signed ints require four bytes, even if it's a short, since -1 is used as our 'empty value'
+	int id = msg.ReadLong(); 
 	int cap = msg.ReadByte();
 	int maxcap = msg.ReadByte();
+	int baseweight = msg.ReadShort();
+	int unitweight = msg.ReadShort();
 	
 	CBasePlayer *pPlayer = ToBasePlayer( UTIL_PlayerByIndex( 1 ) );
 	
 	if ( pPlayer )
 	{
-		pPlayer->UpdateInventoryObject(element, id, cap, maxcap );
+		pPlayer->UpdateInventoryObject(element, id, cap, maxcap, baseweight, unitweight );
 	}
 	
 }
@@ -71,11 +74,13 @@ int CBaseInventory::FindFirstFreeObject()
 	return -1;
 }
 
-void CBaseInventory::UpdateObject( int ObjectIndex, int NewItemID, int NewItemCap, int NewItemMaxCap )
+void CBaseInventory::UpdateObject( int ObjectIndex, int NewItemID, int NewItemCap, int NewItemMaxCap, int NewItemBaseWeight, int NewItemUnitWeight )
 {
 	ItemID[ObjectIndex] = NewItemID;
 	ItemCap[ObjectIndex] = NewItemCap;
 	ItemMaxCap[ObjectIndex] = NewItemMaxCap;
+	ItemBaseWeight[ObjectIndex] = NewItemBaseWeight;
+	ItemUnitWeight[ObjectIndex] = NewItemUnitWeight;
 	ItemDirty[ObjectIndex] = true;
 	DevMsg("Client: Updated object at position %d of type %d with capacity %d and max capacity %d\n", ObjectIndex, NewItemID, NewItemCap, NewItemMaxCap);
 }
@@ -156,4 +161,37 @@ int CBaseInventory::SwapMagazines(int itemid, int remaining)
 	ItemDirty[mag] = true;
 
 	return used;
+}
+
+int CBaseInventory::GetItemTotalWeight(int element)
+{
+	if (ItemUnitWeight[element] || ItemBaseWeight[element])
+	{
+		int baseweight;
+		int totalunitweight;
+
+		baseweight = ItemBaseWeight[element];
+		totalunitweight = ItemUnitWeight[element] * ItemCap[element];
+
+		return (baseweight + totalunitweight);
+	}
+	else
+	{
+		return -1;
+	}
+}
+
+int CBaseInventory::GetInventoryTotalWeight(void)
+{
+	int weight = 0;
+
+	for (int i = 0; i < MAX_INVENTORY; ++i)
+	{
+		if (GetItemID(i) > 0)
+		{
+			weight += GetItemTotalWeight(i);
+		}
+	}
+
+	return weight;
 }

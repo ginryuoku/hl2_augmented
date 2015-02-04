@@ -24,10 +24,12 @@ public:
 	int GetItemCapacity( int element );
 	int GetItemMaxCapacity( int element );
 	bool GetItemDirtiness( int element );
+	int GetItemTotalWeight(int element);
+	int GetInventoryTotalWeight(void);
  	
 	int FindFirstFreeObject();
 	
-	void UpdateObject( int ObjectIndex, int NewItemID, int NewItemCap, int NewItemMaxCap );
+	void UpdateObject( int ObjectIndex, int NewItemID, int NewItemCap, int NewItemMaxCap, int NewBaseWeight, int NewUnitWeight );
 	void ItemIsClean(int element);
 
 	int CountAllObjectContentsOfID(int itemid);
@@ -41,6 +43,8 @@ private:
 	int ItemID[MAX_INVENTORY];
 	int ItemCap[MAX_INVENTORY];
 	int ItemMaxCap[MAX_INVENTORY];
+	int  ItemBaseWeight[MAX_INVENTORY];
+	int  ItemUnitWeight[MAX_INVENTORY];
 	bool ItemDirty[MAX_INVENTORY];
 };
 

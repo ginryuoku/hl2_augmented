@@ -43,6 +43,10 @@ public:
 	int GetItemMaxCapacity( int element );
 	int GetItemType(int element);
 	int GetItemContains(int element);
+	int GetItemTotalWeight(int element);
+	int GetItemBaseWeight(int itemindex);
+	int GetItemUnitWeight(int itemindex);
+	int GetInventoryTotalWeight(void);
 
 	void SetItemCapacity(int element, int newcapacity);
 
@@ -75,17 +79,24 @@ public:
 	void CombineItems(int itemindex1, int itemindex2);
 	void SwapItems(int itemindex1, int itemindex2);
 	void ConsolidateAmmo(void);
+	
 	int QSPartition(int p, int r);
 	void QuickSort(int indexleft, int indexright);
+	
 	bool LoadInfo(int itemid);
+	
 	int ReturnPrice(int itemindex);
+
 	bool SanityCheck(void);
+
 private:
 	int  ItemID     [MAX_INVENTORY];
 	int  ItemCap    [MAX_INVENTORY];
 	int  ItemMaxCap [MAX_INVENTORY];
 	int  ItemType   [MAX_INVENTORY];
 	int  ItemContains[MAX_INVENTORY];
+	int  ItemBaseWeight[MAX_INVENTORY];
+	int  ItemUnitWeight[MAX_INVENTORY];
 	bool ItemDirty  [MAX_INVENTORY]; // dirty flag for each
 };
 
