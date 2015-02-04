@@ -9709,6 +9709,24 @@ void CBasePlayer::AddPlayerCash(int cash)
 	return;
 }
 
+void Cheat_AddPlayerCash(const CCommand &args)
+{
+	if (args.ArgC() < 1)
+	{
+		Msg("Usage: addcash <cash>\n");
+		return;
+	}
+
+	int cash = atoi(args[1]);
+
+	CBasePlayer *pPlayer = UTIL_GetCommandClient();
+	if (pPlayer)
+	{
+		pPlayer->AddPlayerCash(cash);
+	}
+}
+ConCommand addcash("addcash", Cheat_AddPlayerCash, "Usage: addcash <cash>\n", FCVAR_CHEAT);
+
 void DropCurrent(const CCommand &args)
 {
 	CBasePlayer *pPlayer = UTIL_GetCommandClient();
