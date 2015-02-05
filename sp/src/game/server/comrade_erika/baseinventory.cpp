@@ -52,6 +52,9 @@ void CBaseInventory::FlushPendingObjects( CBasePlayer *pBasePlayer )
 
 void CBaseInventory::PurgeObject( int element )
 {
+	if (element >= MAX_INVENTORY)
+		return;
+
 	ItemID[element] = -1;
 	ItemCap[element] = 0;
 	ItemMaxCap[element] = 0;
@@ -569,7 +572,7 @@ int CBaseInventory::QSPartition(int p, int r)
 bool CBaseInventory::SanityCheck(void)
 {
 	bool insanity = false;
-	for (int i = 0; i <= MAX_INVENTORY; ++i)
+	for (int i = 0; i < MAX_INVENTORY; ++i)
 	{
 		if (GetItemID(i) > 0)
 		{
