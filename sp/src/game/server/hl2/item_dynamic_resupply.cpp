@@ -504,7 +504,7 @@ void CItem_DynamicResupply::ComputeAmmoRatios( CItem_DynamicResupply* pMaster, C
 		else
 		{
 			float flMax = GetAmmoDef()->MaxCarry( iAmmoType );
-			float flCurrentAmmo = pPlayer->GetAmmoCount( iAmmoType ) + pPlayer->m_pInventory.CountAllObjectContentsOfID(GetAmmoDef()->ItemID(iAmmoType));
+			float flCurrentAmmo = pPlayer->GetAmmoCount( iAmmoType ) + pPlayer->Inventory_CountAllObjectContentsOfID(GetAmmoDef()->ItemID(iAmmoType));
 			flCurrentAmmo += (pSpawnInfo[i].m_iPotentialItems * g_DynamicResupplyAmmoItems[i].iAmmoCount);
 			pSpawnInfo[i].m_flCurrentRatio = (flCurrentAmmo / flMax);
 		}

@@ -155,7 +155,7 @@ void CHudAmmo::UpdatePlayerAmmo( C_BasePlayer *player )
 	{
 		// we don't use clip ammo, just use the total ammo count
 		if (wpn->GetPrimaryAmmoID() > 0)
-			ammo1 = player->m_pInventory.CountAllObjectContentsOfID(wpn->GetPrimaryAmmoID());
+			ammo1 = player->Inventory_CountAllObjectContentsOfID(wpn->GetPrimaryAmmoID());
 		else
 			ammo1 = player->GetAmmoCount(wpn->GetPrimaryAmmoType());
 		ammo2 = 0;
@@ -168,7 +168,7 @@ void CHudAmmo::UpdatePlayerAmmo( C_BasePlayer *player )
 		} 
 		else if (!wpn->UsesMagazines() && wpn->GetPrimaryAmmoID() > 0)
 		{
-			ammo2 = player->m_pInventory.CountAllObjectContentsOfID(wpn->GetPrimaryAmmoID());
+			ammo2 = player->Inventory_CountAllObjectContentsOfID(wpn->GetPrimaryAmmoID());
 		}
 		else
 			// we use clip ammo, so the second ammo is the total ammo

@@ -690,6 +690,18 @@ public:
 	int  HealthSegmentValue() const { return 10 + (m_Local.m_iHealthSegmentUpgrades * 5); }
 	int  ArmorSegmentValue() const { return 10 + (m_Local.m_iArmorSegmentUpgrades * 5); }
 
+	int Inventory_GetItemID(int element);
+	int Inventory_GetItemCapacity(int element);
+	int Inventory_GetItemMaxCapacity(int element);
+	int Inventory_GetItemType(int element);
+	int Inventory_GetItemContains(int element);
+	int Inventory_GetItemTotalWeight(int element);
+	int Inventory_GetItemBaseWeight(int element);
+	int Inventory_GetItemUnitWeight(int element);
+	int Inventory_GetInventoryTotalWeight(void);
+	int Inventory_UseItem(int used, int itemindex);
+	int Inventory_CountAllObjectContentsOfID(int itemid, bool use_contents = false);
+
 	int		GetObserverMode() const	{ return m_iObserverMode; }
 	CBaseEntity *GetObserverTarget() const	{ return m_hObserverTarget; }
 

@@ -716,11 +716,11 @@ bool CBaseCombatWeapon::HasAmmo( void )
 
 	if (UsesMagazines())
 	{
-		return (player->m_pInventory.CountAllObjectContentsOfID(GetPrimaryMagazineID()) > 0 || m_iClip1 > 0 || m_iClip2 > 0);
+		return (player->Inventory_CountAllObjectContentsOfID(GetPrimaryMagazineID()) > 0 || m_iClip1 > 0 || m_iClip2 > 0);
 	}
 	else if (!UsesMagazines() && GetPrimaryAmmoID() > 0)
 	{
-		return (player->m_pInventory.CountAllObjectContentsOfID(GetPrimaryAmmoID()) > 0 || m_iClip1 > 0 || m_iClip2 > 0);
+		return (player->Inventory_CountAllObjectContentsOfID(GetPrimaryAmmoID()) > 0 || m_iClip1 > 0 || m_iClip2 > 0);
 	}
 	else return ( m_iClip1 > 0 || player->GetAmmoCount( m_iPrimaryAmmoType ) || m_iClip2 > 0 || player->GetAmmoCount( m_iSecondaryAmmoType ) );
 }
@@ -1029,11 +1029,11 @@ bool CBaseCombatWeapon::ShouldDisplayReloadHUDHint()
 			{
 				if (UsesMagazines())
 				{
-					return (pPlayer->m_pInventory.CountAllObjectContentsOfID(GetPrimaryMagazineID())) != 0;
+					return (pPlayer->Inventory_CountAllObjectContentsOfID(GetPrimaryMagazineID())) != 0;
 				}
 				else if (GetPrimaryAmmoID() > 0 && !UsesMagazines())
 				{
-					return (pPlayer->m_pInventory.CountAllObjectContentsOfID(GetPrimaryAmmoID())) != 0;
+					return (pPlayer->Inventory_CountAllObjectContentsOfID(GetPrimaryAmmoID())) != 0;
 				}
 			}
 		}
@@ -1364,11 +1364,11 @@ bool CBaseCombatWeapon::HasPrimaryAmmo( void )
 		{
 			if (UsesMagazines())
 			{
-				return (pPlayer->m_pInventory.CountAllObjectContentsOfID(GetPrimaryMagazineID()) || m_iClip1 > 0);
+				return (pPlayer->Inventory_CountAllObjectContentsOfID(GetPrimaryMagazineID()) || m_iClip1 > 0);
 			}
 			else if (GetPrimaryAmmoID() > 0 && !UsesMagazines())
 			{
-				return (pPlayer->m_pInventory.CountAllObjectContentsOfID(GetPrimaryAmmoID()) || m_iClip1 > 0);
+				return (pPlayer->Inventory_CountAllObjectContentsOfID(GetPrimaryAmmoID()) || m_iClip1 > 0);
 			}
 		}
 	}
@@ -1407,11 +1407,11 @@ bool CBaseCombatWeapon::HasSecondaryAmmo( void )
 		{
 			if (UsesMagazines())
 			{
-				return (pPlayer->m_pInventory.CountAllObjectContentsOfID(GetPrimaryMagazineID()) || m_iClip1 > 0);
+				return (pPlayer->Inventory_CountAllObjectContentsOfID(GetPrimaryMagazineID()) || m_iClip1 > 0);
 			}
 			else if (GetPrimaryAmmoID() > 0 && !UsesMagazines())
 			{
-				return (pPlayer->m_pInventory.CountAllObjectContentsOfID(GetPrimaryMagazineID()) || m_iClip1 > 0);
+				return (pPlayer->Inventory_CountAllObjectContentsOfID(GetPrimaryMagazineID()) || m_iClip1 > 0);
 			}
 		}
 	}
@@ -2131,12 +2131,12 @@ bool CBaseCombatWeapon::DefaultReload( int iClipSize1, int iClipSize2, int iActi
 	{
 		if (UsesMagazines())
 		{
-			if (pPlayer->m_pInventory.CountAllObjectContentsOfID(GetPrimaryMagazineID()) < 1)
+			if (pPlayer->Inventory_CountAllObjectContentsOfID(GetPrimaryMagazineID()) < 1)
 				return false;
 		}
 		else if (!UsesMagazines() && GetPrimaryAmmoID() > 0)
 		{
-			if (pPlayer->m_pInventory.CountAllObjectContentsOfID(GetPrimaryAmmoID()) < 1)
+			if (pPlayer->Inventory_CountAllObjectContentsOfID(GetPrimaryAmmoID()) < 1)
 				return false;
 		}
 		else
@@ -2159,7 +2159,7 @@ bool CBaseCombatWeapon::DefaultReload( int iClipSize1, int iClipSize2, int iActi
 	{
 		if (pPlayer && UsesMagazines())
 		{
-			int candidate = pPlayer->m_pInventory.GetItemCapacity(pPlayer->m_pInventory.FindFirstFullObject(GetPrimaryMagazineID()));
+			int candidate = pPlayer->Inventory_GetItemCapacity(pPlayer->m_pInventory.FindFirstFullObject(GetPrimaryMagazineID()));
 			int primary = MIN(iClipSize1 - m_iClip1, candidate);
 			if (primary != 0 && m_iClip1 < candidate)
 			{
@@ -2168,7 +2168,7 @@ bool CBaseCombatWeapon::DefaultReload( int iClipSize1, int iClipSize2, int iActi
 		} 
 		else if (pPlayer && !UsesMagazines() && GetPrimaryAmmoID() > 0)
 		{
-			int primary = MIN(iClipSize1 - m_iClip1, pPlayer->m_pInventory.CountAllObjectContentsOfID(GetPrimaryAmmoID()));
+			int primary = MIN(iClipSize1 - m_iClip1, pPlayer->Inventory_CountAllObjectContentsOfID(GetPrimaryAmmoID()));
 			if (primary != 0)
 			{
 				bReload = true;
@@ -2315,7 +2315,7 @@ void CBaseCombatWeapon::CheckReload( void )
 			}
 
 			// If out of ammo end reload
-			if (pOwner->GetAmmoCount(m_iPrimaryAmmoType) <=0 || pOwner->m_pInventory.CountAllObjectContentsOfID(GetPrimaryAmmoID()))
+			if (pOwner->GetAmmoCount(m_iPrimaryAmmoType) <=0 || pOwner->Inventory_CountAllObjectContentsOfID(GetPrimaryAmmoID()))
 			{
 				FinishReload();
 				return;
@@ -2327,7 +2327,7 @@ void CBaseCombatWeapon::CheckReload( void )
 
 				if (GetPrimaryAmmoID() > 0)
 				{
-					m_iClip1 += pOwner->m_pInventory.UseItem(1, GetPrimaryAmmoID());
+					m_iClip1 += pOwner->Inventory_UseItem(1, GetPrimaryAmmoID());
 				}
 				else
 				{
@@ -2409,9 +2409,9 @@ void CBaseCombatWeapon::FinishReload( void )
 		} 
 		else if (UsesClipsForAmmo1() && !UsesMagazines() && GetPrimaryAmmoID() > 0)
 		{
-			int primary = MIN(GetMaxClip1() - m_iClip1, pPlayer->m_pInventory.CountAllObjectContentsOfID(GetPrimaryAmmoID()));
+			int primary = MIN(GetMaxClip1() - m_iClip1, pPlayer->Inventory_CountAllObjectContentsOfID(GetPrimaryAmmoID()));
 			m_iClip1 += primary;
-			pPlayer->m_pInventory.UseItem(primary, pPlayer->m_pInventory.FindFirstFullObject(GetPrimaryAmmoID()));
+			pPlayer->Inventory_UseItem(primary, pPlayer->m_pInventory.FindFirstFullObject(GetPrimaryAmmoID()));
 		}
 
 		// If I use secondary clips, reload secondary

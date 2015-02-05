@@ -644,7 +644,7 @@ void CHL2_Player::ThrowExplosiveGrenade(void)
 			CBasePlayer *pPlayer = ToBasePlayer(this);
 			if (pPlayer) 
 			{
-				pPlayer->m_pInventory.UseItem(1, pPlayer->m_pInventory.FindFirstObject(188));
+				pPlayer->Inventory_UseItem(1, pPlayer->m_pInventory.FindFirstObject(188));
 			}
 
 			m_bWantExplosiveGrenadeThrow = false;
@@ -1053,7 +1053,7 @@ void CHL2_Player::PostThink( void )
 			int itemindex = pPlayer->m_pInventory.FindHealthItem();
 			if (itemindex > -1 && itemindex < (MAX_INVENTORY + 1))
 			{
-				m_iHealthKitBuffer = pPlayer->m_pInventory.UseItem(pPlayer->m_pInventory.GetItemCapacity(itemindex), itemindex) * 4;
+				m_iHealthKitBuffer = pPlayer->Inventory_UseItem(pPlayer->Inventory_GetItemCapacity(itemindex), itemindex) * 4;
 				m_fRegenBufferWait = 0.0f;
 			}
 		}
@@ -1062,7 +1062,7 @@ void CHL2_Player::PostThink( void )
 			int itemindex = pPlayer->m_pInventory.FindArmorItem();
 			if (itemindex > -1 && itemindex < (MAX_INVENTORY + 1))
 			{
-				m_iArmorBatteryBuffer = pPlayer->m_pInventory.UseItem(pPlayer->m_pInventory.GetItemCapacity(itemindex), itemindex) * 4;
+				m_iArmorBatteryBuffer = pPlayer->Inventory_UseItem(pPlayer->Inventory_GetItemCapacity(itemindex), itemindex) * 4;
 				m_fRegenBufferWait = 0.0f;
 			}
 		}

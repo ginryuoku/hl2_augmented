@@ -6789,14 +6789,14 @@ bool CBasePlayer::BumpWeapon( CBaseCombatWeapon *pWeapon )
 			{
 				++m_Local.m_iGrabbedSMG1;
 				AddPlayerCash(4000 * MAX(0.1, 1.2 / m_Local.m_iGrabbedSMG1));
-				if (m_pInventory.CountAllObjectContentsOfID(182, true) < 200)
+				if (Inventory_CountAllObjectContentsOfID(182, true) < 200)
 					m_pInventory.NewObject(m_pInventory.FindFirstFreeObject(), 272, primaryGiven, 40);
 			}
 			if (!Q_stricmp(pWeapon->GetClassname(), "weapon_ar2"))
 			{
 				++m_Local.m_iGrabbedAR2;
 				AddPlayerCash(7500 * MAX(0.1, 1.2 / m_Local.m_iGrabbedAR2));
-				if (m_pInventory.CountAllObjectContentsOfID(183, true) < 200)
+				if (Inventory_CountAllObjectContentsOfID(183, true) < 200)
 					m_pInventory.NewObject(m_pInventory.FindFirstFreeObject(), 280, primaryGiven, 30);
 			}
 			if (!Q_stricmp(pWeapon->GetClassname(), "weapon_shotgun"))
@@ -9706,6 +9706,61 @@ void CBasePlayer::AddPlayerCash(int cash)
 	}
 	m_Local.m_iPlayerCash = m_Local.m_iPlayerCash + cash;
 	return;
+}
+
+int CBasePlayer::Inventory_GetItemID(int element)
+{
+	return m_pInventory.GetItemID(element);
+}
+
+int CBasePlayer::Inventory_GetItemCapacity(int element)
+{
+	return m_pInventory.GetItemCapacity(element);
+}
+
+int CBasePlayer::Inventory_GetItemMaxCapacity(int element)
+{
+	return m_pInventory.GetItemMaxCapacity(element);
+}
+
+int CBasePlayer::Inventory_GetItemType(int element)
+{
+	return m_pInventory.GetItemType(element);
+}
+
+int CBasePlayer::Inventory_GetItemContains(int element)
+{
+	return m_pInventory.GetItemContains(element);
+}
+
+int CBasePlayer::Inventory_GetItemTotalWeight(int element)
+{
+	return m_pInventory.GetItemTotalWeight(element);
+}
+
+int CBasePlayer::Inventory_GetItemBaseWeight(int element)
+{
+	return m_pInventory.GetItemBaseWeight(element);
+}
+
+int CBasePlayer::Inventory_GetItemUnitWeight(int element)
+{
+	return m_pInventory.GetItemUnitWeight(element);
+}
+
+int CBasePlayer::Inventory_GetInventoryTotalWeight(void)
+{
+	return m_pInventory.GetInventoryTotalWeight();
+}
+
+int CBasePlayer::Inventory_UseItem(int used, int itemindex)
+{
+	return m_pInventory.UseItem(used, itemindex);
+}
+
+int CBasePlayer::Inventory_CountAllObjectContentsOfID(int itemid, bool use_contents /*= false*/)
+{
+	return m_pInventory.CountAllObjectContentsOfID(itemid, use_contents);
 }
 
 void Cheat_AddPlayerCash(const CCommand &args)

@@ -32,7 +32,7 @@ public:
 	void UpdateObject( int ObjectIndex, int NewItemID, int NewItemCap, int NewItemMaxCap, int NewBaseWeight, int NewUnitWeight );
 	void ItemIsClean(int element);
 
-	int CountAllObjectContentsOfID(int itemid);
+	int CountAllObjectContentsOfID(int itemid, bool non_empty = false);
 	int CountAllObjectsOfID(int itemid, bool non_empty = false);
 
 	int FindFirstFullObject(int itemid);

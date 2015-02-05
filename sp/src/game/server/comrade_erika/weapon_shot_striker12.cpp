@@ -296,11 +296,11 @@ bool CWeaponStriker12::StartReload(void)
 		CBasePlayer *pPlayer = ToBasePlayer(GetOwner());
 		if (pPlayer)
 		{
-			if (pPlayer->m_pInventory.CountAllObjectContentsOfID(GetPrimaryAmmoID()) <= 0)
+			if (pPlayer->Inventory_CountAllObjectContentsOfID(GetPrimaryAmmoID()) <= 0)
 				return false;
 			if (m_iClip1 >= GetMaxClip1())
 				return false;
-			int j = MIN(1, pPlayer->m_pInventory.CountAllObjectContentsOfID(GetPrimaryAmmoID()));
+			int j = MIN(1, pPlayer->Inventory_CountAllObjectContentsOfID(GetPrimaryAmmoID()));
 			if (j <= 0)
 				return false;
 		}
@@ -351,11 +351,11 @@ bool CWeaponStriker12::Reload(void)
 		CBasePlayer *pPlayer = ToBasePlayer(GetOwner());
 		if (pPlayer)
 		{
-			if (pPlayer->m_pInventory.CountAllObjectContentsOfID(GetPrimaryAmmoID()) <= 0)
+			if (pPlayer->Inventory_CountAllObjectContentsOfID(GetPrimaryAmmoID()) <= 0)
 				return false;
 			if (m_iClip1 >= GetMaxClip1())
 				return false;
-			int j = MIN(1, pPlayer->m_pInventory.CountAllObjectContentsOfID(GetPrimaryAmmoID()));
+			int j = MIN(1, pPlayer->Inventory_CountAllObjectContentsOfID(GetPrimaryAmmoID()));
 			if (j <= 0)
 				return false;
 		}
@@ -414,12 +414,12 @@ void CWeaponStriker12::FillClip(void)
 		return;
 
 	// Add them to the clip
-	if (pPlayer->m_pInventory.CountAllObjectContentsOfID(GetPrimaryAmmoID()) > 0)
+	if (pPlayer->Inventory_CountAllObjectContentsOfID(GetPrimaryAmmoID()) > 0)
 	{
 		if (Clip1() < GetMaxClip1())
 		{
 			m_iClip1++;
-			pPlayer->m_pInventory.UseItem(1, pPlayer->m_pInventory.FindFirstObject(GetPrimaryAmmoID()));
+			pPlayer->Inventory_UseItem(1, pPlayer->m_pInventory.FindFirstObject(GetPrimaryAmmoID()));
 		}
 	}
 }
@@ -478,7 +478,7 @@ void CWeaponStriker12::PrimaryAttack(void)
 
 	CSoundEnt::InsertSound(SOUND_COMBAT, GetAbsOrigin(), SOUNDENT_VOLUME_SHOTGUN, 0.2, GetOwner());
 
-	if (!m_iClip1 && pPlayer->m_pInventory.CountAllObjectContentsOfID(GetPrimaryAmmoID()) <= 0)
+	if (!m_iClip1 && pPlayer->Inventory_CountAllObjectContentsOfID(GetPrimaryAmmoID()) <= 0)
 	{
 		// HEV suit - indicate out of ammo condition
 		pPlayer->SetSuitUpdate("!HEV_AMO0", FALSE, 0);
@@ -510,7 +510,7 @@ void CWeaponStriker12::ItemPostFrame(void)
 		}
 		else if (m_flNextPrimaryAttack <= gpGlobals->curtime)
 		{
-			if (pOwner->m_pInventory.CountAllObjectContentsOfID(GetPrimaryAmmoID()) <= 0)
+			if (pOwner->Inventory_CountAllObjectContentsOfID(GetPrimaryAmmoID()) <= 0)
 			{
 				FinishReload();
 				return;
@@ -538,9 +538,9 @@ void CWeaponStriker12::ItemPostFrame(void)
 	if ((m_bDelayedFire1 || pOwner->m_nButtons & IN_ATTACK) && m_flNextPrimaryAttack <= gpGlobals->curtime)
 	{
 		m_bDelayedFire1 = false;
-		if ((m_iClip1 <= 0 && UsesClipsForAmmo1()) || (!UsesClipsForAmmo1() && !pOwner->m_pInventory.CountAllObjectContentsOfID(GetPrimaryAmmoID())))
+		if ((m_iClip1 <= 0 && UsesClipsForAmmo1()) || (!UsesClipsForAmmo1() && !pOwner->Inventory_CountAllObjectContentsOfID(GetPrimaryAmmoID())))
 		{
-			if (!pOwner->m_pInventory.CountAllObjectContentsOfID(GetPrimaryAmmoID()))
+			if (!pOwner->Inventory_CountAllObjectContentsOfID(GetPrimaryAmmoID()))
 			{
 				DryFire();
 			}

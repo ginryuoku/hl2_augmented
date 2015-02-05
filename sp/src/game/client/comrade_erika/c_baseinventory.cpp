@@ -85,16 +85,30 @@ void CBaseInventory::UpdateObject( int ObjectIndex, int NewItemID, int NewItemCa
 	DevMsg("Client: Updated object at position %d of type %d with capacity %d and max capacity %d\n", ObjectIndex, NewItemID, NewItemCap, NewItemMaxCap);
 }
 
-int CBaseInventory::CountAllObjectContentsOfID(int itemid)
+int CBaseInventory::CountAllObjectContentsOfID(int itemid, bool use_contents)
 {
 	int itemcount = 0;
 
 	for (int i = 0; i < MAX_INVENTORY; ++i)
 	{
-		if (GetItemID(i) == itemid)
+#if 0
+		if (use_contents)
 		{
-			itemcount = itemcount + GetItemCapacity(i);
+			if (GetItemContains(i) == itemid)
+			{
+				itemcount = itemcount + GetItemCapacity(i);
+			}
 		}
+		else
+		{
+#endif
+			if (GetItemID(i) == itemid)
+			{
+				itemcount = itemcount + GetItemCapacity(i);
+			}
+#if 0
+		}
+#endif
 	}
 
 	return itemcount;

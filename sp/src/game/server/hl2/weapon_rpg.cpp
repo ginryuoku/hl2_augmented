@@ -2018,9 +2018,9 @@ bool CWeaponRPG::Reload( void )
 
 	if (pPlayer)
 	{
-		if (pPlayer->m_pInventory.CountAllObjectContentsOfID(GetPrimaryAmmoID()) > 0) 
+		if (pPlayer->Inventory_CountAllObjectContentsOfID(GetPrimaryAmmoID()) > 0) 
 		{
-			m_iClip1 = pPlayer->m_pInventory.UseItem(1, pPlayer->m_pInventory.FindFirstObject(GetPrimaryAmmoID()));
+			m_iClip1 = pPlayer->Inventory_UseItem(1, pPlayer->m_pInventory.FindFirstObject(GetPrimaryAmmoID()));
 		}
 		else return false;
 	}

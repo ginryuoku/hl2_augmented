@@ -2989,7 +2989,20 @@ void C_BasePlayer::BuildFirstPersonMeathookTransformations( CStudioHdr *hdr, Vec
 	}
 }
 
+int C_BasePlayer::Inventory_GetItemCapacity(int element)
+{
+	return m_pInventory.GetItemCapacity(element);
+}
 
+int C_BasePlayer::Inventory_UseItem(int used, int itemindex)
+{
+	return m_pInventory.UseItem(used, itemindex);
+}
+
+int C_BasePlayer::Inventory_CountAllObjectContentsOfID(int itemid, bool use_contents /*= false*/)
+{
+	return m_pInventory.CountAllObjectContentsOfID(itemid, use_contents);
+}
 
 void CC_DumpClientSoundscapeData( const CCommand& args )
 {

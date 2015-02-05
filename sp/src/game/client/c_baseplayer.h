@@ -187,6 +187,10 @@ public:
 	bool			IsSuitEquipped( void ) { return m_Local.m_bWearingSuit; };
 	int				GetMaxHealth(void) { return (HealthSegmentValue() * 5) + (HealthSegmentValue() * m_Local.m_iHealthUpgrades); }
 
+	int Inventory_GetItemCapacity(int element);
+	int Inventory_UseItem(int used, int itemindex);
+	int Inventory_CountAllObjectContentsOfID(int itemid, bool use_contents = false);
+
 	// Team handlers
 	virtual void	TeamChange( int iNewTeam );
 
