@@ -580,7 +580,7 @@ CBasePlayer::CBasePlayer( )
 	m_szNetname[0] = '\0';
 
 	m_iHealth = 0;
-	m_Local.m_iPlayerCash = 400; // Just enough to buy a handgun if you collect two in EP2.
+	m_Local.m_iPlayerCash = 0; // Just enough to buy a handgun if you collect two in EP2.
 	m_Local.m_iArmorUpgrades = 0;
 	m_Local.m_iHealthUpgrades = 0;
 	m_Local.m_iArmorSegmentUpgrades = 0;
