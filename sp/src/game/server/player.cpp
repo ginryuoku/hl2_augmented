@@ -590,6 +590,7 @@ CBasePlayer::CBasePlayer( )
 	m_Local.m_iGrabbedPistol = 0;
 	m_Local.m_iGrabbedShotgun = 0;
 	m_Local.m_iGrabbedSMG1 = 0;
+	m_Local.m_iCarryWeight = 0;
 
 	Weapon_SetLast( NULL );
 	m_bitsDamageType = 0;
@@ -9761,6 +9762,11 @@ int CBasePlayer::Inventory_UseItem(int used, int itemindex)
 int CBasePlayer::Inventory_CountAllObjectContentsOfID(int itemid, bool use_contents /*= false*/)
 {
 	return m_pInventory.CountAllObjectContentsOfID(itemid, use_contents);
+}
+
+void CBasePlayer::UpdateCarryWeight(void)
+{
+	m_Local.m_iCarryWeight = Inventory_GetInventoryTotalWeight();
 }
 
 void Cheat_AddPlayerCash(const CCommand &args)

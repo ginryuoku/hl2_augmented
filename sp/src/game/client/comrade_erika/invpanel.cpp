@@ -37,6 +37,8 @@ CInvPanel::CInvPanel(IViewPort *pViewPort) : BaseClass(NULL, PANEL_INVENTORY)
 	InvSubPanel->SetBounds(scheme()->GetProportionalScaledValue(20), scheme()->GetProportionalScaledValue(20),
 		scheme()->GetProportionalScaledValue(600), scheme()->GetProportionalScaledValue(400));
 
+	pCarryWeightLabel = new Label(this, "weightlabel", "BLANK");
+
 	LoadControlSettings("resource/UI/invpanel.res");
 	InvalidateLayout();
 	SetSize(ScreenWidth(), ScreenHeight());
@@ -57,7 +59,7 @@ CInvPanel::CInvPanel(IViewPort *pViewPort) : BaseClass(NULL, PANEL_INVENTORY)
 		//Add Image to PanelListPanel
 		InvSubPanel->AddItem(itempanel);
 	}
-
+	
 	vgui::ivgui()->AddTickSignal(GetVPanel(), 100);
 		
 	DevMsg("InvPanel has been constructed\n");
@@ -129,6 +131,9 @@ void CInvPanel::BeginUpdates()
 				pPlayer->m_pInventory.ItemIsClean(i);
 			}
 		}
+		float weight = (float)pPlayer->m_Local.m_iCarryWeight / 1000.0f;
+		Q_snprintf(buffer, sizeof(buffer), "Carry weight: %.1f / %.1f", weight, 50.0f);
+		pCarryWeightLabel->SetText(buffer);
 	}
 
 	return;

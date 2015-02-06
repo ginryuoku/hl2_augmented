@@ -175,6 +175,7 @@ BEGIN_RECV_TABLE_NOBASE( CPlayerLocalData, DT_Local )
 	RecvPropInt		(RECVINFO(m_iArmorUpgrades)),
 	RecvPropInt(RECVINFO(m_iHealthSegmentUpgrades)),
 	RecvPropInt(RECVINFO(m_iArmorSegmentUpgrades)),
+	RecvPropInt(RECVINFO(m_iCarryWeight)),
 	RecvPropBool	(RECVINFO(m_bPoisoned)),
 	RecvPropFloat	(RECVINFO(m_flStepSize)),
 	RecvPropInt		(RECVINFO(m_bAllowAutoMovement)),

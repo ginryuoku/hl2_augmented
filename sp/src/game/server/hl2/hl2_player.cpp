@@ -1162,6 +1162,7 @@ void CHL2_Player::PostThink( void )
 	}
 
 	m_pInventory.FlushPendingObjects(this);
+	UpdateCarryWeight();
 }
 
 void CHL2_Player::StartAdmireGlovesAnimation( void )

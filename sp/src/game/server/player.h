@@ -690,6 +690,8 @@ public:
 	int  HealthSegmentValue() const { return 10 + (m_Local.m_iHealthSegmentUpgrades * 5); }
 	int  ArmorSegmentValue() const { return 10 + (m_Local.m_iArmorSegmentUpgrades * 5); }
 
+	void UpdateCarryWeight(void);
+
 	int Inventory_GetItemID(int element);
 	int Inventory_GetItemCapacity(int element);
 	int Inventory_GetItemMaxCapacity(int element);

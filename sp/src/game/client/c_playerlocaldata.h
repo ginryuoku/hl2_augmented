@@ -69,6 +69,7 @@ public:
 	int						m_iArmorUpgrades;
 	int						m_iHealthSegmentUpgrades;
 	int						m_iArmorSegmentUpgrades;
+	int						m_iCarryWeight;
 
 	bool					m_bPoisoned;
 	float					m_flStepSize;
