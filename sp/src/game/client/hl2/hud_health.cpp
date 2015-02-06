@@ -129,15 +129,19 @@ void CHudHealth::OnThink()
 
 	m_iHealth = newHealth;
 
-	if ( m_iHealth >= local->GetMaxHealth() / 5 )
+	if (local)
 	{
-		g_pClientMode->GetViewportAnimationController()->StartAnimationSequence("HealthIncreasedAbove20");
+		if (m_iHealth >= local->GetMaxHealth() / 5)
+		{
+			g_pClientMode->GetViewportAnimationController()->StartAnimationSequence("HealthIncreasedAbove20");
+		}
+		else if (m_iHealth > 0)
+		{
+			g_pClientMode->GetViewportAnimationController()->StartAnimationSequence("HealthIncreasedBelow20");
+			g_pClientMode->GetViewportAnimationController()->StartAnimationSequence("HealthLow");
+		}
 	}
-	else if ( m_iHealth > 0 )
-	{
-		g_pClientMode->GetViewportAnimationController()->StartAnimationSequence("HealthIncreasedBelow20");
-		g_pClientMode->GetViewportAnimationController()->StartAnimationSequence("HealthLow");
-	}
+
 
 	SetDisplayValue(m_iHealth);
 }
