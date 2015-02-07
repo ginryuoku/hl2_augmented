@@ -1502,7 +1502,7 @@ void CHL2_Player::StartSprinting( void )
 	filter.UsePredictionRules();
 	EmitSound( filter, entindex(), "HL2Player.SprintStart" );
 
-	SetMaxSpeed( HL2_SPRINT_SPEED );
+	SetMaxSpeed(HL2_SPRINT_SPEED * GetCarryWeightLoadFactor());
 	m_fIsSprinting = true;
 }
 
@@ -1518,11 +1518,11 @@ void CHL2_Player::StopSprinting( void )
 
 	if( IsSuitEquipped() )
 	{
-		SetMaxSpeed( HL2_NORM_SPEED );
+		SetMaxSpeed( HL2_NORM_SPEED * GetCarryWeightLoadFactor());
 	}
 	else
 	{
-		SetMaxSpeed( HL2_WALK_SPEED );
+		SetMaxSpeed(HL2_WALK_SPEED * GetCarryWeightLoadFactor());
 	}
 
 	m_fIsSprinting = false;
@@ -1554,7 +1554,7 @@ void CHL2_Player::EnableSprint( bool bEnable )
 //-----------------------------------------------------------------------------
 void CHL2_Player::StartWalking( void )
 {
-	SetMaxSpeed( HL2_WALK_SPEED );
+	SetMaxSpeed(HL2_WALK_SPEED * GetCarryWeightLoadFactor());
 	m_fIsWalking = true;
 }
 
@@ -1562,7 +1562,7 @@ void CHL2_Player::StartWalking( void )
 //-----------------------------------------------------------------------------
 void CHL2_Player::StopWalking( void )
 {
-	SetMaxSpeed( HL2_NORM_SPEED );
+	SetMaxSpeed(HL2_NORM_SPEED * GetCarryWeightLoadFactor());
 	m_fIsWalking = false;
 }
 
@@ -4065,6 +4065,19 @@ void CHL2_Player::FirePlayerProxyOutput( const char *pszOutputName, variant_t va
 		return;
 
 	GetPlayerProxy()->FireNamedOutput( pszOutputName, variant, pActivator, pCaller );
+}
+
+float CHL2_Player::GetCarryWeightLoadFactor(void)
+{
+	float carryweight = m_Local.m_iCarryWeight;
+	float loadfactor = 1.5f - (0.75f / ( 50000.0f / carryweight));
+
+	if (loadfactor > 1.5f)
+		loadfactor = 1.5f;
+	if (loadfactor < 0.5f)
+		loadfactor = 0.5f;
+
+	return loadfactor;
 }
 
 LINK_ENTITY_TO_CLASS( logic_playerproxy, CLogicPlayerProxy);

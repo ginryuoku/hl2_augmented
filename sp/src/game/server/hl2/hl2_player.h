@@ -273,6 +273,8 @@ public:
 	void ThrowExplosiveGrenade(void);
 	void CreateExplosiveGrenade(void);
 	
+	float GetCarryWeightLoadFactor(void);
+
 	void SetControlClass( Class_T controlClass ) { m_nControlClass = controlClass; }
 	
 	void StartWaterDeathSounds( void );

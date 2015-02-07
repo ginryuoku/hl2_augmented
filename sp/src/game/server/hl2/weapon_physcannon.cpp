@@ -2428,7 +2428,7 @@ bool CWeaponPhysCannon::AttachObject( CBaseEntity *pObject, const Vector &vPosit
 		pOwner->EnableSprint( false );
 
 		float	loadWeight = ( 1.0f - GetLoadPercentage() );
-		float	maxSpeed = hl2_walkspeed.GetFloat() + ( ( hl2_normspeed.GetFloat() - hl2_walkspeed.GetFloat() ) * loadWeight );
+		float	maxSpeed = (hl2_walkspeed.GetFloat() * pOwner->GetCarryWeightLoadFactor()) + (((hl2_normspeed.GetFloat() * pOwner->GetCarryWeightLoadFactor()) - (hl2_walkspeed.GetFloat() * pOwner->GetCarryWeightLoadFactor())) * loadWeight);
 
 		//Msg( "Load perc: %f -- Movement speed: %f/%f\n", loadWeight, maxSpeed, hl2_normspeed.GetFloat() );
 		pOwner->SetMaxSpeed( maxSpeed );
@@ -2875,7 +2875,7 @@ void CWeaponPhysCannon::DetachObject( bool playSound, bool wasLaunched )
 	if( pOwner != NULL )
 	{
 		pOwner->EnableSprint( true );
-		pOwner->SetMaxSpeed( hl2_normspeed.GetFloat() );
+		pOwner->SetMaxSpeed(hl2_normspeed.GetFloat() * pOwner->GetCarryWeightLoadFactor());
 		
 		if( wasLaunched )
 		{
