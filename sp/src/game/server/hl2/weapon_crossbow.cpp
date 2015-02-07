@@ -764,6 +764,11 @@ void CWeaponCrossbow::CreateChargerEffects( void )
 {
 	CBasePlayer *pOwner = ToBasePlayer( GetOwner() );
 
+	if (!pOwner)
+	{
+		return;
+	}
+
 	if ( m_hChargerSprite != NULL )
 		return;
 
