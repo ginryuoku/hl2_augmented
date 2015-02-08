@@ -6777,34 +6777,27 @@ bool CBasePlayer::BumpWeapon( CBaseCombatWeapon *pWeapon )
 			if (!Q_stricmp(pWeapon->GetClassname(), "weapon_pistol"))
 			{
 				++m_Local.m_iGrabbedPistol;
-				AddPlayerCash(1200 * MAX(0.1, 1.2 / m_Local.m_iGrabbedPistol));
-				m_pInventory.NewObject(m_pInventory.FindFirstFreeObject(), 252, primaryGiven, 18);
+				AddPlayerCash(1200 * MAX(0.1, 1.2 - (m_Local.m_iGrabbedPistol * 0.02)) + 68);
 			}
 			if (!Q_stricmp(pWeapon->GetClassname(), "weapon_357"))
 			{
 				++m_Local.m_iGrabbed357;
-				AddPlayerCash(1500 * MAX(0.1, 1.2 / m_Local.m_iGrabbed357));
-				m_pInventory.NewObject(m_pInventory.FindFirstFreeObject(), 260, primaryGiven, 6);
+				AddPlayerCash(1500 * MAX(0.1, 1.2 - (m_Local.m_iGrabbed357 * 0.02)) + 26);
 			}
 			if (!Q_stricmp(pWeapon->GetClassname(), "weapon_smg1"))
 			{
 				++m_Local.m_iGrabbedSMG1;
-				AddPlayerCash(4000 * MAX(0.1, 1.2 / m_Local.m_iGrabbedSMG1));
-				if (Inventory_CountAllObjectContentsOfID(182, true) < 200)
-					m_pInventory.NewObject(m_pInventory.FindFirstFreeObject(), 272, primaryGiven, 40);
+				AddPlayerCash(4000 * MAX(0.1, 1.2 - (m_Local.m_iGrabbedSMG1 * 0.02)) + 90);
 			}
 			if (!Q_stricmp(pWeapon->GetClassname(), "weapon_ar2"))
 			{
 				++m_Local.m_iGrabbedAR2;
-				AddPlayerCash(7500 * MAX(0.1, 1.2 / m_Local.m_iGrabbedAR2));
-				if (Inventory_CountAllObjectContentsOfID(183, true) < 200)
-					m_pInventory.NewObject(m_pInventory.FindFirstFreeObject(), 280, primaryGiven, 30);
+				AddPlayerCash(7500 * MAX(0.1, 1.2 - (m_Local.m_iGrabbedAR2 * 0.02)) + 60);
 			}
 			if (!Q_stricmp(pWeapon->GetClassname(), "weapon_shotgun"))
 			{
 				++m_Local.m_iGrabbedShotgun;
-				AddPlayerCash(3500 * MAX(0.1, 1.2 / m_Local.m_iGrabbedShotgun));
-				m_pInventory.NewObject(m_pInventory.FindFirstFreeObject(), 184, primaryGiven, 20);
+				AddPlayerCash(3500 * MAX(0.1, 1.2 - (m_Local.m_iGrabbedShotgun * 0.02)) + 11);
 			}
 			if (!Q_stricmp(pWeapon->GetClassname(), "weapon_crossbow"))
 				AddPlayerCash(5000 * 0.5);
