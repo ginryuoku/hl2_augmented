@@ -46,6 +46,7 @@ STUB_WEAPON_CLASS( weapon_oldmanharpoon, WeaponOldManHarpoon, C_WeaponCitizenPac
 
 STUB_WEAPON_CLASS( weapon_hgun_92fs, Weapon92FS, C_BaseHLCombatWeapon );
 STUB_WEAPON_CLASS(weapon_hgun_uspmatch9, WeaponUSPMatch9, C_BaseHLCombatWeapon);
+STUB_WEAPON_CLASS(weapon_hgun_uspmatch45, WeaponUSPMatch45, C_BaseHLCombatWeapon);
 STUB_WEAPON_CLASS(weapon_hgun_fiveseven, WeaponFiveSeven, C_BaseHLCombatWeapon);
 STUB_WEAPON_CLASS(weapon_hgun_vp70m, WeaponVP70M, C_HLMachineGun);
 

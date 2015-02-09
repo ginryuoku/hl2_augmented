@@ -59,6 +59,7 @@ static DynamicResupplyItems_t g_DynamicResupplyAmmoItems[] =
 	{ "item_ammo_57x28_small", "57x28mm", SIZE_AMMO_SMG1, 0.4f },
 	{ "item_ammo_762nato_small", "762nato", SIZE_AMMO_SMG1, 0.4f },
 	{ "item_ammo_762x39_small", "762x39", SIZE_AMMO_SMG1, 0.4f },
+	{ "item_ammo_45acp_small", "45acp", SIZE_AMMO_SMG1, 0.4f },
 };
 
 #define DS_HEALTH_INDEX		0
@@ -154,7 +155,8 @@ BEGIN_DATADESC( CItem_DynamicResupply )
 	DEFINE_KEYFIELD( m_flDesiredAmmo[9], FIELD_FLOAT, "DesiredAmmoAR2_AltFire" ),
 	DEFINE_KEYFIELD(m_flDesiredAmmo[10], FIELD_FLOAT, "DesiredAmmo57x28mm"),
 	DEFINE_KEYFIELD(m_flDesiredAmmo[11], FIELD_FLOAT, "DesiredAmmo762nato"),
-	DEFINE_KEYFIELD(m_flDesiredAmmo[11], FIELD_FLOAT, "DesiredAmmo762x39"),
+	DEFINE_KEYFIELD(m_flDesiredAmmo[12], FIELD_FLOAT, "DesiredAmmo762x39"),
+	DEFINE_KEYFIELD(m_flDesiredAmmo[13], FIELD_FLOAT, "DesiredAmmo45acp"),
 
 	DEFINE_FIELD( m_version, FIELD_INTEGER ),
 	DEFINE_FIELD( m_bIsMaster, FIELD_BOOLEAN ),
@@ -190,6 +192,7 @@ CItem_DynamicResupply::CItem_DynamicResupply( void )
 	m_flDesiredAmmo[10] = 0.4;	// 5.7x28mm
 	m_flDesiredAmmo[11] = 0.2;	// 7.62mm NATO
 	m_flDesiredAmmo[12] = 0.5;	// 7.62x39mm
+	m_flDesiredAmmo[13] = 0.4;	// 7.62x39mm
 }
 
 
@@ -363,9 +366,9 @@ void CItem_DynamicResupply::SpawnFullItem( CItem_DynamicResupply *pMaster, CBase
 			return;
 		}
 
-		// Otherwise, spawn the first ammo item in the list
-		flRatio[0] = 1.0f;
-		flTotalProb = 1.0f;
+		// Otherwise, just hand out some money and finish up.
+		pPlayer->AddPlayerCash(500);
+		return;
 	}
 	
 	float flChoice = random->RandomFloat( 0.0f, flTotalProb ); 

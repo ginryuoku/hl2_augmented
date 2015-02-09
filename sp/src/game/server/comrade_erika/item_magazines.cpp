@@ -57,6 +57,32 @@ public:
 };
 LINK_ENTITY_TO_CLASS(item_mag_9x19_18, CItem_Mag_9x19_18)
 
+class CItem_Mag_45acp_12usp : public CItem
+{
+public:
+	DECLARE_CLASS(CItem_Mag_45acp_12usp, CItem);
+
+	void Spawn(void)
+	{
+		Precache();
+		SetModel("models/items/boxsrounds.mdl");
+
+		// ItemID must be established before running the common spawn code
+		m_iItemID = 253;
+
+		BaseClass::Spawn();
+	}
+	void Precache(void)
+	{
+		PrecacheModel("models/items/boxsrounds.mdl");
+	}
+	bool MyTouch(CBasePlayer *pPlayer)
+	{
+		return false;
+	}
+};
+LINK_ENTITY_TO_CLASS(item_mag_45acp_12usp, CItem_Mag_45acp_12usp)
+
 class CItem_Mag_9x19_30mp5 : public CItem
 {
 public:

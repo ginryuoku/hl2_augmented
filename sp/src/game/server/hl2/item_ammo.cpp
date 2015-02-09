@@ -34,7 +34,75 @@ int ITEM_GiveAmmo( CBasePlayer *pPlayer, float flCount, const char *pszAmmoName,
 
 	return pPlayer->GiveAmmo( flCount, iAmmoType, bSuppressSound );
 }
+// ========================================================================
+//	>> BoxSRounds
+// ========================================================================
+class CItem_Box45ACP : public CItem
+{
+public:
+	DECLARE_CLASS(CItem_Box45ACP, CItem);
 
+	void Spawn(void)
+	{
+		Precache();
+		SetModel("models/items/boxsrounds.mdl");
+		m_iItemID = 193;
+		BaseClass::Spawn();
+		m_iItemCapacity = SIZE_AMMO_PISTOL;
+	}
+	void Precache(void)
+	{
+		PrecacheModel("models/items/boxsrounds.mdl");
+	}
+	bool MyTouch(CBasePlayer *pPlayer)
+	{
+		if (ITEM_GiveAmmo(pPlayer, SIZE_AMMO_PISTOL, "45acp"))
+		{
+			if (g_pGameRules->ItemShouldRespawn(this) == GR_ITEM_RESPAWN_NO)
+			{
+				UTIL_Remove(this);
+			}
+
+			return true;
+		}
+		return false;
+	}
+};
+LINK_ENTITY_TO_CLASS(item_ammo_45acp_small, CItem_Box45ACP);
+
+// ========================================================================
+//	>> LargeBoxSRounds
+// ========================================================================
+class CItem_LargeBox45ACP : public CItem
+{
+public:
+	DECLARE_CLASS(CItem_LargeBox45ACP, CItem);
+
+	void Spawn(void)
+	{
+		Precache();
+		SetModel("models/items/boxsrounds.mdl");
+		m_iItemID = 193;
+		BaseClass::Spawn();
+	}
+	void Precache(void)
+	{
+		PrecacheModel("models/items/boxsrounds.mdl");
+	}
+	bool MyTouch(CBasePlayer *pPlayer)
+	{
+		if (ITEM_GiveAmmo(pPlayer, SIZE_AMMO_PISTOL_LARGE, "45acp"))
+		{
+			if (g_pGameRules->ItemShouldRespawn(this) == GR_ITEM_RESPAWN_NO)
+			{
+				UTIL_Remove(this);
+			}
+			return true;
+		}
+		return false;
+	}
+};
+LINK_ENTITY_TO_CLASS(item_ammo_45acp, CItem_LargeBox45ACP);
 // ========================================================================
 //	>> BoxSRounds
 // ========================================================================

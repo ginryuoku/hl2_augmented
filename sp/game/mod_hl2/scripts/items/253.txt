@@ -1,0 +1,20 @@
+ItemData
+{
+	"entity_name"				"item_mag_45acp_12usp" // entity name must match numeric ID
+	"item_friendlyname"			"#CE_Mag_45acp_12usp_Name" // Friendly name. We use the localizer here.
+	"item_friendlydescription"	"#CE_Mag_45acp_12usp_Desc" // Friendly description, also localized.
+
+	"item_capacity"				"12"	// Capacity of the item.
+	"item_maxcapacity"			"12"	// Max capacity of the item.
+    
+    "item_contains"             "193"   // Usually for magazines; refers to what the item contains.
+
+	"item_baseprice"			"50"	// Price for the item, empty.
+	"item_unitprice"			"2"		// Price for each element contained within the item.
+
+    // Weight of USP .45ACP magazines is 50 grams, according to the manual I dug up.
+    // .45ACP ball ammo (230gr) seems to be around 21.3 grams, rounding down.
+	
+    "item_baseweight" 			"50"	// Weight in grams of the empty item. 
+	"item_unitweight" 			"21"	// Weight in grams of each element.
+}
