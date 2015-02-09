@@ -61,3 +61,10 @@ sp/game/mod_hl2/maps/the_village.bsp
 *.png
 *.prt
 *.vmx
+sp/src/game/client/client_osx32_hl2
+sp/src/game/server/server_osx32_episodic
+sp/src/game/server/server_osx32_hl2
+sp/src/mathlib/mathlib_osx32
+sp/src/raytrace/raytrace_osx32
+sp/src/tier1/tier1_osx32
+sp/src/vgui2/vgui_controls/vgui_controls_osx32

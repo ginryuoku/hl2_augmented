@@ -1,4 +1,3 @@
-MakeANetworkVar_m_angRotation
 //========= Copyright Valve Corporation, All rights reserved. ============//
 //
 // Purpose: Base combat character with no AI

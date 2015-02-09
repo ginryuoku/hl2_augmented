@@ -462,7 +462,7 @@ void ControlGrid::SetSelectedPanel(Panel *panel)
 		// notify the panels of the selection change
 		if (m_hSelectedItem)
 		{
-			PostMessage(m_hSelectedItem, new KeyValues("PanelSelected", "state", 0));
+			PostMessage(m_hSelectedItem->GetVPanel(), new KeyValues("PanelSelected", "state", 0));
 		}
 		if (panel)
 		{
