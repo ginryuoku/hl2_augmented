@@ -109,6 +109,7 @@ $Project
 			$File "comrade_erika\weapon_hgun_vp70m.cpp"
             $File "comrade_erika\weapon_hgun_fiveseven.cpp"
             $File "comrade_erika\weapon_hgun_uspmatch9.cpp"
+			$File "comrade_erika\weapon_hgun_uspmatch45.cpp"
 		}
 		$File	"$SRCDIR\game\shared\achievement_saverestore.cpp"
 		$File	"$SRCDIR\game\shared\achievement_saverestore.h"
