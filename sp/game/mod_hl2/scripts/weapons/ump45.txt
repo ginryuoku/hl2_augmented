@@ -1,0 +1,76 @@
+"Weapon_ump45.Single"
+{
+	"channel"		"CHAN_WEAPON"
+	"volume"		"1.0"
+	
+	"CompatibilityAttenuation"	"0.64"
+	"pitch"		"PITCH_NORM"
+
+	"wave"			"weapons\ump45\ump45-1.wav"
+	
+}
+
+"Weapon_ump45.boltslap"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons\ump45\ump45_boltslap.wav"
+	
+}
+
+"Weapon_ump45.Clipout2"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons\ump45\ump45_clipout2.wav"
+	
+}
+
+"Weapon_ump45.Clipin1"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons\ump45\ump45_clipin1.wav"
+	
+}
+
+"Weapon_ump45.clipin2"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons\ump45\ump45_clipin2.wav"
+	
+}
+
+"Weapon_ump45.clipout1"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons\ump45\ump45_clipout1.wav"
+	
+}
+"Weapon_ump45.Cloth"
+{
+	"channel"		"CHAN_ITEM"
+	"volume"		"1.0"
+	"CompatibilityAttenuation"	"1.0"
+	"pitch"			"95,105"
+
+	"wave"			"weapons\ump45\ump45_Cloth.wav"
+	
+}

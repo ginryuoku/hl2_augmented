@@ -1,0 +1,81 @@
+// Small Machine Gun 1
+
+WeaponData
+{
+	// Weapon data is loaded by both the Game and Client DLLs.
+	"printname"	"#CE_HK_UMP45_Name"
+	"viewmodel"				"models/weapons/v_smg_ump45.mdl"
+	"playermodel"			"models/weapons/w_smg_ump45.mdl"	//FIXME: 
+	"anim_prefix"			"smg2"
+	"bucket"				"2"
+	"bucket_position"		"0"
+	"bucket_360"			"2"
+	"bucket_position_360"	"0"
+
+	"clip_size"				"25"
+	"default_clip"			"25"
+
+	"primary_ammo"			"45acp"
+
+	"weight"				"3"
+	"rumble"			"3"
+	"item_flags"			"ITEM_FLAG_SELECTONEMPTY"
+	"BuiltRightHanded"		"0"
+	"AllowFlipping"			"1"
+    
+    "primary_ammo_id"       "193"
+    "primary_mag_id"        "273"
+    "uses_magazines"        "1"
+    IronSight
+    {
+        "right"         "2.83"
+        "up"            "1.24"
+        "pitch"         "0"
+        "yaw"           "0"
+        "fov"           "-10"
+    }    
+	// Sounds for the weapon. There is a max of 16 sounds per category (i.e. max 16 "single_shot" sounds)
+	SoundData
+	{
+		"empty"				"Default.ClipEmpty_Rifle"
+		"single_shot"			"Weapon_UMP45.Single"
+	}
+
+	// Weapon Sprite data is loaded by the Client DLL.
+	TextureData
+	{
+		"weapon"
+		{
+				"font"		"WeaponIcons"
+				"character"	"a"
+		}
+		"weapon_s"
+		{	
+				"font"		"WeaponIconsSelected"
+				"character"	"a"
+		}
+		"weapon_small"
+		{
+				"font"		"WeaponIconsSmall"
+				"character"	"a"
+		}
+		"ammo"
+		{
+				"font"		"WeaponIconsSmall"
+				"character"	"p"
+		}
+		"crosshair"
+		{
+				"font"		"Crosshairs"
+				"character"	"Q"
+		}
+		"autoaim"
+		{
+				"file"		"sprites/crosshairs"
+				"x"			"0"
+				"y"			"48"
+				"width"		"24"
+				"height"	"24"
+		}
+	}
+}

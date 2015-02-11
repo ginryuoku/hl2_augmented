@@ -15,6 +15,7 @@
     "weapon_shot_striker12"     "6500"
     "weapon_smg_mp5k"		    "2800"
     "weapon_smg_mp5a2"		    "2400"
+    "weapon_smg_ump45"          "2750"
     "weapon_pdw_mp7a1"          "4000"
     "weapon_pdw_p90"		    "5000"
     "weapon_arifle_akm"	        "2250"
@@ -54,6 +55,7 @@
     "item_mag_556_stanag30"     "60"
     "item_mag_57x28_20fs"       "60"
     "item_mag_46x30_40mp7"      "90"
+    "item_mag_45acp_25ump"      "110"
     "item_mag_762n_scar20"      "120"
     "item_mag_762x39_30"        "110"
 

@@ -1,0 +1,21 @@
+ItemData
+{
+	"entity_name"				"item_mag_45acp_25ump" // entity name must match numeric ID
+	"item_friendlyname"			"#CE_Mag_45acp_25ump_Name" // Friendly name. We use the localizer here.
+	"item_friendlydescription"	"#CE_Mag_45acp_25ump_Desc" // Friendly description, also localized.
+
+	"item_capacity"				"25"	// Capacity of the item.
+	"item_maxcapacity"			"25"	// Max capacity of the item.
+    
+    "item_contains"             "193"   // Usually for magazines; refers to what the item contains.
+
+	"item_baseprice"			"60"	// Price for the item, empty.
+	"item_unitprice"			"2"		// Price for each element contained within the item.
+
+    // According to H&K's datasheet for their UMP45 product, the magazine weighs 0.17kg, empty.
+    // Thanks for not making this a pain in the ass to find, H&K! :D
+    // .45ACP ball ammo (230gr) seems to be around 21.3 grams, rounding down.
+	
+    "item_baseweight" 			"170"	// Weight in grams of the empty item. 
+	"item_unitweight" 			"7"	// Weight in grams of each element.
+}
