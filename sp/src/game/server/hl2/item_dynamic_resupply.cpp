@@ -178,21 +178,21 @@ CItem_DynamicResupply::CItem_DynamicResupply( void )
 
 	// Setup default values
 	m_flDesiredHealth[0] = 1.0;	// Health
-	m_flDesiredHealth[1] = 0.3;	// Armor
-	m_flDesiredAmmo[0] = 0.5;	// Pistol
-	m_flDesiredAmmo[1] = 0.5;	// SMG1
-	m_flDesiredAmmo[2] = 0.1;	// SMG1 Grenade
-	m_flDesiredAmmo[3] = 0.4;	// AR2
-	m_flDesiredAmmo[4] = 0.5;	// Shotgun
-	m_flDesiredAmmo[5] = 0.0;	// RPG Round
-	m_flDesiredAmmo[6] = 0.1;	// Grenade
-	m_flDesiredAmmo[7] = 0.1;	// .357
-	m_flDesiredAmmo[8] = 0.05;	// Crossbow
-	m_flDesiredAmmo[9] = 0.05;	// AR2 alt-fire
-	m_flDesiredAmmo[10] = 0.4;	// 5.7x28mm
-	m_flDesiredAmmo[11] = 0.2;	// 7.62mm NATO
-	m_flDesiredAmmo[12] = 0.5;	// 7.62x39mm
-	m_flDesiredAmmo[13] = 0.4;	// 7.62x39mm
+	m_flDesiredHealth[1] = 1.0;	// Armor
+	m_flDesiredAmmo[0] = 1.0;	// Pistol
+	m_flDesiredAmmo[1] = 1.0;	// SMG1
+	m_flDesiredAmmo[2] = 1.0;	// SMG1 Grenade
+	m_flDesiredAmmo[3] = 1.0;	// AR2
+	m_flDesiredAmmo[4] = 1.0;	// Shotgun
+	m_flDesiredAmmo[5] = 1.0;	// RPG Round
+	m_flDesiredAmmo[6] = 1.0;	// Grenade
+	m_flDesiredAmmo[7] = 1.0;	// .357
+	m_flDesiredAmmo[8] = 1.0;	// Crossbow
+	m_flDesiredAmmo[9] = 1.0;	// AR2 alt-fire
+	m_flDesiredAmmo[10] = 1.0;	// 5.7x28mm
+	m_flDesiredAmmo[11] = 1.0;	// 7.62mm NATO
+	m_flDesiredAmmo[12] = 1.0;	// 7.62x39mm
+	m_flDesiredAmmo[13] = 1.0;	// .45 ACP
 }
 
 
@@ -365,31 +365,11 @@ void CItem_DynamicResupply::SpawnFullItem( CItem_DynamicResupply *pMaster, CBase
 			}
 			return;
 		}
-
-		// Otherwise, just hand out some money and finish up.
-		pPlayer->AddPlayerCash(500);
-		return;
-	}
-	
-	float flChoice = random->RandomFloat( 0.0f, flTotalProb ); 
-	for ( i = 0; i < NUM_AMMO_ITEMS; ++i )
-	{
-		if ( flChoice <= flRatio[i] )
-		{
-			CBaseEntity::Create( g_DynamicResupplyAmmoItems[i].sEntityName, GetAbsOrigin(), GetAbsAngles(), this );
-
-			if ( iDebug )
-			{
-				Msg("Player is full, spawning %s \n", g_DynamicResupplyAmmoItems[i].sEntityName );
-			}
-			return;
-		}
 	}
 
-	if ( iDebug )
-	{
-		Msg("Player is full on all health + ammo, is not spawning.\n" );
-	}
+	// Otherwise, just hand out some money and finish up.
+	pPlayer->AddPlayerCash(500);
+	return;
 }
 
 
@@ -450,9 +430,9 @@ void CItem_DynamicResupply::ComputeHealthRatios( CItem_DynamicResupply* pMaster,
 		{
 			// Health
 			pPlayer->ResetMaxHealth();
-			flMax = pPlayer->GetMaxHealth();
+			flMax = pPlayer->GetMaxHealth() * 2;
 
-			float flCurrentHealth = pPlayer->GetHealth() + (pSpawnInfo[i].m_iPotentialItems * sk_healthkit.GetFloat());
+			float flCurrentHealth = pPlayer->GetHealth() + pPlayer->Inventory_CountAllObjectContentsOfID(10) + pPlayer->Inventory_CountAllObjectContentsOfID(11);
 			pSpawnInfo[i].m_flCurrentRatio = (flCurrentHealth / flMax);
 		}
 		else if ( i == DS_ARMOR_INDEX )
@@ -465,8 +445,8 @@ void CItem_DynamicResupply::ComputeHealthRatios( CItem_DynamicResupply* pMaster,
 			}
 			else
 			{
-				flMax = pPlayer->MaxArmorValue();
-				float flCurrentArmor = pPlayer->ArmorValue() + (pSpawnInfo[i].m_iPotentialItems * sk_battery.GetFloat());
+				flMax = pPlayer->MaxArmorValue() * 2;
+				float flCurrentArmor = pPlayer->ArmorValue() + pPlayer->Inventory_CountAllObjectContentsOfID(30);
 				pSpawnInfo[i].m_flCurrentRatio = (flCurrentArmor / flMax);
 			}
 		}
