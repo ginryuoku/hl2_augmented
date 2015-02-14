@@ -509,7 +509,7 @@ void CBaseHudWeaponSelection::SelectWeapon( void )
 		return;
 
 	// Don't allow selections of weapons that can't be selected (out of ammo, etc)
-	if ( !GetSelectedWeapon()->CanBeSelected() )
+	if ( !GetSelectedWeapon()->CanBeSelected() && GetSelectedWeapon()->GetPrimaryAmmoID() == 0 )
 	{
 		player->EmitSound( "Player.DenyWeaponSelection" );
 	}
