@@ -8995,8 +8995,38 @@ bool CBasePlayer::ImportEntityIntoInventory( CBaseEntity *pEntity )
 {
 	if (pEntity)
 	{
-		m_pInventory.ConvertEntityToObject(pEntity);
-		return true;
+		int itemtype = m_pInventory.FindItemType(pEntity->m_iItemID);
+		if (m_pInventory.ConvertEntityToObject(pEntity))
+		{
+			switch (itemtype)
+			{
+			case 1:
+			{
+				EmitSound("HealthVial.Touch");
+				break;
+			}
+			case 3:
+			{
+				EmitSound("ItemBattery.Touch");
+				break;
+			}
+			case 8:
+			{
+				EmitSound("BaseCombatCharacter.AmmoPickup");
+				break;
+			}
+			case 9:
+			{
+				EmitSound("HL2Player.PickupWeapon");
+				break;
+			}
+			default:
+				EmitSound("HL2Player.Use");
+				break;
+			}
+			return true;
+		}
+		return false;
 	}
 	else
 	{

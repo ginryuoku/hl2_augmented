@@ -52,7 +52,7 @@ public:
 
 	void PurgeObject( int element );
 	void PurgeAllObjects();
-	void ConvertEntityToObject( CBaseEntity *pEntity );
+	bool ConvertEntityToObject( CBaseEntity *pEntity );
 
 	int FindFirstObject(int itemid);
 	int FindFirstFreeObject();

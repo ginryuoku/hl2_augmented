@@ -163,11 +163,11 @@ int CBaseInventory::GetInventoryTotalWeight(void)
 }
 
 
-void CBaseInventory::ConvertEntityToObject( CBaseEntity *pEntity )
+bool CBaseInventory::ConvertEntityToObject( CBaseEntity *pEntity )
 {
 	int NewObjectIndex = FindFirstFreeObject();
 	if (NewObjectIndex == -1)
-		return;
+		return false;
 	
 	if ( pEntity )
 	{
@@ -175,10 +175,11 @@ void CBaseInventory::ConvertEntityToObject( CBaseEntity *pEntity )
 		int itemcap = pEntity->GetItemCapacity();
 		int itemmaxcap = pEntity->GetItemMaxCapacity();
 		NewObject( NewObjectIndex, itemid, itemcap, itemmaxcap );
+		UTIL_Remove(pEntity);
+		return true;
 	}
 
-	UTIL_Remove(pEntity);
-	return;
+	return false;
 }
 
 bool CBaseInventory::LoadInfo(int itemid)
