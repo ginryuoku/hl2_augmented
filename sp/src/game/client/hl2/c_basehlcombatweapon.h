@@ -31,6 +31,8 @@ class C_BaseHLBludgeonWeapon : public C_BaseHLCombatWeapon
 public:
 	DECLARE_CLASS( C_BaseHLBludgeonWeapon, C_BaseHLCombatWeapon );
 	DECLARE_CLIENTCLASS();
+	
+	bool	HasIronsights(void) { return false; }
 };
 
 #endif // C_BASEHLCOMBATWEAPON_H

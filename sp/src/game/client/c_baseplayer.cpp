@@ -416,7 +416,14 @@ void CC_ToggleIronSights(void)
 	if (pWeapon == NULL)
 		return;
 
-	pWeapon->ToggleIronsights();
+	if (pWeapon->HasIronsights())
+	{
+		pWeapon->ToggleIronsights();
+	}
+	else
+	{
+		pWeapon->SecondaryAttack();
+	}
 
 	engine->ServerCmd("toggle_ironsight"); //forward to server}
 }

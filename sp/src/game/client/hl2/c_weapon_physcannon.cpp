@@ -25,6 +25,8 @@ public:
 	virtual int DrawModel( int flags );
 	virtual void ClientThink( void );
 
+	bool	HasIronsights(void) { return false; }
+
 	virtual bool ShouldUseLargeViewModelVROverride() OVERRIDE { return true; }
 
 private:
