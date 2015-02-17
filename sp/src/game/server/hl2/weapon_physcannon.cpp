@@ -1233,6 +1233,8 @@ public:
 	void	ItemPostFrame();
 	void	ItemBusyFrame();
 
+	bool	HasIronsights(void) { return false; }
+
 	virtual float GetMaxAutoAimDeflection() { return 0.90f; }
 
 	void	ForceDrop( void );
