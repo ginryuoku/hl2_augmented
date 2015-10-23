@@ -14,7 +14,7 @@ class IFileSystem;
 
 typedef unsigned short ITEM_FILE_INFO_HANDLE;
 
-typedef enum ItemType_t
+enum ItemType_t
 {
 	NONE,
 	HEALING,
