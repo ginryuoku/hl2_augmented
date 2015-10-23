@@ -2268,7 +2268,8 @@ void CHL2_Player::UpgradeAuxPowerCells(void)
 
 	// Installing an extra aux power cell recharges the system and resets all suit devices.
 	SuitPower_Initialize();
-	Msg("Aux power upgrades now: %d\n", m_HL2Local.m_iAuxPowerUpgradeCells);
+    int debug_msg_cells = m_HL2Local.m_iAuxPowerUpgradeCells;
+	Msg("Aux power upgrades now: %d\n", debug_msg_cells);
 }
 
 //-----------------------------------------------------------------------------
